@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/contact"
+        android:layout_width="411dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/itemDescription"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="-2dp"
+        android:layout_marginLeft="-2dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/Chat"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:gravity="center"
+            android:text="@string/chat" />
+
+        <Button
+            android:id="@+id/CallMe"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="30dp"
+            android:layout_marginRight="20dp"
+            android:text="@string/call_me" />
+    </LinearLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/item_profile_image"
+        android:layout_width="44dp"
+        android:layout_height="45dp"
+
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="5dp"
+        android:padding="5dp"
+        android:src="@drawable/profile" />
+
+    <TextView
+        android:id="@+id/itemUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/item_profile_image"
+        android:layout_toRightOf="@+id/item_profile_image"
+        android:text="UserName"
+        android:textSize="15dp"
+        android:textColor="#000"
+        />
+
+    <TextView
+        android:id="@+id/itemDateOfPublish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/itemUserName"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/item_profile_image"
+        android:layout_toRightOf="@+id/item_profile_image"
+        android:text="date"
+        android:textColor="#000"
+        android:textSize="10dp"/>
+
+    <TextView
+        android:id="@+id/itemDescription"
+        android:layout_width="363dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/item_profile_image"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:text="additional ino " />
+
+    <TextView
+        android:id="@+id/itemBloodType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="103dp"
+        android:layout_marginLeft="103dp"
+        android:layout_marginTop="14dp"
+        android:layout_toEndOf="@+id/itemUserName"
+        android:layout_toRightOf="@+id/itemUserName"
+        android:text="AB+"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/Share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/contact"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="154dp"
+        android:layout_marginLeft="154dp"
+        android:layout_marginTop="9dp"
+        android:text="Share" />
+
+
+</RelativeLayout>
