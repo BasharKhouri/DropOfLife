@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "96056038675",
+    "firebase_url": "https://drop-of-life-app.firebaseio.com",
+    "project_id": "drop-of-life-app",
+    "storage_bucket": "drop-of-life-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:96056038675:android:1fb1ce0159acf9f5e336e6",
+        "android_client_info": {
+          "package_name": "com.example.dropoflife"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "96056038675-sovg123a9t6f4to10vd3b6fbh8pmcsr2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMvaNQ612z84wi4e33DtA9mQokmMtAfoE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "96056038675-sovg123a9t6f4to10vd3b6fbh8pmcsr2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

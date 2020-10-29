@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    esources>
+    <string name="app_name">DropOfLife</string>
+    <string name="title_home">الصفحة الرئيسية</string>
+    <string name="title_profile">الملف الشخصي</string>
+    <string name="title_notifications">اشعارات</string>
+    <string name="call_me">اتصل بي </string>
+    <string name="chat">المحادثة</string>
+
+
+    <string name="Login">تسجيل الدخول</string>
+    <string name="wel_msg2">اهلا بك في قطرة حياة, هنا يمكنك التبرع بالدم للمرضى المحتاجين</string>
+    <string name="email">البريد الالكتروني</string>
+    <string name="pass">كلمة المرور</string>
+    <string name="forgot"> نسيت كلمة المرور ؟</string>
+    <string name="first">الاسم الاول</string>
+    <string name="last">اسم العائلة</string>
+    <string name="bdate">تاريخ الميلاد </string>
+    <string name="gender">الجمس</string>
+    <string name="signup">انشاء حساب</string>
+    <string name="male">ذكر</string>
+    <string name="female">انثى</string>
+    <string name="dont_have">لا تملك حساب</string>
+    <string name="signup_txt">انشاء حساب</string>
+    <string name="error_email">الرجاء التأكد من كتابة البريد الالكتروني بشكل صحبح</string>
+    <string name="error_pass">كلمة المرور يجب ان تتخطى ال8 احرف</string>
+    <string name="or_sign_in_using">أو تسجيل الدخول عن طريق</string>
+
+</resources>
