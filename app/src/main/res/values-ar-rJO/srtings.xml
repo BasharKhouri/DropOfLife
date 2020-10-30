@@ -27,5 +27,7 @@
     <string name="error_email">الرجاء التأكد من كتابة البريد الالكتروني بشكل صحبح</string>
     <string name="error_pass">كلمة المرور يجب ان تتخطى ال8 احرف</string>
     <string name="or_sign_in_using">أو تسجيل الدخول عن طريق</string>
+    <string name="sign_up_successfully">لقد تمت عملية التسجيل بنجاح</string>
+    <string name="sign_up_unsuccessfully">خطء في عملية التسجيل</string>
 
 </resources>

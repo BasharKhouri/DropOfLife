@@ -4,32 +4,29 @@ import java.util.Date;
 
 public class User {
     private  String fireBaseAuthID;
-    private  String userNationalID;
     private String fullName;
     private Date dateOfLastDonation;
     private int numberOfDonations;
     private BloodType bloodType;
     private Date dateOfBirth;
-    private String residentialAddress;
     private String sex;
 
-    User(String fireBaseAuthID , String userNationalID, String fullName , Date dateOfBirth ,String sex){
+    public User(String fireBaseAuthID, String fullName, Date dateOfBirth, String sex){
         this.fireBaseAuthID= fireBaseAuthID;
-        this.userNationalID=userNationalID;
+        this.numberOfDonations=0;
+        dateOfLastDonation=null;
         this.fullName=fullName;
         this.dateOfBirth=dateOfBirth;
         this.sex=sex;
+        try{
+            bloodType=new BloodType(0);
+        }catch (Exception e ){
+            System.out.println(e.getMessage());
+        }
     }
-
-
-
 
     public String getFireBaseAuthID() {
         return fireBaseAuthID;
-    }
-
-    public String getUserNationalID() {
-        return userNationalID;
     }
 
     public String getFullName() {
@@ -52,20 +49,12 @@ public class User {
         return dateOfBirth;
     }
 
-    public String getResidentialAddress() {
-        return residentialAddress;
-    }
-
     public String getSex() {
         return sex;
     }
 
     public void setSex(String sex) {
         this.sex = sex;
-    }
-
-    public void setResidentialAddress(String residentialAddress) {
-        this.residentialAddress = residentialAddress;
     }
 
     public void setDateOfBirth(Date dateOfBirth) {
@@ -88,7 +77,4 @@ public class User {
         this.fullName = fullName;
     }
 
-    public void setUserNationalID(String userNationalID) {
-        this.userNationalID = userNationalID;
-    }
 }

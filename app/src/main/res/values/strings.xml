@@ -24,4 +24,7 @@
     <string name="error_email">Wrong Pattern,Check your email plz</string>
     <string name="error_pass">Password must be more than 8 letters</string>
     <string name="or_sign_in_using">Or Sign In Using</string>
+    <string name="sign_up_successfully">User signed up successfully</string>
+    <string name="sign_up_unsuccessfully">User signed up error</string>
+
 </resources>

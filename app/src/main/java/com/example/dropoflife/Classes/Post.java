@@ -7,13 +7,18 @@ public class Post {
     private BloodType bloodType;
     private String description;
     private Date dateOfPublish;
-    Post( User user , BloodType bloodType , String description , Date dateOfPublish){
+    private String location ;
+    Post( User user , BloodType bloodType , String description , Date dateOfPublish,String location){
         this.user = user ;
         this.bloodType= bloodType;
         this.description=description;
         this.dateOfPublish=dateOfPublish;
+        this.location=location;
     }
 
+    public String getLocation() {
+        return location;
+    }
 
     public void setDescription(String description) {
         this.description = description;
