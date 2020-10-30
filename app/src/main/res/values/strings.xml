@@ -24,4 +24,8 @@
     <string name="error_email">Wrong Pattern,Check your email plz</string>
     <string name="error_pass">Password must be more than 8 letters</string>
     <string name="or_sign_in_using">Or Sign In Using</string>
+    <string name="enter_date">Enter Date</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="full_name">Full Name</string>
+    <string name="share">share</string>
 </resources>
