@@ -6,17 +6,17 @@ public class BloodType {
 
     private String bloodType;
     private int bloodID ;
-    private String bloodTypes [] ={"A+","A-","B+","B-","C+","C-","AB+","AB-"};
+    private String bloodTypes [] ={"A+","A-","B+","B-","C+","C-","AB+","AB-","Unknown"};
     /**
      *
      * @param bloodID number must be between 0 and 8 else it will through Blood type not found
      */
-    BloodType(int bloodID){
-        if(bloodID>0&&bloodID<8){
+    BloodType(int bloodID) throws IncorrectBloodIDException {
+        if(bloodID>0&&bloodID<9){
             bloodType = bloodTypes[bloodID];
            this.bloodID=bloodID;
         }else {
-
+            throw  new IncorrectBloodIDException("Make sure that the Blood ID is between 0 and 9");
         }
 
     }
@@ -31,8 +31,8 @@ public class BloodType {
     }
 
     public class IncorrectBloodIDException extends Exception {
-        public IncorrectBloodIDException() {
-            super("Make sure that the Blood ID is between 0 and 8 ");
+        public IncorrectBloodIDException(String e) {
+            super(e);
         }
     }
 

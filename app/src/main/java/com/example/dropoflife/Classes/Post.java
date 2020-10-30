@@ -7,7 +7,10 @@ public class Post {
     private BloodType bloodType;
     private String description;
     private Date dateOfPublish;
-    Post(){
-
+    Post( User user , BloodType bloodType , String description , Date dateOfPublish){
+        this.user = user ;
+        this.bloodType= bloodType;
+        this.description=description;
+        this.dateOfPublish=dateOfPublish;
     }
 }
