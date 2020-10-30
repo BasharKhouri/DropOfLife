@@ -13,4 +13,29 @@ public class Post {
         this.description=description;
         this.dateOfPublish=dateOfPublish;
     }
+
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setBloodType(BloodType bloodType) {
+        this.bloodType = bloodType;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public BloodType getBloodType() {
+        return bloodType;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Date getDateOfPublish() {
+        return dateOfPublish;
+    }
 }
