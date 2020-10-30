@@ -9,16 +9,15 @@ public class BloodType {
     private String bloodTypes [] ={"A+","A-","B+","B-","C+","C-","AB+","AB-","Unknown"};
     /**
      *
-     * @param bloodID number must be between 0 and 8 else it will through Blood type not found
+     * @param bloodID number must be between 0 and 8 else it will through Blood type not found @<code> String bloodTypes [] ={"A+","A-","B+","B-","C+","C-","AB+","AB-","Unknown"} </code>
      */
     BloodType(int bloodID) throws IncorrectBloodIDException {
-        if(bloodID>0&&bloodID<9){
+        if(bloodID>0&&bloodID<8){
             bloodType = bloodTypes[bloodID];
            this.bloodID=bloodID;
         }else {
             throw  new IncorrectBloodIDException("Make sure that the Blood ID is between 0 and 9");
         }
-
     }
 
     public int getBloodID() {
