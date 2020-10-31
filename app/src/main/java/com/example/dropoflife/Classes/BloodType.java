@@ -6,7 +6,7 @@ public class BloodType {
 
     private String bloodType;
     private int bloodID ;
-    private String bloodTypes [] ={"A+","A-","B+","B-","C+","C-","AB+","AB-","Unknown"};
+   final public static String bloodTypes [] ={"A+","A-","B+","B-","C+","C-","AB+","AB-","Unknown"};
     /**
      *
      * @param bloodID number must be between 0 and 8 else it will through Blood type not found @<code> String bloodTypes [] ={"A+","A-","B+","B-","C+","C-","AB+","AB-","Unknown"} </code>
@@ -28,6 +28,7 @@ public class BloodType {
     public String toString() {
         return bloodType;
     }
+
 
     public class IncorrectBloodIDException extends Exception {
         public IncorrectBloodIDException(String e) {
