@@ -2,6 +2,9 @@ package com.example.dropoflife.Classes;
 
 import java.util.Date;
 
+/**
+ * author Bashar Khouri
+ */
 public class Post {
     private User user ;
     private BloodType bloodType;

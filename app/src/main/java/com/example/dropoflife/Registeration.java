@@ -1,12 +1,10 @@
 package com.example.dropoflife;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -22,12 +20,17 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * author Bashar Khouri
+ */
 public class Registeration extends AppCompatActivity  implements DatePickerDialog.OnDateSetListener{
     private EditText fullNameET ,emailET , passwordET , conPasswordET , birthdayET ;
     private  Date birthDate ;
@@ -36,6 +39,8 @@ public class Registeration extends AppCompatActivity  implements DatePickerDialo
     private Spinner bloodSpinner;
     private FirebaseAuth mAuth ;
 
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = database.getReference("Users");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,42 +74,36 @@ public class Registeration extends AppCompatActivity  implements DatePickerDialo
         String date = dayOfMonth+"/"+month+"/"+year;
         birthdayET.setText(date);
         try {
-            Date birthDate = new SimpleDateFormat("dd/mm/yy").parse(date);
+             birthDate = new SimpleDateFormat("dd/mm/yy").parse(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
     }
 
-    public void register(View view) {
+    public void register(View view) throws BloodType.IncorrectBloodIDException {
         final String fullName = fullNameET.getText().toString();
-        boolean emptyFieldsBool = false;
         if(TextUtils.isEmpty(fullName)){
             fullNameET.setError(R.string.enter_full_name+"");
-            emptyFieldsBool=true;
             return ;
         }
         final String email = emailET.getText().toString();
         if(TextUtils.isEmpty(email)){
             emailET.setError(R.string.enter_email+"");
-            emptyFieldsBool=true;
             return ;
         }
         final String password = passwordET.getText().toString();
         if(TextUtils.isEmpty(password)){
             passwordET.setError(R.string.enter_password+"");
-            emptyFieldsBool=true;
             return ;
         }
         final String conPassword = conPasswordET.getText().toString();
         if(TextUtils.isEmpty(email)){
             conPasswordET.setError(R.string.enter_confirm_password+"");
-            emptyFieldsBool=true;
             return ;
         }
         final String BirthDate = birthdayET.getText().toString();
         if(TextUtils.isEmpty(email)){
             emailET.setError(R.string.enter_BirthDate+"");
-            emptyFieldsBool=true;
             return ;
         }
         int radioID =radioGroup.getCheckedRadioButtonId();
@@ -112,27 +111,23 @@ public class Registeration extends AppCompatActivity  implements DatePickerDialo
        final String  sex =radioButton.getText().toString();
         if(TextUtils.isEmpty(sex)){
             Toast.makeText(this, R.string.selct_sex, Toast.LENGTH_SHORT).show();
-            emptyFieldsBool=true;
             return ;
         }
-        try {
-            final BloodType blood = new BloodType(bloodSpinner.getId());
-                if(TextUtils.isEmpty(blood.getBloodType())){
+        final BloodType blood = new BloodType(bloodSpinner.getId());
+             if(TextUtils.isEmpty(blood.getBloodType())){
                     Toast.makeText(this,R.string.select_blood, Toast.LENGTH_SHORT).show();
-                    emptyFieldsBool=true;
                     return;
                 }
-        }catch (Exception e ){
-            System.out.println(e.getMessage());
-        }
-        if(!emptyFieldsBool&&conPassword.equals(password)){
+
+        if(conPassword.equals(password)){
             mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
                         //Need to  add UI changes now
                         Toast.makeText(getApplicationContext(), R.string.sign_up_successfully,Toast.LENGTH_SHORT).show();
-                        User user = new User(mAuth.getUid(),fullName,birthDate,sex);
+                        User user = new User(mAuth.getUid(),fullName,birthDate,sex,blood);
+                        myRef.setValue(user);
                     }
                     else{
                         Toast.makeText(getApplicationContext(), R.string.sign_up_successfully,Toast.LENGTH_SHORT).show();

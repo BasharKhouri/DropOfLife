@@ -2,29 +2,57 @@ package com.example.dropoflife.Classes;
 
 import java.util.Date;
 
+/**
+ * author Bashar Khouri
+ */
 public class User {
-    private  String fireBaseAuthID;
+    final private  String fireBaseAuthID;
     private String fullName;
-    private Date dateOfLastDonation;
-    private int numberOfDonations;
     private BloodType bloodType;
     private Date dateOfBirth;
     private String sex;
+    private String UserPhotoURL ;
+    private Date dateOfLastDonation;
+    private int numberOfDonations;
 
-    public User(String fireBaseAuthID, String fullName, Date dateOfBirth, String sex){
+
+    /**
+     *
+     * @param userPhotoURL : is the URL of the profile picture, the URL is stored in firebase storage.
+     */
+
+    public void setUserPhotoURL(String userPhotoURL) {
+        UserPhotoURL = userPhotoURL;
+    }
+
+    /**
+     *
+     * @return UserPhotoURL : it is the URL of the profile picture that is stored in the firebase database
+     */
+    public String getUserPhotoURL() {
+        return UserPhotoURL;
+    }
+    /**
+     *
+     * @param fireBaseAuthID it is assigned to the user when he do the sign up it con not be changed after that.
+     * @param fullName the full name of the user
+     * @param dateOfBirth
+     * @param sex
+     * @param bloodType it is type @<code>{BloodType}</code>  note that the BloodID must be between 0-8 OR @<code>Exception IncorrectBloodIDException will be throne.</code>
+     */
+    public User(String fireBaseAuthID, String fullName, Date dateOfBirth, String sex , BloodType bloodType){
         this.fireBaseAuthID= fireBaseAuthID;
         this.numberOfDonations=0;
         dateOfLastDonation=null;
+
         this.fullName=fullName;
         this.dateOfBirth=dateOfBirth;
         this.sex=sex;
-        try{
-            bloodType=new BloodType(0);
-        }catch (Exception e ){
-            System.out.println(e.getMessage());
-        }
+       this.bloodType=bloodType;
     }
 
+
+    // The Getters
     public String getFireBaseAuthID() {
         return fireBaseAuthID;
     }
@@ -33,16 +61,8 @@ public class User {
         return fullName;
     }
 
-    public Date getDateOfLastDonation() {
-        return dateOfLastDonation;
-    }
-
-    public int getNumberOfDonations() {
-        return numberOfDonations;
-    }
-
-    public BloodType getBloodType() {
-        return bloodType;
+    public String getBloodType() {
+        return bloodType.getBloodType();
     }
 
     public Date getDateOfBirth() {
@@ -53,28 +73,49 @@ public class User {
         return sex;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
+    public Date getDateOfLastDonation() {
+        return dateOfLastDonation;
+    }
+
+    public int getNumberOfDonations() {
+        return numberOfDonations;
+    }
+
+    // The Setters
+
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    /**
+     *
+     * @param bloodID must be between 0-8  OR @<code>Exception IncorrectBloodIDException will be throne.</code>
+     */
+    public void setBloodType(int bloodID) {
+        try {
+            this.bloodType = new BloodType(bloodID);
+        } catch (Exception e ){
+            System.out.println(e.getMessage());
+        }
+
     }
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public void setBloodType(BloodType bloodType) {
-        this.bloodType = bloodType;
-    }
-
-    public void setNumberOfDonations(int numberOfDonations) {
-        this.numberOfDonations = numberOfDonations;
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
     public void setDateOfLastDonation(Date dateOfLastDonation) {
         this.dateOfLastDonation = dateOfLastDonation;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setNumberOfDonations(int numberOfDonations) {
+        this.numberOfDonations = numberOfDonations;
     }
+
 
 }

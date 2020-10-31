@@ -2,6 +2,9 @@ package com.example.dropoflife.Classes;
 
 import java.util.Arrays;
 
+/**
+ * author Bashar Khouri
+ */
 public class BloodType {
 
     private String bloodType;
