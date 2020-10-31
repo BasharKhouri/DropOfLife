@@ -9,7 +9,6 @@
     <string name="chat">المحادثة</string>
     <string name="filter">تصفية</string>
     <string name="req_blood">طلب تبرع بالدم</string>
-
     <string name="Login">تسجيل الدخول</string>
     <string name="wel_msg2">اهلا بك في قطرة حياة, هنا يمكنك التبرع بالدم للمرضى المحتاجين</string>
     <string name="email">البريد الالكتروني</string>
@@ -29,5 +28,11 @@
     <string name="or_sign_in_using">أو تسجيل الدخول عن طريق</string>
     <string name="sign_up_successfully">لقد تمت عملية التسجيل بنجاح</string>
     <string name="sign_up_unsuccessfully">خطء في عملية التسجيل</string>
-
+    <string name="selct_sex">الرجائ اختيار الجنس</string>
+    <string name="select_blood">الرجاء اختيار فصيلة الدم</string>
+    <string name="enter_full_name">الرجاء اذخال السم الكامل</string>
+    <string name="enter_email">الرجاء اذخال البريد الالكتروني</string>
+    <string name="enter_password">الرجاء اذخال كلمة المرور</string>
+    <string name="enter_confirm_password">الرجاء اذخال تاكيد  كلمة المرور</string>
+    <string name="enter_BirthDate">الرجاء ادخال تاريخ الميلاد</string>
 </resources>

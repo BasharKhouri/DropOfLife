@@ -8,12 +8,15 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.dropoflife.Classes.BloodType;
 import com.example.dropoflife.Classes.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -26,11 +29,11 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Registeration extends AppCompatActivity  implements DatePickerDialog.OnDateSetListener{
-    EditText fullNameET ,emailET , passwordET , conPasswordET , birthdayET ;
-    Date birthDate ;
-    RadioGroup radioGroup ;
-    RadioButton radioButton ;
-
+    private EditText fullNameET ,emailET , passwordET , conPasswordET , birthdayET ;
+    private  Date birthDate ;
+    private  RadioGroup radioGroup ;
+    private RadioButton radioButton ;
+    private Spinner bloodSpinner;
     private FirebaseAuth mAuth ;
 
     @Override
@@ -39,15 +42,15 @@ public class Registeration extends AppCompatActivity  implements DatePickerDialo
         setContentView(R.layout.activity_registeration);
 
         mAuth =FirebaseAuth.getInstance().getInstance();
-
         radioGroup = (RadioGroup)findViewById(R.id.genderRadioButton);
-
         birthdayET = (EditText) findViewById(R.id.birthdayText);
-        fullNameET = (EditText)findViewById(R.id.fullNameTxt);
+        fullNameET = (EditText)findViewById(R.id.fullName);
         emailET = (EditText) findViewById(R.id.emailAddress);
         passwordET=(EditText)findViewById(R.id.password);
         conPasswordET = (EditText)findViewById(R.id.confirmPassword);
-
+        bloodSpinner =(Spinner)findViewById(R.id.bloodTypeSpinner);
+        ArrayAdapter<String> spinnerArrayAdapter  = new ArrayAdapter<String>(this , android.R.layout.simple_spinner_dropdown_item,  BloodType.bloodTypes);
+        bloodSpinner.setAdapter(spinnerArrayAdapter);
         birthdayET.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -74,34 +77,33 @@ public class Registeration extends AppCompatActivity  implements DatePickerDialo
 
     public void register(View view) {
         final String fullName = fullNameET.getText().toString();
-
         boolean emptyFieldsBool = false;
         if(TextUtils.isEmpty(fullName)){
-            fullNameET.setError("full name is REQUIRED.");
+            fullNameET.setError(R.string.enter_full_name+"");
             emptyFieldsBool=true;
             return ;
         }
         final String email = emailET.getText().toString();
         if(TextUtils.isEmpty(email)){
-            emailET.setError("full email is REQUIRED.");
+            emailET.setError(R.string.enter_email+"");
             emptyFieldsBool=true;
             return ;
         }
         final String password = passwordET.getText().toString();
         if(TextUtils.isEmpty(password)){
-            passwordET.setError("full email is REQUIRED.");
+            passwordET.setError(R.string.enter_password+"");
             emptyFieldsBool=true;
             return ;
         }
         final String conPassword = conPasswordET.getText().toString();
         if(TextUtils.isEmpty(email)){
-            conPasswordET.setError("full Confirm  password is REQUIRED.");
+            conPasswordET.setError(R.string.enter_confirm_password+"");
             emptyFieldsBool=true;
             return ;
         }
         final String BirthDate = birthdayET.getText().toString();
         if(TextUtils.isEmpty(email)){
-            emailET.setError("full email is REQUIRED.");
+            emailET.setError(R.string.enter_BirthDate+"");
             emptyFieldsBool=true;
             return ;
         }
@@ -109,12 +111,21 @@ public class Registeration extends AppCompatActivity  implements DatePickerDialo
         radioButton=findViewById(radioID);
        final String  sex =radioButton.getText().toString();
         if(TextUtils.isEmpty(sex)){
-            Toast.makeText(this, "sex is required", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.selct_sex, Toast.LENGTH_SHORT).show();
             emptyFieldsBool=true;
             return ;
         }
-
-        if(!emptyFieldsBool){
+        try {
+            final BloodType blood = new BloodType(bloodSpinner.getId());
+                if(TextUtils.isEmpty(blood.getBloodType())){
+                    Toast.makeText(this,R.string.select_blood, Toast.LENGTH_SHORT).show();
+                    emptyFieldsBool=true;
+                    return;
+                }
+        }catch (Exception e ){
+            System.out.println(e.getMessage());
+        }
+        if(!emptyFieldsBool&&conPassword.equals(password)){
             mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
