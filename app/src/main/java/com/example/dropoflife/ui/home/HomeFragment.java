@@ -24,6 +24,7 @@ import java.util.LinkedList;
 
 public class HomeFragment extends Fragment {
 
+
     private HomeViewModel homeViewModel;
     private  ListView listView;
     private LinkedList <Post> posts;
@@ -32,6 +33,7 @@ public class HomeFragment extends Fragment {
         // listView = (ListView)getView().findViewById(R.id.HomeListView);
        // MyAdapter adapter = new MyAdapter(Post info)
 
+        
         return inflater.inflate(R.layout.fragment_home,container,false);
 
     }

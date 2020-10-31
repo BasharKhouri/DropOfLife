@@ -4,54 +4,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/BackGround">
 
-
-    <LinearLayout
-        android:id="@+id/contact"
-        android:layout_width="411dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/itemDescription"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="-2dp"
-        android:layout_marginLeft="-2dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginRight="2dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/Chat"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="30dp"
-            android:gravity="center"
-            android:text="@string/chat" />
-
-        <Button
-            android:id="@+id/CallMe"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="30dp"
-            android:layout_marginRight="20dp"
-            android:text="@string/call_me" />
-    </LinearLayout>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/item_profile_image"
-        android:layout_width="44dp"
-        android:layout_height="45dp"
-
+        android:layout_width="84dp"
+        android:layout_height="88dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="2dp"
         android:padding="5dp"
         android:src="@drawable/profile" />
 
@@ -71,7 +37,7 @@
         />
 
     <TextView
-        android:id="@+id/itemDateOfPublish"
+        android:id="@+id/location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/itemUserName"
@@ -80,9 +46,22 @@
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/item_profile_image"
         android:layout_toRightOf="@+id/item_profile_image"
-        android:text="date"
+        android:text="Location"
         android:textColor="#000"
-        android:textSize="10dp"/>
+        android:textSize="12dp"/>
+    <TextView
+        android:id="@+id/itemDateOfPublish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/location"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/item_profile_image"
+        android:layout_toRightOf="@+id/item_profile_image"
+        android:text="Date"
+        android:textColor="#000"
+        android:textSize="12dp"/>
 
     <TextView
         android:id="@+id/itemDescription"
@@ -95,7 +74,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="22dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
@@ -116,17 +95,77 @@
         android:textSize="20dp"
         android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/Share"
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#60bb0a1e"
+        android:layout_above="@+id/contact"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"/>
+    <LinearLayout
+        android:id="@+id/contact"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/contact"
+        android:layout_below="@+id/itemDescription"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginStart="154dp"
-        android:layout_marginLeft="154dp"
-        android:layout_marginTop="9dp"
-        android:text="Share" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="-2dp"
+        android:layout_marginLeft="-2dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
+        android:orientation="horizontal">
 
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:background="@drawable/button_row"
+            android:text="@string/call_me"
+            android:textSize="12sp"
+            android:drawableStart="@drawable/ic_baseline_call_24"
+            android:drawableLeft="@drawable/ic_baseline_call_24"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"/>
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:background="@drawable/button_row"
+            android:text="@string/share"
+            android:textSize="12sp"
+            android:drawableStart="@drawable/ic_baseline_share_24"
+            android:drawableLeft="@drawable/ic_baseline_share_24"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:background="@drawable/button_row"
+            android:text="@string/chat"
+            android:textSize="12sp"
+            android:drawableStart="@drawable/ic_baseline_chat_24"
+            android:drawableLeft="@drawable/ic_baseline_chat_24"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            />
+
+    </LinearLayout>
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#60bb0a1e"
+        android:layout_below="@+id/contact"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"/>
 
 </RelativeLayout>

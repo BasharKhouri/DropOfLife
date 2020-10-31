@@ -24,16 +24,22 @@
     <string name="error_email">Wrong Pattern,Check your email plz</string>
     <string name="error_pass">Password must be more than 8 letters</string>
     <string name="or_sign_in_using">Or Sign In Using</string>
+    <string name="enter_date">Enter Date</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="full_name">Full Name</string>
+    <string name="share">share</string>
     <string name="sign_up_successfully">User signed up successfully</string>
     <string name="sign_up_unsuccessfully">User signed up error</string>
     <string name="selct_sex">Chose a gender </string>
     <string name="select_blood">select blood type</string>
-    <string name="enter_full_name">full name is REQUIRED.</string>
-    <string name="enter_email">email is REQUIRED.</string>
-    <string name="enter_password">password is REQUIRED.</string>
-    <string name="enter_confirm_password">Confirem  password is REQUIRED.</string>
-    <string name="enter_BirthDate">Birthdate   password is REQUIRED.</string>
-
-
+    <string name="enter_full_name_error">full name is REQUIRED.</string>
+    <string name="enter_email_error">email is REQUIRED.</string>
+    <string name="enter_password_error">password is REQUIRED.</string>
+    <string name="enter_confirm_password_error">Confirem  password is REQUIRED.</string>
+    <string name="enter_BirthDate_error">Birthdate   password is REQUIRED.</string>
+    <string name="enter_date">Enter Date</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="full_name">Full Name</string>
+    <string name="share">share</string>
 
 </resources>
