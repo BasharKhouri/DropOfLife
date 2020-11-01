@@ -24,7 +24,6 @@
     <string name="error_email">Wrong Pattern,Check your email plz</string>
     <string name="error_pass">Password must be more than 8 letters</string>
     <string name="or_sign_in_using">Or Sign In Using</string>
-    <string name="enter_date">Enter Date</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="full_name">Full Name</string>
     <string name="share">share</string>
@@ -35,11 +34,12 @@
     <string name="enter_full_name_error">full name is REQUIRED.</string>
     <string name="enter_email_error">email is REQUIRED.</string>
     <string name="enter_password_error">password is REQUIRED.</string>
-    <string name="enter_confirm_password_error">Confirem  password is REQUIRED.</string>
-    <string name="enter_BirthDate_error">Birthdate   password is REQUIRED.</string>
+    <string name="enter_confirm_password_error">Confirm  password is REQUIRED.</string>
+    <string name="enter_BirthDate_error">Birth date   password is REQUIRED.</string>
     <string name="enter_date">Enter Date</string>
-    <string name="confirm_password">Confirm Password</string>
-    <string name="full_name">Full Name</string>
-    <string name="share">share</string>
+    <string name="error_during_blood_selection">error during blood selection</string>
+    <string name="error_password_length_incorrect">please make sure that the password is 8 to 16 characters</string>
+    <string name="error_password_did_not_match">password did not match </string>
+
 
 </resources>
