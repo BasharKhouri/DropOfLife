@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.icu.util.LocaleData;
 import android.os.Build;
 import android.os.Bundle;
@@ -85,8 +86,9 @@ public class Registration extends AppCompatActivity  implements DatePickerDialog
         }
     }
 
+    Intent intent;
+    public void register(View view)  {
 
-    public void register(View view) throws BloodType.IncorrectBloodIDException {
 
 
         if(checkMinReqForRegistry()){
@@ -98,6 +100,7 @@ public class Registration extends AppCompatActivity  implements DatePickerDialog
                         Toast.makeText(getApplicationContext(), R.string.sign_up_successfully,Toast.LENGTH_SHORT).show();
                         User user = new User(mAuth.getUid(),fullName,birthDate,sex,blood);
                         myRef.setValue(user);
+                        startActivity(new Intent(getApplicationContext(),Login.class));
                     }
                     else{
                         Toast.makeText(getApplicationContext(), R.string.sign_up_unsuccessfully,Toast.LENGTH_SHORT).show();
@@ -127,8 +130,12 @@ public class Registration extends AppCompatActivity  implements DatePickerDialog
         password = passwordET.getText().toString();
         conPassword = conPasswordET.getText().toString();
         birthDateStr = birthdayET.getText().toString();
-        sex = radioButton.getText().toString();
+        try {
+            sex = radioButton.getText().toString();
+        }catch (Exception e){
+            System.out.println(e);
 
+        }
         Date now = new Date(); //now =  new SimpleDateFormat("dd/mm/yy").parse(date);
 
         try {
@@ -139,7 +146,7 @@ public class Registration extends AppCompatActivity  implements DatePickerDialog
         }
 
         if (TextUtils.isEmpty(fullName)) {
-            emailET.setError(R.string.enter_full_name_error + "");
+            fullNameET.setError(R.string.enter_full_name_error + "");
             dataValidated = false;
         }
         if (TextUtils.isEmpty(email)) {
@@ -147,7 +154,7 @@ public class Registration extends AppCompatActivity  implements DatePickerDialog
             dataValidated = false;
         }
         if (TextUtils.isEmpty(password)) {
-            passwordET.setError(R.string.enter_password_error + "");
+            passwordET.setError(R.string.enter_password_error + " ");
             dataValidated = false;
         } else if (password.length() >= 8 && password.length() <= 16) {
             passwordET.setError(R.string.error_password_length_incorrect + "");
@@ -158,14 +165,19 @@ public class Registration extends AppCompatActivity  implements DatePickerDialog
             conPasswordET.setError(R.string.error_password_did_not_match + "");
         }
         if (TextUtils.isEmpty(birthDateStr)) {
-            emailET.setError(R.string.enter_BirthDate_error + "");
+            birthdayET.setError(R.string.enter_BirthDate_error + "");
             dataValidated = false;
         }
         if (TextUtils.isEmpty(sex)) {
             Toast.makeText(this, R.string.selct_sex, Toast.LENGTH_SHORT).show();
             dataValidated = false;
         }
-        if (TextUtils.isEmpty(blood.getBloodType())) {
+        try {
+            if (TextUtils.isEmpty(blood.getBloodType())) {
+                Toast.makeText(this, R.string.select_blood, Toast.LENGTH_SHORT).show();
+                dataValidated = false;
+            }
+        }catch (Exception e){
             Toast.makeText(this, R.string.select_blood, Toast.LENGTH_SHORT).show();
             dataValidated = false;
         }

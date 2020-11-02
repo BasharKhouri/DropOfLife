@@ -3,6 +3,7 @@ package com.example.dropoflife;
 import android.os.Bundle;
 import android.widget.ListView;
 
+import com.example.dropoflife.Classes.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
     ListView listView;
+    public static User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

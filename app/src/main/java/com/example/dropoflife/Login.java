@@ -22,6 +22,7 @@ public class Login extends AppCompatActivity {
     public String email , password ;
     public EditText emailET , passwordET;
     private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +32,7 @@ public class Login extends AppCompatActivity {
 
     public void goToRegister(View view) {
         Intent intent = new Intent(this,Registration.class);
+        startActivity(intent);
     }
 
     public void signIn(View view) {
@@ -49,9 +51,15 @@ public class Login extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-       // add ho to home fragment.
+       // add go to home fragment.
+        if(currentUser!=null)
+        startActivity(new Intent(getApplicationContext(),MainActivity.class).putExtra("currentUser",currentUser));
     }
 
+    /**
+     * @param email the user Email
+     * @param password the user Password
+     */
     public void validateLogIn(final String email , final String password){
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -60,8 +68,9 @@ public class Login extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             System.out.println("success");
-                            FirebaseUser user = mAuth.getCurrentUser();
+                            FirebaseUser currentUser = mAuth.getCurrentUser();
                           //go to Home fragment
+                            startActivity(new Intent(getApplicationContext(),MainActivity.class).putExtra("currentUser",currentUser));
                         } else {
 
                             // If sign in fails, display a message to the user.
@@ -70,10 +79,10 @@ public class Login extends AppCompatActivity {
                            emailET.setError(null);
 
                         }
-
                         // ...
                     }
                 });
     }
+
 
 }
