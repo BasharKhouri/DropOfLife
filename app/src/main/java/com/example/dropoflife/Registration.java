@@ -10,6 +10,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -43,7 +44,7 @@ public class Registration extends AppCompatActivity  implements DatePickerDialog
     private RadioButton radioButton ;
     private Spinner bloodSpinner;
     private FirebaseAuth mAuth ;
-
+    ArrayAdapter<String> spinnerArrayAdapter;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("Users");
@@ -60,8 +61,12 @@ public class Registration extends AppCompatActivity  implements DatePickerDialog
         passwordET=(EditText)findViewById(R.id.password);
         conPasswordET = (EditText)findViewById(R.id.confirmPassword);
         bloodSpinner =(Spinner)findViewById(R.id.bloodTypeSpinner);
-        ArrayAdapter<String> spinnerArrayAdapter  = new ArrayAdapter<String>(this , android.R.layout.simple_spinner_dropdown_item,  BloodType.bloodTypes);
+
+        spinnerArrayAdapter = new ArrayAdapter<String>(this , android.R.layout.simple_spinner_item,  BloodType.bloodTypes);
+
         bloodSpinner.setAdapter(spinnerArrayAdapter);
+
+
         birthdayET.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -101,6 +106,7 @@ public class Registration extends AppCompatActivity  implements DatePickerDialog
                         User user = new User(mAuth.getUid(),fullName,birthDate,sex,blood);
                         myRef.setValue(user);
                         startActivity(new Intent(getApplicationContext(),Login.class));
+                       finish();
                     }
                     else{
                         Toast.makeText(getApplicationContext(), R.string.sign_up_unsuccessfully,Toast.LENGTH_SHORT).show();
@@ -141,12 +147,12 @@ public class Registration extends AppCompatActivity  implements DatePickerDialog
         try {
             blood = new BloodType(bloodSpinner.getId());
         } catch (Exception e) {
-            Toast.makeText(this, R.string.error_during_blood_selection, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, e.getMessage()+"current ID "+bloodSpinner.getId(), Toast.LENGTH_SHORT).show();
             dataValidated = false;
         }
 
         if (TextUtils.isEmpty(fullName)) {
-            fullNameET.setError(R.string.enter_full_name_error + "");
+            fullNameET.setError((R.string.enter_full_name_error)+"");
             dataValidated = false;
         }
         if (TextUtils.isEmpty(email)) {

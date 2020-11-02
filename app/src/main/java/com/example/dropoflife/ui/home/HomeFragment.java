@@ -47,14 +47,13 @@ public class HomeFragment extends Fragment {
         String date [];
         String description[];
         // need to add images later once we figure out how to use firebase storage TBD
-        MyAdapter(Context c , String userName [], String bloodTypeSTR [],String description []){
+        MyAdapter(Context c , String userName [], String bloodTypeSTR [],String description [],String date[]){
             super(c , R.layout.row, R.id.itemUserName,userName);
             this.context = c ;
             this.userName = userName;
             this.bloodTypeSTR = bloodTypeSTR;
             this.date = date ;
             this.description =description;
-
         }
 
         @NonNull
