@@ -34,7 +34,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * author Bashar Khouri
+ * author Bashar Khouri,Hassan wael ,Bashar Nimri
  */
 public class Registration extends AppCompatActivity  implements DatePickerDialog.OnDateSetListener{
     private EditText fullNameET ,emailET , passwordET , conPasswordET , birthdayET ;

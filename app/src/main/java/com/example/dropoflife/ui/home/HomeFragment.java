@@ -21,7 +21,9 @@ import com.example.dropoflife.Classes.Post;
 import com.example.dropoflife.R;
 
 import java.util.LinkedList;
-
+/**
+ * author Bashar Khouri,Hassan wael ,Bashar Nimri
+ */
 public class HomeFragment extends Fragment {
 
 

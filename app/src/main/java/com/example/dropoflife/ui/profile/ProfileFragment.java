@@ -12,7 +12,9 @@ import androidx.fragment.app.Fragment;
 import com.example.dropoflife.Classes.User;
 import com.example.dropoflife.MainActivity;
 import com.example.dropoflife.R;
-
+/**
+ * author Bashar Khouri,Hassan wael ,Bashar Nimri
+ */
 public class ProfileFragment extends Fragment {
     User user;
     private ProfileViewModel profileViewModel;

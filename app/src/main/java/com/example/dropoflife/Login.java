@@ -17,7 +17,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.core.utilities.Utilities;
-
+/**
+ * author Bashar Khouri,Hassan wael ,Bashar Nimri
+ */
 public class Login extends AppCompatActivity {
     public String email , password ;
     public EditText emailET , passwordET;

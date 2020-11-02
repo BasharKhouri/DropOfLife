@@ -11,7 +11,9 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-
+/**
+ * author Bashar Khouri,Hassan wael ,Bashar Nimri
+ */
 public class MainActivity extends AppCompatActivity {
     ListView listView;
     public static User user;
