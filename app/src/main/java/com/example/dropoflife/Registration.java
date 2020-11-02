@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.icu.util.LocaleData;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -87,8 +88,8 @@ public class Registration extends AppCompatActivity  implements DatePickerDialog
 
     public void register(View view) throws BloodType.IncorrectBloodIDException {
 
-        checkMinReqForRegistry();
-        if(conPassword.equals(password)){
+
+        if(checkMinReqForRegistry()){
             mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -114,71 +115,62 @@ public class Registration extends AppCompatActivity  implements DatePickerDialog
      * @return true if the user can sign up with the current data note this process dose not validate if the email exists.
      */
 
-    public boolean checkMinReqForRegistry()  {
+    public boolean checkMinReqForRegistry() {
+
+
         boolean dataValidated = true;
-       //assign the values to the Strings and to blood type;
-        int radioID =radioGroup.getCheckedRadioButtonId();
-        radioButton=findViewById(radioID);
+        //assign the values to the Strings and to blood type;
+        int radioID = radioGroup.getCheckedRadioButtonId();
+        radioButton = findViewById(radioID);
         fullName = fullNameET.getText().toString();
         email = emailET.getText().toString();
         password = passwordET.getText().toString();
         conPassword = conPasswordET.getText().toString();
         birthDateStr = birthdayET.getText().toString();
-        sex =radioButton.getText().toString();
+        sex = radioButton.getText().toString();
 
         Date now = new Date(); //now =  new SimpleDateFormat("dd/mm/yy").parse(date);
 
         try {
-           blood = new BloodType(bloodSpinner.getId());
-       }catch (Exception e ){
-           Toast.makeText(this, R.string.error_during_blood_selection, Toast.LENGTH_SHORT).show();
-           dataValidated = false;
-       }
-
-        if(TextUtils.isEmpty(fullName)){
-          emailET.setError(R.string.enter_full_name_error+"");
+            blood = new BloodType(bloodSpinner.getId());
+        } catch (Exception e) {
+            Toast.makeText(this, R.string.error_during_blood_selection, Toast.LENGTH_SHORT).show();
             dataValidated = false;
         }
-        if(TextUtils.isEmpty(email)){
-            emailET.setError(R.string.enter_email_error+"");
+
+        if (TextUtils.isEmpty(fullName)) {
+            emailET.setError(R.string.enter_full_name_error + "");
             dataValidated = false;
         }
-        if(TextUtils.isEmpty(password)){
-            passwordET.setError(R.string.enter_password_error+"");
+        if (TextUtils.isEmpty(email)) {
+            emailET.setError(R.string.enter_email_error + "");
             dataValidated = false;
-        }else if (password.length()>=8&& password.length()<=16) {
-                passwordET.setError(R.string.error_password_length_incorrect+"");
-        }else if(TextUtils.isEmpty(conPassword)){
-            conPasswordET.setError(R.string.enter_confirm_password_error+"");
-            dataValidated = false;
-        }else if (!password.equals(conPassword)){
-            conPasswordET.setError(R.string.error_password_did_not_match+"");
         }
-        if(TextUtils.isEmpty(birthDateStr)){
-            emailET.setError(R.string.enter_BirthDate_error+"");
+        if (TextUtils.isEmpty(password)) {
+            passwordET.setError(R.string.enter_password_error + "");
             dataValidated = false;
-        }//else if((now.getYear()-birthDate.getTime())>18) {
-
-        //}
-
-        if(TextUtils.isEmpty(sex)){
+        } else if (password.length() >= 8 && password.length() <= 16) {
+            passwordET.setError(R.string.error_password_length_incorrect + "");
+        } else if (TextUtils.isEmpty(conPassword)) {
+            conPasswordET.setError(R.string.enter_confirm_password_error + "");
+            dataValidated = false;
+        } else if (!password.equals(conPassword)) {
+            conPasswordET.setError(R.string.error_password_did_not_match + "");
+        }
+        if (TextUtils.isEmpty(birthDateStr)) {
+            emailET.setError(R.string.enter_BirthDate_error + "");
+            dataValidated = false;
+        }
+        if (TextUtils.isEmpty(sex)) {
             Toast.makeText(this, R.string.selct_sex, Toast.LENGTH_SHORT).show();
             dataValidated = false;
         }
-        if(TextUtils.isEmpty(blood.getBloodType())){
-            Toast.makeText(this,R.string.select_blood, Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(blood.getBloodType())) {
+            Toast.makeText(this, R.string.select_blood, Toast.LENGTH_SHORT).show();
             dataValidated = false;
         }
-         return dataValidated;
+        return dataValidated;
+
+
     }
-
-
-
-
-
-
-
-
-
-
 }
