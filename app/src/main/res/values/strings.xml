@@ -50,9 +50,6 @@
         <item> AB+ </item>
         <item> AB- </item>
         <item> Unknown ! </item>
-
-
-
     </string-array>
-
+    <string name="error_younger_than_the_legal_age">you must be at least 16 years old </string>
 </resources>
