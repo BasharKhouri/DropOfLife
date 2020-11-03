@@ -102,6 +102,7 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
                         //Need to  add UI changes now
                         Toast.makeText(getApplicationContext(), R.string.sign_up_successfully, Toast.LENGTH_SHORT).show();
                         User user = new User(mAuth.getUid(), fullName, birthDate, sex, blood);
+                        myRef.push().getKey();
                         myRef.setValue(user);
                         startActivity(new Intent(getApplicationContext(), Login.class));
                     } else {
@@ -141,7 +142,7 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
         Date now = new Date(); //now =  new SimpleDateFormat("dd/mm/yy").parse(date);
 
         try {
-            blood = new BloodType(bloodSpinner.getId());
+            blood = new BloodType(bloodSpinner.getSelectedItemPosition());
         } catch (Exception e) {
             Toast.makeText(this, R.string.error_during_blood_selection, Toast.LENGTH_SHORT).show();
             dataValidated = false;
@@ -158,8 +159,9 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
         if (TextUtils.isEmpty(password)) {
             passwordET.setError(R.string.enter_password_error + " ");
             dataValidated = false;
-        } else if (password.length() >= 8 && password.length() <= 16) {
-            passwordET.setError(R.string.error_password_length_incorrect + "");
+        } else if (!(password.length() >= 8 && password.length() <= 16)) {
+            passwordET.setError("erorr" + password.length());
+            dataValidated = false;
         } else if (TextUtils.isEmpty(conPassword)) {
             conPasswordET.setError(R.string.enter_confirm_password_error + "");
             dataValidated = false;
