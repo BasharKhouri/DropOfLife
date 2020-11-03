@@ -22,4 +22,9 @@
         android:name="com.example.dropoflife.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.example.dropoflife.ui.SettingsFragment"
+        android:label="@string/title_activity_settings"
+        tools:layout="@layout/root_preferences" />
 </navigation>
