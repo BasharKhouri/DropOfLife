@@ -37,19 +37,18 @@
 
    <ScrollView
        android:layout_width="match_parent"
-       android:layout_height="442dp"
+       android:layout_height="match_parent"
        android:layout_below="@+id/Filter"
        android:layout_alignParentBottom="true"
+
        android:layout_marginTop="-2dp"
        android:layout_marginBottom="0dp">
-
-      <ListView
-          android:id="@+id/HomeListView"
+         <view class="androidx.appcompat.app.AlertController$RecycleListView"
+          android:id="@+id/postRecycleView"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/Filter">
+          app:layout_constraintTop_toBottomOf="@+id/Filter"/>
 
-      </ListView>
    </ScrollView>
 </RelativeLayout>

@@ -164,7 +164,7 @@
 
     <Spinner
         android:id="@+id/bloodTypeSpinner"
-        android:layout_width="107dp"
+        android:layout_width="wrap_content"
         android:layout_height="36dp"
 
         app:layout_constraintBottom_toBottomOf="parent"

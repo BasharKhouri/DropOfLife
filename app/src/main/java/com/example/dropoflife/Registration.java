@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.icu.util.LocaleData;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -104,7 +105,9 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
                         User user = new User(mAuth.getUid(), fullName, birthDate, sex, blood);
                         myRef.push().getKey();
                         myRef.setValue(user);
-                        startActivity(new Intent(getApplicationContext(), Login.class));
+                        Intent intent =new Intent(getApplicationContext(), MainActivity.class);
+                        intent.putExtra("user", (Parcelable) user);
+                        startActivity(intent);
                     } else {
                         Toast.makeText(getApplicationContext(), R.string.sign_up_unsuccessfully, Toast.LENGTH_SHORT).show();
                     }
@@ -184,8 +187,6 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
             dataValidated=false;
         }
         return dataValidated;
-
-
     }
 
 

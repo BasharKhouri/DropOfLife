@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -16,65 +18,77 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.dropoflife.Classes.AdapterPosts;
 import com.example.dropoflife.Classes.Post;
 import com.example.dropoflife.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class HomeFragment extends Fragment {
 
-
+    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference postRef ;
     private HomeViewModel homeViewModel;
     private  ListView listView;
-    private LinkedList <Post> posts;
+    private ArrayList<Post> postList;
+    RecyclerView recyclerView ;
+    AdapterPosts adapterPosts;
+    FirebaseAuth currentUser;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        // listView = (ListView)getView().findViewById(R.id.HomeListView);
-       // MyAdapter adapter = new MyAdapter(Post info)
+         listView = (ListView)getView().findViewById(R.id.HomeListView);
 
-        
+         currentUser=FirebaseAuth.getInstance();
+
+       // Recycler View and it's properties
+        recyclerView = (RecyclerView) getView().findViewById(R.id.postRecycleView);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        //show the newest post 1st,for this load from last
+        linearLayoutManager.setStackFromEnd(true);
+        linearLayoutManager.setReverseLayout(true);
+        //init post List
+        postList = new ArrayList<>();
+        LoadPosts();
+
+
         return inflater.inflate(R.layout.fragment_home,container,false);
 
+
     }
 
-    class MyAdapter extends ArrayAdapter<String>{
-        Context context ;
-        String userName [] ;
-        String bloodTypeSTR[];
-        String date [];
-        String description[];
-        // need to add images later once we figure out how to use firebase storage TBD
-        MyAdapter(Context c , String userName [], String bloodTypeSTR [],String description []){
-            super(c , R.layout.row, R.id.itemUserName,userName);
-            this.context = c ;
-            this.userName = userName;
-            this.bloodTypeSTR = bloodTypeSTR;
-            this.date = date ;
-            this.description =description;
+    private void LoadPosts() {
+        // Path Of all Posts
+        postRef= FirebaseDatabase.getInstance().getReference("Posts");
+        //get all data from the postRef
+        postRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                postList.clear();
+                for(DataSnapshot ds:snapshot.getChildren()){
+                    Post post = ds.getValue(Post.class);
+                    postList.add(post);
+                    adapterPosts = new AdapterPosts(getActivity(),postList);
+                    recyclerView.setAdapter(adapterPosts);
+                }
 
-        }
+            }
 
-        @NonNull
-        @Override
-        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            LayoutInflater layoutInflater =(LayoutInflater) context.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View row = layoutInflater.inflate(R.layout.row,parent,false);
-            //ImageView imageView = row.findViewById(R.id.item_profile_image);
-            TextView userNametxt = row.findViewById(R.id.itemUserName);
-            TextView datetxt = row.findViewById(R.id.itemDateOfPublish);
-            TextView descriptiontxt = row.findViewById(R.id.itemDescription);
-            TextView bloodTypetxt = row.findViewById(R.id.itemBloodType);
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
-          //here we set resources
-           // imageView.setImageResources(imgpath)
-            userNametxt.setText(userName[position]);
-            datetxt.setText(date[position]);
-            descriptiontxt.setText(description[position]);
-            bloodTypetxt.setText(bloodTypeSTR[position]);
-
-
-            return row;
-        }
+            }
+        })
     }
+
+}
 }
