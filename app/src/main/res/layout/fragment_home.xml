@@ -35,12 +35,12 @@
 
    </RelativeLayout>
 
-   <ScrollView
+   <androidx.recyclerview.widget.RecyclerView
        android:layout_width="match_parent"
        android:layout_height="match_parent"
        android:layout_below="@+id/Filter"
        android:layout_alignParentBottom="true"
-
+      android:id="@+id/HomeListView"
        android:layout_marginTop="-2dp"
        android:layout_marginBottom="0dp">
          <view class="androidx.appcompat.app.AlertController$RecycleListView"
@@ -50,5 +50,5 @@
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@+id/Filter"/>
 
-   </ScrollView>
+   </androidx.recyclerview.widget.RecyclerView>
 </RelativeLayout>

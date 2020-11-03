@@ -39,14 +39,13 @@ public class HomeFragment extends Fragment {
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference postRef ;
     private HomeViewModel homeViewModel;
-    private  ListView listView;
     private ArrayList<Post> postList;
     RecyclerView recyclerView ;
     AdapterPosts adapterPosts;
     FirebaseAuth currentUser;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-         listView = (ListView)getView().findViewById(R.id.HomeListView);
+
 
          currentUser=FirebaseAuth.getInstance();
 
@@ -87,8 +86,7 @@ public class HomeFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        })
+        });
     }
 
-}
 }
