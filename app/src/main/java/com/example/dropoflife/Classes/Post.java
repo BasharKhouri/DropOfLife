@@ -11,19 +11,20 @@ public class Post {
     private String description;
     private Date dateOfPublish;
     private String location ;
-    private String picPath;
+    private  String phoneNumber;
 
-    public String getPicPath() {
-        return picPath;
-    }
 
-    Post(String userID, BloodType bloodType, String description, Date dateOfPublish, String location, String picPath){
+    public Post(String userID, BloodType bloodType, String description, Date dateOfPublish, String location, String phoneNumber){
         this.userID = userID ;
         this.bloodType= bloodType;
         this.description=description;
         this.dateOfPublish=dateOfPublish;
         this.location=location;
-        this.picPath = picPath;
+        this.phoneNumber=phoneNumber;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     public String getLocation() {

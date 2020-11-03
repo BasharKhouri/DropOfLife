@@ -24,7 +24,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:background="#E1BB0A1E"
+        android:background="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -33,6 +33,7 @@
             android:id="@+id/progress_circular"
             android:layout_width="200dp"
             android:layout_height="200dp"
+            android:background="@color/trasnperant"
 
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
@@ -48,6 +49,8 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image"
             android:layout_width="180dp"
+            android:background="@color/trasnperant"
+
             android:layout_height="180dp"
             android:padding="5dp"
             android:layout_margin="10dp"
@@ -71,6 +74,8 @@
             android:text="User Name"
             android:textAlignment="center"
             android:textColor="#ffffff"
+            android:background="@color/trasnperant"
+
             android:textSize="30dp" />
 
         <TextView
@@ -86,6 +91,7 @@
             android:textAlignment="center"
             android:gravity="center_horizontal"
             android:textColor="#ffffff"
+            android:background="@color/trasnperant"
             android:layout_marginTop="33dp"
             android:layout_centerInParent="true"
             android:textSize="15dp"
@@ -106,7 +112,7 @@
 
 
         <RelativeLayout
-
+            android:background="@color/BackGround"
             android:layout_width="410dp"
             android:layout_height="378dp"
             android:layout_below="@+id/relativeLayout"
@@ -115,6 +121,7 @@
             android:layout_marginBottom="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
 
@@ -127,6 +134,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="15dp"
+                android:background="@color/trasnperant"
+
                 android:layout_marginEnd="258dp"
                 android:layout_marginRight="258dp"
                 android:text="Blood tpye"
@@ -141,7 +150,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="0dp"
                 android:layout_marginEnd="115dp"
-
+                android:background="@color/trasnperant"
                 android:layout_marginRight="115dp"
                 android:text="3"
                 android:textColor="#bb0a1e"
@@ -155,6 +164,8 @@
                 android:layout_below="@+id/donation"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
+                android:background="@color/trasnperant"
+
                 android:layout_marginStart="63dp"
                 android:layout_marginLeft="63dp"
                 android:layout_marginTop="109dp"
@@ -168,6 +179,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/profile_page_usesLocation"
                 android:layout_alignParentStart="true"
+                android:background="@color/trasnperant"
                 android:layout_alignParentLeft="true"
                 android:layout_marginStart="59dp"
                 android:layout_marginLeft="59dp"
@@ -185,6 +197,8 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:layout_marginStart="82dp"
+                android:background="@color/trasnperant"
+
                 android:layout_marginLeft="82dp"
                 android:layout_marginTop="-1dp"
                 android:layout_marginEnd="133dp"
@@ -206,12 +220,15 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="14dp"
                 android:layout_marginEnd="97dp"
+                android:background="@color/trasnperant"
+
                 android:layout_marginRight="97dp"
                 android:textColor="#000000"
                 android:text="Donations"
                 android:textSize="15dp" />
 
             <Button
+                android:background="@drawable/button"
                 android:id="@+id/donation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -239,10 +256,14 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="25dp"
                 android:layout_marginEnd="-21dp"
+                android:background="@color/trasnperant"
+
                 android:layout_marginRight="-21dp"
                 android:src="@drawable/ic_baseline_my_location_24" />
 
             <ImageView
+                android:background="@color/trasnperant"
+
                 android:id="@+id/imageView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

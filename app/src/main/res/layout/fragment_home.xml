@@ -21,6 +21,7 @@
           android:layout_toStartOf="@+id/Filter"
           android:layout_toLeftOf="@+id/Filter"
           android:drawableLeft="@drawable/ic_baseline_add_circle_24"
+          android:onClick="addPost"
           android:text="@string/req_blood" />
       <Button
           android:id="@id/Filter"
@@ -40,15 +41,8 @@
        android:layout_height="match_parent"
        android:layout_below="@+id/Filter"
        android:layout_alignParentBottom="true"
-      android:id="@+id/HomeListView"
+       android:id="@+id/PostsListRecycleView"
        android:layout_marginTop="-2dp"
        android:layout_marginBottom="0dp">
-         <view class="androidx.appcompat.app.AlertController$RecycleListView"
-          android:id="@+id/postRecycleView"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/Filter"/>
-
    </androidx.recyclerview.widget.RecyclerView>
 </RelativeLayout>
