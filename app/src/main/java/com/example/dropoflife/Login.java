@@ -77,7 +77,7 @@ public class Login extends AppCompatActivity {
 
        // add go to home fragment.
         if(currentUser!=null)
-        startActivity(new Intent(getApplicationContext(),MainActivity.class).putExtra("User", (Parcelable) user));
+        startActivity(new Intent(getApplicationContext(),MainActivity.class));
     }
 
     /**
@@ -95,7 +95,7 @@ public class Login extends AppCompatActivity {
                             FirebaseUser currentUser = mAuth.getCurrentUser();
 
                           //go to Home fragment
-                            startActivity(new Intent(getApplicationContext(),MainActivity.class).putExtra("User", (Serializable) user));
+                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
                         } else {
 
                             // If sign in fails, display a message to the user.

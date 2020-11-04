@@ -84,7 +84,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(),AddRequest.class);
-                intent.putExtra("User", (Serializable) user);
                 startActivity(intent);
             }
         });

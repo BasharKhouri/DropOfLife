@@ -26,7 +26,6 @@ public class AddRequest extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_request);
-        user = (User) getIntent().getSerializableExtra("User");
         location=(EditText) findViewById(R.id.addPostLocation);
         description=(EditText) findViewById(R.id.descriptionEditText);
         phoneNumber=(EditText) findViewById(R.id.enterPhoneNumber);
