@@ -19,9 +19,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="2dp"
         android:padding="5dp"
-        android:src="@drawable/profile"
-        android:autoLink="all"
-        />
+        android:src="@drawable/profile" />
 
     <TextView
         android:id="@+id/itemUserName"
@@ -36,11 +34,10 @@
         android:text="UserName"
         android:textSize="15dp"
         android:textColor="#000"
-        android:autoLink="all"
         />
 
     <TextView
-        android:id="@+id/item_location"
+        android:id="@+id/location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/itemUserName"
@@ -49,16 +46,16 @@
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/item_profile_image"
         android:layout_toRightOf="@+id/item_profile_image"
-        android:text="Location"
+        android:text="@string/location"
         android:textColor="#000"
-        android:textSize="12dp"
+        android:textSize="12sp"
         android:autoLink="all"
         />
     <TextView
         android:id="@+id/itemDateOfPublish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/item_location"
+        android:layout_below="@+id/location"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="5dp"
@@ -66,9 +63,8 @@
         android:layout_toRightOf="@+id/item_profile_image"
         android:text="Date"
         android:textColor="#000"
-        android:textSize="12dp"
-        android:autoLink="all"
-        />
+        android:textSize="12sp"
+        android:autoLink="all"/>
 
     <TextView
         android:id="@+id/itemDescription"
@@ -85,9 +81,8 @@
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
-        android:text="additional ino "
-        android:autoLink="all"
-        />
+        android:text="@string/additional_ino"
+        android:autoLink="all"/>
 
     <TextView
         android:id="@+id/itemBloodType"
@@ -101,10 +96,9 @@
         android:layout_toRightOf="@+id/itemUserName"
         android:text="AB+"
         android:textColor="@color/colorPrimary"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold"
-        android:autoLink="all"
-        />
+        android:autoLink="all"/>
 
 
     <View
@@ -141,7 +135,6 @@
             android:layout_weight="0.3"
             android:background="@drawable/button_row"
             android:text="@string/call_me"
-            android:id="@+id/item_Call_me"
             android:textSize="12sp"
             android:drawableStart="@drawable/ic_baseline_call_24"
             android:drawableLeft="@drawable/ic_baseline_call_24"
@@ -151,7 +144,6 @@
             />
 
         <Button
-            android:id="@+id/item_Share"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
@@ -166,7 +158,6 @@
             />
 
         <Button
-            android:id="@+id/item_Chat"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"

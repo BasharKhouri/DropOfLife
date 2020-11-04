@@ -1,0 +1,27 @@
+<resources>
+    <!-- Reply Preference -->
+    <string-array name="reply_entries">
+        <item>Reply</item>
+        <item>Reply to all</item>
+    </string-array>
+
+    <string-array name="reply_values">
+        <item>reply</item>
+        <item>reply_all</item>
+    </string-array>
+    <string-array name="provinces_array">
+
+        <item>Amman</item>
+        <item>Irbid</item>
+        <item>Ajloun</item>
+        <item>Jerash</item>
+        <item>Mafraq</item>
+        <item>Balqa</item>
+        <item>Zarqa</item>
+        <item>Madaba</item>
+        <item>Karak</item>
+        <item>Tafilah</item>
+        <item>Aqaba</item>
+
+    </string-array>
+</resources>

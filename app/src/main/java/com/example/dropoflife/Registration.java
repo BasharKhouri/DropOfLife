@@ -7,7 +7,6 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -172,55 +171,46 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
             System.out.println(e);
 
         }
-
+        Date now = new Date(); //now =  new SimpleDateFormat("dd/mm/yy").parse(date);
 
         try {
             blood = new BloodType(bloodSpinner.getSelectedItemPosition());
+
         } catch (Exception e) {
-            Toast.makeText(this,getString( R.string.error_during_blood_selection), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.error_during_blood_selection, Toast.LENGTH_SHORT).show();
             dataValidated = false;
         }
 
         if (TextUtils.isEmpty(fullName)) {
-            fullNameET.setError(getString(R.string.enter_full_name_error ));
+            fullNameET.setError(R.string.enter_full_name_error + "");
             dataValidated = false;
         }
         if (TextUtils.isEmpty(email)) {
-            emailET.setError(getString(R.string.enter_email_error ));
+            emailET.setError(R.string.enter_email_error + "");
             dataValidated = false;
         }
         if (TextUtils.isEmpty(password)) {
-            passwordET.setError(getString(R.string.enter_password_error ));
+            passwordET.setError(R.string.enter_password_error + " ");
             dataValidated = false;
-        } else if (!(password.length() >= 8 && password.length() <= 16)) {
-            passwordET.setError(getString(R.string.error_password_length_incorrect) + password.length());
-            dataValidated = false;
+        } else if (password.length() >= 8 && password.length() <= 16) {
+            passwordET.setError(R.string.error_password_length_incorrect + "");
         } else if (TextUtils.isEmpty(conPassword)) {
-            conPasswordET.setError(getString(R.string.enter_confirm_password_error ));
+            conPasswordET.setError(R.string.enter_confirm_password_error + "");
             dataValidated = false;
         } else if (!password.equals(conPassword)) {
-            conPasswordET.setError(getString(R.string.error_password_did_not_match ));
+            conPasswordET.setError(R.string.error_password_did_not_match + "");
         }
         if (TextUtils.isEmpty(birthDateStr)) {
-            birthdayET.setError(getString( R.string.enter_BirthDate_error));
+            birthdayET.setError(R.string.enter_BirthDate_error + "");
             dataValidated = false;
         }
         if (TextUtils.isEmpty(sex)) {
-            Toast.makeText(this, getString(R.string.selct_sex), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.selct_sex, Toast.LENGTH_SHORT).show();
             dataValidated = false;
         }
-//Calendar.getInstance().getTime()
-        int year = birthDate.getYear()+1900;
-        int now = Calendar.getInstance().getTime().getYear()+1900;
-        if(now-year<16){
-            Toast.makeText(this, getString(R.string.error_younger_than_the_legal_age), Toast.LENGTH_SHORT).show();
-            dataValidated=false;
-        }
+
         return dataValidated;
+
+
     }
-
-
-
-
-
 }

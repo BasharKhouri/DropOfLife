@@ -2,7 +2,9 @@ package com.example.dropoflife;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,6 +17,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.dropoflife.Classes.User;
+import com.example.dropoflife.ui.SettingsFragment;
+import com.example.dropoflife.ui.home.HomeFragment;
+import com.example.dropoflife.ui.home.HomeViewModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -46,6 +51,7 @@ public class Login extends AppCompatActivity {
         startActivity(intent);
     }
 
+
     public void signIn(View view) {
 
      email = emailET.getText().toString();
@@ -56,10 +62,12 @@ public class Login extends AppCompatActivity {
                 emailET.setError(null);
             if(TextUtils.isEmpty(password))
                 passwordET.setError(null);
-        }else
+        }else{
             //هي المفروض تكون تحت بعد ال validation  بس حطيتها هون عشان اتأكد
             save(email,password);
-        validateLogIn(email,password);
+        validateLogIn(email,password);}
+
+
     }
 
     public void onStart() {

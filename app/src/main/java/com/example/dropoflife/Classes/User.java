@@ -1,5 +1,7 @@
 package com.example.dropoflife.Classes;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.Date;
 
 /**
@@ -86,6 +88,7 @@ public class User {
         }
 
     }
+
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
