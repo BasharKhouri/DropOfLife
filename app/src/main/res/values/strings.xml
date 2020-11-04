@@ -53,6 +53,7 @@
 
 
     </string-array>
+    <string name="error_younger_than_the_legal_age">Younger than the legal age </string>
     <string name="title_activity_settings">SettingsActivity</string>
 
     <!-- Preference Titles -->

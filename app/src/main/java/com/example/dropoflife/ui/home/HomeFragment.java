@@ -46,12 +46,12 @@ public class HomeFragment extends Fragment {
     FirebaseAuth currentUser;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-         listView = (ListView)getView().findViewById(R.id.HomeListView);
+
 
          currentUser=FirebaseAuth.getInstance();
 
        // Recycler View and it's properties
-        recyclerView = (RecyclerView) getView().findViewById(R.id.postRecycleView);
+//        recyclerView = (RecyclerView) getView().findViewById(R.id.postRecycleView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         //show the newest post 1st,for this load from last
         linearLayoutManager.setStackFromEnd(true);
@@ -87,8 +87,7 @@ public class HomeFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        })
+        });
     }
 
-}
 }
