@@ -1,6 +1,8 @@
 package com.example.dropoflife.Classes;
 
 import android.content.Context;
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,8 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dropoflife.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -20,6 +24,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -34,9 +41,8 @@ import java.util.Locale;
 public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
     Context context;
     List<Post> postList;
-
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("Users");
 
     public AdapterPosts(Context context, List<Post> postList) {
         this.context = context;
@@ -58,7 +64,7 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
         String location =postList.get(position).getLocation();
         String time =postList.get(position).getDateOfPublish().toString();
         String blood = BloodType.bloodTypes[postList.get(position).getBloodTypeID()];
-        String userPic;
+        Uri userPic;
         //convert time stamps to dd/mm/yyyy hh:mm am/pm
         Calendar calendar = Calendar.getInstance(Locale.getDefault());
         calendar.setTimeInMillis(Long.parseLong(time));
@@ -67,15 +73,37 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
         //set Data
 
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-         //User user = new User( myRef.orderByChild("fireBaseAuthID").equalTo(userID).limitToFirst(1));
-        holder.userName.setText(user.getDisplayName());
+        User user =getUser(userID);
+        userPic=user.getProfilePic();
+        holder.userName.setText(user.getUserName());
         holder.blood.setText(blood);
         holder.description.setText(description);
         holder.location.setText(location);
+        holder.uPic.setImageURI(userPic);
 
 
+    }
 
+
+    public User getUser(String userID) {
+
+        final User[] owner = new User[1];
+        db.collection("users").whereEqualTo("fireBaseAuthID", userID).limit(1)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                owner[0] = document.toObject(User.class);
+                            }
+                        } else {
+                            owner[0] =null;
+                            Log.w("", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
+        return owner[0];
     }
 
     @Override

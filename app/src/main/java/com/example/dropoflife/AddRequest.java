@@ -3,6 +3,7 @@ package com.example.dropoflife;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -53,7 +54,9 @@ public class AddRequest extends AppCompatActivity {
                   Post post;
                   post = new Post(publicher.getUid(),requestedBlood.getBloodID(),description.getText().toString(),
                           Calendar.getInstance().getTime(),location.getText().toString(),phoneNumber.getText().toString());
-                  myRef.setValue(post);
+                  Intent intent =new Intent(getApplicationContext(), MainActivity.class);
+                  startActivity(intent);
+                  finish();
               }catch (Exception e){
                   Toast.makeText(AddRequest.this, e.getMessage(), Toast.LENGTH_SHORT).show();
               }

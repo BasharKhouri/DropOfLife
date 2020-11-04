@@ -36,7 +36,6 @@ public class Post {
     public Post(){
         //auto gen
     }
-
     public User getOwner() {
 
         final User[] owner = new User[1];
@@ -57,19 +56,15 @@ public class Post {
                 });
         return owner[0];
     }
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
-
     public String getLocation() {
         return location;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
-
     public void setBloodTypeID(int bloodTypeID) {
         this.bloodTypeID = bloodTypeID;
     }
@@ -93,7 +88,6 @@ public class Post {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
     public User owner(){
         return owner;
     }
@@ -105,11 +99,9 @@ public class Post {
     public String getDescription() {
         return description;
     }
-
     public Date getDateOfPublish() {
         return dateOfPublish;
     }
-
     public int getBloodTypeID() {
         return bloodTypeID;
     }

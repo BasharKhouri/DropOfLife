@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,8 +66,6 @@ public class HomeFragment extends Fragment {
     Button reqBlood;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
-
          currentUser=FirebaseAuth.getInstance().getCurrentUser();
          View view = inflater.inflate(R.layout.fragment_home,container,false);
          // Recycler View and it's properties
@@ -78,7 +77,6 @@ public class HomeFragment extends Fragment {
         //init post List
         postList = new ArrayList<>();
         LoadPosts();
-
         reqBlood = (Button)view.findViewById(R.id.req_bloodHomeButton);
         reqBlood.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,8 +87,6 @@ public class HomeFragment extends Fragment {
         });
 
         return view;
-
-
     }
 
     private void LoadPosts() {
@@ -102,17 +98,20 @@ public class HomeFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 postList.clear();
                 for(DataSnapshot ds:snapshot.getChildren()){
-                    Post post = ds.getValue(Post.class);//Here is 105
+                    Post post = ds.getValue(Post.class);//Here is 106
                     postList.add(post);
+                    //adapter
                     adapterPosts = new AdapterPosts(getActivity(),postList);
+                 //setAdapter to recyclerView
                     recyclerView.setAdapter(adapterPosts);
                 }
+
 
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
