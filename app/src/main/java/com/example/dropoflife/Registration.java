@@ -27,8 +27,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -50,9 +48,6 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
     private Spinner bloodSpinner;
     private FirebaseAuth mAuth;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-   // DatabaseReference myRef = database.getReference("Users");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,25 +89,22 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
         }
     }
 
-    Intent intent;
-
     public void register(View view) {
-
 
         if (checkMinReqForRegistry()) {
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
+                       //added User name and default image to auth.
+                        saveUserProfileData(fullName);
                         //Need to  add UI changes now
                         Toast.makeText(getApplicationContext(), R.string.sign_up_successfully, Toast.LENGTH_SHORT).show();
-                        User user = new User(mAuth.getUid(), birthDate, sex, blood);
+                        User user = new User(mAuth.getCurrentUser().getUid(),fullName, blood,birthDate, sex, email,mAuth.getCurrentUser().getPhotoUrl());
                         //myRef.push().getKey();
                         //myRef.setValue(user);
-                        Map<String, Object> userMap = new HashMap<>();
-                        userMap.put("user",user);
-                        saveUserProfileData(fullName);
-                        db.collection("users").add(userMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+
+                        db.collection("users").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
                                 Intent intent =new Intent(getApplicationContext(), MainActivity.class);

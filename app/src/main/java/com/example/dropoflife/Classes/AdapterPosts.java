@@ -57,7 +57,7 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
         String description =postList.get(position).getDescription();
         String location =postList.get(position).getLocation();
         String time =postList.get(position).getDateOfPublish().toString();
-        String blood =postList.get(position).getBloodType().getBloodType();
+        String blood = BloodType.bloodTypes[postList.get(position).getBloodTypeID()];
         String userPic;
         //convert time stamps to dd/mm/yyyy hh:mm am/pm
         Calendar calendar = Calendar.getInstance(Locale.getDefault());

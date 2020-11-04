@@ -102,7 +102,7 @@ public class HomeFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 postList.clear();
                 for(DataSnapshot ds:snapshot.getChildren()){
-                    Post post = ds.getValue(Post.class);
+                    Post post = ds.getValue(Post.class);//Here is 105
                     postList.add(post);
                     adapterPosts = new AdapterPosts(getActivity(),postList);
                     recyclerView.setAdapter(adapterPosts);
