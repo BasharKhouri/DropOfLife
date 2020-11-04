@@ -13,6 +13,8 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dropoflife.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -63,49 +65,17 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
         String postTime = (String) android.text.format.DateFormat.format("dd/mm/yyyy hh:mm aa",calendar);
 
         //set Data
-        final User[] user = new User[1];
-
-        myRef.orderByKey().equalTo(userID).limitToFirst(1).addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                user[0] = snapshot.getValue(User.class);
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
 
 
-        });
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
          //User user = new User( myRef.orderByChild("fireBaseAuthID").equalTo(userID).limitToFirst(1));
-        holder.userName.setText(user[0].getFullName());
+        holder.userName.setText(user.getDisplayName());
         holder.blood.setText(blood);
         holder.description.setText(description);
         holder.location.setText(location);
 
 
-        try {
-           userPic= user[0].getUserPhotoURL();
-            //set profile pic once  Storage  is configerd
-        }catch (Exception e){
 
-        }
     }
 
     @Override

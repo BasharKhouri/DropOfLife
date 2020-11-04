@@ -7,11 +7,9 @@ import java.util.Date;
  */
 public class User {
     final private  String fireBaseAuthID;
-    private String fullName;
     private BloodType bloodType;
     private Date dateOfBirth;
     private String sex;
-    private String UserPhotoURL ;
     private Date dateOfLastDonation;
     private int numberOfDonations;
 
@@ -21,31 +19,25 @@ public class User {
      * @param userPhotoURL : is the URL of the profile picture, the URL is stored in firebase storage.
      */
 
-    public void setUserPhotoURL(String userPhotoURL) {
-        UserPhotoURL = userPhotoURL;
-    }
 
     /**
      *
      * @return UserPhotoURL : it is the URL of the profile picture that is stored in the firebase database
      */
-    public String getUserPhotoURL() {
-        return UserPhotoURL;
-    }
+
     /**
      *
      * @param fireBaseAuthID it is assigned to the user when he do the sign up it con not be changed after that.
-     * @param fullName the full name of the user
-     * @param dateOfBirth
-     * @param sex
-     * @param bloodType it is type @<code>{BloodType}</code>  note that the BloodID must be between 0-8 OR @<code>Exception IncorrectBloodIDException will be throne.</code>
+     * @param dateOfBirth type Date
+     * @param sex type String
+     * @param bloodType  type @<code>{BloodType}</code>  note that the BloodID must be between 0-8 OR @<code>Exception IncorrectBloodIDException will be throne.</code>
      */
-    public User(String fireBaseAuthID, String fullName, Date dateOfBirth, String sex , BloodType bloodType){
+    public User(String fireBaseAuthID, Date dateOfBirth, String sex , BloodType bloodType){
         this.fireBaseAuthID= fireBaseAuthID;
         this.numberOfDonations=0;
         dateOfLastDonation=null;
 
-        this.fullName=fullName;
+
         this.dateOfBirth=dateOfBirth;
         this.sex=sex;
        this.bloodType=bloodType;
@@ -57,9 +49,6 @@ public class User {
         return fireBaseAuthID;
     }
 
-    public String getFullName() {
-        return fullName;
-    }
 
     public String getBloodType() {
         return bloodType.getBloodType();
@@ -84,9 +73,6 @@ public class User {
     // The Setters
 
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
 
     /**
      *

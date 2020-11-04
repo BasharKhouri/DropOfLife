@@ -1,6 +1,8 @@
 package com.example.dropoflife;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.widget.ListView;
 
 import com.example.dropoflife.Classes.User;
@@ -16,7 +18,7 @@ import androidx.navigation.ui.NavigationUI;
  */
 public class MainActivity extends AppCompatActivity {
     ListView listView;
-    //public static User user;
+    public static User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-
+        Intent intent = getIntent();
+        user= (User) intent.getSerializableExtra("User");
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_profile, R.id.navigation_notifications)
                 .build();

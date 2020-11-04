@@ -12,18 +12,21 @@
         android:id="@+id/birthdayText"
         android:layout_width="300dp"
         android:layout_height="45dp"
+        android:clickable="true"
         android:drawableStart="@drawable/ic_cake_black_24dp"
         android:drawableLeft="@drawable/ic_cake_black_24dp"
         android:drawablePadding="5dp"
         android:ems="10"
         android:hint="@string/enter_date"
-        android:inputType="date"
+        android:inputType="date|none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.641" />
+        app:layout_constraintVertical_bias="0.641"
+
+        />
 
     <EditText
         android:id="@+id/emailAddress"

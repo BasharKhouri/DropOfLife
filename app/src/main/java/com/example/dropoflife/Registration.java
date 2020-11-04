@@ -1,13 +1,11 @@
 package com.example.dropoflife;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.icu.util.LocaleData;
-import android.os.Build;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.TextUtils;
@@ -23,17 +21,24 @@ import android.widget.Toast;
 import com.example.dropoflife.Classes.BloodType;
 import com.example.dropoflife.Classes.User;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Period;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * author Bashar Khouri
@@ -45,10 +50,10 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
     private RadioButton radioButton;
     private Spinner bloodSpinner;
     private FirebaseAuth mAuth;
-
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("Users");
+   // DatabaseReference myRef = database.getReference("Users");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,12 +107,27 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
                     if (task.isSuccessful()) {
                         //Need to  add UI changes now
                         Toast.makeText(getApplicationContext(), R.string.sign_up_successfully, Toast.LENGTH_SHORT).show();
-                        User user = new User(mAuth.getUid(), fullName, birthDate, sex, blood);
-                        myRef.push().getKey();
-                        myRef.setValue(user);
-                        Intent intent =new Intent(getApplicationContext(), MainActivity.class);
-                        intent.putExtra("user", (Parcelable) user);
-                        startActivity(intent);
+                        User user = new User(mAuth.getUid(), birthDate, sex, blood);
+                        //myRef.push().getKey();
+                        //myRef.setValue(user);
+                        Map<String, Object> userMap = new HashMap<>();
+                        userMap.put("user",user);
+                        saveUserProfileData(fullName);
+                        db.collection("users").add(userMap).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                Intent intent =new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(intent);
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                mAuth.getCurrentUser().delete();
+                                Toast.makeText(Registration.this, "FireBaseFailed", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+
                     } else {
                         Toast.makeText(getApplicationContext(), R.string.sign_up_unsuccessfully, Toast.LENGTH_SHORT).show();
                     }
@@ -116,6 +136,16 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
         }
     }
 
+    public void saveUserProfileData(String name){
+        FirebaseUser user = mAuth.getCurrentUser();
+        Uri defaultImage = Uri.parse("android.resource://" + getPackageName() + "/" + R.drawable.profile);
+        if (user!=null){
+            UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
+                    .setDisplayName(name)
+                    .setPhotoUri(defaultImage)
+                    .build();
+        }
+    }
 
     String fullName, email, password, conPassword, birthDateStr, sex;
     BloodType blood;
