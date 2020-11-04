@@ -60,7 +60,36 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="facebook">facebook</string>
+    <string name="twitter">twitter</string>
+    <string name="google">google</string>
+    <string name="our_logo">our_logo</string>
+    <string name="gender_with">Gender :</string>
+    <string name="register">Register</string>
+    <string name="what_s_your_blood_type">What\'s your blood type?</string>
+    <string name="username">UserName</string>
+    <string name="location">Location</string>
+    <string name="date">Date</string>
+    <string name="additional_ino">additional ino</string>
+    <string name="ab">AB+</string>
+    <string name="settings">Settings</string>
+    <string name="title_settings">Settings</string>
 
+    <string-array name="provinces">
+
+        <item>عمان</item>
+        <item>اريد</item>
+        <item>عجلون</item>
+        <item>جرش</item>
+        <item>المفرق</item>
+        <item>البلقاء</item>
+        <item>الزرقاء</item>
+        <item>مادبا</item>
+        <item>الكرك</item>
+        <item>الطفيلة</item>
+        <item>العقبة</item>
+
+    </string-array>
 
 </resources>
 

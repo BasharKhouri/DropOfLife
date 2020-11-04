@@ -26,6 +26,6 @@
     <fragment
         android:id="@+id/navigation_settings1"
         android:name="com.example.dropoflife.ui.SettingsFragment"
-        android:label="Settings"
+        android:label="@string/title_settings"
         tools:layout="@layout/navigation_settings" />
 </navigation>

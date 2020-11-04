@@ -2,6 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -31,8 +32,8 @@
         android:layout_marginTop="10dp"
         android:layout_toEndOf="@+id/item_profile_image"
         android:layout_toRightOf="@+id/item_profile_image"
-        android:text="UserName"
-        android:textSize="15dp"
+        android:text="@string/username"
+        android:textSize="15sp"
         android:textColor="#000"
         />
 
@@ -46,9 +47,9 @@
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/item_profile_image"
         android:layout_toRightOf="@+id/item_profile_image"
-        android:text="Location"
+        android:text="@string/location"
         android:textColor="#000"
-        android:textSize="12dp"/>
+        android:textSize="12sp"/>
     <TextView
         android:id="@+id/itemDateOfPublish"
         android:layout_width="wrap_content"
@@ -59,9 +60,9 @@
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/item_profile_image"
         android:layout_toRightOf="@+id/item_profile_image"
-        android:text="Date"
+        android:text="@string/date"
         android:textColor="#000"
-        android:textSize="12dp"/>
+        android:textSize="12sp"/>
 
     <TextView
         android:id="@+id/itemDescription"
@@ -78,7 +79,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
-        android:text="additional ino " />
+        android:text="@string/additional_ino" />
 
     <TextView
         android:id="@+id/itemBloodType"
@@ -90,9 +91,9 @@
         android:layout_marginTop="14dp"
         android:layout_toEndOf="@+id/itemUserName"
         android:layout_toRightOf="@+id/itemUserName"
-        android:text="AB+"
+        android:text="@string/ab"
         android:textColor="@color/colorPrimary"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
 
@@ -130,7 +131,8 @@
             android:drawableStart="@drawable/ic_baseline_call_24"
             android:drawableLeft="@drawable/ic_baseline_call_24"
             android:paddingLeft="30dp"
-            android:paddingRight="30dp"/>
+            android:paddingRight="30dp"
+            tools:ignore="ButtonStyle" />
 
         <Button
             android:layout_width="0dp"
@@ -143,7 +145,7 @@
             android:drawableLeft="@drawable/ic_baseline_share_24"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
-            />
+            tools:ignore="ButtonStyle" />
 
         <Button
             android:layout_width="0dp"
@@ -156,7 +158,7 @@
             android:drawableLeft="@drawable/ic_baseline_chat_24"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
-            />
+            tools:ignore="ButtonStyle" />
 
     </LinearLayout>
     <View

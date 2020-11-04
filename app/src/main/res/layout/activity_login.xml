@@ -22,7 +22,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.294" />
+        app:layout_constraintVertical_bias="0.294"
+        tools:ignore="Autofill" />
 
     <EditText
         android:id="@+id/loginUserPassword"
@@ -40,7 +41,8 @@
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.377" />
+        app:layout_constraintVertical_bias="0.377"
+        tools:ignore="Autofill"/>
 
     <Button
         android:id="@+id/LoginButton"
@@ -114,12 +116,12 @@
         android:id="@+id/imageView5"
         android:layout_width="165dp"
         android:layout_height="165dp"
+        android:contentDescription="@string/our_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.026"
+        app:layout_constraintVertical_bias="0.028"
         app:srcCompat="@drawable/splashlogo" />
 
     <ImageView
@@ -132,7 +134,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.807"
-        app:srcCompat="@drawable/googlelogo" />
+        app:srcCompat="@drawable/googlelogo"
+        android:contentDescription="@string/google" />
 
     <ImageView
         android:id="@+id/imageView7"
@@ -144,13 +147,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.807"
-        app:srcCompat="@drawable/twitterlogo" />
+        app:srcCompat="@drawable/twitterlogo"
+        android:contentDescription="@string/twitter" />
 
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Or Sign In Using"
+        android:text="@string/or_sign_in_using"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -168,6 +172,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.807"
-        app:srcCompat="@drawable/facebooklogo" />
+        app:srcCompat="@drawable/facebooklogo"
+        android:contentDescription="@string/facebook" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.dropoflife.Classes.User;
 import com.example.dropoflife.ui.SettingsFragment;
 import com.example.dropoflife.ui.home.HomeFragment;
 import com.example.dropoflife.ui.home.HomeViewModel;
@@ -46,6 +47,7 @@ public class Login extends AppCompatActivity {
         startActivity(intent);
     }
 
+
     public void signIn(View view) {
 
      email = emailET.getText().toString();
@@ -61,8 +63,7 @@ public class Login extends AppCompatActivity {
             save(email,password);
         validateLogIn(email,password);}
 
-        Intent in = new Intent(this,MainActivity.class);
-        startActivity(in);
+
     }
 
     public void onStart() {
