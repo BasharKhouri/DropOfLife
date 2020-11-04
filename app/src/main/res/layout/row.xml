@@ -2,7 +2,6 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -32,8 +31,8 @@
         android:layout_marginTop="10dp"
         android:layout_toEndOf="@+id/item_profile_image"
         android:layout_toRightOf="@+id/item_profile_image"
-        android:text="@string/username"
-        android:textSize="15sp"
+        android:text="UserName"
+        android:textSize="15dp"
         android:textColor="#000"
         />
 
@@ -49,7 +48,9 @@
         android:layout_toRightOf="@+id/item_profile_image"
         android:text="@string/location"
         android:textColor="#000"
-        android:textSize="12sp"/>
+        android:textSize="12sp"
+        android:autoLink="all"
+        />
     <TextView
         android:id="@+id/itemDateOfPublish"
         android:layout_width="wrap_content"
@@ -60,9 +61,10 @@
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/item_profile_image"
         android:layout_toRightOf="@+id/item_profile_image"
-        android:text="@string/date"
+        android:text="Date"
         android:textColor="#000"
-        android:textSize="12sp"/>
+        android:textSize="12sp"
+        android:autoLink="all"/>
 
     <TextView
         android:id="@+id/itemDescription"
@@ -79,7 +81,8 @@
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="20dp"
-        android:text="@string/additional_ino" />
+        android:text="@string/additional_ino"
+        android:autoLink="all"/>
 
     <TextView
         android:id="@+id/itemBloodType"
@@ -91,10 +94,11 @@
         android:layout_marginTop="14dp"
         android:layout_toEndOf="@+id/itemUserName"
         android:layout_toRightOf="@+id/itemUserName"
-        android:text="@string/ab"
+        android:text="AB+"
         android:textColor="@color/colorPrimary"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:autoLink="all"/>
 
 
     <View
@@ -104,7 +108,9 @@
         android:background="#60bb0a1e"
         android:layout_above="@+id/contact"
         android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"/>
+        android:layout_marginLeft="10dp"
+        android:autoLink="all"
+        />
     <LinearLayout
         android:id="@+id/contact"
         android:layout_width="wrap_content"
@@ -119,7 +125,9 @@
         android:layout_marginTop="2dp"
         android:layout_marginEnd="2dp"
         android:layout_marginRight="2dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:autoLink="all"
+        >
 
         <Button
             android:layout_width="0dp"
@@ -132,7 +140,8 @@
             android:drawableLeft="@drawable/ic_baseline_call_24"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
-            tools:ignore="ButtonStyle" />
+            android:autoLink="all"
+            />
 
         <Button
             android:layout_width="0dp"
@@ -145,7 +154,8 @@
             android:drawableLeft="@drawable/ic_baseline_share_24"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
-            tools:ignore="ButtonStyle" />
+            android:autoLink="all"
+            />
 
         <Button
             android:layout_width="0dp"
@@ -158,7 +168,8 @@
             android:drawableLeft="@drawable/ic_baseline_chat_24"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
-            tools:ignore="ButtonStyle" />
+            android:autoLink="all"
+            />
 
     </LinearLayout>
     <View
@@ -168,6 +179,10 @@
         android:background="#60bb0a1e"
         android:layout_below="@+id/contact"
         android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"/>
+        android:layout_marginRight="5dp"
+        android:autoLink="all"
+        />
+
+
 
 </RelativeLayout>

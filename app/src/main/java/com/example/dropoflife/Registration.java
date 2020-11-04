@@ -49,10 +49,6 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("Users");
 
-    String fullName, email, password, conPassword, birthDateStr, sex;
-    int bloodtype;
-    BloodType blood;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,6 +113,8 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
     }
 
 
+    String fullName, email, password, conPassword, birthDateStr, sex;
+    BloodType blood;
 
     /**
      * @return true if the user can sign up with the current data note this process dose not validate if the email exists.
@@ -144,7 +142,7 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
 
         try {
             blood = new BloodType(bloodSpinner.getSelectedItemPosition());
-            Toast.makeText(this, blood.getBloodType(), Toast.LENGTH_SHORT).show();
+
         } catch (Exception e) {
             Toast.makeText(this, R.string.error_during_blood_selection, Toast.LENGTH_SHORT).show();
             dataValidated = false;

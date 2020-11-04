@@ -44,6 +44,7 @@
     <string name="error_password_length_incorrect">كلمة السر يجب ان تكون ن 8 الى 16 حرفا</string>
     <string name="error_password_did_not_match"> الرجاء التاكد من مطابقة كلمة السر</string>
 
+    <string name="error_younger_than_the_legal_age">يجب ان تكون اكبر من 16 عاما </string>
     <string name="title_activity_settings">SettingsActivity</string>
 
     <!-- Preference Titles -->
