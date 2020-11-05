@@ -159,8 +159,9 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
         if (TextUtils.isEmpty(password)) {
             passwordET.setError(R.string.enter_password_error + " ");
             dataValidated = false;
-        } else if (password.length() >= 8 && password.length() <= 16) {
+        } else if (!(password.length() >= 8 && password.length() <= 16)) {
             passwordET.setError(R.string.error_password_length_incorrect + "");
+            dataValidated = false;
         } else if (TextUtils.isEmpty(conPassword)) {
             conPasswordET.setError(R.string.enter_confirm_password_error + "");
             dataValidated = false;
