@@ -15,100 +15,103 @@
         >
 
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:background="@color/colorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ProgressBar
-            android:id="@+id/progress_circular"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:background="@color/trasnperant"
-
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginStart="90.5dp"
-            android:layout_marginLeft="90.5dp"
-            android:layout_marginEnd="90.5dp"
-            android:layout_marginRight="90.5dp"
-            android:indeterminateOnly="false"
-            android:progress="5"
-            android:progressDrawable="@drawable/circle"
-            android:rotation="-90" />
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_image"
-            android:layout_width="180dp"
-            android:background="@color/trasnperant"
-
-            android:layout_height="180dp"
-            android:padding="5dp"
-            android:layout_margin="10dp"
-            android:layout_alignStart="@+id/progress_circular"
-            android:layout_alignLeft="@+id/progress_circular"
-            android:layout_alignEnd="@+id/progress_circular"
-            android:layout_alignRight="@+id/progress_circular"
-            android:layout_alignBottom="@+id/progress_circular"
-            android:layout_alignParentTop="true"
-            android:src="@drawable/profile" />
-
-        <TextView
-            android:id="@+id/profile_page_userName"
-            android:layout_width="179dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/progress_circular"
-            android:layout_centerInParent="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="33dp"
-            android:gravity="center_horizontal"
-            android:text="User Name"
-            android:textAlignment="center"
-            android:textColor="#ffffff"
-            android:background="@color/trasnperant"
-
-            android:textSize="30dp" />
-
-        <TextView
-            android:id="@+id/NoOfDaysRemaining"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/profile_page_userName"
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="293dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerHorizontal="true"
-            android:textAlignment="center"
-            android:gravity="center_horizontal"
-            android:textColor="#ffffff"
-            android:background="@color/trasnperant"
-            android:layout_marginTop="33dp"
-            android:layout_centerInParent="true"
-            android:textSize="15dp"
-        android:text="Days remaining / you can donate " />
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="11dp"
-            android:layout_marginRight="11dp"
-            android:src="@drawable/ic_baseline_edit_24" />
-    </RelativeLayout>
+            android:background="@color/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ProgressBar
+                android:id="@+id/progress_circular"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_alignParentLeft="true"
+
+                android:layout_alignParentRight="true"
+                android:layout_marginStart="90.5dp"
+                android:layout_marginLeft="90.5dp"
+                android:layout_marginEnd="90.5dp"
+                android:layout_marginRight="90.5dp"
+                android:background="@color/trasnperant"
+                android:indeterminateOnly="false"
+                android:progress="5"
+                android:progressDrawable="@drawable/circle"
+                android:rotation="-90" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+
+                android:layout_alignStart="@+id/progress_circular"
+                android:layout_alignLeft="@+id/progress_circular"
+                android:layout_alignEnd="@+id/progress_circular"
+                android:layout_alignRight="@+id/progress_circular"
+                android:layout_alignBottom="@+id/progress_circular"
+                android:layout_alignParentTop="true"
+                android:layout_margin="10dp"
+                android:background="@color/trasnperant"
+                android:padding="5dp"
+                android:src="@drawable/profile" />
+
+            <TextView
+                android:id="@+id/profile_page_userName"
+                android:layout_width="179dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/progress_circular"
+                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="14dp"
+                android:background="@color/trasnperant"
+                android:gravity="center_horizontal"
+                android:text="User Name"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/NoOfDaysRemaining"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profile_page_userName"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="1dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="9dp"
+                android:layout_marginEnd="-1dp"
+                android:layout_marginRight="-1dp"
+                android:background="@color/trasnperant"
+                android:gravity="center_horizontal"
+                android:text="Days remaining / you can donate "
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:textSize="15dp" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="11dp"
+                android:layout_marginRight="11dp"
+                android:src="@drawable/ic_baseline_edit_24" />
+        </RelativeLayout>
 
 
         <RelativeLayout

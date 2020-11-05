@@ -80,16 +80,14 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
       // Calendar calendar = Calendar.getInstance(Locale.getDefault());
         //calendar.setTimeInMillis(Long.parseLong(time));
         ;
-        final String postTime = (String) android.text.format.DateFormat.format("dd/mm/yyyy hh:mm aa",time);
+        final String postTime = (String) android.text.format.DateFormat.format("MMM dd yyyy",time);
 
         DocumentReference documentReference = fStore.collection("users").document(userID);
-        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+         documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
 
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                Toast.makeText(context, "yay", Toast.LENGTH_SHORT).show();
                 user = value.toObject(User.class);
-                Toast.makeText(context, user.toString(), Toast.LENGTH_SHORT).show();
 
                 try {
                     userPic = Uri.parse(user.getProfilePic());
