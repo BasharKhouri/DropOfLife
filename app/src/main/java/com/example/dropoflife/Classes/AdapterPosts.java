@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,7 +25,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -34,6 +39,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.concurrent.Executor;
 
 /**
  * @author Bashar Khouri
@@ -42,9 +48,9 @@ import java.util.Scanner;
 public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
     Context context;
     List<Post> postList;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseFirestore fStore = FirebaseFirestore.getInstance();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-
+    User user;
     public AdapterPosts(Context context, List<Post> postList) {
         this.context = context;
         this.postList = postList;
@@ -75,10 +81,27 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
         //set Data
 
 
-        User user =getUser(userID);
-//        if(user.getProfilePic()!=null)
-        userPic=Uri.parse(user.getProfilePic());
+        DocumentReference documentReference = fStore.collection("users").document(userID);
+       ApiFuture<DocumentSnapshot> task = documentReference.get();
+       // DocumentSnapshot documentSnapshot = .get();
+        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+               if(value.exists())
+                user = value.toObject(User.class);
+            }
+        });
+
+    try {
+        userPic = Uri.parse(user.getProfilePic());
         holder.userName.setText(user.getUserName());
+
+    }catch (Exception e){
+        Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+        System.out.println(e.getMessage());
+
+    }
         holder.blood.setText(blood);
         holder.description.setText(description);
         holder.location.setText(location);
@@ -87,26 +110,6 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
     }
 
 
-    public User getUser(String userID) {
-
-        final User[] owner = new User[1];
-        db.collection("users").whereEqualTo("fireBaseAuthID", userID).limit(1)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                owner[0] = document.toObject(User.class);
-                            }
-                        } else {
-                            owner[0] =null;
-                            Log.w("", "Error getting documents.", task.getException());
-                        }
-                    }
-                });
-        return owner[0];
-    }
 
     @Override
     public int getItemCount() {

@@ -11,8 +11,6 @@ import java.util.Date;
  */
 public class User {
 
-
-    private  String fireBaseAuthID;
     private  String userName;
     private BloodType bloodType;
     private Date dateOfBirth;
@@ -29,7 +27,6 @@ public class User {
 
     /**
      *
-     * @param fireBaseAuthID it is assigned to the user when he do the sign up it con not be changed after that.
      * @param userName
      * @param bloodType  type @<code>{BloodType}</code>  note that the BloodID must be between 0-8 OR @<code>Exception IncorrectBloodIDException will be throne.</code>
      * @param dateOfBirth type Date
@@ -38,8 +35,8 @@ public class User {
      * @param profilePic
      */
 
-    public User(String fireBaseAuthID, String userName, BloodType bloodType, Date dateOfBirth, String sex, String email, String profilePic) {
-        this.fireBaseAuthID = fireBaseAuthID;
+    public User( String userName, BloodType bloodType, Date dateOfBirth, String sex, String email, String profilePic) {
+
         this.userName = userName;
         this.bloodType = bloodType;
         this.dateOfBirth = dateOfBirth;
@@ -53,9 +50,7 @@ public class User {
     }
 
     // The Getters
-    public String getFireBaseAuthID() {
-        return fireBaseAuthID;
-    }
+
 
     public String getUserName() {
         return userName;
@@ -72,8 +67,9 @@ public class User {
     public String getPhone() {
         return phone;
     }
-    public String getBloodType() {
-        return bloodType.getBloodType();
+
+    public BloodType getBloodType() {
+        return bloodType;
     }
 
     public Date getDateOfBirth() {
@@ -98,23 +94,12 @@ public class User {
 
     // The Setters
 
-    /**
-     *
-     * @param bloodID must be from 0 to 8  OR @<code>Exception IncorrectBloodIDException will be throne.</code>
-     */
-
-    public void setBloodType(int bloodID) {
-        try {
-            this.bloodType = new BloodType(bloodID);
-        } catch (Exception e ){
-            System.out.println(e.getMessage());
-        }
+    public void setBloodType(BloodType bloodType) {
+        this.bloodType = bloodType;
     }
 
 
-    public void setFireBaseAuthID(String fireBaseAuthID) {
-        this.fireBaseAuthID = fireBaseAuthID;
-    }
+
 
 
     public void setEmail(String email) {
