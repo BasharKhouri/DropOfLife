@@ -11,16 +11,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import com.example.dropoflife.Classes.BloodType;
 import com.example.dropoflife.Classes.Post;
-import com.example.dropoflife.Classes.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.Calendar;
+import java.util.Date;
 
 public class AddRequest extends AppCompatActivity {
 
@@ -48,12 +46,14 @@ public class AddRequest extends AppCompatActivity {
         postButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
               try {
                   requestedBlood = new BloodType(bloodSpinner.getSelectedItemPosition());
 
                   Post post;
                   post = new Post(publicher.getUid(),requestedBlood.getBloodID(),description.getText().toString(),
-                          Calendar.getInstance().getTime(),location.getText().toString(),phoneNumber.getText().toString());
+                     new Date(),location.getText().toString(),phoneNumber.getText().toString());
+                  myRef.push().setValue(post);
                   Intent intent =new Intent(getApplicationContext(), MainActivity.class);
                   startActivity(intent);
                   finish();

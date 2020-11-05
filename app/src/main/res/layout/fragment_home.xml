@@ -40,11 +40,10 @@
 
    <androidx.recyclerview.widget.RecyclerView
        android:layout_width="match_parent"
-       android:layout_height="442dp"
+       android:layout_height="match_parent"
+       android:id="@+id/postsRecyclerView"
        android:layout_below="@+id/Filter"
-       android:layout_alignParentBottom="true"
-       android:id="@+id/PostsListRecycleView"
-       android:layout_marginTop="-2dp"
-       android:layout_marginBottom="0dp">
+
+   >
    </androidx.recyclerview.widget.RecyclerView>
 </RelativeLayout>

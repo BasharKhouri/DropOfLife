@@ -22,7 +22,7 @@ public class User {
     private String email;
 
 
-    private Uri profilePic;
+    private String profilePic;
     private String phone;
 
 
@@ -38,7 +38,7 @@ public class User {
      * @param profilePic
      */
 
-    public User(String fireBaseAuthID, String userName, BloodType bloodType, Date dateOfBirth, String sex, String email, Uri profilePic) {
+    public User(String fireBaseAuthID, String userName, BloodType bloodType, Date dateOfBirth, String sex, String email, String profilePic) {
         this.fireBaseAuthID = fireBaseAuthID;
         this.userName = userName;
         this.bloodType = bloodType;
@@ -65,7 +65,7 @@ public class User {
      *
      * @return profilePic : it is the URL of the profile picture that is stored in the firebase database
      */
-    public Uri getProfilePic() {
+    public String getProfilePic() {
         return profilePic;
     }
 
@@ -109,7 +109,6 @@ public class User {
         } catch (Exception e ){
             System.out.println(e.getMessage());
         }
-
     }
 
 
@@ -117,9 +116,6 @@ public class User {
         this.fireBaseAuthID = fireBaseAuthID;
     }
 
-    public void setBloodType(BloodType bloodType) {
-        this.bloodType = bloodType;
-    }
 
     public void setEmail(String email) {
         this.email = email;
@@ -135,7 +131,7 @@ public class User {
      * @param profilePic : is the URL of the profile picture, the URL is stored in firebase storage.
      */
 
-    public void setProfilePic(Uri profilePic) {
+    public void setProfilePic(String profilePic) {
         this.profilePic = profilePic;
     }
 

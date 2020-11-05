@@ -59,21 +59,30 @@ public class HomeFragment extends Fragment {
     final FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference postRef ;
     private HomeViewModel homeViewModel;
-    private ArrayList<Post> postList;
-    RecyclerView recyclerView ;
-    AdapterPosts adapterPosts;
     FirebaseUser currentUser;
     Button reqBlood;
+
+    //Posts var
+    RecyclerView recyclerView ;
+    private ArrayList<Post> postList;
+    AdapterPosts adapterPosts;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-         currentUser=FirebaseAuth.getInstance().getCurrentUser();
-         View view = inflater.inflate(R.layout.fragment_home,container,false);
+        //inflate the layout of this fragment
+        View view = inflater.inflate(R.layout.fragment_home,container,false);
+
+        //init current user
+        currentUser=FirebaseAuth.getInstance().getCurrentUser();
          // Recycler View and it's properties
-         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerView = view.findViewById(R.id.PostsListRecycleView);
+        recyclerView = view.findViewById(R.id.postsRecyclerView);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+
         //show the newest post 1st,for this load from last
         linearLayoutManager.setStackFromEnd(true);
         linearLayoutManager.setReverseLayout(true);
+        //set layout manger for the recycle view
+        recyclerView.setLayoutManager(linearLayoutManager);
         //init post List
         postList = new ArrayList<>();
         LoadPosts();
@@ -98,19 +107,18 @@ public class HomeFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 postList.clear();
                 for(DataSnapshot ds:snapshot.getChildren()){
-                    Post post = ds.getValue(Post.class);//Here is 106
+                    Post post = ds.getValue(Post.class);
                     postList.add(post);
                     //adapter
                     adapterPosts = new AdapterPosts(getActivity(),postList);
                  //setAdapter to recyclerView
                     recyclerView.setAdapter(adapterPosts);
                 }
-
-
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                //in case of error
                 Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

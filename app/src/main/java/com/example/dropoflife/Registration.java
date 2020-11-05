@@ -100,13 +100,13 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
                         saveUserProfileData(fullName);
                         //Need to  add UI changes now
                         Toast.makeText(getApplicationContext(), R.string.sign_up_successfully, Toast.LENGTH_SHORT).show();
-                        User user = new User(mAuth.getCurrentUser().getUid(),fullName, blood,birthDate, sex, email,mAuth.getCurrentUser().getPhotoUrl());
-                        //myRef.push().getKey();
-                        //myRef.setValue(user);
+                        User user = new User(mAuth.getCurrentUser().getUid(),fullName, blood,birthDate, sex, email,"android.resource://" + getPackageName() + "/" + R.drawable.profile);
+                           // user.setProfilePic ("android.resource://" + getPackageName() + "/" + R.drawable.profile);
 
                         db.collection("users").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
+                                Toast.makeText(Registration.this, "User Registerd", Toast.LENGTH_SHORT).show();
                                 Intent intent =new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);
                             }
@@ -115,6 +115,7 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
                             public void onFailure(@NonNull Exception e) {
                                 mAuth.getCurrentUser().delete();
                                 Toast.makeText(Registration.this, "FireBaseFailed", Toast.LENGTH_SHORT).show();
+
                             }
                         });
 
@@ -174,26 +175,27 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
         }
 
         if (TextUtils.isEmpty(fullName)) {
-            fullNameET.setError(R.string.enter_full_name_error + "");
+            fullNameET.setError(getString( R.string.enter_full_name_error));
             dataValidated = false;
         }
         if (TextUtils.isEmpty(email)) {
-            emailET.setError(R.string.enter_email_error + "");
+            emailET.setError(getString(R.string.enter_email_error ));
             dataValidated = false;
         }
         if (TextUtils.isEmpty(password)) {
-            passwordET.setError(R.string.enter_password_error + " ");
+            passwordET.setError(getString(R.string.enter_password_error));
             dataValidated = false;
-        } else if (password.length() >= 8 && password.length() <= 16) {
-            passwordET.setError(R.string.error_password_length_incorrect + "");
+        } else if (!(password.length() >= 8 && password.length() <= 16)) {
+            passwordET.setError(getString(R.string.error_password_length_incorrect ));
+            dataValidated=false;
         } else if (TextUtils.isEmpty(conPassword)) {
-            conPasswordET.setError(R.string.enter_confirm_password_error + "");
+            conPasswordET.setError(getString(R.string.enter_confirm_password_error));
             dataValidated = false;
         } else if (!password.equals(conPassword)) {
-            conPasswordET.setError(R.string.error_password_did_not_match + "");
+            conPasswordET.setError(getString(R.string.error_password_did_not_match ));
         }
         if (TextUtils.isEmpty(birthDateStr)) {
-            birthdayET.setError(R.string.enter_BirthDate_error + "");
+            birthdayET.setError(getString(R.string.enter_BirthDate_error ));
             dataValidated = false;
         }
         if (TextUtils.isEmpty(sex)) {

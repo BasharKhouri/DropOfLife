@@ -33,6 +33,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Scanner;
 
 /**
  * @author Bashar Khouri
@@ -52,6 +53,7 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+      //inflate layout
        View view= LayoutInflater.from(context).inflate(R.layout.row,parent,false);
         return new MyHolder(view);
     }
@@ -66,21 +68,21 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
         String blood = BloodType.bloodTypes[postList.get(position).getBloodTypeID()];
         Uri userPic;
         //convert time stamps to dd/mm/yyyy hh:mm am/pm
-        Calendar calendar = Calendar.getInstance(Locale.getDefault());
-        calendar.setTimeInMillis(Long.parseLong(time));
-        String postTime = (String) android.text.format.DateFormat.format("dd/mm/yyyy hh:mm aa",calendar);
+      //  Calendar calendar = Calendar.getInstance(Locale.getDefault());
+        //calendar.setTimeInMillis(Long.parseLong(time));
+        //String postTime = (String) android.text.format.DateFormat.format("dd/mm/yyyy hh:mm aa",calendar);
 
         //set Data
 
 
         User user =getUser(userID);
-        userPic=user.getProfilePic();
+//        if(user.getProfilePic()!=null)
+        userPic=Uri.parse(user.getProfilePic());
         holder.userName.setText(user.getUserName());
         holder.blood.setText(blood);
         holder.description.setText(description);
         holder.location.setText(location);
-        holder.uPic.setImageURI(userPic);
-
+       // holder.uPic.setImageURI(userPic);
 
     }
 
@@ -111,12 +113,16 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
         return postList.size();
     }
 
+
+    //View Holder Class
     class MyHolder extends RecyclerView.ViewHolder{
+        //views from row.xml
         ImageView uPic ;
         TextView userName , time  , description , blood , location;
         Button callMe , chat , shareButton;
         public MyHolder(@NonNull View itemView) {
             super(itemView);
+          //init Views
             uPic = (ImageView) itemView.findViewById(R.id.item_profile_image);
             userName = (TextView)itemView.findViewById(R.id.itemUserName);
             time = (TextView)itemView.findViewById(R.id.itemDateOfPublish);
