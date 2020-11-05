@@ -7,15 +7,19 @@
     android:background="@color/BackGround"
     tools:context=".Login">
 
+
     <EditText
         android:id="@+id/loginUsername"
         android:layout_width="250dp"
         android:layout_height="45dp"
-        android:background="#ffffff"
+        android:ems="10"
+        android:hint="Email Address"
+        android:inputType="textEmailAddress"
         android:drawableStart="@drawable/ic_person_black_24dp"
         android:drawableLeft="@drawable/ic_person_black_24dp"
         android:drawablePadding="5dp"
         android:ems="10"
+        android:background="#ffffff"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -49,13 +53,12 @@
         tools:ignore="Autofill" />
 
     <Button
-        android:id="@+id/LoginButton"
+        android:id="@+id/button"
         android:layout_width="100dp"
         android:layout_height="35dp"
         android:background="@drawable/button"
         android:gravity="center"
-        android:onClick="signIn"
-        android:text="@string/Login"
+        android:text="Login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -67,7 +70,8 @@
         android:id="@+id/forgotPassTextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/forgot"
+        android:fontFamily="@font/actor"
+        android:text="Forgot Password?"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -95,7 +99,7 @@
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/dont_have"
+        android:text="Don't have an account? "
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -126,8 +130,9 @@
         app:layout_constraintHorizontal_bias="0.481"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.026"
-        app:srcCompat="@drawable/splashlogo" />
+        app:layout_constraintVertical_bias="0.028"
+        app:srcCompat="@drawable/splashlogo"
+        android:background="@color/BackGround"/>
 
     <ImageView
         android:id="@+id/imageView8"
@@ -140,7 +145,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.807"
-        app:srcCompat="@drawable/googlelogo" />
+        app:srcCompat="@drawable/googlelogo"
+        android:background="@color/BackGround"
+        android:contentDescription="@string/google" />
+
+        />
 
     <ImageView
         android:id="@+id/imageView7"
@@ -153,7 +162,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.807"
-        app:srcCompat="@drawable/twitterlogo" />
+        app:srcCompat="@drawable/twitterlogo"
+        android:background="@color/BackGround"
+        android:contentDescription="@string/twitter" />
+
+        />
 
     <TextView
         android:id="@+id/textView9"
@@ -165,7 +178,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.724" />
+        app:layout_constraintVertical_bias="0.724"
+        />
 
     <ImageView
         android:id="@+id/imageView6"
@@ -178,6 +192,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.807"
-        app:srcCompat="@drawable/facebooklogo" />
+        app:srcCompat="@drawable/facebooklogo"
+        android:background="@color/BackGround"
+        android:contentDescription="@string/facebook" />
+
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.example.dropoflife.ui.home;
 
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.lifecycle.LiveData;
@@ -12,10 +13,11 @@ public class HomeViewModel extends ViewModel {
     public HomeViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("This is home fragment");
-
     }
 
     public LiveData<String> getText() {
         return mText;
     }
+
+
 }

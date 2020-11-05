@@ -36,7 +36,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                         Intent in = new Intent(getContext(), Login.class);
                         in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(in);
-
                     return true;
                 }
             });

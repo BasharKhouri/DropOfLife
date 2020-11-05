@@ -1,5 +1,6 @@
 package com.example.dropoflife;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
@@ -16,7 +17,9 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
-
+/**
+ * author Bashar Khouri,Hassan wael ,Bashar Nimri
+ */
 public class MainActivity extends AppCompatActivity {
     ListView listView;
     public static User user;
@@ -30,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-           user= (User) getIntent().getSerializableExtra("user");
-
+        Intent intent = getIntent();
+        user= (User) intent.getSerializableExtra("User");
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_profile, R.id.navigation_notifications,R.id.navigation_settings1)
                 .build();
@@ -41,6 +44,4 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-
 }
