@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dropoflife.R;
+import com.google.android.gms.common.api.Api;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,6 +41,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 import java.util.concurrent.Executor;
+import java.util.concurrent.Future;
 
 /**
  * @author Bashar Khouri
@@ -51,6 +53,8 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
     FirebaseFirestore fStore = FirebaseFirestore.getInstance();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     User user;
+    Uri userPic;
+
     public AdapterPosts(Context context, List<Post> postList) {
         this.context = context;
         this.postList = postList;
@@ -65,47 +69,48 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final MyHolder holder, int position) {
         //get data
         String userID =postList.get(position).getUserID();
-        String description =postList.get(position).getDescription();
-        String location =postList.get(position).getLocation();
-        String time =postList.get(position).getDateOfPublish().toString();
-        String blood = BloodType.bloodTypes[postList.get(position).getBloodTypeID()];
-        Uri userPic;
+        final String description =postList.get(position).getDescription();
+        final String location =postList.get(position).getLocation();
+        final Date time =postList.get(position).getDateOfPublish();
+        final String blood = BloodType.bloodTypes[postList.get(position).getBloodTypeID()];
         //convert time stamps to dd/mm/yyyy hh:mm am/pm
-      //  Calendar calendar = Calendar.getInstance(Locale.getDefault());
+      // Calendar calendar = Calendar.getInstance(Locale.getDefault());
         //calendar.setTimeInMillis(Long.parseLong(time));
-        //String postTime = (String) android.text.format.DateFormat.format("dd/mm/yyyy hh:mm aa",calendar);
-
-        //set Data
-
+        ;
+        final String postTime = (String) android.text.format.DateFormat.format("dd/mm/yyyy hh:mm aa",time);
 
         DocumentReference documentReference = fStore.collection("users").document(userID);
-       ApiFuture<DocumentSnapshot> task = documentReference.get();
-       // DocumentSnapshot documentSnapshot = .get();
         documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
 
             @Override
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-               if(value.exists())
+                Toast.makeText(context, "yay", Toast.LENGTH_SHORT).show();
                 user = value.toObject(User.class);
+                Toast.makeText(context, user.toString(), Toast.LENGTH_SHORT).show();
+
+                try {
+                    userPic = Uri.parse(user.getProfilePic());
+
+                }catch (Exception e){
+                    Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    System.out.println(e.getMessage());
+
+                }
+                holder.userName.setText(user.getUserName());
+
+                holder.blood.setText(blood);
+                holder.description.setText(description);
+                holder.location.setText(location);
+                holder.time.setText(postTime);
+                // holder.uPic.setImageURI(userPic);
+
             }
         });
 
-    try {
-        userPic = Uri.parse(user.getProfilePic());
-        holder.userName.setText(user.getUserName());
 
-    }catch (Exception e){
-        Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-        System.out.println(e.getMessage());
-
-    }
-        holder.blood.setText(blood);
-        holder.description.setText(description);
-        holder.location.setText(location);
-       // holder.uPic.setImageURI(userPic);
 
     }
 

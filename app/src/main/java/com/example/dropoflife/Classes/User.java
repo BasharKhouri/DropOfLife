@@ -141,5 +141,8 @@ public class User {
         this.numberOfDonations = numberOfDonations;
     }
 
-
+    @Override
+    public String toString() {
+        return getUserName();
+    }
 }
