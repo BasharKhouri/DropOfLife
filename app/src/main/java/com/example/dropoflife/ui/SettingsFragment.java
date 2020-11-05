@@ -31,7 +31,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
                         FirebaseAuth.getInstance().signOut();
                         Intent in = new Intent(getContext(), Login.class);
-                    Toast.makeText(getContext(), FirebaseAuth.getInstance().getUid(), Toast.LENGTH_SHORT).show();
+                        in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(in);
                     return true;
                 }

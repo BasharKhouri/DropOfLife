@@ -136,6 +136,7 @@
         >
 
         <Button
+            android:id="@+id/item_call_me"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
@@ -151,6 +152,7 @@
             />
 
         <Button
+            android:id="@+id/item_share"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
@@ -166,6 +168,7 @@
             />
 
         <Button
+            android:id="@+id/item_chat"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
