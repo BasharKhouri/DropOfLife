@@ -2,6 +2,7 @@ package com.example.dropoflife;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import android.app.FragmentManager;
@@ -81,6 +82,7 @@ public class Login extends AppCompatActivity {
      * @param password the user Password
      */
     public void validateLogIn(final String email , final String password){
+
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -125,8 +127,9 @@ public class Login extends AppCompatActivity {
 //    @Override
 //    public void onBackPressed(){
 //
-//
+//      finish();
 //    }
+
 
 
 }

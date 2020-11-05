@@ -8,6 +8,7 @@ import android.widget.Toast;
 import androidx.preference.EditTextPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.example.dropoflife.Classes.User;
 import com.example.dropoflife.Login;
@@ -18,10 +19,12 @@ import com.google.firebase.auth.FirebaseAuth;
 public class SettingsFragment extends PreferenceFragmentCompat {
 
     Preference logoutET;
+    SwitchPreferenceCompat darkMode;
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey);
         logoutET=findPreference("log");
+        darkMode=findPreference("dark_mode_switch");
 
         if (logoutET != null) {
             logoutET.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
@@ -38,6 +41,8 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 }
             });
         }
+
+
     }
 
 
