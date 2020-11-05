@@ -59,9 +59,9 @@ public class Login extends AppCompatActivity {
             if(TextUtils.isEmpty(password))
                 passwordET.setError(null);
         }else{
-            //هي المفروض تكون تحت بعد ال validation  بس حطيتها هون عشان اتأكد
             save(email,password);
-        validateLogIn(email,password);}
+        validateLogIn(email,password);
+        }
 
 
     }
@@ -122,7 +122,11 @@ public class Login extends AppCompatActivity {
 
 
     }
-
+//    @Override
+//    public void onBackPressed(){
+//
+//
+//    }
 
 
 }
