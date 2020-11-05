@@ -22,8 +22,6 @@ import java.util.Date;
 
 public class AddRequest extends AppCompatActivity {
 
-    private AlertDialog.Builder dialogBuilder;
-    private  AlertDialog dialog;
     private EditText location , description , phoneNumber;
     private Spinner bloodSpinner;
     private Button postButton;
