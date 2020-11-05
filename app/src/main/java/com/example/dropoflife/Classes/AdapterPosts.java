@@ -129,7 +129,7 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
             description= (TextView)itemView.findViewById(R.id.itemDescription);
             blood= (TextView)itemView.findViewById(R.id.itemBloodType);
             location= (TextView)itemView.findViewById(R.id.location);
-            callMe = (Button) itemView.findViewById(R.id.item_call_Me);
+            callMe = (Button) itemView.findViewById(R.id.item_call_me);
             chat= (Button) itemView.findViewById(R.id.item_Chat);
             shareButton= (Button) itemView.findViewById(R.id.item_Share);
          }
