@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -39,7 +38,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * author Bashar Khouri,Hassan wael ,Bashar Nimri
+ * author Bashar Khouri
  */
 public class Registration extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     private EditText fullNameET, emailET, passwordET, conPasswordET, birthdayET;
@@ -55,22 +54,17 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
 
-        mAuth =FirebaseAuth.getInstance().getInstance();
-        radioGroup = (RadioGroup)findViewById(R.id.genderRadioButton);
-        birthdayET = (EditText) findViewById(R.id.birthdayText);
-        fullNameET = (EditText)findViewById(R.id.fullName);
-        emailET = (EditText) findViewById(R.id.emailAddress);
-        passwordET=(EditText)findViewById(R.id.password);
-        conPasswordET = (EditText)findViewById(R.id.confirmPassword);
-        bloodSpinner =(Spinner)findViewById(R.id.bloodTypeSpinner);
-
-        spinnerArrayAdapter = new ArrayAdapter<String>(this , android.R.layout.simple_spinner_item,  BloodType.bloodTypes);
-
+        mAuth = FirebaseAuth.getInstance().getInstance();
+        radioGroup = findViewById(R.id.genderRadioButton);
+        birthdayET = findViewById(R.id.birthdayText);
+        fullNameET = findViewById(R.id.fullName);
+        emailET = findViewById(R.id.emailAddress);
+        passwordET = findViewById(R.id.password);
+        conPasswordET = findViewById(R.id.confirmPassword);
+        bloodSpinner = findViewById(R.id.bloodTypeSpinner);
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, BloodType.bloodTypes);
         bloodSpinner.setAdapter(spinnerArrayAdapter);
-
-
-        birthdayET.setOnClickListener(new View.OnClickListener(){
-
+        birthdayET.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDatePickerDialog();
@@ -102,12 +96,12 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                       //added User name and default image to auth.
+                        //added User name and default image to auth.
                         saveUserProfileData(fullName);
                         //Need to  add UI changes now
                         Toast.makeText(getApplicationContext(), R.string.sign_up_successfully, Toast.LENGTH_SHORT).show();
                         User user = new User(fullName, blood,birthDate, sex, email,"android.resource://" + getPackageName() + "/" + R.drawable.profile);
-                           // user.setProfilePic ("android.resource://" + getPackageName() + "/" + R.drawable.profile);
+                        // user.setProfilePic ("android.resource://" + getPackageName() + "/" + R.drawable.profile);
 
 
 
@@ -189,7 +183,7 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
             blood = new BloodType(bloodSpinner.getSelectedItemPosition());
 
         } catch (Exception e) {
-            Toast.makeText(this, e.getMessage()+"current ID "+bloodSpinner.getId(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.error_during_blood_selection, Toast.LENGTH_SHORT).show();
             dataValidated = false;
         }
 
