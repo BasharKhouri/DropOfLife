@@ -1,81 +1,132 @@
 package com.example.dropoflife.ui.home;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.FragmentBreadCrumbs;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.dropoflife.AddRequest;
+import com.example.dropoflife.Classes.AdapterPosts;
+import com.example.dropoflife.Classes.BloodType;
 import com.example.dropoflife.Classes.Post;
+import com.example.dropoflife.Classes.User;
+import com.example.dropoflife.MainActivity;
 import com.example.dropoflife.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedList;
 /**
  * author Bashar Khouri,Hassan wael ,Bashar Nimri
  */
 public class HomeFragment extends Fragment {
 
-
+    final User user = MainActivity.user;
+    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference postRef ;
     private HomeViewModel homeViewModel;
-    private  ListView listView;
-    private LinkedList <Post> posts;
+    FirebaseUser currentUser;
+    Button reqBlood;
+
+    //Posts var
+    RecyclerView recyclerView ;
+    private ArrayList<Post> postList;
+    AdapterPosts adapterPosts;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        // listView = (ListView)getView().findViewById(R.id.HomeListView);
-       // MyAdapter adapter = new MyAdapter(Post info)
+        //inflate the layout of this fragment
+        View view = inflater.inflate(R.layout.fragment_home,container,false);
 
-        
-        return inflater.inflate(R.layout.fragment_home,container,false);
+        //init current user
+        currentUser=FirebaseAuth.getInstance().getCurrentUser();
+         // Recycler View and it's properties
+        recyclerView = view.findViewById(R.id.postsRecyclerView);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
 
+        //show the newest post 1st,for this load from last
+        linearLayoutManager.setStackFromEnd(true);
+        linearLayoutManager.setReverseLayout(true);
+        //set layout manger for the recycle view
+        recyclerView.setLayoutManager(linearLayoutManager);
+        //init post List
+        postList = new ArrayList<>();
+        LoadPosts();
+        reqBlood = (Button)view.findViewById(R.id.req_bloodHomeButton);
+        reqBlood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),AddRequest.class);
+                startActivity(intent);
+            }
+        });
+
+        return view;
     }
 
-    class MyAdapter extends ArrayAdapter<String>{
-        Context context ;
-        String userName [] ;
-        String bloodTypeSTR[];
-        String date [];
-        String description[];
-        // need to add images later once we figure out how to use firebase storage TBD
-        MyAdapter(Context c , String userName [], String bloodTypeSTR [],String description [],String date[]){
-            super(c , R.layout.row, R.id.itemUserName,userName);
-            this.context = c ;
-            this.userName = userName;
-            this.bloodTypeSTR = bloodTypeSTR;
-            this.date = date ;
-            this.description =description;
-        }
+    private void LoadPosts() {
+        // Path Of all Posts
+        postRef= FirebaseDatabase.getInstance().getReference("Posts");
+        //get all data from the postRef
+        postRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                postList.clear();
+                for(DataSnapshot ds:snapshot.getChildren()){
+                    Post post = ds.getValue(Post.class);
+                    postList.add(post);
+                    //adapter
+                    adapterPosts = new AdapterPosts(getActivity(),postList);
+                 //setAdapter to recyclerView
+                    recyclerView.setAdapter(adapterPosts);
+                }
+            }
 
-        @NonNull
-        @Override
-        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            LayoutInflater layoutInflater =(LayoutInflater) context.getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View row = layoutInflater.inflate(R.layout.row,parent,false);
-            //ImageView imageView = row.findViewById(R.id.item_profile_image);
-            TextView userNametxt = row.findViewById(R.id.itemUserName);
-            TextView datetxt = row.findViewById(R.id.itemDateOfPublish);
-            TextView descriptiontxt = row.findViewById(R.id.itemDescription);
-            TextView bloodTypetxt = row.findViewById(R.id.itemBloodType);
-
-          //here we set resources
-           // imageView.setImageResources(imgpath)
-            userNametxt.setText(userName[position]);
-            datetxt.setText(date[position]);
-            descriptiontxt.setText(description[position]);
-            bloodTypetxt.setText(bloodTypeSTR[position]);
-
-
-            return row;
-        }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                //in case of error
+                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
+
+
+
 }

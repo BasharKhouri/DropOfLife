@@ -12,18 +12,20 @@
         android:id="@+id/birthdayText"
         android:layout_width="300dp"
         android:layout_height="45dp"
+        android:clickable="true"
         android:drawableStart="@drawable/ic_cake_black_24dp"
         android:drawableLeft="@drawable/ic_cake_black_24dp"
         android:drawablePadding="5dp"
         android:ems="10"
         android:hint="@string/enter_date"
-        android:inputType="date"
+        android:inputType="date|none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.641" />
+        app:layout_constraintVertical_bias="0.641"
+        tools:ignore="Autofill" />
 
     <EditText
         android:id="@+id/emailAddress"
@@ -40,7 +42,8 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.409" />
+        app:layout_constraintVertical_bias="0.409"
+        tools:ignore="Autofill" />
 
     <EditText
         android:id="@+id/password"
@@ -57,7 +60,8 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.488" />
+        app:layout_constraintVertical_bias="0.488"
+        tools:ignore="Autofill" />
 
     <EditText
         android:id="@+id/confirmPassword"
@@ -74,7 +78,8 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.565" />
+        app:layout_constraintVertical_bias="0.565"
+        tools:ignore="Autofill" />
 
     <EditText
         android:id="@+id/fullName"
@@ -91,14 +96,15 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.333" />
+        app:layout_constraintVertical_bias="0.333"
+        tools:ignore="Autofill" />
 
     <TextView
         android:id="@+id/gender"
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:gravity="center"
-        android:text="Gender:"
+        android:text="@string/gender_with"
         android:textColor="@android:color/black"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -126,7 +132,7 @@
             android:layout_height="45dp"
             android:layout_weight="1"
             android:buttonTint="#bb0a1e"
-            android:text="Male" />
+            android:text="@string/male" />
 
         <RadioButton
             android:id="@+id/femaleRadioButton"
@@ -134,7 +140,7 @@
             android:layout_height="45dp"
             android:layout_weight="1"
             android:buttonTint="#bb0a1e"
-            android:text="Female" />
+            android:text="@string/female" />
     </RadioGroup>
 
     <Button
@@ -142,7 +148,7 @@
         android:layout_width="250dp"
         android:layout_height="35dp"
         android:background="@drawable/button"
-        android:text="Register"
+        android:text="@string/register"
         android:onClick="register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -160,11 +166,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.028"
-        app:srcCompat="@drawable/splashlogo" />
+        app:srcCompat="@drawable/splashlogo"
+        android:contentDescription="@string/our_logo" />
 
     <Spinner
         android:id="@+id/bloodTypeSpinner"
-        android:layout_width="107dp"
+        android:layout_width="wrap_content"
         android:layout_height="36dp"
 
         app:layout_constraintBottom_toBottomOf="parent"
@@ -179,7 +186,7 @@
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:gravity="center"
-        android:text="What's your blood type?"
+        android:text="@string/what_s_your_blood_type"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"

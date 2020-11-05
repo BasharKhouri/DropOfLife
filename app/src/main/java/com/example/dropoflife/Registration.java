@@ -1,13 +1,11 @@
 package com.example.dropoflife;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.icu.util.LocaleData;
-import android.os.Build;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -23,17 +21,22 @@ import android.widget.Toast;
 import com.example.dropoflife.Classes.BloodType;
 import com.example.dropoflife.Classes.User;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Period;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * author Bashar Khouri,Hassan wael ,Bashar Nimri
@@ -44,13 +47,8 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
     private RadioGroup radioGroup;
     private RadioButton radioButton;
     private Spinner bloodSpinner;
-
-    private FirebaseAuth mAuth ;
-    ArrayAdapter<String> spinnerArrayAdapter;
-
-
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("Users");
+    private FirebaseAuth mAuth;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,32 +95,68 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
         }
     }
 
-    Intent intent;
-
     public void register(View view) {
-
 
         if (checkMinReqForRegistry()) {
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
+                       //added User name and default image to auth.
+                        saveUserProfileData(fullName);
                         //Need to  add UI changes now
                         Toast.makeText(getApplicationContext(), R.string.sign_up_successfully, Toast.LENGTH_SHORT).show();
-                        User user = new User(mAuth.getUid(), fullName, birthDate, sex, blood);
-                        myRef.setValue(user);
+                        User user = new User(fullName, blood,birthDate, sex, email,"android.resource://" + getPackageName() + "/" + R.drawable.profile);
+                           // user.setProfilePic ("android.resource://" + getPackageName() + "/" + R.drawable.profile);
 
-                        startActivity(new Intent(getApplicationContext(),Login.class));
-                       finish();
-                    }
-                    else{
-                        Toast.makeText(getApplicationContext(), R.string.sign_up_unsuccessfully,Toast.LENGTH_SHORT).show();
+
+
+                        db.collection("users").document(mAuth.getUid()).set(user)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Toast.makeText(Registration.this, "User Registerd", Toast.LENGTH_SHORT).show();
+                                        Intent intent =new Intent(getApplicationContext(), MainActivity.class);
+                                        startActivity(intent);
+                                    }
+                                });
+
+
+//                        db.collection("users").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+//                            @Override
+//                            public void onSuccess(DocumentReference documentReference) {
+//                                Toast.makeText(Registration.this, "User Registerd", Toast.LENGTH_SHORT).show();
+//                                Intent intent =new Intent(getApplicationContext(), MainActivity.class);
+//                                startActivity(intent);
+//                            }
+//                        }).addOnFailureListener(new OnFailureListener() {
+//                            @Override
+//                            public void onFailure(@NonNull Exception e) {
+//                                mAuth.getCurrentUser().delete();
+//                                Toast.makeText(Registration.this, "FireBaseFailed", Toast.LENGTH_SHORT).show();
+//
+//                            }
+//                        });
+
+
+                    } else {
+                        Toast.makeText(getApplicationContext(), R.string.sign_up_unsuccessfully, Toast.LENGTH_SHORT).show();
                     }
                 }
             });
         }
     }
 
+    public void saveUserProfileData(String name){
+        FirebaseUser user = mAuth.getCurrentUser();
+        Uri defaultImage = Uri.parse("android.resource://" + getPackageName() + "/" + R.drawable.profile);
+        if (user!=null){
+            UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
+                    .setDisplayName(name)
+                    .setPhotoUri(defaultImage)
+                    .build();
+        }
+    }
 
     String fullName, email, password, conPassword, birthDateStr, sex;
     BloodType blood;
@@ -152,33 +186,35 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
         Date now = new Date(); //now =  new SimpleDateFormat("dd/mm/yy").parse(date);
 
         try {
-            blood = new BloodType(bloodSpinner.getId());
+            blood = new BloodType(bloodSpinner.getSelectedItemPosition());
+
         } catch (Exception e) {
             Toast.makeText(this, e.getMessage()+"current ID "+bloodSpinner.getId(), Toast.LENGTH_SHORT).show();
             dataValidated = false;
         }
 
         if (TextUtils.isEmpty(fullName)) {
-            fullNameET.setError((R.string.enter_full_name_error)+"");
+            fullNameET.setError(getString( R.string.enter_full_name_error));
             dataValidated = false;
         }
         if (TextUtils.isEmpty(email)) {
-            emailET.setError(R.string.enter_email_error + "");
+            emailET.setError(getString(R.string.enter_email_error ));
             dataValidated = false;
         }
         if (TextUtils.isEmpty(password)) {
-            passwordET.setError(R.string.enter_password_error + " ");
+            passwordET.setError(getString(R.string.enter_password_error));
             dataValidated = false;
-        } else if (password.length() >= 8 && password.length() <= 16) {
-            passwordET.setError(R.string.error_password_length_incorrect + "");
+        } else if (!(password.length() >= 8 && password.length() <= 16)) {
+            passwordET.setError(getString(R.string.error_password_length_incorrect ));
+            dataValidated=false;
         } else if (TextUtils.isEmpty(conPassword)) {
-            conPasswordET.setError(R.string.enter_confirm_password_error + "");
+            conPasswordET.setError(getString(R.string.enter_confirm_password_error));
             dataValidated = false;
         } else if (!password.equals(conPassword)) {
-            conPasswordET.setError(R.string.error_password_did_not_match + "");
+            conPasswordET.setError(getString(R.string.error_password_did_not_match ));
         }
         if (TextUtils.isEmpty(birthDateStr)) {
-            birthdayET.setError(R.string.enter_BirthDate_error + "");
+            birthdayET.setError(getString(R.string.enter_BirthDate_error ));
             dataValidated = false;
         }
         if (TextUtils.isEmpty(sex)) {

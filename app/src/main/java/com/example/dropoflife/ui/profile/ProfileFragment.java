@@ -12,17 +12,18 @@ import androidx.fragment.app.Fragment;
 import com.example.dropoflife.Classes.User;
 import com.example.dropoflife.MainActivity;
 import com.example.dropoflife.R;
-/**
- * author Bashar Khouri,Hassan wael ,Bashar Nimri
- */
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 public class ProfileFragment extends Fragment {
     User user;
     private ProfileViewModel profileViewModel;
-
+    private StorageReference mStorageRef;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        user =MainActivity.user;
-        return inflater.inflate(R.layout.fragment_profile,container,false);
+        View view = inflater.inflate(R.layout.fragment_profile,container,false);
+        mStorageRef = FirebaseStorage.getInstance().getReference();
+        return view ;
     }
 
 

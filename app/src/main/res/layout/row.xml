@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@color/BackGround">
+    app:cardCornerRadius="3dp"
+    android:elevation="3dp"
+    app:cardUseCompatPadding="true"
+    android:background="#ffffff"
+    app:contentPadding="5dp">
 
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/item_profile_image"
-        android:layout_width="84dp"
-        android:layout_height="88dp"
+        android:layout_width="68dp"
+        android:layout_height="59dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
@@ -41,14 +48,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/itemUserName"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginStart="135dp"
+        android:layout_marginLeft="135dp"
+        android:layout_marginTop="-20dp"
         android:layout_toEndOf="@+id/item_profile_image"
         android:layout_toRightOf="@+id/item_profile_image"
-        android:text="Location"
+        android:autoLink="all"
+        android:text="@string/location"
         android:textColor="#000"
-        android:textSize="12dp"/>
+        android:textSize="15sp" />
+
     <TextView
         android:id="@+id/itemDateOfPublish"
         android:layout_width="wrap_content"
@@ -56,12 +65,14 @@
         android:layout_below="@+id/location"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="3dp"
         android:layout_toEndOf="@+id/item_profile_image"
         android:layout_toRightOf="@+id/item_profile_image"
+        android:autoLink="all"
         android:text="Date"
         android:textColor="#000"
-        android:textSize="12dp"/>
+        android:textSize="12sp" />
+
 
     <TextView
         android:id="@+id/itemDescription"
@@ -72,29 +83,38 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginRight="36dp"
         android:layout_marginBottom="20dp"
-        android:text="additional ino " />
+        android:autoLink="all"
+        android:text="@string/additional_ino"
+        android:textColor="#000"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/itemBloodType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="101dp"
+        android:layout_height="62dp"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="103dp"
-        android:layout_marginLeft="103dp"
-        android:layout_marginTop="14dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="117dp"
+        android:layout_marginLeft="117dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
         android:layout_toEndOf="@+id/itemUserName"
         android:layout_toRightOf="@+id/itemUserName"
+        android:autoLink="all"
+        android:gravity="end"
         android:text="AB+"
+        android:textAlignment="viewEnd"
         android:textColor="@color/colorPrimary"
-        android:textSize="20dp"
+        android:textSize="40sp"
         android:textStyle="bold" />
-
 
     <View
         android:id="@+id/divider"
@@ -103,7 +123,9 @@
         android:background="#60bb0a1e"
         android:layout_above="@+id/contact"
         android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"/>
+        android:layout_marginLeft="10dp"
+        android:autoLink="all"
+        />
     <LinearLayout
         android:id="@+id/contact"
         android:layout_width="wrap_content"
@@ -118,9 +140,12 @@
         android:layout_marginTop="2dp"
         android:layout_marginEnd="2dp"
         android:layout_marginRight="2dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:autoLink="all"
+        >
 
         <Button
+            android:id="@+id/item_call_me"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
@@ -130,9 +155,12 @@
             android:drawableStart="@drawable/ic_baseline_call_24"
             android:drawableLeft="@drawable/ic_baseline_call_24"
             android:paddingLeft="30dp"
-            android:paddingRight="30dp"/>
+            android:paddingRight="30dp"
+            android:autoLink="all"
+            />
 
         <Button
+            android:id="@+id/item_share"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
@@ -143,9 +171,11 @@
             android:drawableLeft="@drawable/ic_baseline_share_24"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
+            android:autoLink="all"
             />
 
         <Button
+            android:id="@+id/item_chat"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
@@ -156,6 +186,7 @@
             android:drawableLeft="@drawable/ic_baseline_chat_24"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
+            android:autoLink="all"
             />
 
     </LinearLayout>
@@ -166,6 +197,10 @@
         android:background="#60bb0a1e"
         android:layout_below="@+id/contact"
         android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"/>
+        android:layout_marginRight="5dp"
+        android:autoLink="all"
+        />
+
 
 </RelativeLayout>
+</androidx.cardview.widget.CardView>

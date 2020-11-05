@@ -23,6 +23,21 @@ public class BloodType {
             throw  new IncorrectBloodIDException("Make sure that the Blood ID is between 0 and 9");
         }
     }
+    public BloodType(){
+        //auto filed from DB
+    }
+
+    public static String[] getBloodTypes() {
+        return bloodTypes;
+    }
+
+    public void setBloodType(String bloodType) {
+        this.bloodType = bloodType;
+    }
+
+    public void setBloodID(int bloodID) {
+        this.bloodID = bloodID;
+    }
 
     public int getBloodID() {
         return bloodID;

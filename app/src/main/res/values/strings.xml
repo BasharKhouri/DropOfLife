@@ -52,6 +52,51 @@
         <item> Unknown ! </item>
 
 
+    </string-array>
+    <string name="error_younger_than_the_legal_age">Younger than the legal age </string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails</string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="facebook">facebook</string>
+    <string name="twitter">twitter</string>
+    <string name="google">google</string>
+    <string name="our_logo">our_logo</string>
+    <string name="gender_with">Gender :</string>
+    <string name="register">Register</string>
+    <string name="what_s_your_blood_type">What\'s your blood type?</string>
+    <string name="username">UserName</string>
+    <string name="location">Location</string>
+    <string name="date">Date</string>
+    <string name="additional_ino">additional ino</string>
+    <string name="ab">AB+</string>
+    <string name="settings">Settings</string>
+    <string name="title_settings">Settings</string>
+
+    <string-array name="provinces">
+
+        <item>Amman</item>
+        <item>Irbid</item>
+        <item>Ajloun</item>
+        <item>Jerash</item>
+        <item>Mafraq</item>
+        <item>Balqa</item>
+        <item>Zarqa</item>
+        <item>Madaba</item>
+        <item>Karak</item>
+        <item>Tafilah</item>
+        <item>Aqaba</item>
 
     </string-array>
 

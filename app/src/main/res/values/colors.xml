@@ -5,7 +5,7 @@
     <color name="colorAccent">#bb0a1e</color>
     <color name="BackGround">#DEE4E7</color>
     <color name="shape_outline">#bb0a1e</color>
-
+    <color name="trasnperant">#00FFFFFF</color>
 
 
 </resources>

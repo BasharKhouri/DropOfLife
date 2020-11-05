@@ -13,15 +13,17 @@
        android:layout_height="wrap_content">
 
       <Button
-          android:id="@+id/req_blood"
+          android:id="@+id/req_bloodHomeButton"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginEnd="0dp"
           android:layout_marginRight="0dp"
           android:layout_toStartOf="@+id/Filter"
           android:layout_toLeftOf="@+id/Filter"
+          android:clickable="true"
           android:drawableLeft="@drawable/ic_baseline_add_circle_24"
-          android:text="@string/req_blood" />
+          android:text="@string/req_blood"
+          android:drawableStart="@drawable/ic_baseline_add_circle_24" />
       <Button
           android:id="@id/Filter"
           android:layout_width="wrap_content"
@@ -31,25 +33,16 @@
           android:layout_marginEnd="0dp"
           android:layout_marginRight="0dp"
           android:drawableLeft="@drawable/ic_baseline_filter_list_24"
-          android:text="@string/filter" />
+          android:text="@string/filter"
+          android:drawableStart="@drawable/ic_baseline_filter_list_24" />
 
    </RelativeLayout>
 
-   <ScrollView
+   <androidx.recyclerview.widget.RecyclerView
        android:layout_width="match_parent"
-       android:layout_height="442dp"
+       android:layout_height="match_parent"
+       android:id="@+id/postsRecyclerView"
        android:layout_below="@+id/Filter"
-       android:layout_alignParentBottom="true"
-       android:layout_marginTop="-2dp"
-       android:layout_marginBottom="0dp">
-
-      <ListView
-          android:id="@+id/HomeListView"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/Filter">
-
-      </ListView>
-   </ScrollView>
+   >
+   </androidx.recyclerview.widget.RecyclerView>
 </RelativeLayout>
