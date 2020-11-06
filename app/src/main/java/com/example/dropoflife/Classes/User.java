@@ -18,8 +18,6 @@ public class User {
     private Date dateOfLastDonation;
     private int numberOfDonations;
     private String email;
-
-
     private String profilePic;
     private String phone;
 

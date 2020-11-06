@@ -66,7 +66,7 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
-
+    ArrayList<String> postID = new ArrayList<>();
     private Task  LoadPosts() {
         // Path Of all Posts
         postRef= FirebaseDatabase.getInstance().getReference("Posts");
@@ -75,11 +75,13 @@ public class HomeFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 postList.clear();
+                postID.clear();
                 for(DataSnapshot ds:snapshot.getChildren()){
                     Post post = ds.getValue(Post.class);
                     postList.add(post);
+                    postID.add(ds.getKey());
                     //adapter
-                    adapterPosts = new AdapterPosts(getActivity(),postList);
+                    adapterPosts = new AdapterPosts(getActivity(),postList,postID);
                  //setAdapter to recyclerView
                     recyclerView.setAdapter(adapterPosts);
                 }

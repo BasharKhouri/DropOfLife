@@ -101,7 +101,7 @@
                 android:textSize="15dp" />
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/editImage"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -111,6 +111,19 @@
                 android:layout_marginEnd="11dp"
                 android:layout_marginRight="11dp"
                 android:src="@drawable/ic_baseline_edit_24" />
+
+            <ImageView
+                android:id="@+id/doneImage"
+                android:layout_width="36dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="11dp"
+                android:layout_marginRight="11dp"
+                android:src="@drawable/ic_twotone_done_outline_24"
+                android:visibility="invisible" />
         </RelativeLayout>
 
 
@@ -160,7 +173,7 @@
                 android:textSize="40dp"
                 android:textStyle="bold" />
 
-            <TextView
+            <EditText
                 android:id="@+id/profile_page_usesLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -168,15 +181,15 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:background="@color/trasnperant"
-
                 android:layout_marginStart="63dp"
                 android:layout_marginLeft="63dp"
                 android:layout_marginTop="109dp"
                 android:text="Location"
+                android:enabled="false"
                 android:textColor="#000000"
                 android:textSize="25dp" />
 
-            <TextView
+            <EditText
                 android:id="@+id/profile_page_usesPhone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -189,6 +202,7 @@
                 android:layout_marginTop="27dp"
                 android:text="Phone Number"
                 android:textSize="25dp"
+                android:enabled="false"
                android:textColor="#000000"
                 />
 
