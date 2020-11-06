@@ -78,7 +78,7 @@
                 android:textSize="30dp" />
 
             <TextView
-                android:id="@+id/NoOfDaysRemaining"
+                android:id="@+id/Profile_NoOfDaysRemaining"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/profile_page_userName"
@@ -86,7 +86,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 android:layout_marginStart="1dp"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="9dp"
@@ -245,7 +245,7 @@
 
             <Button
                 android:background="@drawable/button"
-                android:id="@+id/donation"
+                android:id="@+id/donationButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
