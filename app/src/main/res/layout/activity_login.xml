@@ -64,7 +64,8 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.543" />
+        app:layout_constraintVertical_bias="0.543"
+        android:onClick="signIn"/>
 
     <TextView
         android:id="@+id/forgotPassTextButton"
@@ -148,7 +149,6 @@
         android:background="@color/BackGround"
         android:contentDescription="@string/google" />
 
-        />
 
     <ImageView
         android:id="@+id/imageView7"
@@ -163,9 +163,6 @@
         app:srcCompat="@drawable/twitterlogo"
         android:background="@color/BackGround"
         android:contentDescription="@string/twitter" />
-
-        />
-
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
@@ -193,6 +190,5 @@
         android:background="@color/BackGround"
         android:contentDescription="@string/facebook" />
 
-        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

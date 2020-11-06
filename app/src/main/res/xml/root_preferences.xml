@@ -65,14 +65,11 @@
 
     <PreferenceCategory app:title="@string/settings">
 
-        <Preference
-            android:title="Dark Mode"
-            app:key="dark_mode" />
         <SwitchPreferenceCompat
             app:key="dark_mode_switch"
             app:title="Dark mode"
-            app:summaryOff="Switch Off"
-            app:summaryOn="Switch On"/>
+            app:summaryOff="Dark Mode Off"
+            app:summaryOn="Dark Mode On"/>
 
 
         <Preference

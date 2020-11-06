@@ -33,7 +33,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dropoflife.AddRequest;
-import com.example.dropoflife.Classes.AdapterPosts;
+//import com.example.dropoflife.Classes.AdapterPosts;
 import com.example.dropoflife.Classes.BloodType;
 import com.example.dropoflife.Classes.Post;
 import com.example.dropoflife.Classes.User;
@@ -65,7 +65,7 @@ public class HomeFragment extends Fragment {
     //Posts var
     RecyclerView recyclerView ;
     private ArrayList<Post> postList;
-    AdapterPosts adapterPosts;
+//    AdapterPosts adapterPosts;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -110,9 +110,9 @@ public class HomeFragment extends Fragment {
                     Post post = ds.getValue(Post.class);
                     postList.add(post);
                     //adapter
-                    adapterPosts = new AdapterPosts(getActivity(),postList);
+//                    adapterPosts = new AdapterPosts(getActivity(),postList);
                  //setAdapter to recyclerView
-                    recyclerView.setAdapter(adapterPosts);
+//                    recyclerView.setAdapter(adapterPosts);
                 }
             }
 
