@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -213,7 +214,7 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
             }
         });
 
-
+        popupMenu.show();
     }
 
     /**
@@ -222,10 +223,9 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
      */
     private void report(String postID,String currnetUser) {
         DatabaseReference reportRef = database.getReference("Report");
-        HashMap<String,String>hashMap=new HashMap<>();
-        hashMap.put("postID",postID);
-        hashMap.put("reporter",currnetUser);
-        reportRef.push().setValue(hashMap);
+        HashMap<String,String>PostMap=new HashMap<>();
+        reportRef.child("PostID: "+postID).child("Reporter: "+currnetUser).setValue(new Date());
+
     }
 
     /**
@@ -250,7 +250,8 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
     //View Holder Class
     class MyHolder extends RecyclerView.ViewHolder{
         //views from row.xml
-        ImageView uPic ,moreOption;
+        ImageButton moreOption;
+        ImageView uPic ;
         TextView userName , time  , description , blood , location;
         Button callMe , chat , shareButton;
 
@@ -266,7 +267,7 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
             callMe = (Button) itemView.findViewById(R.id.item_call_me);
             chat= (Button) itemView.findViewById(R.id.item_chat);
             shareButton= (Button) itemView.findViewById(R.id.item_share);
-            moreOption=(ImageView)itemView.findViewById(R.id.moreOption);
+            moreOption=(ImageButton) itemView.findViewById(R.id.moreOption);
          }
     }
 }
