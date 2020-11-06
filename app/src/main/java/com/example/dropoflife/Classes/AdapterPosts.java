@@ -2,6 +2,7 @@ package com.example.dropoflife.Classes;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
@@ -110,6 +111,7 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
         final String blood = BloodType.bloodTypes[postList.get(position).getBloodTypeID()];
         final String postTime = (String) android.text.format.DateFormat.format("MMM dd yyyy",time);
         final String postID =  postIDList.get(position).toString();
+        final String phoneNumber =postList.get(position).getPhoneNumber();
         DocumentReference documentReference = fStore.collection("users").document(userID);
         synchronized (documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             /**
@@ -151,7 +153,16 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
                 holder.chat.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                   try {
 
+
+                       Uri uri = Uri.parse("smsto:" + phoneNumber);
+                       Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
+                       intent.setPackage("com.whatsapp");
+                       context.startActivity(intent);
+                   }catch (Exception e){
+                       Toast.makeText(context, "you need to have whatsapp ", Toast.LENGTH_SHORT).show();
+                   }
                     }
                 });
 

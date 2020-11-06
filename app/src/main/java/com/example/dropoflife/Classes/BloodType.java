@@ -26,6 +26,11 @@ public class BloodType {
         //auto filed from DB
     }
 
+    @Override
+    public String toString() {
+        return bloodType;
+    }
+
     public static String[] getBloodTypes() {
         return bloodTypes;
     }
