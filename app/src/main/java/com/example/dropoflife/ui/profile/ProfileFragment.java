@@ -21,9 +21,12 @@ import androidx.fragment.app.Fragment;
 import com.example.dropoflife.Classes.User;
 import com.example.dropoflife.MainActivity;
 import com.example.dropoflife.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 public class ProfileFragment extends Fragment {
@@ -31,10 +34,10 @@ public class ProfileFragment extends Fragment {
     ProgressBar progressBar ;
     ImageView userImage;
     TextView bloodTypeDisplay, numberOfDonations,userName,remainingDaysUntilNextDonation;
-
+    FirebaseFirestore fStore = FirebaseFirestore.getInstance();
     Button donationButton;
-    private ProfileViewModel profileViewModel;
     private StorageReference mStorageRef;
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -49,8 +52,9 @@ public class ProfileFragment extends Fragment {
         progressBar =  (ProgressBar)view.findViewById(R.id.progress_circular);
         bloodTypeDisplay =(TextView)view.findViewById(R.id.profile_page_usesBlood);
         donationButton=(Button)view.findViewById(R.id.donationButton);
-
         numberOfDonations =(TextView)view.findViewById(R.id.profile_page_NoOfDonation);
+
+        mStorageRef = FirebaseStorage.getInstance().getReference();
        //set values
        userName.setText(user.getUserName());
 
@@ -63,11 +67,13 @@ public class ProfileFragment extends Fragment {
        if(user.getDateOfLastDonation()==null){
            progressBar.setProgress(100);
            remainingDaysUntilNextDonation.setText(R.string.you_can_donate);
+
        }else{
-           Long noOfDays = TimeUnit.DAYS.convert( user.getDateOfLastDonation().getTime()-new Date().getTime(), TimeUnit.MILLISECONDS);
-           if(noOfDays>0){
-                remainingDaysUntilNextDonation.setText(getString(R.string.days_remaining)+ noOfDays);
+           Long noOfDays = TimeUnit.DAYS.convert( new Date().getTime()-user.getDateOfLastDonation().getTime(), TimeUnit.MILLISECONDS);
+           if(noOfDays<75){
+                remainingDaysUntilNextDonation.setText(getString(R.string.days_remaining)+ " "+(75-noOfDays));
                progressBar.setProgress((int) (100*noOfDays/75));
+               donationButton.setEnabled(false);
 
            }else{
                remainingDaysUntilNextDonation.setText(R.string.you_can_donate);
@@ -87,8 +93,11 @@ public class ProfileFragment extends Fragment {
                 user.setNumberOfDonations(user.getNumberOfDonations()+1);
                 user.setDateOfLastDonation(new Date());
                 progressBar.setProgress(0);
-                remainingDaysUntilNextDonation.setText(getString(R.string.days_remaining)+ 75);
+                remainingDaysUntilNextDonation.setText(getString(R.string.days_remaining)+" "+ 75);
                 progressBar.setProgress((int) (0));
+                numberOfDonations.setText(user.getNumberOfDonations()+" ");
+                donationButton.setEnabled(false);
+                fStore.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(user);
             }
         });
 
