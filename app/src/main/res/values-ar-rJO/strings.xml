@@ -76,6 +76,14 @@
     <string name="settings">Settings</string>
     <string name="title_settings">Settings</string>
     <string name="deleting">جاري عملية الحذف</string>
+    <string name="add_request_msg">If you have any additional information such as Sickness, Health Problems or any specific details, please list below:</string>
+    <string name="your_location">Your Location</string>
+    <string name="where_is_your_location">Where is your location?</string>
+    <string name="what_blood_type_do_you_need">What Blood Type do you need?</string>
+    <string name="phone_number">Phone Number:</string>
+    <string name="phone_number_without">Phone Number</string>
+    <string name="additional_information">Additional Information</string>
+    <string name="add_request">Add Request</string>
 
     <string-array name="provinces">
 
