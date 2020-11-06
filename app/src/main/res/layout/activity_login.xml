@@ -12,21 +12,18 @@
         android:id="@+id/loginUsername"
         android:layout_width="250dp"
         android:layout_height="45dp"
-        android:background="@color/ET_color"
+        android:ems="10"
+        android:hint="Email Address"
+        android:inputType="textEmailAddress"
         android:drawableStart="@drawable/ic_person_black_24dp"
         android:drawableLeft="@drawable/ic_person_black_24dp"
         android:drawablePadding="5dp"
-        android:ems="10"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.294"
-        tools:ignore="Autofill"
-        android:textColorHint="#aaaaaa"
-        />
+        tools:ignore="Autofill" />
 
     <EditText
         android:id="@+id/loginUserPassword"
@@ -38,7 +35,6 @@
         android:layout_marginEnd="80dp"
         android:layout_marginRight="80dp"
         android:layout_marginBottom="1dp"
-        android:background="@color/ET_color"
         android:drawableStart="@drawable/ic_lock_outline_black_24dp"
         android:drawableLeft="@drawable/ic_lock_outline_black_24dp"
         android:drawablePadding="5dp"
@@ -49,8 +45,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginUsername"
-        tools:ignore="Autofill"
-        android:textColorHint="#aaaaaa"/>
+        tools:ignore="Autofill" />
 
     <Button
         android:id="@+id/button"
@@ -64,15 +59,14 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.543"
-        android:onClick="signIn"/>
+        app:layout_constraintVertical_bias="0.543" />
 
     <TextView
         android:id="@+id/forgotPassTextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/actor"
-        android:text="@string/forgot"
+        android:text="Forgot Password?"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -90,17 +84,17 @@
         android:textColor="#0000ff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.775"
+        app:layout_constraintHorizontal_bias="0.706"
         app:layout_constraintStart_toStartOf="parent"
 
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.899" />
+        app:layout_constraintVertical_bias="0.898" />
 
     <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/dont_have"
+        android:text="Don't have an account? "
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -139,6 +133,7 @@
         android:id="@+id/imageView8"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:contentDescription="@string/google"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.689"
@@ -147,8 +142,9 @@
         app:layout_constraintVertical_bias="0.807"
         app:srcCompat="@drawable/googlelogo"
         android:background="@color/BackGround"
-        android:contentDescription="@string/google" />
+     />
 
+        />
 
     <ImageView
         android:id="@+id/imageView7"
@@ -163,18 +159,10 @@
         app:srcCompat="@drawable/twitterlogo"
         android:background="@color/BackGround"
         android:contentDescription="@string/twitter" />
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/or_sign_in_using"
-        android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.724"
+
         />
+
+
 
     <ImageView
         android:id="@+id/imageView6"
@@ -190,5 +178,6 @@
         android:background="@color/BackGround"
         android:contentDescription="@string/facebook" />
 
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

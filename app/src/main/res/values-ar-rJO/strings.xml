@@ -75,6 +75,7 @@
     <string name="ab">AB+</string>
     <string name="settings">Settings</string>
     <string name="title_settings">Settings</string>
+    <string name="deleting">جاري عملية الحذف</string>
 
     <string-array name="provinces">
 

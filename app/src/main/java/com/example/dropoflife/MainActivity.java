@@ -1,33 +1,54 @@
 package com.example.dropoflife;
-
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.dropoflife.Classes.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.preference.EditTextPreference;
-import androidx.preference.Preference;
 /**
  * author Bashar Khouri,Hassan wael ,Bashar Nimri
  */
 public class MainActivity extends AppCompatActivity {
-    ListView listView;
+
     public static User user;
     private FirebaseAuth mAuth;
+    private FirebaseUser firebaseUser;
+    FirebaseFirestore fStore = FirebaseFirestore.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mAuth= FirebaseAuth.getInstance();
+        firebaseUser =mAuth.getCurrentUser();
+
+        DocumentReference documentReference = fStore.collection("users").document(firebaseUser.getUid());
+        synchronized (documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                user = value.toObject(User.class);
+            }
+        })) {
+
+        }
+
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
 

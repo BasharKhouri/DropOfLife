@@ -100,26 +100,20 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
                         saveUserProfileData(fullName);
                         //Need to  add UI changes now
                         Toast.makeText(getApplicationContext(), R.string.sign_up_successfully, Toast.LENGTH_SHORT).show();
-                        User user = new User(mAuth.getCurrentUser().getUid(),fullName, blood,birthDate, sex, email,"android.resource://" + getPackageName() + "/" + R.drawable.profile);
+                        User user = new User(fullName, blood,birthDate, sex, email,null);
                            // user.setProfilePic ("android.resource://" + getPackageName() + "/" + R.drawable.profile);
 
-                        db.collection("users").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Toast.makeText(Registration.this, "User Registerd", Toast.LENGTH_SHORT).show();
-                                Intent intent =new Intent(getApplicationContext(), MainActivity.class);
-                                startActivity(intent);
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                mAuth.getCurrentUser().delete();
-                                Toast.makeText(Registration.this, "FireBaseFailed", Toast.LENGTH_SHORT).show();
-
-                            }
-                        });
 
 
+                        db.collection("users").document(mAuth.getUid()).set(user)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Toast.makeText(Registration.this, "User Registerd", Toast.LENGTH_SHORT).show();
+                                        Intent intent =new Intent(getApplicationContext(), MainActivity.class);
+                                        startActivity(intent);
+                                    }
+                                });
                     } else {
                         Toast.makeText(getApplicationContext(), R.string.sign_up_unsuccessfully, Toast.LENGTH_SHORT).show();
                     }
@@ -130,11 +124,9 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
 
     public void saveUserProfileData(String name){
         FirebaseUser user = mAuth.getCurrentUser();
-        Uri defaultImage = Uri.parse("android.resource://" + getPackageName() + "/" + R.drawable.profile);
         if (user!=null){
             UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
                     .setDisplayName(name)
-                    .setPhotoUri(defaultImage)
                     .build();
         }
     }
