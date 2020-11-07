@@ -123,7 +123,7 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
                 user = value.toObject(User.class);
 
                 try {
-                    userPic = Uri.parse(user.getProfilePic());
+                    userPic = user.getProfilePic();
                     holder.uPic.setImageURI(userPic);
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
@@ -149,7 +149,7 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
                     }
                 });
 
-                    //ToDO figure what the fuck do we want to do this shit so called chat.
+
                 holder.chat.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -158,7 +158,7 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
 
                        Uri uri = Uri.parse("smsto:" + phoneNumber);
                        Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
-                       intent.setPackage("com.whatsapp");
+                      intent.setPackage("com.whatsapp");
                        context.startActivity(intent);
                    }catch (Exception e){
                        Toast.makeText(context, "you need to have whatsapp ", Toast.LENGTH_SHORT).show();
@@ -173,8 +173,17 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
                      */
                     @Override
                     public void onClick(View v) {
+                        try {
 
+
+                            Uri uri = Uri.parse("tel:" + phoneNumber);
+                            Intent intent = new Intent(Intent.ACTION_DIAL, uri);
+                            context.startActivity(intent);
+                        }catch (Exception e){
+                            Toast.makeText(context, "you need to have whatsapp ", Toast.LENGTH_SHORT).show();
+                        }
                     }
+
                 });
                 /*
                 TODO Hassan you said that this one is on you to do so I'll leave it be don't forget to add comments tho

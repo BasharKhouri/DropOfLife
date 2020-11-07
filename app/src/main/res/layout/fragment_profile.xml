@@ -86,7 +86,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_centerHorizontal="true"
+                android:layout_centerInParent="true"
                 android:layout_marginStart="1dp"
                 android:layout_marginLeft="1dp"
                 android:layout_marginTop="9dp"
@@ -94,7 +94,7 @@
                 android:layout_marginRight="-1dp"
                 android:background="@color/trasnperant"
                 android:gravity="center_horizontal"
-                android:text="@string/days_remaining_you_can_donate"
+                android:text="Days remaining / you can donate "
                 android:textAlignment="center"
                 android:textColor="#ffffff"
                 android:textSize="15dp" />
@@ -153,13 +153,14 @@
 
                 android:layout_marginEnd="258dp"
                 android:layout_marginRight="258dp"
-                android:text="@string/blood_tpye"
+                android:text="Blood tpye"
                 android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/profile_page_NoOfDonation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/donationButton"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="0dp"
@@ -175,13 +176,14 @@
                 android:id="@+id/profile_page_usesLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/donationButton"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:background="@color/trasnperant"
                 android:layout_marginStart="63dp"
                 android:layout_marginLeft="63dp"
                 android:layout_marginTop="109dp"
-                android:text="@string/location"
+                android:text="Location"
                 android:enabled="false"
                 android:textColor="#000000"
                 android:textSize="25dp" />
@@ -197,7 +199,7 @@
                 android:layout_marginStart="59dp"
                 android:layout_marginLeft="59dp"
                 android:layout_marginTop="27dp"
-                android:text="@string/phone_number"
+                android:text="Phone Number"
                 android:textSize="25dp"
                 android:enabled="false"
                android:textColor="#000000"
@@ -207,15 +209,18 @@
                 android:id="@+id/profile_page_usesBlood"
                 android:layout_width="57dp"
                 android:layout_height="55dp"
+                android:layout_below="@+id/donationButton"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentLeft="true"
                 android:layout_marginStart="82dp"
                 android:background="@color/trasnperant"
+
                 android:layout_marginLeft="82dp"
                 android:layout_marginTop="-1dp"
                 android:layout_marginEnd="133dp"
                 android:layout_marginRight="133dp"
                 android:layout_toStartOf="@+id/profile_page_NoOfDonation"
+
                 android:layout_toLeftOf="@+id/profile_page_NoOfDonation"
                 android:text="A+"
                 android:textColor="#bb0a1e"
@@ -235,7 +240,7 @@
 
                 android:layout_marginRight="97dp"
                 android:textColor="#000000"
-                android:text="@string/donations"
+                android:text="Donations"
                 android:textSize="15dp" />
 
             <Button
@@ -253,7 +258,7 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="139dp"
                 android:layout_marginRight="139dp"
-                android:text="@string/i_just_donated"
+                android:text="I just donated"
                 />
 
             <ImageView

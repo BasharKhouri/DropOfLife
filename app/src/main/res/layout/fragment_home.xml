@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/loading"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/BackGround"
@@ -21,9 +22,10 @@
           android:layout_toStartOf="@+id/Filter"
           android:layout_toLeftOf="@+id/Filter"
           android:clickable="true"
+          android:drawableStart="@drawable/ic_baseline_add_circle_24"
           android:drawableLeft="@drawable/ic_baseline_add_circle_24"
-          android:text="@string/req_blood"
-          android:drawableStart="@drawable/ic_baseline_add_circle_24" />
+          android:text="@string/req_blood" />
+
       <Button
           android:id="@id/Filter"
           android:layout_width="wrap_content"
@@ -32,17 +34,27 @@
           android:layout_alignParentRight="true"
           android:layout_marginEnd="0dp"
           android:layout_marginRight="0dp"
+          android:drawableStart="@drawable/ic_baseline_filter_list_24"
           android:drawableLeft="@drawable/ic_baseline_filter_list_24"
-          android:text="@string/filter"
-          android:drawableStart="@drawable/ic_baseline_filter_list_24" />
+          android:text="@string/filter" />
 
    </RelativeLayout>
 
    <androidx.recyclerview.widget.RecyclerView
+       android:id="@+id/postsRecyclerView"
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-       android:id="@+id/postsRecyclerView"
-       android:layout_below="@+id/Filter"
-   >
-   </androidx.recyclerview.widget.RecyclerView>
+       android:layout_below="@+id/Filter"></androidx.recyclerview.widget.RecyclerView>
+
+   <ProgressBar
+       android:id="@+id/loadingBar"
+       style="?android:attr/progressBarStyle"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_alignParentEnd="true"
+       android:layout_alignParentRight="true"
+       android:layout_alignParentBottom="true"
+       android:layout_marginEnd="181dp"
+       android:layout_marginRight="181dp"
+       android:layout_marginBottom="275dp" />
 </RelativeLayout>

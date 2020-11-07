@@ -2,7 +2,7 @@
 <resources>
 
 
-    <string name="app_name">قطرة حياة</string>
+    <string name="app_name">DropOfLife</string>
     <string name="title_home">الصفحة الرئيسية</string>
     <string name="title_profile">الملف الشخصي</string>
     <string name="title_notifications">اشعارات</string>
@@ -90,6 +90,9 @@
     <string name="blood_tpye">نوع الدم</string>
     <string name="donations">التبرعات</string>
     <string name="i_just_donated">لقد تبرعت مؤخرا</string>
+    <string name="upload_successful">لقد تمت العمليه بنجاح</string>
+    <string name="upload_not_successful"> حدث خطء الرجاء المحاوله فيما بعد</string>
+    <string name="uploading">جاري عملية الرفع</string>
 
     <string-array name="provinces">
 
