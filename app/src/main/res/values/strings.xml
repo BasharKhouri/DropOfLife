@@ -116,4 +116,6 @@
     <string name="upload_successful">upload successful</string>
     <string name="upload_not_successful">failed try again later</string>
     <string name="uploading">uploading</string>
+    <string name="log_out">Log out</string>
+    <string name="dark_mode">Dark mode</string>
 </resources>

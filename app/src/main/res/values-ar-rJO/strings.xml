@@ -93,6 +93,8 @@
     <string name="upload_successful">لقد تمت العمليه بنجاح</string>
     <string name="upload_not_successful"> حدث خطء الرجاء المحاوله فيما بعد</string>
     <string name="uploading">جاري عملية الرفع</string>
+    <string name="log_out">تسجيل الخروج</string>
+    <string name="dark_mode">الوضع المظلم</string>
 
     <string-array name="provinces">
 
