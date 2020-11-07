@@ -22,6 +22,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.example.dropoflife.Classes.User;
 import com.example.dropoflife.MainActivity;
 import com.example.dropoflife.R;
@@ -71,19 +72,43 @@ public class ProfileFragment extends Fragment {
         mStorageRef = FirebaseStorage.getInstance().getReference();
         user = MainActivity.user;
         storage = FirebaseStorage.getInstance();
-        mStorageRef = storage.getReference();
-        try {
-            localFile = File.createTempFile("images", "jpg");
-        }catch (Exception exception){
-            System.out.println(exception.getMessage());
-        }
-        StorageReference riversRef = mStorageRef.child("images/");
+
+
+
 
         //set values
-       userName.setText(user.getUserName());
+        //if the user has a profile pic
+        if(user.getProfilePic()!=null) {
+            try {
+                StorageReference riversRef = storage.getReferenceFromUrl(user.getProfilePic());
+                //download the file into the local file that we created
+                riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Glide.with(getContext())
+                                .load(uri)
+                                .into(userImage);
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getContext(), "Fail", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+            } catch (Exception exception) {
+                System.out.println(exception.getMessage());
+            }
+
+        }
+
+
+        userName.setText(user.getUserName());
 
         try {//if the image is null it wont be changed form the default image
-           userImage.setImageURI(user.getProfilePic());
+           userImage.setImageURI(Uri.parse(user.getProfilePic()));
        }catch (Exception e){
 
            System.out.println(e.getMessage());
@@ -148,31 +173,34 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-       // if(requestCode==1&&requestCode==RESULT_OK&&data!=null&&data.getData()!=null){
+      try {
+
+
             imageUri =data.getData();
             userImage.setImageURI(imageUri);
             uploadImage();
-      //  }
+        }
+      catch (Exception e ){
+          Toast.makeText(getContext(), "upload Failed", Toast.LENGTH_SHORT).show();
+      }
     }
 
     private void uploadImage() {
         final ProgressDialog pd = new ProgressDialog(getContext());
         pd.setTitle(R.string.uploading);
         final String randomkey =UUID.randomUUID().toString();
-        StorageReference riversRef = mStorageRef.child("images/"+randomkey);
+        final String imagePath = "images/"+randomkey+".jpeg";
+                StorageReference riversRef = mStorageRef.child(imagePath);
 
         riversRef.putFile(imageUri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Toast.makeText(getContext(), R.string.upload_successful, Toast.LENGTH_SHORT).show();
-                       taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                           @Override
-                           public void onSuccess(Uri uri) {
-                               pd.dismiss();
-                               user.setProfilePic(uri);
-                           }
-                       });
+                        pd.dismiss();
+
+                        user.setProfilePic( taskSnapshot.getStorage()+"");
+                     fStore.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(user);
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

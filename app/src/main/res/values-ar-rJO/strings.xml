@@ -95,6 +95,19 @@
     <string name="uploading">جاري عملية الرفع</string>
     <string name="log_out">تسجيل الخروج</string>
     <string name="dark_mode">الوضع المظلم</string>
+    <string name="Reset_password">اعادتة تعين كلمة المرور</string>
+    <string name="enter_email_to_receive_link">  لاعدة تعين كلمة المرور الرجاء ادخل البريد الالكتروني</string>
+    <string name="Okay">حسنا</string>
+    <string name="cancel">ألغاء</string>
+    <string name="reset_password_email_has_been_sent">تم إرسال البريد الإلكتروني لإعادة تعيين كلمة المرور</string>
+    <string name="error_reset_password_email_">  خطأ: تعذر إرسال البريد الإلكتروني لإعادة تعيين كلمة المرور </string>
+
+
+
+
+
+
+
 
     <string-array name="provinces">
 
