@@ -123,7 +123,7 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
                 user = value.toObject(User.class);
 
                 try {
-                    userPic = user.getProfilePic();
+                    userPic = Uri.parse(user.getProfilePic());
                     holder.uPic.setImageURI(userPic);
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
