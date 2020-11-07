@@ -35,7 +35,7 @@
     <string name="enter_email_error">email is REQUIRED.</string>
     <string name="enter_password_error">password is REQUIRED.</string>
     <string name="enter_confirm_password_error">Confirm  password is REQUIRED.</string>
-    <string name="enter_BirthDate_error">Birth date   password is REQUIRED.</string>
+    <string name="enter_BirthDate_error">Birth date is REQUIRED.</string>
     <string name="enter_date">Enter Date</string>
     <string name="error_during_blood_selection">error during blood selection</string>
     <string name="error_password_length_incorrect">please make sure that the password is 8 to 16 characters</string>
@@ -79,7 +79,7 @@
     <string name="username">UserName</string>
     <string name="location">Location</string>
     <string name="date">Date</string>
-    <string name="additional_ino">additional ino</string>
+    <string name="additional_ino">additional info</string>
     <string name="ab">AB+</string>
     <string name="settings">Settings</string>
     <string name="title_settings">Settings</string>
@@ -94,6 +94,10 @@
     <string name="add_request">Add Request</string>
     <string name="you_can_donate">you can donate now</string>
     <string name="days_remaining">Days remaining</string>
+    <string name="days_remaining_you_can_donate">Days remaining / you can donate</string>
+    <string name="blood_tpye">Blood type</string>
+    <string name="donations">Donations</string>
+    <string name="i_just_donated">I just donated</string>
     <string-array name="provinces">
 
         <item>Amman</item>
