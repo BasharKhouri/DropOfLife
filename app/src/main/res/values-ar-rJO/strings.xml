@@ -86,6 +86,9 @@
     <string name="add_request">Add Request</string>
     <string name="you_can_donate">يكنك التبرع في الدم</string>
     <string name="days_remaining">عدد الايام المتبقيه</string>
+    <string name="upload_successful">لقد تمت العمليه بنجاح</string>
+    <string name="upload_not_successful"> حدث خطء الرجاء المحاوله فيما بعد</string>
+    <string name="uploading">جاري عملية الرفع</string>
 
     <string-array name="provinces">
 

@@ -1,5 +1,7 @@
 package com.example.dropoflife.ui.profile;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.net.Uri;
 
 import android.os.Build;
@@ -13,21 +15,33 @@ import android.widget.ImageView;
 
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.example.dropoflife.Classes.User;
 import com.example.dropoflife.MainActivity;
 import com.example.dropoflife.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.io.File;
+import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
+
+import static android.app.Activity.RESULT_OK;
 
 public class ProfileFragment extends Fragment {
     User user;
@@ -36,15 +50,16 @@ public class ProfileFragment extends Fragment {
     TextView bloodTypeDisplay, numberOfDonations,userName,remainingDaysUntilNextDonation;
     FirebaseFirestore fStore = FirebaseFirestore.getInstance();
     Button donationButton;
+    Uri imageUri;
+    private FirebaseStorage storage;
     private StorageReference mStorageRef;
-
+    File localFile ;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceSyotate) {
        View view = inflater.inflate(R.layout.fragment_profile,container,false);
-       mStorageRef = FirebaseStorage.getInstance().getReference();
-       user = MainActivity.user;
+
        //init values
         userName = (TextView) view.findViewById(R.id.profile_page_userName);
         userImage =(ImageView)view.findViewById(R.id.profile_image);
@@ -53,13 +68,22 @@ public class ProfileFragment extends Fragment {
         bloodTypeDisplay =(TextView)view.findViewById(R.id.profile_page_usesBlood);
         donationButton=(Button)view.findViewById(R.id.donationButton);
         numberOfDonations =(TextView)view.findViewById(R.id.profile_page_NoOfDonation);
-
         mStorageRef = FirebaseStorage.getInstance().getReference();
-       //set values
+        user = MainActivity.user;
+        storage = FirebaseStorage.getInstance();
+        mStorageRef = storage.getReference();
+        try {
+            localFile = File.createTempFile("images", "jpg");
+        }catch (Exception exception){
+            System.out.println(exception.getMessage());
+        }
+        StorageReference riversRef = mStorageRef.child("images/");
+
+        //set values
        userName.setText(user.getUserName());
 
-       try {//if the image is null it wont be changed form the default image
-           userImage.setImageURI(Uri.parse(user.getProfilePic()));
+        try {//if the image is null it wont be changed form the default image
+           userImage.setImageURI(user.getProfilePic());
        }catch (Exception e){
 
            System.out.println(e.getMessage());
@@ -101,11 +125,71 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        userImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                choosePic();
+            }
+        });
+
 
 
 
         return view ;
     }
 
+    private void choosePic() {
+        Intent intent=new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent,1);
+    }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+       // if(requestCode==1&&requestCode==RESULT_OK&&data!=null&&data.getData()!=null){
+            imageUri =data.getData();
+            userImage.setImageURI(imageUri);
+            uploadImage();
+      //  }
+    }
+
+    private void uploadImage() {
+        final ProgressDialog pd = new ProgressDialog(getContext());
+        pd.setTitle(R.string.uploading);
+        final String randomkey =UUID.randomUUID().toString();
+        StorageReference riversRef = mStorageRef.child("images/"+randomkey);
+
+        riversRef.putFile(imageUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Toast.makeText(getContext(), R.string.upload_successful, Toast.LENGTH_SHORT).show();
+                       taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                           @Override
+                           public void onSuccess(Uri uri) {
+                               pd.dismiss();
+                               user.setProfilePic(uri);
+                           }
+                       });
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        pd.dismiss();
+                        Toast.makeText(getContext(), R.string.upload_not_successful, Toast.LENGTH_SHORT).show();
+                        // Handle unsuccessful uploads
+                        // ...
+                    }
+                }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                double progressPercent =(100*snapshot.getBytesTransferred()/snapshot.getTotalByteCount());
+                ;
+                pd.setMessage((int)progressPercent+" ");
+            }
+        });
+    }
 }

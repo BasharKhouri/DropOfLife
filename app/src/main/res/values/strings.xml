@@ -109,5 +109,7 @@
         <item>Aqaba</item>
 
     </string-array>
-
+    <string name="upload_successful">upload successful</string>
+    <string name="upload_not_successful">failed try again later</string>
+    <string name="uploading">uploading</string>
 </resources>

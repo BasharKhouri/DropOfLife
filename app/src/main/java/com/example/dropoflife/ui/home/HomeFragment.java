@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -30,7 +31,7 @@ public class HomeFragment extends Fragment {
 
     FirebaseUser currentUser;
     Button reqBlood;
-
+    ProgressBar bar;
     //Posts var
     RecyclerView recyclerView ;
     private ArrayList<Post> postList;
@@ -40,7 +41,8 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         //inflate the layout of this fragment
         View view = inflater.inflate(R.layout.fragment_home,container,false);
-
+        bar=(ProgressBar)view.findViewById(R.id.loadingBar);
+        bar.setVisibility(View.VISIBLE);
         //init current user
         currentUser=FirebaseAuth.getInstance().getCurrentUser();
          // Recycler View and it's properties
@@ -54,7 +56,8 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         //init post List
         postList = new ArrayList<>();
-         LoadPosts();
+            LoadPosts();
+
         reqBlood = (Button)view.findViewById(R.id.req_bloodHomeButton);
         reqBlood.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +88,8 @@ public class HomeFragment extends Fragment {
                  //setAdapter to recyclerView
                     recyclerView.setAdapter(adapterPosts);
                 }
+                bar.setVisibility(View.GONE);
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
