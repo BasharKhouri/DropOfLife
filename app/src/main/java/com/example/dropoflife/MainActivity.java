@@ -38,14 +38,20 @@ public class MainActivity extends AppCompatActivity {
         mAuth= FirebaseAuth.getInstance();
         firebaseUser =mAuth.getCurrentUser();
 
-        DocumentReference documentReference = fStore.collection("users").document(firebaseUser.getUid());
-        synchronized (documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+        try {
 
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                user = value.toObject(User.class);
+
+            DocumentReference documentReference = fStore.collection("users").document(firebaseUser.getUid());
+            synchronized (documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+
+                @Override
+                public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                    user = value.toObject(User.class);
+                }
+            })) {
+
             }
-        })) {
+        }catch (Exception ignore){
 
         }
 

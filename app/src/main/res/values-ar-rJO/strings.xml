@@ -3,6 +3,8 @@
 
 
     <string name="app_name">DropOfLife</string>
+    <string name="facebook_app_id">3508661939228468</string>
+    <string name="fb_login_protocol_scheme">fb3508661939228468</string>
     <string name="title_home">الصفحة الرئيسية</string>
     <string name="title_profile">الملف الشخصي</string>
     <string name="title_notifications">اشعارات</string>

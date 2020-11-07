@@ -43,6 +43,17 @@ public class User {
         this.profilePic = profilePic;
         numberOfDonations=0;
     }
+    public User( String userName, String email,String profilePic) {
+
+        this.userName = userName;
+
+        this.profilePic = profilePic;
+
+        this.email = email;
+
+        numberOfDonations=0;
+    }
+
     public User(){
         // public no-arg constructor needed
     }
