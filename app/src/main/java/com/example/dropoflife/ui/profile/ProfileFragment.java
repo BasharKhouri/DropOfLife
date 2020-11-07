@@ -80,9 +80,6 @@ public class ProfileFragment extends Fragment {
         //if the user has a profile pic
         if(user.getProfilePic()!=null) {
             try {
-                // create a temp file to save pics into
-                localFile = File.createTempFile("images", "jpg");
-                //init the storage  ref for my file
                 StorageReference riversRef = storage.getReferenceFromUrl(user.getProfilePic());
                 //download the file into the local file that we created
                 riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {

@@ -24,10 +24,13 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.dropoflife.MainActivity;
 import com.example.dropoflife.R;
 import com.google.android.gms.common.api.Api;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -44,7 +47,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -69,6 +77,7 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
     Uri userPic;
     ArrayList postIDList;
     DatabaseReference myRef = database.getReference("Posts");
+    private FirebaseStorage storage ;
 
     /**
      *
@@ -122,12 +131,37 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                 user = value.toObject(User.class);
 
+                storage = FirebaseStorage.getInstance();
+                StorageReference riversRef = storage.getReferenceFromUrl(user.getProfilePic());
+
+                //if the user has a profile pic
+                if(user.getProfilePic()!=null)
                 try {
-                    userPic = Uri.parse(user.getProfilePic());
-                    holder.uPic.setImageURI(userPic);
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
+                    final File localFile = File.createTempFile("images", "jpg");
+                    riversRef.getFile(localFile)
+                            .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                    // Successfully downloaded data to local file
+                                    // ...
+                                    Picasso.get().load(localFile).into(holder.uPic);
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            // Handle failed download
+                            // ...
+                        }
+                    });
+
+                 }catch (Exception e){
+
                 }
+
+
+
+
+
                 holder.userName.setText(user.getUserName());
                 holder.blood.setText(blood);
                 holder.description.setText(description);
