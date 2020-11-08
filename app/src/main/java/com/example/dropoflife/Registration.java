@@ -18,6 +18,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.dropoflife.Classes.BloodType;
+import com.example.dropoflife.Classes.Roles;
 import com.example.dropoflife.Classes.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -47,6 +48,7 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
     private RadioButton radioButton;
     private Spinner bloodSpinner;
     private FirebaseAuth mAuth;
+
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
@@ -100,11 +102,12 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
                         saveUserProfileData(fullName);
                         //Need to  add UI changes now
                         Toast.makeText(getApplicationContext(), R.string.sign_up_successfully, Toast.LENGTH_SHORT).show();
-                        User user = new User(fullName, blood,birthDate, sex, email,null);
-                           // user.setProfilePic ("android.resource://" + getPackageName() + "/" + R.drawable.profile);
-
-
-
+                        User user = null;
+                        try {
+                            user = new User(fullName, blood,birthDate, sex, email,null, new Roles(1));
+                        } catch (Roles.IncorrectRoleExciption incorrectRoleExciption) {
+                            incorrectRoleExciption.printStackTrace();
+                        }
                         db.collection("users").document(mAuth.getUid()).set(user)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override

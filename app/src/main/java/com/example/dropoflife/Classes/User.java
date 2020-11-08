@@ -20,6 +20,10 @@ public class User {
     private String email;
     private String profilePic;
     private String phone;
+    private Roles role;
+
+
+
 
 
 
@@ -33,8 +37,8 @@ public class User {
      * @param profilePic
      */
 
-    public User( String userName, BloodType bloodType, Date dateOfBirth, String sex, String email, String profilePic) {
-
+    public User( String userName, BloodType bloodType, Date dateOfBirth, String sex, String email, String profilePic,Roles role) {
+        this.role=role;
         this.userName = userName;
         this.bloodType = bloodType;
         this.dateOfBirth = dateOfBirth;
@@ -60,7 +64,9 @@ public class User {
 
     // The Getters
 
-
+    public Roles getRole() {
+        return role;
+    }
     public String getUserName() {
         return userName;
     }
@@ -149,9 +155,7 @@ public class User {
     public void setNumberOfDonations(int numberOfDonations) {
         this.numberOfDonations = numberOfDonations;
     }
-
-    @Override
-    public String toString() {
-        return getUserName();
+    public void setRole(Roles role) {
+        this.role = role;
     }
 }
