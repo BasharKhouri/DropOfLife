@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static User user;
     private FirebaseAuth mAuth;
-    private FirebaseUser firebaseUser;
+    public static FirebaseUser firebaseUser;
     FirebaseFirestore fStore = FirebaseFirestore.getInstance();
 
     @Override

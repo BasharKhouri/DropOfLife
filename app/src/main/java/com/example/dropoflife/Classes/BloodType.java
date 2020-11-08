@@ -9,7 +9,7 @@ public class BloodType {
 
     private String bloodType;
     private int bloodID ;
-   final public static String bloodTypes [] ={"A+","A-","B+","B-","C+","C-","AB+","AB-","Unknown"};
+   final public static String bloodTypes [] ={"A+","A-","B+","B-","O+","O-","AB+","AB-","Unknown"};
     /**
      *
      * @param bloodID number must be between 0 and 8 else it will through Blood type not found @<code> String bloodTypes [] ={"A+","A-","B+","B-","C+","C-","AB+","AB-","Unknown"} </code>

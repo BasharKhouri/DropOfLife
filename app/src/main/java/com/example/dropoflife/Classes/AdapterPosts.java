@@ -132,34 +132,35 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
                 user = value.toObject(User.class);
 
                 storage = FirebaseStorage.getInstance();
-                StorageReference riversRef = storage.getReferenceFromUrl(user.getProfilePic());
 
                 //if the user has a profile pic
-                if(user.getProfilePic()!=null)
-                try {
-                    final File localFile = File.createTempFile("images", "jpg");
-                    riversRef.getFile(localFile)
-                            .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                                @Override
-                                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                    // Successfully downloaded data to local file
-                                    // ...
-                                    Picasso.get().load(localFile).into(holder.uPic);
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            // Handle failed download
-                            // ...
-                        }
-                    });
+                if(user.getProfilePic()!=null) {
+                    StorageReference riversRef = storage.getReferenceFromUrl(user.getProfilePic());
 
-                 }catch (Exception e){
+                    try {
+                        final File localFile = File.createTempFile("images", "jpg");
+                        riversRef.getFile(localFile)
+                                .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                        // Successfully downloaded data to local file
+                                        // ...
+                                        Picasso.get().load(localFile).into(holder.uPic);
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                // Handle failed download
+                                // ...
+                            }
+                        });
+
+                    } catch (Exception e) {
+
+                    }
+
 
                 }
-
-
-
 
 
                 holder.userName.setText(user.getUserName());

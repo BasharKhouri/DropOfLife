@@ -188,8 +188,8 @@ public class ProfileFragment extends Fragment {
     private void uploadImage() {
         final ProgressDialog pd = new ProgressDialog(getContext());
         pd.setTitle(R.string.uploading);
-        final String randomkey =UUID.randomUUID().toString();
-        final String imagePath = "images/"+randomkey+".jpeg";
+
+        final String imagePath = "images/"+MainActivity.firebaseUser.getUid()+".jpeg";
                 StorageReference riversRef = mStorageRef.child(imagePath);
 
         riversRef.putFile(imageUri)
@@ -197,9 +197,8 @@ public class ProfileFragment extends Fragment {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         pd.dismiss();
-
                         user.setProfilePic( taskSnapshot.getStorage()+"");
-                     fStore.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(user);
+                        fStore.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(user);
 
                     }
                 })
@@ -210,6 +209,7 @@ public class ProfileFragment extends Fragment {
                         Toast.makeText(getContext(), R.string.upload_not_successful, Toast.LENGTH_SHORT).show();
                         // Handle unsuccessful uploads
                         // ...
+
                     }
                 }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
             @Override
