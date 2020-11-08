@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ebecef"
+    android:background="@color/BackGround"
     tools:context=".Registration">
 
 
@@ -105,7 +105,7 @@
         android:layout_height="45dp"
         android:gravity="center"
         android:text="@string/gender_with"
-        android:textColor="@android:color/black"
+        android:textColor="@color/row_txt_color"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -187,7 +187,7 @@
         android:layout_height="35dp"
         android:gravity="center"
         android:text="@string/what_s_your_blood_type"
-        android:textColor="@android:color/black"
+        android:textColor="@color/row_txt_color"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
