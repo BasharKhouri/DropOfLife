@@ -16,6 +16,7 @@ com/example/dropoflife/ui/home/HomeViewModel.java
  com.example.dropoflife.ui.home.HomeViewModel
 com/example/dropoflife/Classes/Roles.java
  com.example.dropoflife.Classes.Roles
+ com.example.dropoflife.Classes.Roles$IncorrectRoleExciption
 com/example/dropoflife/ui/SettingsFragment.java
  com.example.dropoflife.ui.SettingsFragment
  com.example.dropoflife.ui.SettingsFragment$1
@@ -28,8 +29,11 @@ com/example/dropoflife/MainActivity.java
 com/example/dropoflife/Classes/Post.java
  com.example.dropoflife.Classes.Post
  com.example.dropoflife.Classes.Post$1
-com/example/dropoflife/Classes/User.java
- com.example.dropoflife.Classes.User
+com/example/dropoflife/Registration.java
+ com.example.dropoflife.Registration
+ com.example.dropoflife.Registration$1
+ com.example.dropoflife.Registration$2
+ com.example.dropoflife.Registration$2$1
 com/example/dropoflife/ui/home/HomeFragment.java
  com.example.dropoflife.ui.home.HomeFragment
  com.example.dropoflife.ui.home.HomeFragment$1
@@ -65,8 +69,5 @@ com/example/dropoflife/Login.java
  com.example.dropoflife.Login$5
  com.example.dropoflife.Login$6
  com.example.dropoflife.Login$7
-com/example/dropoflife/Registration.java
- com.example.dropoflife.Registration
- com.example.dropoflife.Registration$1
- com.example.dropoflife.Registration$2
- com.example.dropoflife.Registration$2$1
+com/example/dropoflife/Classes/User.java
+ com.example.dropoflife.Classes.User

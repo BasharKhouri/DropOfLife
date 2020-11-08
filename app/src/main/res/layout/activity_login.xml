@@ -161,18 +161,20 @@
         android:contentDescription="@string/twitter" />
 
 
-    <ImageButton
+    <ImageView
         android:id="@+id/facebook_button"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:background="@color/BackGround"
         android:contentDescription="@string/facebook"
         android:onClick="face"
-        android:src="@drawable/com_facebook_button_send_icon_blue"
+        android:src="@drawable/facebooklogo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.315"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.807" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

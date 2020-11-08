@@ -27,6 +27,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,7 +61,7 @@ public class Login extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private CallbackManager mCallbackManager;
     public static final String SHARED_NAME = ".shared";
-    private ImageButton facebook_button;
+    private ImageView facebook_button;
     private CallbackManager callbackManager;
     private LoginManager loginManager;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -68,6 +69,9 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         mAuth = FirebaseAuth.getInstance();
         emailET = findViewById(R.id.loginUsername);
         passwordET = findViewById(R.id.loginUserPassword);
