@@ -17,10 +17,11 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center">
+
             <ImageView
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:background="@drawable/splashlogo"/>
+                android:background="@drawable/splashlogo" />
         </LinearLayout>
 
         <LinearLayout
@@ -37,7 +38,6 @@
                 android:layout_weight="5"
                 android:gravity="center"
                 android:text="@string/what_blood_type_do_you_need"
-                android:textColor="@android:color/black"
                 android:textSize="20sp" />
 
             <Spinner
@@ -67,7 +67,7 @@
             android:layout_height="2dp"
             android:layout_marginLeft="75dp"
             android:layout_marginTop="40dp"
-            android:background="#60bb0a1e"
+            android:background="#90bb0a1e"
             android:paddingTop="1000dp" />
 
         <Button

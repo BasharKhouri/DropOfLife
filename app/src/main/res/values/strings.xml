@@ -40,7 +40,8 @@
     <string name="error_during_blood_selection">error during blood selection</string>
     <string name="error_password_length_incorrect">please make sure that the password is 8 to 16 characters</string>
     <string name="error_password_did_not_match">password did not match </string>
-    <string-array name="bloodtypes">String bloodTypes [] ={"A+","A-","B+","B-","O+","O-","AB+","AB-","Unknown"};
+    <string-array name="bloodtypes">String bloodTypes []
+        ={"A+","A-","B+","B-","O+","O-","AB+","AB-","Unknown"};
         <item> A+ </item>
         <item> A- </item>
         <item> B+ </item>

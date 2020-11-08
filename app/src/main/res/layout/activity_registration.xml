@@ -4,15 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ebecef"
+    android:background="@color/BackGround"
     tools:context=".Registration">
-
 
     <EditText
         android:id="@+id/birthdayText"
         android:layout_width="300dp"
         android:layout_height="45dp"
-        android:clickable="true"
+        android:focusableInTouchMode="false"
         android:drawableStart="@drawable/ic_cake_black_24dp"
         android:drawableLeft="@drawable/ic_cake_black_24dp"
         android:drawablePadding="5dp"
