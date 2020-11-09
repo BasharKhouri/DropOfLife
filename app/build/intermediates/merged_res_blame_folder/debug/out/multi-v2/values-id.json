@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\hassa\\OneDrive\\Documents\\GitHub\\DropOfLife\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-id\\values-id.xml",
+            "outputFile": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-id\\values-id.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\hassa\\.gradle\\caches\\transforms-2\\files-2.1\\d78271053b6785aeec7aeacdefb278bf\\jetified-facebook-common-7.1.0\\res\\values-id\\values-id.xml",
+                    "source": "C:\\Users\\basha\\.gradle\\caches\\transforms-2\\files-2.1\\d78271053b6785aeec7aeacdefb278bf\\jetified-facebook-common-7.1.0\\res\\values-id\\values-id.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

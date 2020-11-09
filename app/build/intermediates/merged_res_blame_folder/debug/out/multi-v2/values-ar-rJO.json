@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\hassa\\OneDrive\\Documents\\GitHub\\DropOfLife\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ar-rJO\\values-ar-rJO.xml",
+            "outputFile": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-ar-rJO\\values-ar-rJO.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\hassa\\OneDrive\\Documents\\GitHub\\DropOfLife\\app\\src\\main\\res\\values-ar-rJO\\strings.xml",
+                    "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\src\\main\\res\\values-ar-rJO\\strings.xml",
                     "from": {
                         "startLines": "113,14,101,99,75,87,79,86,74,4,63,62,61,22,91,10,102,11,32,98,73,89,90,78,92,27,15,43,42,31,40,100,39,41,44,29,30,46,45,104,48,64,5,6,26,12,20,19,34,23,68,66,93,21,72,97,25,52,18,67,17,84,85,69,57,13,103,37,38,76,33,35,36,56,24,28,53,60,49,7,9,8,77,65,95,94,96,71,16,83,70,82,88,81",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
