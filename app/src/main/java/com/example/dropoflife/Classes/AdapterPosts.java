@@ -132,7 +132,7 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
                 user = value.toObject(User.class);
 
                 storage = FirebaseStorage.getInstance();
-                StorageReference riversRef = storage.getReferenceFromUrl(user.getProfilePic());
+                
 
                 //if the user has a profile pic
                 if(user.getProfilePic()!=null) {
@@ -156,7 +156,7 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
                             }
                         });
 
-                    } catch (Exception e) {
+                    } catch (Exception ignored) {
 
                     }
                 }

@@ -1138,6 +1138,7 @@ color dim_foreground_disabled_material_dark
 color dim_foreground_disabled_material_light
 color dim_foreground_material_dark
 color dim_foreground_material_light
+color editTextColor
 color error_color_material_dark
 color error_color_material_light
 color foreground_material_dark
@@ -1254,6 +1255,8 @@ color switch_thumb_normal_material_dark
 color switch_thumb_normal_material_light
 color test_mtrl_calendar_day
 color test_mtrl_calendar_day_selected
+color textColorDark
+color textColorWhite
 color tooltip_background_dark
 color tooltip_background_light
 color trasnperant
@@ -1929,7 +1932,6 @@ id action_text
 id actions
 id activity_chooser_view_content
 id add
-id addPostLocation
 id addRequest
 id adjust_height
 id adjust_width
@@ -2047,7 +2049,6 @@ id end
 id end_padder
 id enterAlways
 id enterAlwaysCollapsed
-id enterPhoneNumber
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
@@ -2309,8 +2310,6 @@ id textStart
 id textView
 id textView2
 id textView3
-id textView5
-id textView6
 id textView7
 id text_input_end_icon
 id text_input_start_icon
@@ -2569,7 +2568,6 @@ string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
 string add_request
-string add_request_msg
 string additional_information
 string additional_ino
 string app_name

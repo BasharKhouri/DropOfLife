@@ -55,7 +55,9 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
-
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
         mAuth = FirebaseAuth.getInstance().getInstance();
         radioGroup = findViewById(R.id.genderRadioButton);
         birthdayET = findViewById(R.id.birthdayText);

@@ -157,8 +157,8 @@
             android:textSize="12sp"
             android:drawableStart="@drawable/ic_baseline_call_24"
             android:drawableLeft="@drawable/ic_baseline_call_24"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp"
+            android:paddingLeft="20dp"
+
             android:autoLink="all"
             android:textColor="@color/row_txt_color"
             />
@@ -174,7 +174,6 @@
             android:drawableStart="@drawable/ic_baseline_share_24"
             android:drawableLeft="@drawable/ic_baseline_share_24"
             android:paddingLeft="30dp"
-            android:paddingRight="30dp"
             android:autoLink="all"
             android:textColor="@color/row_txt_color"
             />
