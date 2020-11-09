@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.dropoflife" >
+    package="com.example.dropoflife">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,14 +11,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
+        <activity android:name=".ui.MainActivity"></activity>
         <activity
             android:name=".DrawerActivity"
             android:label="@string/title_activity_drawer"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".AddRequest" />
-        <activity android:name=".Splashscreen" >
+        <activity android:name=".Splashscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,8 +26,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Registration" />
-        <activity android:name=".Login" >
-        </activity>
+        <activity android:name=".Login"></activity>
         <activity android:name=".MainActivity" />
 
         <meta-data
