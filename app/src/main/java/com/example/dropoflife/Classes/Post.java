@@ -1,5 +1,7 @@
 package com.example.dropoflife.Classes;
+
 import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -15,27 +17,30 @@ import java.util.Date;
  */
 public class Post {
 
-    private String userID ;
+    private String userID;
     private int bloodTypeID;
     private String description;
     private Date dateOfPublish;
-    private String location ;
+    private String location;
     private String phoneNumber;
     private User owner;
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    public Post(String userID,int bloodTypeID, String description, Date dateOfPublish, String location, String phoneNumber){
-        this.userID = userID ;
-        this.bloodTypeID= bloodTypeID;
-        this.description=description;
-        this.dateOfPublish=dateOfPublish;
-        this.location=location;
-        this.phoneNumber=phoneNumber;
-        owner=getOwner();
+
+    public Post(String userID, int bloodTypeID, String description, Date dateOfPublish, String location, String phoneNumber) {
+        this.userID = userID;
+        this.bloodTypeID = bloodTypeID;
+        this.description = description;
+        this.dateOfPublish = dateOfPublish;
+        this.location = location;
+        this.phoneNumber = phoneNumber;
+        owner = getOwner();
     }
-    public Post(){
+
+    public Post() {
         //auto gen
     }
+
     public User getOwner() {
 
         final User[] owner = new User[1];
@@ -49,22 +54,26 @@ public class Post {
                                 owner[0] = document.toObject(User.class);
                             }
                         } else {
-                            owner[0] =null;
+                            owner[0] = null;
                             Log.w("", "Error getting documents.", task.getException());
                         }
                     }
                 });
         return owner[0];
     }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }
+
     public String getLocation() {
         return location;
     }
+
     public void setDescription(String description) {
         this.description = description;
     }
+
     public void setBloodTypeID(int bloodTypeID) {
         this.bloodTypeID = bloodTypeID;
     }
@@ -88,20 +97,27 @@ public class Post {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-    public User owner(){
+
+    public User owner() {
         return owner;
     }
-    public String getUserID() {return userID;}
 
-    public int bloodTypeID(){
+    public String getUserID() {
+        return userID;
+    }
+
+    public int bloodTypeID() {
         return bloodTypeID;
     }
+
     public String getDescription() {
         return description;
     }
+
     public Date getDateOfPublish() {
         return dateOfPublish;
     }
+
     public int getBloodTypeID() {
         return bloodTypeID;
     }

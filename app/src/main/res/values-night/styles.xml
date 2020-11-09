@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <resources>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.DayNight">
@@ -5,7 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-
+        <item name="android:textColor">@color/textColorDark</item>
+        <item name="android:fontFamily">@font/actor</item>
     </style>
-
 </resources>

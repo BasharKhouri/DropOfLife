@@ -9,7 +9,7 @@
     <color name="hint">#222222</color>
     <color name="row_BackGround">#010101</color>
     <color name="row_txt_color">#eee</color>
-
-
-
+    <color name="textColorWhite">#000000</color>
+    <color name="textColorDark">#ffffff</color>
+    <color name="editTextColor">#ffffff</color>
 </resources>
