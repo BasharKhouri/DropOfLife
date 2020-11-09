@@ -23,6 +23,10 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.example.dropoflife.DrawerActivity"
+            android:label="@string/title_activity_drawer"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name="com.example.dropoflife.AddRequest" />
         <activity android:name="com.example.dropoflife.Splashscreen" >
             <intent-filter>
@@ -32,8 +36,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.dropoflife.Registration" />
-        <activity android:name="com.example.dropoflife.Login" >
-        </activity>
+        <activity android:name="com.example.dropoflife.Login" />
         <activity android:name="com.example.dropoflife.MainActivity" />
 
         <meta-data
