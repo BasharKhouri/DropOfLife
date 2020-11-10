@@ -19,7 +19,7 @@
             android:layout_gravity="center">
 
             <ImageView
-                android:layout_width="150dp"
+                android:layout_width="165dp"
                 android:layout_height="150dp"
                 android:background="@drawable/splashlogo" />
         </LinearLayout>
@@ -78,6 +78,7 @@
             android:layout_margin="40dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/button"
+            android:textColor="@color/bttnTxt"
             android:text="@string/add_request" />
     </LinearLayout>
 </ScrollView>

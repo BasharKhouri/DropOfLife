@@ -254,6 +254,7 @@
                 android:layout_marginEnd="139dp"
                 android:layout_marginRight="139dp"
                 android:background="@drawable/button"
+                android:textColor="@color/bttnTxt"
                 android:text="@string/i_just_donated" />
 
             <ImageView
@@ -285,6 +286,5 @@
                 android:background="@color/trasnperant"
                 android:src="@drawable/ic_baseline_phone_24" />
         </RelativeLayout>
-
     </LinearLayout>
 </ScrollView>
