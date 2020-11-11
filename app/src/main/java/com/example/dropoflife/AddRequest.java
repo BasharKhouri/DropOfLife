@@ -33,9 +33,9 @@ public class AddRequest extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_request);
-        location=(EditText) findViewById(R.id.addPostLocation);
+      //  location=(EditText) findViewById(R.id.addPostLocation);
         description=(EditText) findViewById(R.id.descriptionEditText);
-        phoneNumber=(EditText) findViewById(R.id.enterPhoneNumber);
+     //   phoneNumber=(EditText) findViewById(R.id.enterPhoneNumber);
         bloodSpinner = findViewById(R.id.req_blood_Type);
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, BloodType.bloodTypes);
         bloodSpinner.setAdapter(spinnerArrayAdapter);
@@ -44,7 +44,6 @@ public class AddRequest extends AppCompatActivity {
         postButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
               try {
                   requestedBlood = new BloodType(bloodSpinner.getSelectedItemPosition());
 

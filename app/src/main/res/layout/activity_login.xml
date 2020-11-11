@@ -54,6 +54,7 @@
         android:background="@drawable/button"
         android:gravity="center"
         android:text="@string/Login"
+        android:textColor="@color/bttnTxt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -63,19 +64,17 @@
         android:onClick="signIn"/>
 
     <TextView
-
         android:id="@+id/forgotPassTextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/actor"
         android:text="@string/forgot"
-        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.729"
+        app:layout_constraintHorizontal_bias="0.737"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.426" />
+        app:layout_constraintVertical_bias="0.438" />
 
     <TextView
         android:id="@+id/signUpTextButton"
@@ -83,7 +82,7 @@
         android:layout_height="wrap_content"
         android:onClick="goToRegister"
         android:text="@string/signup"
-        android:textColor="#0000ff"
+        android:textColor="#008080"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.706"
@@ -97,7 +96,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/dont_have"
-        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.411"
@@ -108,19 +106,20 @@
     <View
         android:id="@+id/divider"
         android:layout_width="300dp"
-        android:layout_height="1dp"
-        android:background="#60bb0a1e"
+        android:layout_height="2dp"
+        android:background="#90bb0a1e"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.627" />
+        app:layout_constraintVertical_bias="0.627"
+        android:layout_marginTop="25dp"/>
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="110dp"
-        android:layout_height="133dp"
+        android:layout_width="165dp"
+        android:layout_height="150dp"
         android:contentDescription="@string/our_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

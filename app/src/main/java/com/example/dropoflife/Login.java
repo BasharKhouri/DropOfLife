@@ -31,6 +31,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.dropoflife.Classes.User;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
@@ -190,10 +194,7 @@ public class Login extends AppCompatActivity {
 
             }
         });
-
-
         passwordResetDialog.create().show();
-
     }
 
     public void goToRegister(View view) {
@@ -216,8 +217,6 @@ public class Login extends AppCompatActivity {
             save(email, password);
             validateLogIn(email, password);
         }
-
-
     }
 
     public void onStart() {
@@ -248,7 +247,6 @@ public class Login extends AppCompatActivity {
                             //go to Home fragment
                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         } else {
-
                             // If sign in fails, display a message to the user.
                             System.out.println("failure");
                             Toast.makeText(Login.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
@@ -277,7 +275,13 @@ public class Login extends AppCompatActivity {
         emailET.setText(usern);
         passwordET.setText(passs);
 
+    public void load() {
+        SharedPreferences shared = getSharedPreferences(SHARED_NAME, Context.MODE_PRIVATE);
+        String usern = shared.getString("USER_NAME", "");
+        String passs = shared.getString("PASSWORD", "");
 
+        emailET.setText(usern);
+        passwordET.setText(passs);
     }
 
     public void face(View view) {

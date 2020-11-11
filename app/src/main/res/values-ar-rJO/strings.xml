@@ -77,14 +77,12 @@
     <string name="settings">Settings</string>
     <string name="title_settings">الاعدادات</string>
     <string name="deleting">جاري عملية الحذف</string>
-    <string name="add_request_msg">    اذا كان لديك اي امراض مزمنة او تعاني حساسة من بعض المواد الرجاء ذكرها بالأسفل : </string>
-
     <string name="your_location">موقعك</string>
     <string name="where_is_your_location">اين هو موقعك</string>
     <string name="what_blood_type_do_you_need">ما هو نوع الدم المطلوب؟</string>
     <string name="phone_number">رقم الهاتف:</string>
     <string name="phone_number_without">رقم الهاتف</string>
-    <string name="additional_information">معلومات إضافية</string>
+    <string name="additional_information">اذا كان لديك اي امراض مزمنة او تعاني حساسة من بعض المواد الرجاء ذكرها بالأسفل :</string>
     <string name="add_request">إضافة طلب</string>
     <string name="you_can_donate">يكنك التبرع في الدم</string>
     <string name="days_remaining">عدد الايام المتبقيه</string>
@@ -130,5 +128,3 @@
     </string-array>
 
 </resources>
-
-

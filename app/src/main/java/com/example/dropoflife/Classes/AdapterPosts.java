@@ -162,7 +162,6 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
 
                 }
 
-
                 holder.userName.setText(user.getUserName());
                 holder.blood.setText(blood);
                 holder.description.setText(description);
@@ -184,13 +183,10 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
                     }
                 });
 
-
                 holder.chat.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                    try {
-
-
                        Uri uri = Uri.parse("smsto:" + phoneNumber);
                        Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
                       intent.setPackage("com.whatsapp");
@@ -209,8 +205,6 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
                     @Override
                     public void onClick(View v) {
                         try {
-
-
                             Uri uri = Uri.parse("tel:" + phoneNumber);
                             Intent intent = new Intent(Intent.ACTION_DIAL, uri);
                             context.startActivity(intent);
@@ -226,16 +220,10 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
                 holder.shareButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
                     }
                 });
-
-
             }
         })) {/* leave these brackets Like this don't touch them*/  }
-
-
-
     }
 
     /**
