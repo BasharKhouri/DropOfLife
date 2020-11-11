@@ -4,12 +4,13 @@ import android.net.Uri;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * author Bashar Khouri
  */
-public class User {
+public class User implements Serializable {
 
     private  String userName;
     private BloodType bloodType;
@@ -47,19 +48,22 @@ public class User {
         this.profilePic = profilePic;
         numberOfDonations=0;
     }
-    public User( String userName, String email,String profilePic) {
-
-        this.userName = userName;
-
-        this.profilePic = profilePic;
-
-        this.email = email;
+    public User( String userName,Date dateOfBirth,String sex, String email,String profilePic) throws BloodType.IncorrectBloodIDException {
+        this(userName,new BloodType(1),dateOfBirth,sex,email,profilePic);
+        Roles temp = new Roles();
+        temp.setRole("user");
+        BloodType tempBlood = new BloodType();
+        tempBlood.setBloodType("Unknown");
 
         numberOfDonations=0;
+
     }
 
-    public User(){
+    public User(String userName, BloodType bloodType, Date dateOfBirth, String sex, String email, String profilePic){
         // public no-arg constructor needed
+    }
+    public User(){
+
     }
 
     // The Getters

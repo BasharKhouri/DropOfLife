@@ -1058,6 +1058,8 @@ color browser_actions_bg_grey
 color browser_actions_divider_color
 color browser_actions_text_color
 color browser_actions_title_color
+color bttnClck
+color bttnTxt
 color button_material_dark
 color button_material_light
 color cardview_dark_background
@@ -2126,6 +2128,7 @@ id loadingBar
 id location
 id loginUserPassword
 id loginUsername
+id login_button
 id maleRadioButton
 id masked
 id media_actions

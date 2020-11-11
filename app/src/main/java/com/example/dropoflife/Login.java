@@ -49,8 +49,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 
 
 public class Login extends AppCompatActivity {
@@ -61,10 +64,13 @@ public class Login extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private CallbackManager mCallbackManager;
     public static final String SHARED_NAME = ".shared";
-    private ImageView facebook_button;
+    //private ImageView facebook_button;
     private CallbackManager callbackManager;
     private LoginManager loginManager;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    Bundle bundle = new Bundle();
+    LoginButton facebook_button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +82,8 @@ public class Login extends AppCompatActivity {
         emailET = findViewById(R.id.loginUsername);
         passwordET = findViewById(R.id.loginUserPassword);
         load();
-        FacebookSdk.sdkInitialize(Login.this);
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(this);
         forgotPasswordButton = (TextView) findViewById(R.id.forgotPassTextButton);
         forgotPasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,77 +92,115 @@ public class Login extends AppCompatActivity {
             }
         });
         callbackManager = CallbackManager.Factory.create();
-        facebookLogin();
-        facebook_button = findViewById(R.id.facebook_button);
-        facebook_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+//        facebookLogin();
+        //facebook_button = findViewById(R.id.facebook_button);
+        facebook_button= findViewById(R.id.login_button);
+        facebook_button.setReadPermissions("email","public_profile");
+//        facebook_button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                loginManager.logInWithReadPermissions(Login.this, Arrays.asList("email", "public_profile", "user_birthday"));
+//
+//            }
+//        });
 
-                loginManager.logInWithReadPermissions(Login.this, Arrays.asList("email", "public_profile", "user_birthday"));
+        facebook_button.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                handleFacebookToken(loginResult.getAccessToken());
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException error) {
 
             }
         });
 
-
     }
 
-    private void facebookLogin() {
-
-        loginManager = LoginManager.getInstance();
-        callbackManager = CallbackManager.Factory.create();
-
-        loginManager
-                .registerCallback(
-                        callbackManager,
-                        new FacebookCallback<LoginResult>() {
-
-                            @Override
-                            public void onSuccess(LoginResult loginResult) {
-                                GraphRequest request = GraphRequest.newMeRequest(
-
-                                        loginResult.getAccessToken(),
-
-                                        new GraphRequest.GraphJSONObjectCallback() {
-
-                                            @Override
-                                            public void onCompleted(JSONObject object,
-                                                                    GraphResponse response) {
-
-                                                if (object != null) {
-                                                    try {
-                                                        String name = object.getString("name");
-                                                        String email = object.getString("email");
-                                                        String fbUserID = object.getString("id");
-
-                                                        disconnectFromFacebook();
-                                                        User user = new User(name, email,null);
-                                                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                                                        // or call your API
-                                                    } catch (JSONException | NullPointerException e) {
-                                                        e.printStackTrace();
-                                                    }
-                                                }
-                                            }
-                                        });
-
-                                Bundle parameters = new Bundle();
-                                parameters.putString("fields", "id, name, email, gender, birthday");
-                                request.setParameters(parameters);
-                                request.executeAsync();
-
-                            }
-
-                            @Override
-                            public void onCancel() {
-
-                            }
-
-                            @Override
-                            public void onError(FacebookException error) {
-
-                            }
-                        });
+    private void handleFacebookToken(AccessToken token) {
+        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        mAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                FirebaseUser user= mAuth.getCurrentUser();
+                Toast.makeText(Login.this, "Faaack youuuuuuuuu", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), Login.class));
+            }
+        });
     }
+
+//    private void facebookLogin() {
+//
+//        loginManager = LoginManager.getInstance();
+//        callbackManager = CallbackManager.Factory.create();
+//
+//        loginManager
+//                .registerCallback(
+//                        callbackManager,
+//                        new FacebookCallback<LoginResult>() {
+//
+//                            @Override
+//                            public void onSuccess(LoginResult loginResult) {
+//                                GraphRequest request = GraphRequest.newMeRequest(
+//
+//                                        loginResult.getAccessToken(),
+//
+//                                        new GraphRequest.GraphJSONObjectCallback() {
+//
+//                                            @Override
+//                                            public void onCompleted(JSONObject object,
+//                                                                    GraphResponse response) {
+//
+//                                                if (object != null) {
+//                                                    try {
+//                                                        String name = object.getString("name");
+//
+//                                                        String birth = object.getString("birthday");
+//                                                        Date bod=new SimpleDateFormat("dd/MM/yyyy").parse(birth);
+//                                                        String email = object.getString("email");
+//                                                        String fbUserID = object.getString("id");
+//                                                        User user = new User(name,bod,"Male", email,null);
+//                                                        Intent in = new Intent(getApplicationContext(),MainActivity.class);
+//
+//                                                        bundle.putSerializable("elUser", user);
+//                                                        in.putExtras(bundle);
+//                                                        startActivity(in);
+//                                                        disconnectFromFacebook();
+//                                                        //userName,new BloodType(1),dateOfBirth,sex,email,profilePic
+//
+//                                                        // or call your API
+//                                                    } catch (JSONException | NullPointerException | BloodType.IncorrectBloodIDException | ParseException e) {
+//                                                        e.printStackTrace();
+//                                                    }
+//                                                }
+//                                            }
+//                                        });
+//
+//                                Bundle parameters = new Bundle();
+//                                parameters.putString("fields", "id, name, email, gender, birthday");
+//                                request.setParameters(parameters);
+//                                request.executeAsync();
+//
+//                            }
+//
+//                            @Override
+//                            public void onCancel() {
+//
+//                            }
+//
+//                            @Override
+//                            public void onError(FacebookException error) {
+//
+//                            }
+//                        });
+//    }
 
     private void forgotPassowrd() {
         final EditText restMail = new EditText(this);
@@ -312,19 +357,8 @@ public class Login extends AppCompatActivity {
                 .executeAsync();
     }
     @Override
-    protected void onActivityResult(int requestCode,
-                                    int resultCode,
-                                    Intent data)
-    {
-
-        // add this line
-        callbackManager.onActivityResult(
-                requestCode,
-                resultCode,
-                data);
-
-        super.onActivityResult(requestCode,
-                resultCode,
-                data);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

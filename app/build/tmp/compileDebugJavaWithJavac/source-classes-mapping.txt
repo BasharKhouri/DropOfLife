@@ -62,7 +62,6 @@ com/example/dropoflife/Login.java
  com.example.dropoflife.Login$1
  com.example.dropoflife.Login$2
  com.example.dropoflife.Login$3
- com.example.dropoflife.Login$3$1
  com.example.dropoflife.Login$4
  com.example.dropoflife.Login$4$1
  com.example.dropoflife.Login$4$2

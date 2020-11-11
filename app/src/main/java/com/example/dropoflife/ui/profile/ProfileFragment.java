@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,30 +79,35 @@ public class ProfileFragment extends Fragment {
 
         //set values
         //if the user has a profile pic
-        if(user.getProfilePic()!=null) {
-            try {
-                StorageReference riversRef = storage.getReferenceFromUrl(user.getProfilePic());
-                //download the file into the local file that we created
-                riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-                        Glide.with(getContext())
-                                .load(uri)
-                                .into(userImage);
 
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getContext(), "Fail", Toast.LENGTH_SHORT).show();
+        try {
+            if(user.getProfilePic()!=null) {
+                try {
+                    StorageReference riversRef = storage.getReferenceFromUrl(user.getProfilePic());
+                    //download the file into the local file that we created
+                    riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            Glide.with(getContext())
+                                    .load(uri)
+                                    .into(userImage);
 
-                    }
-                });
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getContext(), "Fail", Toast.LENGTH_SHORT).show();
 
-            } catch (Exception exception) {
-                System.out.println(exception.getMessage());
+                        }
+                    });
+
+                } catch (Exception exception) {
+                    System.out.println(exception.getMessage());
+                }
+
             }
-
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
 
@@ -130,11 +136,13 @@ public class ProfileFragment extends Fragment {
            }
        }
 
-       bloodTypeDisplay.setText(user.getBloodType().toString());
+
         try {
             numberOfDonations.setText(user.getNumberOfDonations()+"");
+            bloodTypeDisplay.setText(user.getBloodType().toString());
         }catch (Exception e){
             numberOfDonations.setText("0");
+            bloodTypeDisplay.setText("Unknown");
         }
         donationButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,7 +165,10 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-
+       // Log.e("Username",user.getUserName());
+        Log.e("sex",user.getSex());
+        Log.e("email",user.getEmail());
+        Log.e("dob",user.getDateOfBirth().toString());
 
 
         return view ;
@@ -220,4 +231,6 @@ public class ProfileFragment extends Fragment {
             }
         });
     }
+
+
 }
