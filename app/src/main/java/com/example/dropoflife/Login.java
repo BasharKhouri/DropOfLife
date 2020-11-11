@@ -138,6 +138,56 @@ public class Login extends AppCompatActivity {
 
 //    private void facebookLogin() {
 //
+
+    /**
+     * Bashar comment
+     *
+     * User faceBooUser =   new User(fullName, blood,birthDate, sex, email,imagePath, new Roles(1));
+     *
+     *   pic
+     *   final String imagePath = "images/"+MainActivity.firebaseUser.getUid()+".jpeg";
+     *                 StorageReference riversRef = mStorageRef.child(imagePath);
+     *
+     *         riversRef.putFile(imageUri)
+     *                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+     *                     @Override
+     *                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+     *                         pd.dismiss();
+     *                         user.setProfilePic( taskSnapshot.getStorage()+"");
+     *                         fStore.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(user);
+     *
+     *                     }
+     *                 })
+     *                 .addOnFailureListener(new OnFailureListener() {
+     *                     @Override
+     *                     public void onFailure(@NonNull Exception exception) {
+     *                         pd.dismiss();
+     *                         Toast.makeText(getContext(), R.string.upload_not_successful, Toast.LENGTH_SHORT).show();
+     *                         // Handle unsuccessful uploads
+     *                         // ...
+     *
+     *                     }
+     *                 }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+     *             @Override
+     *             public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+     *                 double progressPercent =(100*snapshot.getBytesTransferred()/snapshot.getTotalByteCount());
+     *                 ;
+     *                 pd.setMessage((int)progressPercent+" ");
+     *             }
+     *         });
+     *
+     *                                 db.collection("users").document(mAuth.getUid()).set(user)
+     *                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
+     *                                     @Override
+     *                                     public void onSuccess(Void aVoid) {
+     *                                         Toast.makeText(Registration.this, "User Registerd", Toast.LENGTH_SHORT).show();
+     *                                         Intent intent =new Intent(getApplicationContext(), MainActivity.class);
+     *                                         startActivity(intent);
+     *                                     }
+     *                                 });
+     *
+     */
+
 //        loginManager = LoginManager.getInstance();
 //        callbackManager = CallbackManager.Factory.create();
 //
