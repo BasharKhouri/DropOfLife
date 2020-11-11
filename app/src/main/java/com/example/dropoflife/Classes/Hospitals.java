@@ -1,30 +1,29 @@
 package com.example.dropoflife.Classes;
 
+import com.google.firebase.firestore.GeoPoint;
+
 /**
  * @author Bashar
  */
 public class Hospitals {
     String name ;
-    String longitude ;
-    String latitude;
-    String PhoneNumber;
+    GeoPoint location;
+    String phoneNumber;
     String profilePic;
     String address;
     Hospitals(){/*Ignore  Constructor For Firebase*/}
     /**
      *
      * @param name name of the Hospital
-     * @param longitude for the Geographical location
-     * @param latitude for the Geographical location
+     * @param location for the geographical location of the hospital
      * @param phoneNumber for the receptionist
      * @param profilePic the Path for the LOGO
      * @param address the physical location for the Hospital
      */
-    public Hospitals(String name, String longitude, String latitude, String phoneNumber, String profilePic, String address) {
+    public Hospitals(String name, GeoPoint location, String phoneNumber, String profilePic, String address) {
         this.name = name;
-        this.longitude = longitude;
-        this.latitude = latitude;
-        PhoneNumber = phoneNumber;
+        this.location=location;
+        this.phoneNumber = phoneNumber;
         this.profilePic = profilePic;
         this.address = address;
     }
@@ -33,16 +32,9 @@ public class Hospitals {
         this.name = name;
     }
 
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
-    }
-
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
-    }
 
     public void setPhoneNumber(String phoneNumber) {
-        PhoneNumber = phoneNumber;
+        this.phoneNumber = phoneNumber;
     }
 
     public void setProfilePic(String profilePic) {
@@ -57,16 +49,8 @@ public class Hospitals {
         return name;
     }
 
-    public String getLongitude() {
-        return longitude;
-    }
-
-    public String getLatitude() {
-        return latitude;
-    }
-
     public String getPhoneNumber() {
-        return PhoneNumber;
+        return phoneNumber;
     }
 
     public String getProfilePic() {

@@ -17,6 +17,8 @@ com/example/dropoflife/ui/home/HomeViewModel.java
 com/example/dropoflife/Classes/Roles.java
  com.example.dropoflife.Classes.Roles
  com.example.dropoflife.Classes.Roles$IncorrectRoleExciption
+com/example/dropoflife/ui/Admin.java
+ com.example.dropoflife.ui.Admin
 com/example/dropoflife/ui/SettingsFragment.java
  com.example.dropoflife.ui.SettingsFragment
  com.example.dropoflife.ui.SettingsFragment$1
@@ -26,9 +28,6 @@ com/example/dropoflife/BuildConfig.java
 com/example/dropoflife/MainActivity.java
  com.example.dropoflife.MainActivity
  com.example.dropoflife.MainActivity$1
-com/example/dropoflife/ui/slideshow/SlideshowFragment.java
- com.example.dropoflife.ui.slideshow.SlideshowFragment
- com.example.dropoflife.ui.slideshow.SlideshowFragment$1
 com/example/dropoflife/Classes/Post.java
  com.example.dropoflife.Classes.Post
  com.example.dropoflife.Classes.Post$1
@@ -57,17 +56,9 @@ com/example/dropoflife/ui/profile/ProfileFragment.java
  com.example.dropoflife.ui.profile.ProfileFragment$5
  com.example.dropoflife.ui.profile.ProfileFragment$6
  com.example.dropoflife.ui.profile.ProfileFragment$7
-com/example/dropoflife/DrawerActivity.java
- com.example.dropoflife.DrawerActivity
- com.example.dropoflife.DrawerActivity$1
-com/example/dropoflife/ui/gallery/GalleryViewModel.java
- com.example.dropoflife.ui.gallery.GalleryViewModel
 com/example/dropoflife/Splashscreen.java
  com.example.dropoflife.Splashscreen
  com.example.dropoflife.Splashscreen$1
-com/example/dropoflife/ui/gallery/GalleryFragment.java
- com.example.dropoflife.ui.gallery.GalleryFragment
- com.example.dropoflife.ui.gallery.GalleryFragment$1
 com/example/dropoflife/Classes/Hospitals.java
  com.example.dropoflife.Classes.Hospitals
 com/example/dropoflife/Login.java
@@ -84,5 +75,3 @@ com/example/dropoflife/Login.java
  com.example.dropoflife.Login$7
 com/example/dropoflife/Classes/User.java
  com.example.dropoflife.Classes.User
-com/example/dropoflife/ui/slideshow/SlideshowViewModel.java
- com.example.dropoflife.ui.slideshow.SlideshowViewModel

@@ -4,7 +4,7 @@ package com.example.dropoflife.Classes;
  * @author Bashar
  */
 public class Roles {
-    public  static String [] roles = {"user","admin","hospital"};
+    public  static String [] roles = {"user","admin","hospitalWorker"};
     private String role;
     private int ID;
     public Roles(){/*ignore this Constructor it is for the database */}

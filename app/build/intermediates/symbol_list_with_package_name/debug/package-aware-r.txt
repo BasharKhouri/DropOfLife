@@ -1807,12 +1807,6 @@ drawable ic_launcher_foreground
 drawable ic_lock_black_24dp
 drawable ic_lock_outline_black_24dp
 drawable ic_mail_outline_black_24dp
-drawable ic_menu_camera
-drawable ic_menu_gallery
-drawable ic_menu_manage
-drawable ic_menu_send
-drawable ic_menu_share
-drawable ic_menu_slideshow
 drawable ic_mtrl_checked_circle
 drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
@@ -1861,7 +1855,6 @@ drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable preference_list_divider_material
 drawable profile
-drawable side_nav_bar
 drawable splashlogo
 drawable test_custom_background
 drawable textspace
@@ -1936,7 +1929,6 @@ id action_menu_presenter
 id action_mode_bar
 id action_mode_bar_stub
 id action_mode_close_button
-id action_settings
 id action_text
 id actions
 id activity_chooser_view_content
@@ -2048,7 +2040,6 @@ id dragLeft
 id dragRight
 id dragStart
 id dragUp
-id drawer_layout
 id dropdown_menu
 id easeIn
 id easeInOut
@@ -2064,7 +2055,6 @@ id enterPhoneNumber
 id exitUntilCollapsed
 id expand_activities_button
 id expanded_menu
-id fab
 id facebook_button
 id fade
 id femaleRadioButton
@@ -2178,11 +2168,8 @@ id mtrl_picker_text_input_range_start
 id mtrl_picker_title_text
 id multiply
 id nav_controller_view_tag
-id nav_gallery
-id nav_home
 id nav_host_fragment
 id nav_host_fragment_container
-id nav_slideshow
 id nav_view
 id navigation_header_container
 id navigation_home
@@ -2329,11 +2316,9 @@ id textView3
 id textView5
 id textView6
 id textView7
-id text_gallery
 id text_input_end_icon
 id text_input_start_icon
 id text_notifications
-id text_slideshow
 id textinput_counter
 id textinput_error
 id textinput_helper_text
@@ -2345,7 +2330,6 @@ id title
 id titleDividerNoCustom
 id title_template
 id toggle
-id toolbar
 id top
 id topPanel
 id touch_outside
@@ -2435,12 +2419,10 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_add_request
-layout activity_drawer
 layout activity_login
 layout activity_main
 layout activity_registration
 layout activity_splashscreen
-layout app_bar_main
 layout browser_actions_context_menu_page
 layout browser_actions_context_menu_row
 layout com_facebook_activity_layout
@@ -2448,7 +2430,6 @@ layout com_facebook_device_auth_dialog_fragment
 layout com_facebook_login_fragment
 layout com_facebook_smart_device_dialog_fragment
 layout com_facebook_tooltip_bubble
-layout content_main
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
@@ -2466,11 +2447,10 @@ layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout expand_button
-layout fragment_gallery
+layout fragment_admin
 layout fragment_home
 layout fragment_notifications
 layout fragment_profile
-layout fragment_slideshow
 layout image_frame
 layout messenger_button_send_blue_large
 layout messenger_button_send_blue_round
@@ -2506,7 +2486,6 @@ layout mtrl_picker_header_title_text
 layout mtrl_picker_header_toggle
 layout mtrl_picker_text_input_date
 layout mtrl_picker_text_input_date_range
-layout nav_header_main
 layout navigation_settings
 layout notification_action
 layout notification_action_tombstone
@@ -2558,9 +2537,8 @@ layout text_view_with_line_height_from_layout
 layout text_view_with_line_height_from_style
 layout text_view_with_theme_line_height
 layout text_view_without_line_height
-menu activity_main_drawer
+layout users_card
 menu bottom_nav_menu
-menu drawer
 mipmap ic_launcher
 mipmap ic_launcher_round
 navigation mobile_navigation
@@ -2705,6 +2683,7 @@ string google_api_key
 string google_app_id
 string google_crash_reporting_api_key
 string google_storage_bucket
+string hello_blank_fragment
 string hide_bottom_view_on_scroll_behavior
 string i_just_donated
 string icon_content_description
@@ -2821,9 +2800,6 @@ style Animation_AppCompat_Tooltip
 style Animation_Design_BottomSheetDialog
 style Animation_MaterialComponents_BottomSheetDialog
 style AppTheme
-style AppTheme_AppBarOverlay
-style AppTheme_NoActionBar
-style AppTheme_PopupOverlay
 style Base_AlertDialog_AppCompat
 style Base_AlertDialog_AppCompat_Light
 style Base_Animation_AppCompat_Dialog

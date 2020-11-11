@@ -16,10 +16,6 @@
         "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_baseline_local_hospital_24.xml"
     },
     {
-        "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21_ic_menu_gallery.xml.flat",
-        "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_menu_gallery.xml"
-    },
-    {
         "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_baseline_call_24.png.flat",
         "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxhdpi\\ic_baseline_call_24.png"
     },
@@ -44,16 +40,12 @@
         "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_launcher_background.png.flat",
-        "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\generated\\res\\pngs\\debug\\drawable-hdpi\\ic_launcher_background.png"
-    },
-    {
         "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_person_black_24dp.png.flat",
         "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\generated\\res\\pngs\\debug\\drawable-mdpi\\ic_person_black_24dp.png"
     },
     {
-        "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\drawable_side_nav_bar.xml.flat",
-        "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\src\\main\\res\\drawable\\side_nav_bar.xml"
+        "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_launcher_background.png.flat",
+        "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\generated\\res\\pngs\\debug\\drawable-hdpi\\ic_launcher_background.png"
     },
     {
         "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\menu_bottom_nav_menu.xml.flat",
@@ -104,10 +96,6 @@
         "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\generated\\res\\pngs\\debug\\drawable-xhdpi\\ic_home_black_24dp.png"
     },
     {
-        "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_drawer.xml.flat",
-        "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\src\\main\\res\\layout\\activity_drawer.xml"
-    },
-    {
         "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_mail_outline_black_24dp.png.flat",
         "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\generated\\res\\pngs\\debug\\drawable-mdpi\\ic_mail_outline_black_24dp.png"
     },
@@ -128,10 +116,6 @@
         "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\generated\\res\\pngs\\debug\\drawable-ldpi\\ic_lock_black_24dp.png"
     },
     {
-        "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21_ic_menu_camera.xml.flat",
-        "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_menu_camera.xml"
-    },
-    {
         "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi_ic_cake_black_24dp.png.flat",
         "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\generated\\res\\pngs\\debug\\drawable-ldpi\\ic_cake_black_24dp.png"
     },
@@ -144,12 +128,12 @@
         "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxxhdpi\\ic_baseline_add_circle_24.png"
     },
     {
-        "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_baseline_phone_24.png.flat",
-        "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\generated\\res\\pngs\\debug\\drawable-xhdpi\\ic_baseline_phone_24.png"
-    },
-    {
         "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_ic_person_black_24dp.png.flat",
         "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxxhdpi\\ic_person_black_24dp.png"
+    },
+    {
+        "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_baseline_phone_24.png.flat",
+        "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\generated\\res\\pngs\\debug\\drawable-xhdpi\\ic_baseline_phone_24.png"
     },
     {
         "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21_ic_mail_outline_black_24dp.xml.flat",
@@ -196,10 +180,6 @@
         "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\menu_activity_main_drawer.xml.flat",
-        "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\src\\main\\res\\menu\\activity_main_drawer.xml"
-    },
-    {
         "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_mail_outline_black_24dp.png.flat",
         "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxhdpi\\ic_mail_outline_black_24dp.png"
     },
@@ -222,10 +202,6 @@
     {
         "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_lock_black_24dp.png.flat",
         "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\generated\\res\\pngs\\debug\\drawable-mdpi\\ic_lock_black_24dp.png"
-    },
-    {
-        "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\layout_content_main.xml.flat",
-        "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\src\\main\\res\\layout\\content_main.xml"
     },
     {
         "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_baseline_my_location_24.png.flat",
@@ -292,10 +268,6 @@
         "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\generated\\res\\pngs\\debug\\drawable-ldpi\\ic_baseline_chat_24.png"
     },
     {
-        "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_gallery.xml.flat",
-        "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\src\\main\\res\\layout\\fragment_gallery.xml"
-    },
-    {
         "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_baseline_local_hospital_24.png.flat",
         "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxhdpi\\ic_baseline_local_hospital_24.png"
     },
@@ -330,10 +302,6 @@
     {
         "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_baseline_edit_24.png.flat",
         "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxhdpi\\ic_baseline_edit_24.png"
-    },
-    {
-        "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_slideshow.xml.flat",
-        "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\src\\main\\res\\layout\\fragment_slideshow.xml"
     },
     {
         "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi_ic_baseline_local_hospital_24.png.flat",
@@ -376,10 +344,6 @@
         "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxhdpi\\ic_baseline_person_pin_24.png"
     },
     {
-        "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21_ic_menu_slideshow.xml.flat",
-        "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_menu_slideshow.xml"
-    },
-    {
         "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_baseline_local_hospital_24.png.flat",
         "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\generated\\res\\pngs\\debug\\drawable-xhdpi\\ic_baseline_local_hospital_24.png"
     },
@@ -394,10 +358,6 @@
     {
         "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\drawable_facebooklogo.png.flat",
         "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\src\\main\\res\\drawable\\facebooklogo.png"
-    },
-    {
-        "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\layout_app_bar_main.xml.flat",
-        "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\src\\main\\res\\layout\\app_bar_main.xml"
     },
     {
         "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi_ic_dashboard_black_24dp.png.flat",
@@ -446,6 +406,10 @@
     {
         "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_baseline_more_horiz_24.png.flat",
         "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\generated\\res\\pngs\\debug\\drawable-xhdpi\\ic_baseline_more_horiz_24.png"
+    },
+    {
+        "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_admin.xml.flat",
+        "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\src\\main\\res\\layout\\fragment_admin.xml"
     },
     {
         "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21_ic_baseline_edit_24.xml.flat",
@@ -498,10 +462,6 @@
     {
         "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_ic_baseline_settings_24.png.flat",
         "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxxhdpi\\ic_baseline_settings_24.png"
-    },
-    {
-        "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\layout_nav_header_main.xml.flat",
-        "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\src\\main\\res\\layout\\nav_header_main.xml"
     },
     {
         "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_baseline_my_location_24.png.flat",
@@ -600,6 +560,10 @@
         "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\generated\\res\\pngs\\debug\\drawable-ldpi\\ic_launcher_background.png"
     },
     {
+        "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\layout_users_card.xml.flat",
+        "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\src\\main\\res\\layout\\users_card.xml"
+    },
+    {
         "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi_ic_baseline_add_circle_24.png.flat",
         "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\generated\\res\\pngs\\debug\\drawable-ldpi\\ic_baseline_add_circle_24.png"
     },
@@ -658,10 +622,6 @@
     {
         "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_baseline_my_location_24.png.flat",
         "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\generated\\res\\pngs\\debug\\drawable-mdpi\\ic_baseline_my_location_24.png"
-    },
-    {
-        "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\menu_drawer.xml.flat",
-        "source": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\src\\main\\res\\menu\\drawer.xml"
     },
     {
         "merged": "C:\\Users\\basha\\AndroidStudioProjects\\DropOfLife\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_add_request.xml.flat",

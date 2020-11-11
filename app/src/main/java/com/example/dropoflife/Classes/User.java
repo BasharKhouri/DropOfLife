@@ -21,10 +21,7 @@ public class User {
     private String profilePic;
     private String phone;
     private Roles role;
-
-
-
-
+    private String hospitalID ;
 
 
     /**
