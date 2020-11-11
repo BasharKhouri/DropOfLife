@@ -30,7 +30,6 @@ public class Splashscreen extends AppCompatActivity {
             }
         }, SPLASH_TIMEOUT);
                loadDark();
-
     }
 
 

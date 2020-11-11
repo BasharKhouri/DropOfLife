@@ -7,9 +7,10 @@ import com.google.firebase.firestore.GeoPoint;
  */
 public class Hospitals {
     String name ;
+    String ID;
     GeoPoint location;
     String phoneNumber;
-    String profilePic;
+    String logo;
     String address;
     Hospitals(){/*Ignore  Constructor For Firebase*/}
     /**
@@ -17,14 +18,14 @@ public class Hospitals {
      * @param name name of the Hospital
      * @param location for the geographical location of the hospital
      * @param phoneNumber for the receptionist
-     * @param profilePic the Path for the LOGO
+     * @param logo the Path for the LOGO
      * @param address the physical location for the Hospital
      */
-    public Hospitals(String name, GeoPoint location, String phoneNumber, String profilePic, String address) {
+    public Hospitals(String name, GeoPoint location, String phoneNumber, String logo, String address) {
         this.name = name;
         this.location=location;
         this.phoneNumber = phoneNumber;
-        this.profilePic = profilePic;
+        this.logo = logo;
         this.address = address;
     }
 
@@ -37,8 +38,16 @@ public class Hospitals {
         this.phoneNumber = phoneNumber;
     }
 
-    public void setProfilePic(String profilePic) {
-        this.profilePic = profilePic;
+    public void setID(String ID) {
+        this.ID = ID;
+    }
+
+    public void setLocation(GeoPoint location) {
+        this.location = location;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
     }
 
     public void setAddress(String address) {
@@ -53,11 +62,21 @@ public class Hospitals {
         return phoneNumber;
     }
 
-    public String getProfilePic() {
-        return profilePic;
-    }
 
     public String getAddress() {
         return address;
     }
+
+    public String getID() {
+        return ID;
+    }
+
+    public GeoPoint getLocation() {
+        return location;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
 }

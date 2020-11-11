@@ -61,7 +61,9 @@
             android:layout_below="@id/building_address"
             android:layout_marginTop="30dp"
             android:layout_centerHorizontal="true"
-            android:text="@string/select_logo"/>
+            android:text="@string/select_logo"
+            android:onClick="selectLogo"
+            />
 
 
     <Button
@@ -85,14 +87,14 @@
         <EditText
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:id="@+id/latitude"
+            android:id="@+id/latitudeET"
             android:hint="@string/latitude"
             android:layout_margin="10dp"
             />
         <EditText
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:id="@+id/longitude"
+            android:id="@+id/longitudeET"
             android:hint="@string/longitude"
             android:layout_margin="10dp"
             />

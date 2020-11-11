@@ -275,60 +275,42 @@ public class Login extends AppCompatActivity {
         emailET.setText(usern);
         passwordET.setText(passs);
 
-    public void load() {
-        SharedPreferences shared = getSharedPreferences(SHARED_NAME, Context.MODE_PRIVATE);
-        String usern = shared.getString("USER_NAME", "");
-        String passs = shared.getString("PASSWORD", "");
-
-        emailET.setText(usern);
-        passwordET.setText(passs);
     }
+        private void disconnectFromFacebook () {
 
-    public void face(View view) {
-    }
-//    @Override
-//    public void onBackPressed(){
-//
-//      finish();
-//    }
+            if (AccessToken.getCurrentAccessToken() == null) {
+                return; // already logged out
+            }
 
-
-
-    private void disconnectFromFacebook() {
-
-        if (AccessToken.getCurrentAccessToken() == null) {
-            return; // already logged out
+            new GraphRequest(
+                    AccessToken.getCurrentAccessToken(),
+                    "/me/permissions/",
+                    null,
+                    HttpMethod.DELETE,
+                    new GraphRequest
+                            .Callback() {
+                        @Override
+                        public void onCompleted(GraphResponse graphResponse) {
+                            LoginManager.getInstance().logOut();
+                        }
+                    })
+                    .executeAsync();
         }
+        @Override
+        protected void onActivityResult ( int requestCode,
+        int resultCode,
+        Intent data)
+        {
 
-        new GraphRequest(
-                AccessToken.getCurrentAccessToken(),
-                "/me/permissions/",
-                null,
-                HttpMethod.DELETE,
-                new GraphRequest
-                        .Callback() {
-                    @Override
-                    public void onCompleted(GraphResponse graphResponse)
-                    {
-                        LoginManager.getInstance().logOut();
-                    }
-                })
-                .executeAsync();
+            // add this line
+            callbackManager.onActivityResult(
+                    requestCode,
+                    resultCode,
+                    data);
+
+            super.onActivityResult(requestCode,
+                    resultCode,
+                    data);
+        }
     }
-    @Override
-    protected void onActivityResult(int requestCode,
-                                    int resultCode,
-                                    Intent data)
-    {
 
-        // add this line
-        callbackManager.onActivityResult(
-                requestCode,
-                resultCode,
-                data);
-
-        super.onActivityResult(requestCode,
-                resultCode,
-                data);
-    }
-}
