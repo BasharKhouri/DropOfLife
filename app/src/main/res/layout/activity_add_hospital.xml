@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddHospital">
+
+    <EditText
+        android:id="@+id/HospitalNameET"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:drawableStart="@drawable/ic_baseline_local_hospital_24"
+        android:drawableLeft="@drawable/ic_baseline_local_hospital_24"
+        android:hint="@string/hospital_name"
+        android:inputType="text"
+        android:importantForAutofill="no" />
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/HospitalNameET"
+        android:layout_marginTop="30dp"
+        android:hint="@string/phone_number"
+        android:layout_centerHorizontal="true"
+        android:drawableStart="@drawable/ic_phone_red"
+        android:drawableLeft="@drawable/ic_phone_red"
+        android:id="@+id/HospitalPhoneNumberET"/>
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/HospitalPhoneNumberET"
+        android:layout_marginTop="30dp"
+        android:hint="@string/address"
+        android:drawableStart="@drawable/ic_location_building"
+        android:drawableLeft="@drawable/ic_location_building"
+        android:id="@+id/building_address"
+        />
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:visibility="invisible"
+            android:layout_marginTop="30dp"
+            android:id="@+id/addHospitalLogoImage"
+            android:layout_below="@id/building_address"
+
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="55dp"
+            android:gravity="center_horizontal"
+            android:textAlignment="center"
+            android:id="@+id/addHospitalLogoButton"
+            android:layout_below="@id/building_address"
+            android:layout_marginTop="30dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/select_logo"/>
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addHospitalLogoButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:text="@string/select_Location"
+        android:id="@+id/go_to_picker_button"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/geographicalLocationLayout"
+        android:layout_below="@id/go_to_picker_button"
+        android:layout_centerHorizontal="true"
+        >
+
+        <EditText
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/latitude"
+            android:hint="@string/latitude"
+            android:layout_margin="10dp"
+            />
+        <EditText
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/longitude"
+            android:hint="@string/longitude"
+            android:layout_margin="10dp"
+            />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/saveHospital"
+        android:id="@+id/saveHospital"
+        android:layout_below="@id/geographicalLocationLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="30dp"/>
+
+
+</RelativeLayout>

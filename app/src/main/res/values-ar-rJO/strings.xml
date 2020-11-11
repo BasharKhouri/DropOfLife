@@ -103,12 +103,14 @@
     <string name="cancel">ألغاء</string>
     <string name="reset_password_email_has_been_sent">تم إرسال البريد الإلكتروني لإعادة تعيين كلمة المرور</string>
     <string name="error_reset_password_email_">  خطأ: تعذر إرسال البريد الإلكتروني لإعادة تعيين كلمة المرور </string>
+    <string name="hospital_name">اسم المسشفى</string>
+    <string name="address">العنوان</string>
+    <string name="select_logo">اختر الشعار</string>
 
-
-
-
-
-
+    <string name="saveHospital">حفظ المستشفى</string>
+    <string name="longitude">خط الطول</string>
+    <string name="latitude">خط العرض</string>
+    <string name="select_Location">حدد الموقع</string>
 
 
     <string-array name="provinces">

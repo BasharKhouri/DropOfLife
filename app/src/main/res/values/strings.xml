@@ -127,7 +127,16 @@
     <string name="cancel">cancel</string>
     <string name="reset_password_email_has_been_sent">reset password email has been sent</string>
     <string name="error_reset_password_email_">  error: could not send the reset password email </string>
+    <string name="hospital_name">Hospital name</string>
+
+    <string name="address">Address</string>
+    <string name="select_logo">Select Logo</string>
+
     <string name="mapbox_access_token" translatable="false">pk.eyJ1IjoiZHJvcG9mbGlmZWFwcCIsImEiOiJja2hkbG16d28wMzVvMnFuNWF1MzByYjNtIn0.9h7IFdGELC-EUcgUaxaybw</string>
+    <string name="saveHospital">Save Hospital</string>
+    <string name="longitude">Longitude</string>
+    <string name="latitude">Latitude</string>
+    <string name="select_Location">Select Location</string>
 
 
 </resources>
