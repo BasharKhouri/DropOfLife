@@ -7,7 +7,8 @@ import android.widget.EditText;
 
 public class AddHospital extends AppCompatActivity {
 
-    EditText hospitalNameET
+    EditText hospitalNameET , hospitalPhoneET , hospitalAddress;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
