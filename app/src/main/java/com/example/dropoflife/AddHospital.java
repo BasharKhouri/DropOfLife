@@ -78,11 +78,17 @@ public class AddHospital extends AppCompatActivity {
        if(!TextUtils.isEmpty(name)||!TextUtils.isEmpty(phoneNumber)||!TextUtils.isEmpty(logo)||!TextUtils.isEmpty(address)||location!=null)
         {
             hospital = new Hospitals(name, location, phoneNumber, logo, address);
-            fStore.collection("Hospitals").document();
+            fStore.collection("Hospitals").document(name).set(hospital);
+
         }
     }
 
-//todo add a map view 
+
+
+
+
+
+
 
 
     public void selectLogo(View view) {
@@ -146,5 +152,11 @@ public class AddHospital extends AppCompatActivity {
                 pd.setMessage((int)progressPercent+" ");
             }
         });
+    }
+
+
+    //todo figure WTF to do with this
+
+    public void selectLocation(View view) {
     }
 }

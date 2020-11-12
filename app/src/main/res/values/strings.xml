@@ -135,6 +135,6 @@
     <string name="longitude">Longitude</string>
     <string name="latitude">Latitude</string>
     <string name="select_Location">Select Location</string>
-
+    <string name="selected_place_info" translatable="false">Selected location information:\n%1$s</string>
 
 </resources>
