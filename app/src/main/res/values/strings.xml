@@ -136,5 +136,6 @@
     <string name="latitude">Latitude</string>
     <string name="select_Location">Select Location</string>
     <string name="selected_place_info" translatable="false">Selected location information:\n%1$s</string>
+    <string name="Fail_in_select_img">Failed to select an image</string>
 
 </resources>

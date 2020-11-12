@@ -84,7 +84,17 @@ public class AddHospital extends AppCompatActivity {
 
 
     }
-//todo make a document of hospital in firebase
+
+    /**
+     *    it takes all the data and add it to the fireStore firebase database
+     *
+     * @param name name of the hospital String
+     * @param latitude  latitude coordinates for the hospital
+     * @param longitude longitude coordinates for the hospital
+     * @param phoneNumber the desk number for the hospital
+     * @param logo image path name in the firebase storage
+     * @param address the address that can be understood by Humans
+     */
     private void save(String  name , double latitude,double longitude,String phoneNumber,String logo ,String address) {
        if(!TextUtils.isEmpty(name)||!TextUtils.isEmpty(phoneNumber)||!TextUtils.isEmpty(logo)||!TextUtils.isEmpty(address)||latitude!=0||longitude!=0)
         {
@@ -94,7 +104,13 @@ public class AddHospital extends AppCompatActivity {
 
         }
     }
-    
+
+    /**
+     * it create an intent request to select image from the phone
+     *
+     *
+     * @param view the current view in the app
+     */
 
     public void selectLogo(View view) {
         choosePic();
@@ -106,18 +122,23 @@ public class AddHospital extends AppCompatActivity {
         startActivityForResult(intent,1);
     }
 
+    /**
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         try {
-
 
             imageUri =data.getData();
             logoIV.setImageURI(imageUri);
             uploadImage();
         }
         catch (Exception e ){
-            Toast.makeText(this, "upload Failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.Fail_in_select_img, Toast.LENGTH_SHORT).show();
         }
     }
 

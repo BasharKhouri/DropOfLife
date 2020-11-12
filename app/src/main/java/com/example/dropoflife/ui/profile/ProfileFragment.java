@@ -181,7 +181,7 @@ public class ProfileFragment extends Fragment {
             uploadImage();
         }
       catch (Exception e ){
-          Toast.makeText(getContext(), "upload Failed", Toast.LENGTH_SHORT).show();
+          Toast.makeText(getContext(), R.string.Fail_in_select_img, Toast.LENGTH_SHORT).show();
       }
     }
 
