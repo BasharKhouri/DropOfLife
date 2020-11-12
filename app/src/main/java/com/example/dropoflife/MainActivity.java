@@ -1,10 +1,7 @@
 package com.example.dropoflife;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.view.View;
 
 import com.example.dropoflife.Classes.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -40,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         }
         mAuth= FirebaseAuth.getInstance();
         firebaseUser =mAuth.getCurrentUser();
+
 
         try {
 

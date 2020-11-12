@@ -19,10 +19,17 @@ import com.example.dropoflife.Login;
 import com.example.dropoflife.MainActivity;
 import com.example.dropoflife.R;
 import com.example.dropoflife.Splashscreen;
+import com.facebook.AccessToken;
+import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 
 import static android.content.Context.CONTEXT_IGNORE_SECURITY;
 import static com.example.dropoflife.Login.SHARED_NAME;
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
 
@@ -30,12 +37,13 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     SwitchPreferenceCompat darkMode;
     public boolean test;
 
+
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey);
         logoutET=findPreference("log");
         darkMode=findPreference("dark_mode_switch");
-
+        FacebookSdk.sdkInitialize(getApplicationContext());
         if (logoutET != null) {
             logoutET.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
@@ -43,9 +51,11 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
 
                         FirebaseAuth.getInstance().signOut();
+                        disconnectFromFacebook();
                         Intent in = new Intent(getContext(), Login.class);
                         in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(in);
+
                     return true;
                 }
             });
@@ -75,6 +85,15 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         edit.putBoolean("DARK",dark_theme);
         edit.apply();
 
+
+    }
+    private void disconnectFromFacebook() {
+
+        if (AccessToken.getCurrentAccessToken() == null) {
+            return; // already logged out
+        }else {
+            LoginManager.getInstance().logOut();
+        }
 
     }
 

@@ -3,6 +3,7 @@ package com.example.dropoflife;
 import androidx.annotation.NonNull;
 
 import com.example.dropoflife.Classes.BloodType;
+import com.example.dropoflife.Classes.Roles;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -16,17 +17,19 @@ import com.facebook.appevents.AppEventsLogger;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.text.TextUtils;
-import android.util.Log;
+import android.util.Base64;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,14 +48,19 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Date;
 
 
@@ -64,10 +72,12 @@ public class Login extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private CallbackManager mCallbackManager;
     public static final String SHARED_NAME = ".shared";
-    //private ImageView facebook_button;
+    private ImageView facebook_button2;
     private CallbackManager callbackManager;
     private LoginManager loginManager;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseStorage storage;
+    private StorageReference mStorageRef;
     Bundle bundle = new Bundle();
     LoginButton facebook_button;
 
@@ -77,6 +87,10 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
+        }
+        if (android.os.Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
         }
         mAuth = FirebaseAuth.getInstance();
         emailET = findViewById(R.id.loginUsername);
@@ -93,18 +107,18 @@ public class Login extends AppCompatActivity {
         });
         callbackManager = CallbackManager.Factory.create();
 //        facebookLogin();
-        //facebook_button = findViewById(R.id.facebook_button);
-        facebook_button= findViewById(R.id.login_button);
-        facebook_button.setReadPermissions("email","public_profile");
-//        facebook_button.setOnClickListener(new View.OnClickListener() {
+//        facebook_button2 = findViewById(R.id.facebook_button);
+        facebook_button = findViewById(R.id.login_button);
+        facebook_button.setReadPermissions("email", "public_profile", "user_gender", "user_age_range");
+//        facebook_button2.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
 //
-//                loginManager.logInWithReadPermissions(Login.this, Arrays.asList("email", "public_profile", "user_birthday"));
+//                loginManager.logInWithReadPermissions(Login.this, Arrays.asList("email", "public_profile", "user_birthday","user_gender","user_age_range"));
 //
 //            }
 //        });
-
+//
         facebook_button.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -129,65 +143,88 @@ public class Login extends AppCompatActivity {
         mAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                FirebaseUser user= mAuth.getCurrentUser();
+                FirebaseUser user = mAuth.getCurrentUser();
+                assert user != null;
+                String name = user.getDisplayName();
+                String email = user.getEmail();
+                String userId = user.getProviderId();
+                User facebookUser = new User();
+                facebookUser.setEmail(email);
+                facebookUser.setUserName(name);
+                try {
+                    facebookUser.setBloodType(new BloodType(7));
+                } catch (BloodType.IncorrectBloodIDException e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    facebookUser.setProfilePic(getStringImage(getFacebookProfilePicture(userId)));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 Toast.makeText(Login.this, "Faaack youuuuuuuuu", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(getApplicationContext(), Login.class));
+                db.collection("users").document(mAuth.getUid()).set(facebookUser)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(Login.this, "Success", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(intent);
+                            }
+                        });
             }
         });
     }
 
+    //
 //    private void facebookLogin() {
 //
-
-    /**
-     * Bashar comment
-     *
-     * User faceBooUser =   new User(fullName, blood,birthDate, sex, email,imagePath, new Roles(1));
-     *
-     *   pic
-     *   final String imagePath = "images/"+MainActivity.firebaseUser.getUid()+".jpeg";
-     *                 StorageReference riversRef = mStorageRef.child(imagePath);
-     *
-     *         riversRef.putFile(imageUri)
-     *                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-     *                     @Override
-     *                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-     *                         pd.dismiss();
-     *                         user.setProfilePic( taskSnapshot.getStorage()+"");
-     *                         fStore.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(user);
-     *
-     *                     }
-     *                 })
-     *                 .addOnFailureListener(new OnFailureListener() {
-     *                     @Override
-     *                     public void onFailure(@NonNull Exception exception) {
-     *                         pd.dismiss();
-     *                         Toast.makeText(getContext(), R.string.upload_not_successful, Toast.LENGTH_SHORT).show();
-     *                         // Handle unsuccessful uploads
-     *                         // ...
-     *
-     *                     }
-     *                 }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-     *             @Override
-     *             public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-     *                 double progressPercent =(100*snapshot.getBytesTransferred()/snapshot.getTotalByteCount());
-     *                 ;
-     *                 pd.setMessage((int)progressPercent+" ");
-     *             }
-     *         });
-     *
-     *                                 db.collection("users").document(mAuth.getUid()).set(user)
-     *                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
-     *                                     @Override
-     *                                     public void onSuccess(Void aVoid) {
-     *                                         Toast.makeText(Registration.this, "User Registerd", Toast.LENGTH_SHORT).show();
-     *                                         Intent intent =new Intent(getApplicationContext(), MainActivity.class);
-     *                                         startActivity(intent);
-     *                                     }
-     *                                 });
-     *
-     */
-
+//
+//    /**
+//     * Bashar comment
+//     * <p>
+//     * User faceBooUser =   new User(fullName, blood,birthDate, sex, email,imagePath, new Roles(1));
+//     * <p>
+//     * pic
+//     * final String imagePath = "images/"+MainActivity.firebaseUser.getUid()+".jpeg";
+//     * StorageReference riversRef = mStorageRef.child(imagePath);
+//     * <p>
+//     * riversRef.putFile(imageUri)
+//     * .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//     *
+//     * @Override public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//     * pd.dismiss();
+//     * user.setProfilePic( taskSnapshot.getStorage()+"");
+//     * fStore.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(user);
+//     * <p>
+//     * }
+//     * })
+//     * .addOnFailureListener(new OnFailureListener() {
+//     * @Override public void onFailure(@NonNull Exception exception) {
+//     * pd.dismiss();
+//     * Toast.makeText(getContext(), R.string.upload_not_successful, Toast.LENGTH_SHORT).show();
+//     * // Handle unsuccessful uploads
+//     * // ...
+//     * <p>
+//     * }
+//     * }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+//     * @Override public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+//     * double progressPercent =(100*snapshot.getBytesTransferred()/snapshot.getTotalByteCount());
+//     * ;
+//     * pd.setMessage((int)progressPercent+" ");
+//     * }
+//     * });
+//     * <p>
+//     * db.collection("users").document(mAuth.getUid()).set(user)
+//     * .addOnSuccessListener(new OnSuccessListener<Void>() {
+//     * @Override public void onSuccess(Void aVoid) {
+//     * Toast.makeText(Registration.this, "User Registerd", Toast.LENGTH_SHORT).show();
+//     * Intent intent =new Intent(getApplicationContext(), MainActivity.class);
+//     * startActivity(intent);
+//     * }
+//     * });
+//     */
+//
 //        loginManager = LoginManager.getInstance();
 //        callbackManager = CallbackManager.Factory.create();
 //
@@ -224,9 +261,9 @@ public class Login extends AppCompatActivity {
 //                                                        startActivity(in);
 //                                                        disconnectFromFacebook();
 //                                                        //userName,new BloodType(1),dateOfBirth,sex,email,profilePic
-//
+//                                                          User faceBooUser =   new User(name, new BloodType(1),bod, "Male", email,null, new Roles(1));
 //                                                        // or call your API
-//                                                    } catch (JSONException | NullPointerException | BloodType.IncorrectBloodIDException | ParseException e) {
+//                                                    } catch (JSONException | NullPointerException | BloodType.IncorrectBloodIDException | ParseException | Roles.IncorrectRoleExciption | ParseException e) {
 //                                                        e.printStackTrace();
 //                                                    }
 //                                                }
@@ -251,7 +288,6 @@ public class Login extends AppCompatActivity {
 //                            }
 //                        });
 //    }
-
     private void forgotPassowrd() {
         final EditText restMail = new EditText(this);
         AlertDialog.Builder passwordResetDialog = new AlertDialog.Builder(this);
@@ -377,12 +413,12 @@ public class Login extends AppCompatActivity {
 
     public void face(View view) {
     }
-//    @Override
-//    public void onBackPressed(){
-//
-//      finish();
-//    }
 
+    @Override
+    public void onBackPressed() {
+
+        finish();
+    }
 
 
     private void disconnectFromFacebook() {
@@ -399,16 +435,62 @@ public class Login extends AppCompatActivity {
                 new GraphRequest
                         .Callback() {
                     @Override
-                    public void onCompleted(GraphResponse graphResponse)
-                    {
+                    public void onCompleted(GraphResponse graphResponse) {
                         LoginManager.getInstance().logOut();
                     }
                 })
                 .executeAsync();
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+    public static Bitmap getFacebookProfilePicture(String userID) throws IOException {
+        URL imageURL = new URL("https://graph.facebook.com/" + userID + "/picture?type=large");
+        Bitmap bitmap = BitmapFactory.decodeStream(imageURL.openConnection().getInputStream());
+
+        return bitmap;
+    }
+
+    //    public String getStringImage(Bitmap bmp) {
+//        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+//        bmp.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+//        byte[] imageBytes = byteArrayOutputStream.toByteArray();
+//        return  Base64.encodeToString(imageBytes, Base64.DEFAULT);
+//
+//    }
+    public String getStringImage(Bitmap bmp) {
+
+
+        try {
+            final boolean[] success = {false};
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            bmp.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+            byte[] imageBytes = byteArrayOutputStream.toByteArray();
+            storage = FirebaseStorage.getInstance();
+            mStorageRef = storage.getReference();
+            final String imagePath = "images/" + MainActivity.firebaseUser.getUid() + ".jpeg";
+            StorageReference riversRef = mStorageRef.child(imagePath);
+            riversRef.putBytes(imageBytes).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    success[0] = true;
+                }
+            });
+
+            if (success[0])
+                return imagePath;
+
+
+        } catch (Exception e) {
+            Toast.makeText(this, "FUCK FACEBOOK", Toast.LENGTH_SHORT).show();
+        }
+        return null;
+    }
 }
+
+
+

@@ -166,10 +166,6 @@ public class ProfileFragment extends Fragment {
         });
 
        // Log.e("Username",user.getUserName());
-        Log.e("sex",user.getSex());
-        Log.e("email",user.getEmail());
-        Log.e("dob",user.getDateOfBirth().toString());
-
 
         return view ;
     }
