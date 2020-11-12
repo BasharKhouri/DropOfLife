@@ -1,6 +1,8 @@
 package com.example.dropoflife;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.firestore.GeoPoint;
 import com.mapbox.api.geocoding.v5.models.CarmenFeature;
 
 import android.content.Intent;
@@ -23,6 +25,7 @@ import com.mapbox.mapboxsdk.plugins.places.picker.model.PlacePickerOptions;
 
 public class MapToSelectHospitalLocation extends AppCompatActivity {
 
+    GeoPoint g ;
     private static final int REQUEST_CODE = 5678;
     private TextView selectedLocationTextView;
 
@@ -68,12 +71,16 @@ public class MapToSelectHospitalLocation extends AppCompatActivity {
 // Retrieve the information from the selected location's CarmenFeature
             CarmenFeature carmenFeature = PlacePicker.getPlace(data);
 
-// Set the TextView text to the entire CarmenFeature. The CarmenFeature
-// also be parsed through to grab and display certain information such as
-// its placeName, text, or coordinates.
+
+    // also be parsed through to grab and display certain information such as
+    // its placeName, text, or coordinates.
             if (carmenFeature != null) {
-                selectedLocationTextView.setText(String.format(
-                        getString(R.string.selected_place_info), carmenFeature.center().coordinates()));
+                g = new GeoPoint(carmenFeature.center().latitude(),carmenFeature.center().longitude());
+                Intent intent = new Intent(this,AddHospital.class);
+                intent.putExtra("latitude",carmenFeature.center().latitude());
+                intent.putExtra("longitude",carmenFeature.center().longitude());
+                startActivity(intent);
+
             }
         }
     }

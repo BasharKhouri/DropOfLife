@@ -38,13 +38,13 @@ public class AddHospital extends AppCompatActivity {
     private StorageReference mStorageRef;
     FirebaseFirestore fStore ;
     Hospitals hospital ;
-    EditText hospitalNameET , hospitalPhoneET , hospitalAddressET ,latitude,longitude;
+    EditText hospitalNameET , hospitalPhoneET , hospitalAddressET ,latitudeET,longitudeET;
     ImageView logoIV;
     Uri imageUri;
     Button saveHospital;
     String logoStr ;
     GeoPoint location;
-
+    double latitude ,longitude;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +54,8 @@ public class AddHospital extends AppCompatActivity {
         hospitalNameET = (EditText)findViewById(R.id.HospitalNameET);
         hospitalPhoneET = (EditText)findViewById(R.id.HospitalPhoneNumberET);
         hospitalAddressET =(EditText)findViewById(R.id.building_address);
-        latitude = (EditText)findViewById(R.id.latitudeET);
-        longitude = (EditText)findViewById(R.id.longitudeET);
+        latitudeET= (EditText)findViewById(R.id.latitudeET);
+        longitudeET = (EditText)findViewById(R.id.longitudeET);
         // ImageView
         logoIV=(ImageView)findViewById(R.id.addHospitalLogoImage);
         //Button
@@ -63,33 +63,38 @@ public class AddHospital extends AppCompatActivity {
         //firebase stuff
         storage = FirebaseStorage.getInstance();
         fStore  = FirebaseFirestore.getInstance();
+        Intent intent = getIntent();
+        if(intent.hasExtra("latitude")){
+            latitude = intent.getDoubleExtra("latitude",0);
+            latitudeET.setText(latitude+"");
+        }
+        if(intent.hasExtra("longitude")){
+            longitude = intent.getDoubleExtra("longitude",0);
+            longitudeET.setText(longitude+"");
+
+        }
 
 
         saveHospital.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               save(hospitalNameET.getText().toString(),location , hospitalPhoneET.getText().toString(),logoStr,hospitalAddressET.getText().toString());
+               save(hospitalNameET.getText().toString(),latitude, longitude, hospitalPhoneET.getText().toString(),logoStr,hospitalAddressET.getText().toString());
             }
         });
 
+
     }
 //todo make a document of hospital in firebase
-    private void save(String  name , GeoPoint location,String phoneNumber,String logo ,String address) {
-       if(!TextUtils.isEmpty(name)||!TextUtils.isEmpty(phoneNumber)||!TextUtils.isEmpty(logo)||!TextUtils.isEmpty(address)||location!=null)
+    private void save(String  name , double latitude,double longitude,String phoneNumber,String logo ,String address) {
+       if(!TextUtils.isEmpty(name)||!TextUtils.isEmpty(phoneNumber)||!TextUtils.isEmpty(logo)||!TextUtils.isEmpty(address)||latitude!=0||longitude!=0)
         {
+            location=new GeoPoint(latitude,longitude);
             hospital = new Hospitals(name, location, phoneNumber, logo, address);
             fStore.collection("Hospitals").document(name).set(hospital);
 
         }
     }
-
-
-
-
-
-
-
-
+    
 
     public void selectLogo(View view) {
         choosePic();
@@ -158,5 +163,9 @@ public class AddHospital extends AppCompatActivity {
     //todo figure WTF to do with this
 
     public void selectLocation(View view) {
+
+        Intent intent = new Intent(this,MapToSelectHospitalLocation.class);
+        startActivity(intent);
+
     }
 }
