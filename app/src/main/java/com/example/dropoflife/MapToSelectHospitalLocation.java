@@ -73,7 +73,7 @@ public class MapToSelectHospitalLocation extends AppCompatActivity {
 // its placeName, text, or coordinates.
             if (carmenFeature != null) {
                 selectedLocationTextView.setText(String.format(
-                        getString(R.string.selected_place_info), carmenFeature.toJson()));
+                        getString(R.string.selected_place_info), carmenFeature.center().coordinates()));
             }
         }
     }
@@ -87,7 +87,7 @@ public class MapToSelectHospitalLocation extends AppCompatActivity {
                         .accessToken(getString(R.string.mapbox_access_token))
                         .placeOptions(PlacePickerOptions.builder()
                                 .statingCameraPosition(new CameraPosition.Builder()
-                                        .target(new LatLng(40.7544, -73.9862)).zoom(16).build())
+                                        .target(new LatLng(31.954926, 35.923889)).zoom(20).build())
                                 .build())
                         .build(this), REQUEST_CODE);
     }
