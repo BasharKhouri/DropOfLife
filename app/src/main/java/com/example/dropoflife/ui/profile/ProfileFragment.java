@@ -101,8 +101,8 @@ public class ProfileFragment extends Fragment {
             } catch (Exception exception) {
                 System.out.println(exception.getMessage());
             }
-
         }
+
 
 
         userName.setText(user.getUserName());
