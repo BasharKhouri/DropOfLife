@@ -28,6 +28,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -38,15 +39,22 @@ import com.example.dropoflife.Classes.User;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -65,6 +73,7 @@ import java.util.Date;
 
 
 public class Login extends AppCompatActivity {
+    private static final int RC_SIGN_IN =123 ;
     User user;
     private TextView forgotPasswordButton;
     public String email, password;
@@ -81,6 +90,7 @@ public class Login extends AppCompatActivity {
     Bundle bundle = new Bundle();
     LoginButton facebook_button;
 
+    private  GoogleSignInClient mGoogleSignInClient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +102,11 @@ public class Login extends AppCompatActivity {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         mAuth = FirebaseAuth.getInstance();
         emailET = findViewById(R.id.loginUsername);
         passwordET = findViewById(R.id.loginUserPassword);
@@ -136,6 +151,58 @@ public class Login extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.sign_in_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                signIn();
+            }
+        });
+    }
+
+    private void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    private void firebaseAuthWithGoogle(String idToken) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Toast.makeText(getApplicationContext(), "يسعد الله", Toast.LENGTH_SHORT).show();
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            User googleUser = new User();
+                            googleUser.setEmail(user.getEmail());
+                            googleUser.setUserName(user.getDisplayName());
+                            googleUser.setProfilePic(user.getPhotoUrl().toString());
+
+                            try {
+                                googleUser.setBloodType(new BloodType(8));
+                            } catch (BloodType.IncorrectBloodIDException e) {
+                                e.printStackTrace();
+                            }
+                            db.collection("users").document(mAuth.getUid()).set(googleUser)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Toast.makeText(Login.this, "Success", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                            startActivity(intent);
+                                        }
+                                    });
+                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(getApplicationContext(), "Task failed successfully", Toast.LENGTH_SHORT).show();
+                        }
+
+                        // ...
+                    }
+                });
     }
 
     private void handleFacebookToken(AccessToken token) {
@@ -152,7 +219,7 @@ public class Login extends AppCompatActivity {
                 facebookUser.setEmail(email);
                 facebookUser.setUserName(name);
                 try {
-                    facebookUser.setBloodType(new BloodType(7));
+                    facebookUser.setBloodType(new BloodType(8));
                 } catch (BloodType.IncorrectBloodIDException e) {
                     e.printStackTrace();
                 }
@@ -359,6 +426,8 @@ public class Login extends AppCompatActivity {
         // add go to home fragment.
         if (currentUser != null)
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
+
     }
 
     /**
@@ -444,9 +513,24 @@ public class Login extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                // Google Sign In was successful, authenticate with Firebase
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                firebaseAuthWithGoogle(account.getIdToken());
+            } catch (ApiException e) {
+                // Google Sign In failed, update UI appropriately
+                Log.e("EL GOOGLE" ,e.getMessage());
+            }
+        } else
+            callbackManager.onActivityResult(requestCode, resultCode, data);
     }
+
+
 
     public static Bitmap getFacebookProfilePicture(String userID) throws IOException {
         URL imageURL = new URL("https://graph.facebook.com/" + userID + "/picture?type=large");
@@ -485,8 +569,8 @@ public class Login extends AppCompatActivity {
                 return imagePath;
 
 
-        } catch (Exception e) {
-            Toast.makeText(this, "FUCK FACEBOOK", Toast.LENGTH_SHORT).show();
+        } catch (Exception ignored) {
+
         }
         return null;
     }
