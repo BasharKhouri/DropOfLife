@@ -73,7 +73,6 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
     List<Post> postList;
     FirebaseFirestore fStore = FirebaseFirestore.getInstance();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    User user;
     Uri userPic;
     ArrayList postIDList;
     DatabaseReference myRef = database.getReference("Posts");
@@ -113,30 +112,23 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
     public void onBindViewHolder(@NonNull final MyHolder holder, int position) {
         //get data
         final Post post = postList.get(position);
-        final String userID =postList.get(position).getUserID();
+        final Hospitals hospitals =postList.get(position).getHospital();
         final String description =postList.get(position).getDescription();
-        final String location =postList.get(position).getLocation();
+        final String location =hospitals.getAddress();
         final Date time =postList.get(position).getDateOfPublish();
         final String blood = BloodType.bloodTypes[postList.get(position).getBloodTypeID()];
         final String postTime = (String) android.text.format.DateFormat.format("MMM dd yyyy",time);
         final String postID =  postIDList.get(position).toString();
-        final String phoneNumber =postList.get(position).getPhoneNumber();
-        DocumentReference documentReference = fStore.collection("users").document(userID);
-        synchronized (documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            /**
-             * @param value Post values from the realTime Firebase Database
-             * @param error in case of exceptions
-             */
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                user = value.toObject(User.class);
+        final String phoneNumber =hospitals.getPhoneNumber();
+
+
+
 
                 storage = FirebaseStorage.getInstance();
 
                 //if the user has a profile pic
-                if(user.getProfilePic()!=null) {
-                    StorageReference riversRef = storage.getReferenceFromUrl(user.getProfilePic());
-
+                if(hospitals.getLogo()!=null) {
+                    StorageReference riversRef = storage.getReferenceFromUrl(hospitals.getLogo());
                     try {
                         final File localFile = File.createTempFile("images", "jpg");
                         riversRef.getFile(localFile)
@@ -156,13 +148,13 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
                         });
 
                     } catch (Exception e) {
-
                     }
 
 
                 }
 
-                holder.userName.setText(user.getUserName());
+
+                holder.userName.setText(hospitals.getName());
                 holder.blood.setText(blood);
                 holder.description.setText(description);
                 holder.location.setText(location);
@@ -179,7 +171,7 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
                     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                     @Override
                     public void onClick(View v) {
-                        moreOption(holder.moreOption, FirebaseAuth.getInstance().getCurrentUser().getUid(),userID,postID);
+                        moreOption(holder.moreOption, FirebaseAuth.getInstance().getCurrentUser().getUid(),hospitals.getName(),postID);
                     }
                 });
 
@@ -223,8 +215,8 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
                     }
                 });
             }
-        })) {/* leave these brackets Like this don't touch them*/  }
-    }
+
+
 
     /**
      *

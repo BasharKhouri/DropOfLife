@@ -21,7 +21,7 @@ public class User {
     private String profilePic;
     private String phone;
     private Roles role;
-    private String hospitalID ;
+    private Hospitals hospital ;
 
 
     /**
@@ -154,5 +154,13 @@ public class User {
     }
     public void setRole(Roles role) {
         this.role = role;
+    }
+
+    public void setHospital(Hospitals hospital) {
+        this.hospital = hospital;
+    }
+
+    public Hospitals getHospital() {
+        return hospital;
     }
 }

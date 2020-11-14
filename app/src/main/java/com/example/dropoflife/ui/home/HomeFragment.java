@@ -16,6 +16,7 @@ import com.example.dropoflife.Classes.AdapterPosts;
 import com.example.dropoflife.Classes.Post;
 import com.example.dropoflife.R;
 import com.google.android.gms.tasks.Task;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -42,9 +43,9 @@ public class HomeFragment extends Fragment {
         //inflate the layout of this fragment
         View view = inflater.inflate(R.layout.fragment_home,container,false);
         bar=(ProgressBar)view.findViewById(R.id.loadingBar);
-        bar.setVisibility(View.VISIBLE);
+        bar.setVisibility(View.VISIBLE);a
         //init current user
-        currentUser=FirebaseAuth.getInstance().getCurrentUser();
+        currentUser= FirebaseAuth.getInstance().getCurrentUser();
          // Recycler View and it's properties
         recyclerView = view.findViewById(R.id.postsRecyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());

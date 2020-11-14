@@ -1,12 +1,10 @@
 package com.example.dropoflife.ui;
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -15,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import com.example.dropoflife.AddHospital;
+import com.example.dropoflife.Classes.AdapterUsers;
 import com.example.dropoflife.Classes.User;
 import com.example.dropoflife.MainActivity;
 import com.example.dropoflife.R;
@@ -32,7 +31,7 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class Admin extends Fragment {
-    AdapterUsers Adapter;
+    AdapterUsers adapter;
         User user;
         Button AddAHospital;
         RecyclerView userRecyclerView;
