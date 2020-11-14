@@ -4,11 +4,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
+
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,7 +28,8 @@ public class AdapterUsers extends  RecyclerView.Adapter<AdapterUsers.UserHolder>
     List<User> userList;
     List<String> userIDList;
     private FirebaseStorage storage ;
-        public AdapterUsers(Context context, List<Post> postList , List<String> userIDList) {
+
+    public AdapterUsers(Context context, List<Post> postList , List<String> userIDList) {
         this.context = context;
         this.userList = userList;
         this.userIDList=userIDList;
