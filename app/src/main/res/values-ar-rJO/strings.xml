@@ -110,8 +110,10 @@
     <string name="latitude">خط العرض</string>
     <string name="select_Location">حدد الموقع</string>
     <string name="Fail_in_select_img">فشل في عملية اختيار الصوره</string>
+    <string name="role">الوظيفه</string>
 
     <string name="Admin">المشرف</string>
+    <string name="select_hosptial">اختر المشفى</string>
 
     <string-array name="provinces">
 

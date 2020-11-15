@@ -7,6 +7,7 @@
     android:orientation="vertical"
     app:cardCornerRadius="3dp"
     android:elevation="3dp"
+    android:layout_margin="10dp"
     app:cardUseCompatPadding="true"
     android:background="@color/row_BackGround"
     app:contentPadding="5dp"

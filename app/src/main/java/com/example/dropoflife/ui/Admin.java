@@ -7,12 +7,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import com.example.dropoflife.AddHospital;
+import com.example.dropoflife.ChangeRole;
 import com.example.dropoflife.Classes.AdapterUsers;
 import com.example.dropoflife.Classes.User;
 import com.example.dropoflife.MainActivity;
@@ -26,12 +28,14 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.grpc.internal.JsonUtil;
+
 /**
  * A simple {@link Fragment} subclass.
  * create an instance of this fragment.
  */
-public class Admin extends Fragment {
-    AdapterUsers adapter;
+public class Admin extends Fragment implements AdapterUsers.OnNoteListner {
+    AdapterUsers adapterUsers;
         User user;
         Button AddAHospital;
         RecyclerView userRecyclerView;
@@ -39,6 +43,7 @@ public class Admin extends Fragment {
         List<User> users ;
     FirebaseFirestore fStore;
     List<String> usersID;
+    AdapterUsers.OnNoteListner mOnNoteListner ;
 
 
     @Override
@@ -76,7 +81,7 @@ public class Admin extends Fragment {
                 LoadUsers(search.getText().toString());
             }
         });
-
+        mOnNoteListner = this;
 
         AddAHospital.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -92,7 +97,7 @@ public class Admin extends Fragment {
     private void LoadUsers(String value){
      users.clear();
      usersID.clear();
-      fStore.collection("users").whereEqualTo("email",value).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+      fStore.collection("users").whereEqualTo("email",value).limit(10).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (QueryDocumentSnapshot tk: task.getResult()) {
@@ -101,10 +106,18 @@ public class Admin extends Fragment {
                     users.add(user);
                     usersID.add(id);
                 }
-
-
+                adapterUsers = new  AdapterUsers(getContext(),users,usersID,mOnNoteListner);
+                userRecyclerView.setAdapter(adapterUsers);
             }
         });
 
+    }
+    @Override
+    public void onNoteClick(int position) {
+        users.get(position);
+        //Todo view to edit user info
+        Log.w("TAG", "Error adding document");
+        Intent intent = new Intent(getContext(), ChangeRole.class);
+        startActivity(intent);
     }
 }

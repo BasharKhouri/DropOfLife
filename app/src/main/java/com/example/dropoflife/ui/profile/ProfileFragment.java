@@ -34,6 +34,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.time.Instant;
@@ -85,9 +86,9 @@ public class ProfileFragment extends Fragment {
                 riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        Glide.with(getContext())
-                                .load(uri)
-                                .into(userImage);
+
+                        Picasso.get().load(uri).placeholder(R.drawable.profile).into(userImage);
+
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -182,6 +183,7 @@ public class ProfileFragment extends Fragment {
         }
       catch (Exception e ){
           Toast.makeText(getContext(), R.string.Fail_in_select_img, Toast.LENGTH_SHORT).show();
+
       }
     }
 

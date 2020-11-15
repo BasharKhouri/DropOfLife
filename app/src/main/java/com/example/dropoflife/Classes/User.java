@@ -1,6 +1,7 @@
 package com.example.dropoflife.Classes;
 
 import android.net.Uri;
+import android.os.Parcelable;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -9,7 +10,7 @@ import java.util.Date;
 /**
  * author Bashar Khouri
  */
-public class User {
+public class User   {
 
     private  String userName;
     private BloodType bloodType;
