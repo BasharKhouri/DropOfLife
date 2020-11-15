@@ -66,9 +66,9 @@ public class MainActivity extends AppCompatActivity {
                 // menu should be considered as top level destinations.
 
                      intent = getIntent();
-                if (role.equals(null) || !role.equals(new Roles(1))) {
+                if (role==null ) {
                     AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                            R.id.navigation_home, R.id.navigation_profile, R.id.navigation_notifications, R.id.navigation_settings1)
+                            R.id.navigation_home, R.id.navigation_profile, R.id.navigation_notifications, R.id.navigation_settings1,R.id.navigation_AdminView)
                             .build();
                 findViewById(R.id.navigation_AdminView).setVisibility(View.GONE);
                     NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -81,6 +81,16 @@ public class MainActivity extends AppCompatActivity {
                     NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
                     NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
                     NavigationUI.setupWithNavController(navView, navController);
+                }
+                else {
+                    AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                            R.id.navigation_home, R.id.navigation_profile, R.id.navigation_notifications, R.id.navigation_settings1,R.id.navigation_AdminView)
+                            .build();
+                    findViewById(R.id.navigation_AdminView).setVisibility(View.GONE);
+                    NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+                    NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+                    NavigationUI.setupWithNavController(navView, navController);
+
                 }
             }catch (Exception e){
                 System.out.println(e.getMessage());

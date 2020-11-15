@@ -21,7 +21,7 @@ public class Hospitals {
      * @param logo the Path for the LOGO
      * @param address the physical location for the Hospital
      */
-    public Hospitals(String name, GeoPoint location, String phoneNumber, String logo, String address) {
+    public Hospitals(String ID,String name, GeoPoint location, String phoneNumber, String logo, String address) {
         this.name = name;
         this.location=location;
         this.phoneNumber = phoneNumber;

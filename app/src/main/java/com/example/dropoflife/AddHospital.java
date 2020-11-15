@@ -41,6 +41,7 @@ public class AddHospital extends AppCompatActivity {
     EditText hospitalNameET , hospitalPhoneET , hospitalAddressET ,latitudeET,longitudeET;
     ImageView logoIV;
     Uri imageUri;
+     String uuid;
     Button saveHospital;
     String logoStr ;
     GeoPoint location;
@@ -48,6 +49,7 @@ public class AddHospital extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+       uuid = UUID.randomUUID().toString();
         setContentView(R.layout.activity_add_hospital);
       // init values
         //Edit text
@@ -62,6 +64,7 @@ public class AddHospital extends AppCompatActivity {
         saveHospital = (Button)findViewById(R.id.saveHospital);
         //firebase stuff
         storage = FirebaseStorage.getInstance();
+        mStorageRef = storage.getReference("images");
         fStore  = FirebaseFirestore.getInstance();
         Intent intent = getIntent();
         if(intent.hasExtra("latitude")){
@@ -99,8 +102,11 @@ public class AddHospital extends AppCompatActivity {
        if(!TextUtils.isEmpty(name)||!TextUtils.isEmpty(phoneNumber)||!TextUtils.isEmpty(logo)||!TextUtils.isEmpty(address)||latitude!=0||longitude!=0)
         {
             location=new GeoPoint(latitude,longitude);
-            hospital = new Hospitals(name, location, phoneNumber, logo, address);
-            fStore.collection("Hospitals").document(name).set(hospital);
+            hospital = new Hospitals(uuid,name, location, phoneNumber, logo, address);
+            fStore.collection("Hospitals").document(uuid).set(hospital);
+            Intent intent = new Intent(this,MainActivity.class);
+            startActivity(intent);
+            finish();
 
         }
     }
@@ -135,9 +141,11 @@ public class AddHospital extends AppCompatActivity {
 
             imageUri =data.getData();
             logoIV.setImageURI(imageUri);
+            logoIV.setVisibility(View.VISIBLE);
             uploadImage();
         }
         catch (Exception e ){
+            Toast.makeText(this,e.getMessage(),Toast.LENGTH_LONG).show();
             Toast.makeText(this, R.string.Fail_in_select_img, Toast.LENGTH_SHORT).show();
         }
     }
@@ -147,7 +155,7 @@ public class AddHospital extends AppCompatActivity {
     private void uploadImage() {
         final ProgressDialog pd = new ProgressDialog(this);
         pd.setTitle(R.string.uploading);
-        final String uuid = UUID.randomUUID().toString();
+
        final String imagePath = "images/"+uuid+".jpeg";
         StorageReference riversRef = mStorageRef.child(imagePath);
 

@@ -43,7 +43,7 @@ public class HomeFragment extends Fragment {
         //inflate the layout of this fragment
         View view = inflater.inflate(R.layout.fragment_home,container,false);
         bar=(ProgressBar)view.findViewById(R.id.loadingBar);
-        bar.setVisibility(View.VISIBLE);a
+        bar.setVisibility(View.VISIBLE);
         //init current user
         currentUser= FirebaseAuth.getInstance().getCurrentUser();
          // Recycler View and it's properties
