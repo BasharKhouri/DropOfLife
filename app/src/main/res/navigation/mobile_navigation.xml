@@ -28,6 +28,9 @@
         android:name="com.example.dropoflife.ui.SettingsFragment"
         android:label="@string/title_settings"
         tools:layout="@layout/navigation_settings" />
-
+        <fragment android:id="@+id/navigation_AdminView"
+            android:name="com.example.dropoflife.ui.Admin"
+            android:label="@string/Admin"
+            tools:layout="@layout/fragment_admin"/>
 
 </navigation>
