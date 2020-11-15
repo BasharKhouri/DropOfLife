@@ -81,8 +81,8 @@ public class Admin extends Fragment implements AdapterUsers.OnNoteListner {
                 LoadUsers(search.getText().toString());
             }
         });
+       // to add a custom on click for the recycle view
         mOnNoteListner = this;
-
         AddAHospital.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
@@ -112,12 +112,11 @@ public class Admin extends Fragment implements AdapterUsers.OnNoteListner {
         });
 
     }
+    //form the custom onclick
     @Override
     public void onNoteClick(int position) {
-        users.get(position);
-        //Todo view to edit user info
-        Log.w("TAG", "Error adding document");
         Intent intent = new Intent(getContext(), ChangeRole.class);
+        intent.putExtra("user",users.get(position));
         startActivity(intent);
     }
 }
