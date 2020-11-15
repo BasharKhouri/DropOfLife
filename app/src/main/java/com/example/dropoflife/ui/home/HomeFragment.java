@@ -75,7 +75,7 @@ public class HomeFragment extends Fragment {
         // Path Of all Posts
         postRef= FirebaseDatabase.getInstance().getReference("Posts");
         //get all data from the postRef
-        postRef.addValueEventListener(new ValueEventListener() {
+        postRef.limitToFirst(20).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 postList.clear();

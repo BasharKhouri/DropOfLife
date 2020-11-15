@@ -81,39 +81,12 @@ public class ProfileFragment extends Fragment {
         //if the user has a profile pic
         if(user.getProfilePic()!=null) {
             try {
-                StorageReference riversRef = storage.getReferenceFromUrl(user.getProfilePic());
-                //download the file into the local file that we created
-                riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                    @Override
-                    public void onSuccess(Uri uri) {
-
-                        Picasso.get().load(uri).placeholder(R.drawable.profile).into(userImage);
-
-
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getContext(), "Fail", Toast.LENGTH_SHORT).show();
-
-                    }
-                });
-
+                Picasso.get().load(MainActivity.localFile).placeholder(R.drawable.profile).into(userImage);
             } catch (Exception exception) {
                 System.out.println(exception.getMessage());
             }
         }
 
-
-
-        userName.setText(user.getUserName());
-
-        try {//if the image is null it wont be changed form the default image
-           userImage.setImageURI(Uri.parse(user.getProfilePic()));
-       }catch (Exception e){
-
-           System.out.println(e.getMessage());
-       }
        if(user.getDateOfLastDonation()==null){
            progressBar.setProgress(100);
            remainingDaysUntilNextDonation.setText(R.string.you_can_donate);

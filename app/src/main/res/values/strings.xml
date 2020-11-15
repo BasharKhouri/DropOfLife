@@ -137,6 +137,7 @@
     <string name="Admin">Admin</string>
     <string name="role">Role</string>
     <string name="select_hosptial">Select hosptial</string>
+    <string name="changeRole">Change role</string>
 
 
 </resources>

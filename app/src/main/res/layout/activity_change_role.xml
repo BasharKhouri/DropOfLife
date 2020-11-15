@@ -47,22 +47,52 @@
             android:textSize="30dp" />
     </RelativeLayout>
 
-    <EditText
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:id="@+id/rolesLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@+id/relativeLayout"
         android:layout_alignParentStart="true"
-        android:layout_margin="30dp"
-        android:layout_marginStart="30dp"
-        android:id="@+id/roleET"
-        android:hint="@string/role"
-         />
-    <EditText
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/roleET"
-        android:id="@+id/selectHospital"
-        android:layout_marginLeft="30dp"
-        android:hint="@string/select_hosptial"/>
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="0dp"
+        android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="30dp"
+                android:text="@string/changeRole"
+                android:textSize="20sp"
+                />
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:autofillHints="@string/role" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/select_hospital_changeRole"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rolesLayout"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
+                android:text="@string/select_hosptial"
+                android:textSize="20sp" />
+            <!--Todo add a custom spinner-->
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>
