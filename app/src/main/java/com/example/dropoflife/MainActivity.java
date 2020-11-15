@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
     public static File localFile ;
     Intent intent;
     FirebaseStorage storage = FirebaseStorage.getInstance();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,10 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }catch (Exception ignore){
-
         }
-
-
         //init bar
             try {
                 setContentView(R.layout.activity_main);
@@ -120,6 +116,5 @@ public class MainActivity extends AppCompatActivity {
             }catch (Exception e){
                 System.out.println(e.getMessage());
             }
-
     }
 }

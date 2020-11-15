@@ -7,10 +7,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.dropoflife.Classes.BloodType;
 import com.example.dropoflife.Classes.Roles;
 import com.example.dropoflife.Classes.User;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -25,23 +29,37 @@ import java.io.File;
 public class ChangeRole extends AppCompatActivity {
     ImageView userImageIV;
     TextView userNameET;
-    EditText roleET, hospitalET;
     FirebaseStorage storage = FirebaseStorage.getInstance();
-
+    LinearLayout hospitalLinearLayout;
+    Roles hospitalWorkerRole ;
+    Spinner roleSpinner ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_role);
+
+       //init values
+        userNameET = (TextView)findViewById(R.id.profile_page_userName_role);
+        userImageIV=(ImageView) findViewById(R.id.profile_image_role);
+        hospitalLinearLayout = (LinearLayout) findViewById(R.id.select_hospital_changeRole);
+        roleSpinner = (Spinner) findViewById(R.id.roleSpinner);
+        //init adapter for the spinner
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, Roles.roles);
+        roleSpinner.setAdapter(spinnerArrayAdapter);
+        //set layout gone
+        hospitalLinearLayout.setVisibility(View.INVISIBLE);
+        try{
+            hospitalWorkerRole = new Roles(2);
+        }catch (Exception e ){
+            Log.w("Error", e.getMessage());
+        }
+
         Intent intent = getIntent();
         User selectedUser;
         if (intent.hasExtra("user")) {
             selectedUser = intent.getParcelableExtra("user");
-            try {
-                if (selectedUser.getRole().equals(new Roles(2))) {
-                    hospitalET.setVisibility(View.VISIBLE);
-                }
-            } catch (Exception e) {
-                Log.w("Error", e.getMessage());
+                if (selectedUser.getRole().equals(hospitalWorkerRole)) {
+                hospitalLinearLayout.setVisibility(View.VISIBLE);
             }
 
 
@@ -71,30 +89,21 @@ public class ChangeRole extends AppCompatActivity {
 
             userNameET.setText(selectedUser.getUserName());
 
-            if (selectedUser.getRole() != null) {
-                roleET.setText(selectedUser.getRole().getRole());
-            }
-            if (selectedUser.getHospital() != null) {
-                hospitalET.setText(selectedUser.getHospital().getName());
-            }
 
-
-            roleET.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
-
-            hospitalET.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
 
         } else {
             Log.w("Error", "Error loading the user into change role ");
         }
+    }
+
+    public void SaveChange(View view) {
+        //todo save changes to the firesStore
+
+        if(roleSpinner.getSelectedItemPosition()>2){
+
+        }else if (roleSpinner.getSelectedItemPosition()==2){
+
+        }
+
     }
 }
