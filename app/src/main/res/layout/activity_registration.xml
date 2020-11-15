@@ -4,15 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ebecef"
+    android:background="@color/BackGround"
     tools:context=".Registration">
-
 
     <EditText
         android:id="@+id/birthdayText"
         android:layout_width="300dp"
         android:layout_height="45dp"
-        android:clickable="true"
+        android:focusableInTouchMode="false"
         android:drawableStart="@drawable/ic_cake_black_24dp"
         android:drawableLeft="@drawable/ic_cake_black_24dp"
         android:drawablePadding="5dp"
@@ -105,7 +104,7 @@
         android:layout_height="45dp"
         android:gravity="center"
         android:text="@string/gender_with"
-        android:textColor="@android:color/black"
+        android:textColor="@color/row_txt_color"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -150,6 +149,7 @@
         android:background="@drawable/button"
         android:text="@string/register"
         android:onClick="register"
+        android:textColor="@color/bttnTxt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -159,8 +159,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="165dp"
+        android:layout_height="150dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -171,29 +171,30 @@
 
     <Spinner
         android:id="@+id/bloodTypeSpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="36dp"
-
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.907"
+        app:layout_constraintHorizontal_bias="0.581"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.778" />
+        app:layout_constraintVertical_bias="0.783" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
+        android:layout_marginRight="50dp"
         android:gravity="center"
         android:text="@string/what_s_your_blood_type"
-        android:textColor="@android:color/black"
+        android:textColor="@color/row_txt_color"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.246"
+        app:layout_constraintHorizontal_bias="0.319"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.778" />
+        app:layout_constraintVertical_bias="0.785" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

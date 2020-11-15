@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChangeRole"
+    android:background="@color/BackGround">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="293dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:background="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image_role"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="10dp"
+            android:background="@color/trasnperant"
+            android:padding="5dp"
+            android:src="@drawable/profile" />
+        <TextView
+            android:id="@+id/profile_page_userName_role"
+            android:layout_width="179dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profile_image_role"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="14dp"
+            android:background="@color/trasnperant"
+            android:gravity="center_horizontal"
+            android:text="User Name"
+            android:textAlignment="center"
+            android:textColor="#ffffff"
+            android:textSize="30dp" />
+    </RelativeLayout>
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_alignParentStart="true"
+        android:layout_margin="30dp"
+        android:layout_marginStart="30dp"
+        android:id="@+id/roleET"
+        android:hint="@string/role"
+         />
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/roleET"
+        android:id="@+id/selectHospital"
+        android:layout_marginLeft="30dp"
+        android:hint="@string/select_hosptial"/>
+
+</RelativeLayout>

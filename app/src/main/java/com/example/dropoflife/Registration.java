@@ -18,6 +18,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.dropoflife.Classes.BloodType;
+import com.example.dropoflife.Classes.Roles;
 import com.example.dropoflife.Classes.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -47,6 +48,7 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
     private RadioButton radioButton;
     private Spinner bloodSpinner;
     private FirebaseAuth mAuth;
+
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
@@ -100,11 +102,12 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
                         saveUserProfileData(fullName);
                         //Need to  add UI changes now
                         Toast.makeText(getApplicationContext(), R.string.sign_up_successfully, Toast.LENGTH_SHORT).show();
-                        User user = new User(fullName, blood,birthDate, sex, email,"android.resource://" + getPackageName() + "/" + R.drawable.profile);
-                        // user.setProfilePic ("android.resource://" + getPackageName() + "/" + R.drawable.profile);
-
-
-
+                        User user = null;
+                        try {
+                            user = new User(fullName, blood,birthDate, sex, email,null, new Roles(1));
+                        } catch (Roles.IncorrectRoleExciption incorrectRoleExciption) {
+                            incorrectRoleExciption.printStackTrace();
+                        }
                         db.collection("users").document(mAuth.getUid()).set(user)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
@@ -114,25 +117,6 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
                                         startActivity(intent);
                                     }
                                 });
-
-
-//                        db.collection("users").add(user).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                            @Override
-//                            public void onSuccess(DocumentReference documentReference) {
-//                                Toast.makeText(Registration.this, "User Registerd", Toast.LENGTH_SHORT).show();
-//                                Intent intent =new Intent(getApplicationContext(), MainActivity.class);
-//                                startActivity(intent);
-//                            }
-//                        }).addOnFailureListener(new OnFailureListener() {
-//                            @Override
-//                            public void onFailure(@NonNull Exception e) {
-//                                mAuth.getCurrentUser().delete();
-//                                Toast.makeText(Registration.this, "FireBaseFailed", Toast.LENGTH_SHORT).show();
-//
-//                            }
-//                        });
-
-
                     } else {
                         Toast.makeText(getApplicationContext(), R.string.sign_up_unsuccessfully, Toast.LENGTH_SHORT).show();
                     }
@@ -143,11 +127,9 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
 
     public void saveUserProfileData(String name){
         FirebaseUser user = mAuth.getCurrentUser();
-        Uri defaultImage = Uri.parse("android.resource://" + getPackageName() + "/" + R.drawable.profile);
         if (user!=null){
             UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
                     .setDisplayName(name)
-                    .setPhotoUri(defaultImage)
                     .build();
         }
     }

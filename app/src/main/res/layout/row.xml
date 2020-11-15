@@ -7,9 +7,11 @@
     android:orientation="vertical"
     app:cardCornerRadius="3dp"
     android:elevation="3dp"
+    android:layout_margin="10dp"
     app:cardUseCompatPadding="true"
-    android:background="#ffffff"
-    app:contentPadding="5dp">
+    android:background="@color/row_BackGround"
+    app:contentPadding="5dp"
+    >
 
 <RelativeLayout
     android:layout_width="match_parent"
@@ -40,72 +42,76 @@
         android:layout_toRightOf="@+id/item_profile_image"
         android:text="UserName"
         android:textSize="15dp"
-        android:textColor="#000"
+        android:textColor="@color/row_txt_color"
         />
+
 
     <TextView
         android:id="@+id/location"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="72dp"
+        android:layout_height="16dp"
         android:layout_below="@+id/itemUserName"
-        android:layout_marginStart="135dp"
-        android:layout_marginLeft="135dp"
-        android:layout_marginTop="-20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="103dp"
+        android:layout_marginRight="103dp"
         android:layout_toEndOf="@+id/item_profile_image"
         android:layout_toRightOf="@+id/item_profile_image"
         android:autoLink="all"
         android:text="@string/location"
-        android:textColor="#000"
+        android:textColor="@color/row_txt_color"
         android:textSize="15sp" />
 
     <TextView
         android:id="@+id/itemDateOfPublish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/location"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="3dp"
-        android:layout_toEndOf="@+id/item_profile_image"
-        android:layout_toRightOf="@+id/item_profile_image"
+        android:layout_above="@+id/contact"
+        android:layout_below="@+id/itemBloodType"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginRight="17dp"
+        android:layout_marginBottom="26dp"
         android:autoLink="all"
-        android:text="Date"
-        android:textColor="#000"
+        android:text="@string/date"
+        android:textColor="@color/row_txt_color"
         android:textSize="12sp" />
-
 
     <TextView
         android:id="@+id/itemDescription"
-        android:layout_width="363dp"
+        android:layout_width="315dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/item_profile_image"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginRight="36dp"
+        android:layout_marginEnd="34dp"
+        android:layout_marginRight="34dp"
         android:layout_marginBottom="20dp"
+        android:layout_toStartOf="@+id/itemDateOfPublish"
+        android:layout_toLeftOf="@+id/itemDateOfPublish"
         android:autoLink="all"
         android:text="@string/additional_ino"
-        android:textColor="#000"
+        android:textColor="@color/row_txt_color"
         android:textSize="20sp" />
 
     <TextView
         android:id="@+id/itemBloodType"
-        android:layout_width="101dp"
-        android:layout_height="62dp"
+        android:layout_width="123dp"
+        android:layout_height="42dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginStart="117dp"
-        android:layout_marginLeft="117dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginStart="53dp"
+        android:layout_marginLeft="53dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="70dp"
+        android:layout_marginRight="70dp"
         android:layout_toEndOf="@+id/itemUserName"
         android:layout_toRightOf="@+id/itemUserName"
         android:autoLink="all"
@@ -119,8 +125,8 @@
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#60bb0a1e"
+        android:layout_height="2dp"
+        android:background="#90bb0a1e"
         android:layout_above="@+id/contact"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
@@ -140,9 +146,7 @@
         android:layout_marginTop="2dp"
         android:layout_marginEnd="2dp"
         android:layout_marginRight="2dp"
-        android:orientation="horizontal"
-        android:autoLink="all"
-        >
+        android:autoLink="all">
 
         <Button
             android:id="@+id/item_call_me"
@@ -157,6 +161,7 @@
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
             android:autoLink="all"
+            android:textColor="@color/row_txt_color"
             />
 
         <Button
@@ -172,6 +177,7 @@
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
             android:autoLink="all"
+            android:textColor="@color/row_txt_color"
             />
 
         <Button
@@ -187,19 +193,33 @@
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
             android:autoLink="all"
+            android:textColor="@color/row_txt_color"
             />
 
     </LinearLayout>
     <View
         android:id="@+id/divider2"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#60bb0a1e"
+        android:layout_height="2dp"
+        android:background="#90bb0a1e"
         android:layout_below="@+id/contact"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:autoLink="all"
         />
+
+    <ImageButton
+        android:id="@+id/moreOption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/ic_baseline_more_horiz_24"
+        android:background="@color/trasnperant"/>
 
 
 </RelativeLayout>

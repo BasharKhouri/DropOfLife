@@ -1,6 +1,8 @@
 package com.example.dropoflife.Classes;
 
 import android.net.Uri;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -9,7 +11,7 @@ import java.util.Date;
 /**
  * author Bashar Khouri
  */
-public class User {
+public class User  implements Parcelable {
 
     private  String userName;
     private BloodType bloodType;
@@ -18,11 +20,10 @@ public class User {
     private Date dateOfLastDonation;
     private int numberOfDonations;
     private String email;
-
-
     private String profilePic;
     private String phone;
-
+    private Roles role;
+    private Hospitals hospital ;
 
 
     /**
@@ -35,8 +36,8 @@ public class User {
      * @param profilePic
      */
 
-    public User( String userName, BloodType bloodType, Date dateOfBirth, String sex, String email, String profilePic) {
-
+    public User( String userName, BloodType bloodType, Date dateOfBirth, String sex, String email, String profilePic,Roles role) {
+        this.role=role;
         this.userName = userName;
         this.bloodType = bloodType;
         this.dateOfBirth = dateOfBirth;
@@ -45,13 +46,47 @@ public class User {
         this.profilePic = profilePic;
         numberOfDonations=0;
     }
+    public User( String userName, String email,String profilePic) {
+
+        this.userName = userName;
+
+        this.profilePic = profilePic;
+
+        this.email = email;
+
+        numberOfDonations=0;
+    }
+
     public User(){
         // public no-arg constructor needed
     }
 
     // The Getters
 
+    protected User(Parcel in) {
+        userName = in.readString();
+        sex = in.readString();
+        numberOfDonations = in.readInt();
+        email = in.readString();
+        profilePic = in.readString();
+        phone = in.readString();
+    }
 
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
+
+    public Roles getRole() {
+        return role;
+    }
     public String getUserName() {
         return userName;
     }
@@ -140,9 +175,30 @@ public class User {
     public void setNumberOfDonations(int numberOfDonations) {
         this.numberOfDonations = numberOfDonations;
     }
+    public void setRole(Roles role) {
+        this.role = role;
+    }
+
+    public void setHospital(Hospitals hospital) {
+        this.hospital = hospital;
+    }
+
+    public Hospitals getHospital() {
+        return hospital;
+    }
 
     @Override
-    public String toString() {
-        return getUserName();
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(userName);
+        dest.writeString(sex);
+        dest.writeInt(numberOfDonations);
+        dest.writeString(email);
+        dest.writeString(profilePic);
+        dest.writeString(phone);
     }
 }

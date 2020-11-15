@@ -16,7 +16,7 @@
         android:layout_marginTop="316dp"
         android:layout_marginEnd="176dp"
         android:layout_marginRight="176dp"
-        android:text="fuck you"
+        android:text="this layout for nothing "
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

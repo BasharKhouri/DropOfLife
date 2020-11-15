@@ -5,7 +5,13 @@
     <color name="colorAccent">#bb0a1e</color>
     <color name="BackGround">#36393f</color>
     <color name="shape_outline">#bb0a1e</color>
-
-
-
+    <color name="ET_color">#ffffff</color>
+    <color name="bttnClck">#40bb0a1e</color>
+    <color name="hint">#222222</color>
+    <color name="row_BackGround">#010101</color>
+    <color name="row_txt_color">#eee</color>
+    <color name="textColorWhite">#000000</color>
+    <color name="textColorDark">#ffffff</color>
+    <color name="editTextColor">#ffffff</color>
+    <color name="bttnTxt">#000000</color>
 </resources>

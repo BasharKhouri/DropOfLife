@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddHospital">
+
+    <EditText
+        android:id="@+id/HospitalNameET"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:drawableStart="@drawable/ic_baseline_local_hospital_24"
+        android:drawableLeft="@drawable/ic_baseline_local_hospital_24"
+        android:hint="@string/hospital_name"
+        android:inputType="text"
+        android:importantForAutofill="no" />
+
+    <EditText
+
+        android:id="@+id/HospitalPhoneNumberET"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/HospitalNameET"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:drawableStart="@drawable/ic_phone_red"
+        android:drawableLeft="@drawable/ic_phone_red"
+        android:hint="@string/phone_number"
+        android:inputType="number" />
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/HospitalPhoneNumberET"
+        android:layout_marginTop="30dp"
+        android:hint="@string/address"
+        android:drawableStart="@drawable/ic_location_building"
+        android:drawableLeft="@drawable/ic_location_building"
+        android:id="@+id/building_address"
+        />
+
+    <ImageView
+        android:id="@+id/addHospitalLogoImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@id/building_address"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="27dp"
+
+        android:layout_marginTop="30dp"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/addHospitalLogoButton"
+        android:layout_width="112dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/building_address"
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginTop="30dp"
+        android:background="@drawable/button"
+        android:onClick="selectLogo"
+        android:text="@string/select_logo"
+        android:textAlignment="center"
+        android:textAllCaps="false" />
+
+
+    <Button
+        android:id="@+id/go_to_picker_button"
+        android:layout_width="112dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addHospitalLogoButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/button"
+        android:onClick="selectLocation"
+        android:text="@string/select_Location"
+        android:textAllCaps="false" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/geographicalLocationLayout"
+        android:layout_below="@id/go_to_picker_button"
+        android:layout_centerHorizontal="true"
+        >
+
+        <EditText
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/latitudeET"
+            android:hint="@string/latitude"
+            android:layout_margin="10dp"
+            />
+        <EditText
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/longitudeET"
+            android:hint="@string/longitude"
+            android:layout_margin="10dp"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/saveHospital"
+        android:layout_width="112dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/geographicalLocationLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/button"
+        android:text="@string/saveHospital"
+        android:textAllCaps="false" />
+
+
+</RelativeLayout>

@@ -22,8 +22,6 @@ import java.util.Date;
 
 public class AddRequest extends AppCompatActivity {
 
-    private AlertDialog.Builder dialogBuilder;
-    private  AlertDialog dialog;
     private EditText location , description , phoneNumber;
     private Spinner bloodSpinner;
     private Button postButton;
@@ -35,24 +33,22 @@ public class AddRequest extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_request);
-        location=(EditText) findViewById(R.id.addPostLocation);
         description=(EditText) findViewById(R.id.descriptionEditText);
-        phoneNumber=(EditText) findViewById(R.id.enterPhoneNumber);
         bloodSpinner = findViewById(R.id.req_blood_Type);
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, BloodType.bloodTypes);
         bloodSpinner.setAdapter(spinnerArrayAdapter);
         postButton=(Button)findViewById(R.id.addRequest);
-
         postButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-
               try {
                   requestedBlood = new BloodType(bloodSpinner.getSelectedItemPosition());
 
                   Post post;
-                  post = new Post(publicher.getUid(),requestedBlood.getBloodID(),description.getText().toString(),
-                     new Date(),location.getText().toString(),phoneNumber.getText().toString());
+
+                  post = new Post(MainActivity.user.getHospital(),requestedBlood.getBloodID(),description.getText().toString(),
+                     new Date());
                   myRef.push().setValue(post);
                   Intent intent =new Intent(getApplicationContext(), MainActivity.class);
                   startActivity(intent);

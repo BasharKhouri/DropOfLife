@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">DropOfLife</string>
+    <string name="facebook_app_id">3508661939228468</string>
+    <string name="fb_login_protocol_scheme">fb3508661939228468</string>
     <string name="title_home">Home</string>
     <string name="title_profile">Profile</string>
     <string name="title_notifications">Notifications</string>
@@ -35,24 +37,24 @@
     <string name="enter_email_error">email is REQUIRED.</string>
     <string name="enter_password_error">password is REQUIRED.</string>
     <string name="enter_confirm_password_error">Confirm  password is REQUIRED.</string>
-    <string name="enter_BirthDate_error">Birth date   password is REQUIRED.</string>
+    <string name="enter_BirthDate_error">Birth date is REQUIRED.</string>
     <string name="enter_date">Enter Date</string>
     <string name="error_during_blood_selection">error during blood selection</string>
     <string name="error_password_length_incorrect">please make sure that the password is 8 to 16 characters</string>
     <string name="error_password_did_not_match">password did not match </string>
-    <string-array name="bloodtypes">String bloodTypes [] ={"A+","A-","B+","B-","C+","C-","AB+","AB-","Unknown"};
+    <string-array name="bloodtypes">String bloodTypes []
+        ={"A+","A-","B+","B-","O+","O-","AB+","AB-","Unknown"};
         <item> A+ </item>
         <item> A- </item>
         <item> B+ </item>
         <item> B- </item>
-        <item> C+ </item>
-        <item> C- </item>
+        <item> O+ </item>
+        <item> O- </item>
         <item> AB+ </item>
         <item> AB- </item>
-        <item> Unknown ! </item>
-
-
+        <item> Unknown!</item>
     </string-array>
+
     <string name="error_younger_than_the_legal_age">Younger than the legal age </string>
     <string name="title_activity_settings">SettingsActivity</string>
 
@@ -75,17 +77,30 @@
     <string name="our_logo">our_logo</string>
     <string name="gender_with">Gender :</string>
     <string name="register">Register</string>
-    <string name="what_s_your_blood_type">What\'s your blood type?</string>
+    <string name="what_s_your_blood_type">Blood Type?</string>
     <string name="username">UserName</string>
     <string name="location">Location</string>
     <string name="date">Date</string>
-    <string name="additional_ino">additional ino</string>
+    <string name="additional_ino">additional info</string>
     <string name="ab">AB+</string>
     <string name="settings">Settings</string>
     <string name="title_settings">Settings</string>
+    <string name="deleting">Deleting</string>
+    <string name="your_location">Hospital Name</string>
+    <string name="where_is_your_location">Location: </string>
+    <string name="what_blood_type_do_you_need">Blood Type: </string>
+    <string name="phone_number">Phone Number:</string>
+    <string name="phone_number_without">Phone Number</string>
+    <string name="additional_information">If you have any additional information such as Sickness, Health Problems or any specific details, please list below:</string>
+    <string name="add_request">Add Request</string>
+    <string name="you_can_donate">you can donate now</string>
+    <string name="days_remaining">Days remaining</string>
+    <string name="days_remaining_you_can_donate">Days remaining / you can donate</string>
+    <string name="blood_tpye">Blood type</string>
+    <string name="donations">Donations</string>
+    <string name="i_just_donated">I just donated</string>
 
     <string-array name="provinces">
-
         <item>Amman</item>
         <item>Irbid</item>
         <item>Ajloun</item>
@@ -97,7 +112,31 @@
         <item>Karak</item>
         <item>Tafilah</item>
         <item>Aqaba</item>
-
     </string-array>
+    <string name="upload_successful">upload successful</string>
+    <string name="upload_not_successful">failed try again later</string>
+    <string name="uploading">uploading</string>
+    <string name="log_out">Log out</string>
+    <string name="dark_mode">Dark mode</string>
+    <string name="Reset_password">Reset_password</string>
+    <string name="enter_email_to_receive_link">enter email to receive reset password link</string>
+    <string name="Okay">Okay</string>
+    <string name="cancel">cancel</string>
+    <string name="reset_password_email_has_been_sent">reset password email has been sent</string>
+    <string name="error_reset_password_email_">  error: could not send the reset password email </string>
+    <string name="hospital_name">Hospital name</string>
+    <string name="address">Address</string>
+    <string name="select_logo">Select Logo</string>
+    <string name="mapbox_access_token" translatable="false">pk.eyJ1IjoiZHJvcG9mbGlmZWFwcCIsImEiOiJja2hkbG16d28wMzVvMnFuNWF1MzByYjNtIn0.9h7IFdGELC-EUcgUaxaybw</string>
+    <string name="saveHospital">Save Hospital</string>
+    <string name="longitude">Longitude</string>
+    <string name="latitude">Latitude</string>
+    <string name="select_Location">Select Location</string>
+    <string name="selected_place_info" translatable="false">Selected location information:\n%1$s</string>
+    <string name="Fail_in_select_img">Failed to select an image</string>
+    <string name="Admin">Admin</string>
+    <string name="role">Role</string>
+    <string name="select_hosptial">Select hosptial</string>
+
 
 </resources>
