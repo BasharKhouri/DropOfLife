@@ -54,13 +54,23 @@ public class MainActivity extends AppCompatActivity {
         }
         mAuth= FirebaseAuth.getInstance();
         firebaseUser =mAuth.getCurrentUser();
-        loadUser();
         try {
-            loadImageAndHospital();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            //get the required reference
+            DocumentReference documentReference = fStore.collection("users").document(firebaseUser.getUid());
+            synchronized (documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+
+                @Override
+                public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                    user = value.toObject(User.class);
+                    role = user.getRole();
+                    Log.w("success ", "LoadedUser");
+                    loadImageAndHospital();
+                }
+            })) {
+            }
+        }catch (Exception ignore){
+            Log.w("Error",ignore.getMessage());
         }
-        
         //init bar
             try {
                 setContentView(R.layout.activity_main);
@@ -104,32 +114,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadUser(){
-        try {
-            //get the required reference
-            DocumentReference documentReference = fStore.collection("users").document(firebaseUser.getUid());
-            synchronized (documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
 
-                @Override
-                public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                    user = value.toObject(User.class);
-                    role = user.getRole();
-                }
-            })) {  }
-        }catch (Exception ignore){
-            Log.w("Error",ignore.getMessage());
-        }
     }
 
 
-    private void loadImageAndHospital() throws InterruptedException {
-       while (user==null){
-           Thread.sleep(1);
-       }
+    private void loadImageAndHospital()  {
        loadImage();
        loadHospital();
     }
-
-
 
 
     private Task loadImage(){
@@ -155,9 +147,9 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                     hospital = value.toObject(Hospitals.class);
+                    Log.w("success",hospital.getName());
                 }
             });
-
         }
      return  null;
     }

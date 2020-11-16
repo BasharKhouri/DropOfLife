@@ -76,7 +76,7 @@ public class ProfileFragment extends Fragment {
 
 
 
-
+        userName.setText(user.getUserName());
         //set values
         //if the user has a profile pic
         if(user.getProfilePic()!=null) {

@@ -9,8 +9,10 @@ public class Roles {
     private int ID;
     public Roles(){/*ignore this Constructor it is for the database */}
     public Roles(int ID) throws IncorrectRoleExciption {
-            if(ID>=0&&ID<=2)
-        role=roles[ID];
+            if(ID>=0&&ID<=2) {
+                role = roles[ID];
+                this.ID = ID;
+            }
             else
                 throw new IncorrectRoleExciption("Incorrect Role");
     }
