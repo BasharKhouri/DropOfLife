@@ -11,9 +11,9 @@ import java.util.Date;
 /**
  * author Bashar Khouri
  */
-public class User  implements Parcelable {
+public class User implements Parcelable {
 
-    private  String userName;
+    private String userName;
     private BloodType bloodType;
     private Date dateOfBirth;
     private String sex;
@@ -23,30 +23,31 @@ public class User  implements Parcelable {
     private String profilePic;
     private String phone;
     private Roles role;
-    private Hospitals hospital ;
-
+    private String hospitalID;
+    private String userID;
 
     /**
-     *
      * @param userName
-     * @param bloodType  type @<code>{BloodType}</code>  note that the BloodID must be between 0-8 OR @<code>Exception IncorrectBloodIDException will be throne.</code>
+     * @param bloodType   type @<code>{BloodType}</code>  note that the BloodID must be between 0-8 OR @<code>Exception IncorrectBloodIDException will be throne.</code>
      * @param dateOfBirth type Date
-     * @param sex type String
+     * @param sex         type String
      * @param email
      * @param profilePic
      */
 
-    public User( String userName, BloodType bloodType, Date dateOfBirth, String sex, String email, String profilePic,Roles role) {
-        this.role=role;
+    public User(String userID, String userName, BloodType bloodType, Date dateOfBirth, String sex, String email, String profilePic, Roles role) {
+        this.userID = userID;
+        this.role = role;
         this.userName = userName;
         this.bloodType = bloodType;
         this.dateOfBirth = dateOfBirth;
         this.sex = sex;
         this.email = email;
         this.profilePic = profilePic;
-        numberOfDonations=0;
+        numberOfDonations = 0;
     }
-    public User( String userName, String email,String profilePic) {
+
+    public User(String userName, String email, String profilePic) {
 
         this.userName = userName;
 
@@ -54,14 +55,13 @@ public class User  implements Parcelable {
 
         this.email = email;
 
-        numberOfDonations=0;
+        numberOfDonations = 0;
     }
 
-    public User(){
+    public User() {
         // public no-arg constructor needed
     }
 
-    // The Getters
 
     protected User(Parcel in) {
         userName = in.readString();
@@ -83,16 +83,26 @@ public class User  implements Parcelable {
             return new User[size];
         }
     };
+    // The Getters
+
+
+    public String getHospitalID() {
+        return hospitalID;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
 
     public Roles getRole() {
         return role;
     }
+
     public String getUserName() {
         return userName;
     }
 
     /**
-     *
      * @return profilePic : it is the URL of the profile picture that is stored in the firebase database
      */
     public String getProfilePic() {
@@ -129,12 +139,18 @@ public class User  implements Parcelable {
 
     // The Setters
 
+
+    public void setHospitalID(String hospitalID) {
+        this.hospitalID = hospitalID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
     public void setBloodType(BloodType bloodType) {
         this.bloodType = bloodType;
     }
-
-
-
 
 
     public void setEmail(String email) {
@@ -147,7 +163,6 @@ public class User  implements Parcelable {
     }
 
     /**
-     *
      * @param profilePic : is the URL of the profile picture, the URL is stored in firebase storage.
      */
 
@@ -175,16 +190,17 @@ public class User  implements Parcelable {
     public void setNumberOfDonations(int numberOfDonations) {
         this.numberOfDonations = numberOfDonations;
     }
+
     public void setRole(Roles role) {
         this.role = role;
     }
 
-    public void setHospital(Hospitals hospital) {
-        this.hospital = hospital;
+    public void setHospital(String hospitalID) {
+        this.hospitalID = hospitalID;
     }
 
-    public Hospitals getHospital() {
-        return hospital;
+    public String getHospital() {
+        return hospitalID;
     }
 
     @Override

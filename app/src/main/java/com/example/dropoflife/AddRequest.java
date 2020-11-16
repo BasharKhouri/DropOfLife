@@ -27,7 +27,7 @@ public class AddRequest extends AppCompatActivity {
     private Button postButton;
     private BloodType requestedBlood;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("Posts");
+    DatabaseReference myRef ;
    FirebaseUser publicher = FirebaseAuth.getInstance().getCurrentUser();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +46,8 @@ public class AddRequest extends AppCompatActivity {
                   requestedBlood = new BloodType(bloodSpinner.getSelectedItemPosition());
 
                   Post post;
-
-                  post = new Post(MainActivity.user.getHospital(),requestedBlood.getBloodID(),description.getText().toString(),
+                    myRef= database.getReference("Posts").push();
+                  post = new Post(myRef.getKey(),MainActivity.getHospital(),requestedBlood.getBloodID(),description.getText().toString(),
                      new Date());
                   myRef.push().setValue(post);
                   Intent intent =new Intent(getApplicationContext(), MainActivity.class);

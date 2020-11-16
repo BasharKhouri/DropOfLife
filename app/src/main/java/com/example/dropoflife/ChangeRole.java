@@ -15,53 +15,89 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.dropoflife.Classes.BloodType;
+import com.example.dropoflife.Classes.Hospitals;
 import com.example.dropoflife.Classes.Roles;
 import com.example.dropoflife.Classes.User;
+import com.example.dropoflife.Interface.IFirebaseHospitalLoad;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
+import com.toptoche.searchablespinnerlibrary.SearchableSpinner;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ChangeRole extends AppCompatActivity {
+public class ChangeRole extends AppCompatActivity implements IFirebaseHospitalLoad {
     ImageView userImageIV;
     TextView userNameET;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     LinearLayout hospitalLinearLayout;
-    Roles hospitalWorkerRole ;
-    Spinner roleSpinner ;
+    Roles hospitalWorkerRole;
+    Spinner roleSpinner;
+    SearchableSpinner searchableSpinner;
+    FirebaseFirestore fStore = FirebaseFirestore.getInstance();
+    IFirebaseHospitalLoad iFirebaseHospitalLoad;
+    User selectedUser;
+    List<Hospitals> hospitalsList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_role);
 
-       //init values
-        userNameET = (TextView)findViewById(R.id.profile_page_userName_role);
-        userImageIV=(ImageView) findViewById(R.id.profile_image_role);
+        //init values
+        userNameET = (TextView) findViewById(R.id.profile_page_userName_role);
+        userImageIV = (ImageView) findViewById(R.id.profile_image_role);
         hospitalLinearLayout = (LinearLayout) findViewById(R.id.select_hospital_changeRole);
         roleSpinner = (Spinner) findViewById(R.id.roleSpinner);
-        //init adapter for the spinner
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, Roles.roles);
-        roleSpinner.setAdapter(spinnerArrayAdapter);
-        //set layout gone
-        hospitalLinearLayout.setVisibility(View.INVISIBLE);
-        try{
-            hospitalWorkerRole = new Roles(2);
-        }catch (Exception e ){
-            Log.w("Error", e.getMessage());
-        }
-
+        searchableSpinner = (SearchableSpinner) findViewById(R.id.searchableSpinner_hospitals);
+        iFirebaseHospitalLoad = this;
+        //init selected user
         Intent intent = getIntent();
-        User selectedUser;
         if (intent.hasExtra("user")) {
             selectedUser = intent.getParcelableExtra("user");
-                if (selectedUser.getRole().equals(hospitalWorkerRole)) {
-                hospitalLinearLayout.setVisibility(View.VISIBLE);
-            }
 
+            //init adapter for the spinner
+            ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, Roles.roles);
+            roleSpinner.setAdapter(spinnerArrayAdapter);
+            //set layout gone
+            hospitalLinearLayout.setVisibility(View.INVISIBLE);
+            hospitalsList = new ArrayList<Hospitals>();
+            //get all the hospitals into the list
+            fStore.collection("Hospitals").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    hospitalsList.clear();
+                    for (QueryDocumentSnapshot tk : task.getResult()) {
+                        hospitalsList.add(tk.toObject(Hospitals.class));
+                    }
+                    iFirebaseHospitalLoad.onLoadSuccess(hospitalsList);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    iFirebaseHospitalLoad.onLoadFail(e.getMessage());
+                }
+            });
+
+            //set data
+            //set username
+            userNameET.setText(selectedUser.getUserName());
+            //set profile pic
 
             if (selectedUser.getProfilePic() != null) {
                 StorageReference riversRef = storage.getReferenceFromUrl(selectedUser.getProfilePic());
@@ -86,24 +122,50 @@ public class ChangeRole extends AppCompatActivity {
                     Log.w("Error", e.getMessage());
                 }
             }
-
-            userNameET.setText(selectedUser.getUserName());
-
-
-
         } else {
             Log.w("Error", "Error loading the user into change role ");
         }
     }
 
     public void SaveChange(View view) {
-        //todo save changes to the firesStore
-
-        if(roleSpinner.getSelectedItemPosition()>2){
-
-        }else if (roleSpinner.getSelectedItemPosition()==2){
-
+        if (roleSpinner.getSelectedItemPosition() > 2) {
+            try {
+                selectedUser.setRole(new Roles(roleSpinner.getSelectedItemPosition()));
+            } catch (Roles.IncorrectRoleExciption incorrectRoleExciption) {
+                Log.w("Error", incorrectRoleExciption.getMessage());
+            }
+        } else if (roleSpinner.getSelectedItemPosition() == 2) {
+            try {
+                selectedUser.setRole(new Roles(roleSpinner.getSelectedItemPosition()));
+            } catch (Roles.IncorrectRoleExciption incorrectRoleExciption) {
+                Log.w("Error", incorrectRoleExciption.getMessage() + "");
+            }
+            selectedUser.setHospital(hospitalsList.get(searchableSpinner.getSelectedItemPosition()).getID());
+            fStore.collection("users").document(selectedUser.getUserID()).set(selectedUser);
+            Intent intent = new Intent(this,MainActivity.class);
+            startActivity(intent);
+            finish();
         }
-
     }
+
+    @Override
+    public void onLoadSuccess(List<Hospitals> hospitalsList) {
+
+        List<String> hospitalNameList = new ArrayList<>();
+
+        for (Hospitals hospital : hospitalsList) {
+
+            hospitalNameList.add(hospital.getName());
+        }
+        // create adapter and set for spinner
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, hospitalNameList);
+
+        searchableSpinner.setAdapter(adapter);
+    }
+
+    @Override
+    public void onLoadFail(String message) {
+        Log.w("error", message);
+    }
+
 }

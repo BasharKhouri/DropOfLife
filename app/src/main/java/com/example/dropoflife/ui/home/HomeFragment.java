@@ -1,4 +1,5 @@
 package com.example.dropoflife.ui.home;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.dropoflife.AddRequest;
 import com.example.dropoflife.Classes.AdapterPosts;
 import com.example.dropoflife.Classes.Post;
+import com.example.dropoflife.Classes.SingletonPost;
 import com.example.dropoflife.R;
 import com.google.android.gms.tasks.Task;
 
@@ -29,7 +31,7 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment {
 
     DatabaseReference postRef ;
-
+    SingletonPost singletonPost;
     FirebaseUser currentUser;
     Button reqBlood;
     ProgressBar bar;
@@ -42,6 +44,7 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         //inflate the layout of this fragment
         View view = inflater.inflate(R.layout.fragment_home,container,false);
+        singletonPost = SingletonPost.getInstance();
         bar=(ProgressBar)view.findViewById(R.id.loadingBar);
         bar.setVisibility(View.VISIBLE);
         //init current user
@@ -72,32 +75,10 @@ public class HomeFragment extends Fragment {
     }
     ArrayList<String> postID = new ArrayList<>();
     private Task  LoadPosts() {
-        // Path Of all Posts
-        postRef= FirebaseDatabase.getInstance().getReference("Posts");
-        //get all data from the postRef
-        postRef.limitToFirst(20).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                postList.clear();
-                postID.clear();
-                for(DataSnapshot ds:snapshot.getChildren()){
-                    Post post = ds.getValue(Post.class);
-                    postList.add(post);
-                    postID.add(ds.getKey());
-                    //adapter
-                    adapterPosts = new AdapterPosts(getActivity(),postList,postID);
-                 //setAdapter to recyclerView
-                    recyclerView.setAdapter(adapterPosts);
-                }
-                bar.setVisibility(View.GONE);
 
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                //in case of error
-                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        adapterPosts = new AdapterPosts(getActivity(),singletonPost.LoadPosts());
+        recyclerView.setAdapter(adapterPosts);
+        bar.setVisibility(View.GONE);
         return null;
     }
 

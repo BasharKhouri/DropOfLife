@@ -83,10 +83,9 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
      * @param context
      * @param postList
      */
-    public AdapterPosts(Context context, List<Post> postList , ArrayList<String> postIDList) {
+    public AdapterPosts(Context context, List<Post> postList) {
         this.context = context;
         this.postList = postList;
-        this.postIDList=postIDList;
     }
 
     /**
@@ -118,7 +117,7 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
         final Date time =postList.get(position).getDateOfPublish();
         final String blood = BloodType.bloodTypes[postList.get(position).getBloodTypeID()];
         final String postTime = (String) android.text.format.DateFormat.format("MMM dd yyyy",time);
-        final String postID =  postIDList.get(position).toString();
+        final String postID = postList.get(position).getID();
         final String phoneNumber =hospitals.getPhoneNumber();
 
 

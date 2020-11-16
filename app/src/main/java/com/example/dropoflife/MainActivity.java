@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.dropoflife.Classes.Hospitals;
 import com.example.dropoflife.Classes.Roles;
 import com.example.dropoflife.Classes.User;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -30,6 +31,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import java.io.File;
 
+import bolts.Task;
+
 /**
  * author Bashar Khouri,Hassan wael ,Bashar Nimri
  */
@@ -41,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     public static FirebaseUser firebaseUser;
     public static File localFile ;
     Intent intent;
+    private static Hospitals hospital ;
     FirebaseStorage storage = FirebaseStorage.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,34 +54,13 @@ public class MainActivity extends AppCompatActivity {
         }
         mAuth= FirebaseAuth.getInstance();
         firebaseUser =mAuth.getCurrentUser();
-
+        loadUser();
         try {
-            DocumentReference documentReference = fStore.collection("users").document(firebaseUser.getUid());
-            synchronized (documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-
-                @Override
-                public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                    user = value.toObject(User.class);
-                    role = user.getRole();
-                    try {
-                        StorageReference riversRef = storage.getReferenceFromUrl(user.getProfilePic());
-                        localFile = File.createTempFile("userPic", "jpg");
-                     riversRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                         @Override
-                         public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                Log.w("success ","ImageLoaded");
-                         }
-                     });
-
-                    }catch (Exception e ){
-                        Log.w("Error",e.getMessage());
-                    }
-                }
-            })) {
-
-            }
-        }catch (Exception ignore){
+            loadImageAndHospital();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+        
         //init bar
             try {
                 setContentView(R.layout.activity_main);
@@ -116,5 +99,70 @@ public class MainActivity extends AppCompatActivity {
             }catch (Exception e){
                 System.out.println(e.getMessage());
             }
+
+
+    }
+
+    private void loadUser(){
+        try {
+            //get the required reference
+            DocumentReference documentReference = fStore.collection("users").document(firebaseUser.getUid());
+            synchronized (documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+
+                @Override
+                public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                    user = value.toObject(User.class);
+                    role = user.getRole();
+                }
+            })) {  }
+        }catch (Exception ignore){
+            Log.w("Error",ignore.getMessage());
+        }
+    }
+
+
+    private void loadImageAndHospital() throws InterruptedException {
+       while (user==null){
+           Thread.sleep(1);
+       }
+       loadImage();
+       loadHospital();
+    }
+
+
+
+
+    private Task loadImage(){
+        try {
+            StorageReference riversRef = storage.getReferenceFromUrl(user.getProfilePic());
+            localFile = File.createTempFile("userPic", "jpg");
+            riversRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    Log.w("success ","ImageLoaded");
+                }
+            });
+
+        }catch (Exception e ){
+            Log.w("Error",e.getMessage());
+        }
+        return null ;
+    }
+
+    private Task loadHospital(){
+        if(user.getHospital()!=null){
+            fStore.collection("Hospitals").document(user.getHospital()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                @Override
+                public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                    hospital = value.toObject(Hospitals.class);
+                }
+            });
+
+        }
+     return  null;
+    }
+
+    public static Hospitals getHospital() {
+        return hospital;
     }
 }
