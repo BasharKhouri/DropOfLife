@@ -7,18 +7,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.dropoflife.Classes.BloodType;
 import com.example.dropoflife.Classes.Hospitals;
 import com.example.dropoflife.Classes.Roles;
 import com.example.dropoflife.Classes.User;
 import com.example.dropoflife.Interface.IFirebaseHospitalLoad;
+import com.example.dropoflife.ui.Admin;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -94,11 +97,11 @@ public class ChangeRole extends AppCompatActivity implements IFirebaseHospitalLo
                 }
             });
 
+
             //set data
             //set username
             userNameET.setText(selectedUser.getUserName());
             //set profile pic
-
             if (selectedUser.getProfilePic() != null) {
                 StorageReference riversRef = storage.getReferenceFromUrl(selectedUser.getProfilePic());
                 try {
@@ -125,41 +128,55 @@ public class ChangeRole extends AppCompatActivity implements IFirebaseHospitalLo
         } else {
             Log.w("Error", "Error loading the user into change role ");
         }
+
+
+        roleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 2) {
+                    hospitalLinearLayout.setVisibility(View.VISIBLE);
+                } else {
+                    hospitalLinearLayout.setVisibility(View.INVISIBLE);
+                }
+                Toast.makeText(ChangeRole.this, "" + position, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
     }
 
     public void SaveChange(View view) {
-        if (roleSpinner.getSelectedItemPosition() > 2) {
-            try {
-                selectedUser.setRole(new Roles(roleSpinner.getSelectedItemPosition()));
-            } catch (Roles.IncorrectRoleExciption incorrectRoleExciption) {
-                Log.w("Error", incorrectRoleExciption.getMessage());
-            }
-        } else if (roleSpinner.getSelectedItemPosition() == 2) {
-            try {
-                selectedUser.setRole(new Roles(roleSpinner.getSelectedItemPosition()));
-            } catch (Roles.IncorrectRoleExciption incorrectRoleExciption) {
-                Log.w("Error", incorrectRoleExciption.getMessage() + "");
-            }
-            selectedUser.setHospital(hospitalsList.get(searchableSpinner.getSelectedItemPosition()).getID());
-            fStore.collection("users").document(selectedUser.getUserID()).set(selectedUser);
-            Intent intent = new Intent(this,MainActivity.class);
-            startActivity(intent);
-            finish();
+        try {
+            fStore.collection("users").document(selectedUser.getUserID()).update("role", new Roles(roleSpinner.getSelectedItemPosition()));
         }
+        catch (Exception e){
+            Log.w("Error",e.getMessage());
+        }
+        if (roleSpinner.getSelectedItemPosition() == 2) {
+
+            fStore.collection("users").document(selectedUser.getUserID()).update("hospitalID", hospitalsList.get(searchableSpinner.getSelectedItemPosition()).getID());
+        }
+
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+        Log.w("userInfo", selectedUser.getUserID());
+        Toast.makeText(this, "5555 " + selectedUser.getUserID(), Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
     public void onLoadSuccess(List<Hospitals> hospitalsList) {
-
         List<String> hospitalNameList = new ArrayList<>();
-
         for (Hospitals hospital : hospitalsList) {
-
             hospitalNameList.add(hospital.getName());
         }
         // create adapter and set for spinner
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, hospitalNameList);
-
         searchableSpinner.setAdapter(adapter);
     }
 
@@ -167,5 +184,4 @@ public class ChangeRole extends AppCompatActivity implements IFirebaseHospitalLo
     public void onLoadFail(String message) {
         Log.w("error", message);
     }
-
 }

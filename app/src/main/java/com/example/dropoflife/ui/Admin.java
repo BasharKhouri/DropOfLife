@@ -1,7 +1,9 @@
 package com.example.dropoflife.ui;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,31 +36,30 @@ import io.grpc.internal.JsonUtil;
  * A simple {@link Fragment} subclass.
  * create an instance of this fragment.
  */
-public class Admin extends Fragment implements AdapterUsers.OnNoteListner {
+public class Admin extends AppCompatActivity implements AdapterUsers.OnNoteListner {
     AdapterUsers adapterUsers;
         User user;
-        Button AddAHospital;
         RecyclerView userRecyclerView;
         EditText search ;
         List<User> users ;
     FirebaseFirestore fStore;
     List<String> usersID;
     AdapterUsers.OnNoteListner mOnNoteListner ;
-
-
+    Context context = this;
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_admin);
+
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_admin, container, false);
+       // View view = inflater.inflate(R.layout.fragment_admin, container, false);
          //init values
         fStore = FirebaseFirestore.getInstance();
-        AddAHospital=(Button)view.findViewById(R.id.goToAddHospitalButton);
          user = MainActivity.user;
-         search = view.findViewById(R.id.searchUser);
+         search = findViewById(R.id.searchUser);
          //userRecyclerView and it's property
-        userRecyclerView = (RecyclerView)view.findViewById(R.id.userRecyclerView);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        userRecyclerView = (RecyclerView)findViewById(R.id.userRecyclerView);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         //show the newest users 1st,for this load from last
         linearLayoutManager.setStackFromEnd(true);
         linearLayoutManager.setReverseLayout(true);
@@ -83,21 +84,15 @@ public class Admin extends Fragment implements AdapterUsers.OnNoteListner {
         });
        // to add a custom on click for the recycle view
         mOnNoteListner = this;
-        AddAHospital.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 Intent intent = new Intent(getContext(), AddHospital.class);
-                 startActivity(intent);
-             }
-         });
-        return  view;
+
+
     }
 
 
     private void LoadUsers(String value){
      users.clear();
      usersID.clear();
-      fStore.collection("users").whereEqualTo("email",value).limit(10).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+      fStore.collection("users").whereGreaterThanOrEqualTo("email",value.toLowerCase()).limit(10).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (QueryDocumentSnapshot tk: task.getResult()) {
@@ -106,7 +101,7 @@ public class Admin extends Fragment implements AdapterUsers.OnNoteListner {
                     users.add(user);
                     usersID.add(id);
                 }
-                adapterUsers = new  AdapterUsers(getContext(),users,usersID,mOnNoteListner);
+                adapterUsers = new  AdapterUsers(context,users,usersID,mOnNoteListner);
                 userRecyclerView.setAdapter(adapterUsers);
             }
         });
@@ -115,8 +110,13 @@ public class Admin extends Fragment implements AdapterUsers.OnNoteListner {
     //form the custom onclick
     @Override
     public void onNoteClick(int position) {
-        Intent intent = new Intent(getContext(), ChangeRole.class);
+        Intent intent = new Intent(this, ChangeRole.class);
         intent.putExtra("user",users.get(position));
+        startActivity(intent);
+    }
+
+    public void goToAddHospitalView(View view) {
+        Intent intent = new Intent(context,AddHospital.class);
         startActivity(intent);
     }
 }

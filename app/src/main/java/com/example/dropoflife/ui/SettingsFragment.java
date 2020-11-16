@@ -31,19 +31,25 @@ import static android.content.Context.CONTEXT_IGNORE_SECURITY;
 import static com.example.dropoflife.Login.SHARED_NAME;
 import static com.facebook.FacebookSdk.getApplicationContext;
 
+/**
+ * @author Hassan , Bashar
+ */
 public class SettingsFragment extends PreferenceFragmentCompat {
 
-    Preference logoutET;
+    Preference logoutET , adminET;
     SwitchPreferenceCompat darkMode;
     public boolean test;
-
+    User user ;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey);
         logoutET=findPreference("log");
+        adminET=findPreference("admin");
         darkMode=findPreference("dark_mode_switch");
         FacebookSdk.sdkInitialize(getApplicationContext());
+     user = MainActivity.user;
+
         if (logoutET != null) {
             logoutET.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
@@ -56,6 +62,19 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                         in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(in);
 
+                    return true;
+                }
+            });
+        }
+        if(!user.getRole().getRole().equals("admin")){
+            adminET.setVisible(false);
+        }
+        if(adminET!=null){
+            adminET.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent intent = new Intent(getContext(),Admin.class);
+                    startActivity(intent);
                     return true;
                 }
             });
