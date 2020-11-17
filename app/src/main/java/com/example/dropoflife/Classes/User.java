@@ -72,6 +72,10 @@ public class User implements Parcelable {
         phone = in.readString();
     }
 
+
+    // The Getters
+
+
     public static final Creator<User> CREATOR = new Creator<User>() {
         @Override
         public User createFromParcel(Parcel in) {
@@ -83,8 +87,6 @@ public class User implements Parcelable {
             return new User[size];
         }
     };
-    // The Getters
-
 
     public String getHospitalID() {
         return hospitalID;
@@ -203,6 +205,7 @@ public class User implements Parcelable {
         return hospitalID;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -216,5 +219,7 @@ public class User implements Parcelable {
         dest.writeString(email);
         dest.writeString(profilePic);
         dest.writeString(phone);
+        dest.writeString(hospitalID);
+        dest.writeString(userID);
     }
 }

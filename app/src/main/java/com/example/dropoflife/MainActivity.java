@@ -1,4 +1,5 @@
 package com.example.dropoflife;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.widget.Toast;
 
 import com.example.dropoflife.Classes.Hospitals;
 import com.example.dropoflife.Classes.Roles;
+import com.example.dropoflife.Classes.SingletonPost;
 import com.example.dropoflife.Classes.User;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -18,6 +20,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.ListenerRegistration;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -30,6 +34,9 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import bolts.Task;
 
@@ -38,121 +45,80 @@ import bolts.Task;
  */
 public class MainActivity extends AppCompatActivity {
     FirebaseFirestore fStore = FirebaseFirestore.getInstance();
-    private Roles role ;
+    private Roles role;
     public static User user;
     private FirebaseAuth mAuth;
     public static FirebaseUser firebaseUser;
-    public static File localFile ;
+    public static File localFile;
     Intent intent;
-    private static Hospitals hospital ;
+    private static Hospitals hospital;
     FirebaseStorage storage = FirebaseStorage.getInstance();
+    AppBarConfiguration appBarConfiguration;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
-        mAuth= FirebaseAuth.getInstance();
-        firebaseUser =mAuth.getCurrentUser();
-        try {
-            //get the required reference
-            DocumentReference documentReference = fStore.collection("users").document(firebaseUser.getUid());
-            synchronized (documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+        mAuth = FirebaseAuth.getInstance();
+        firebaseUser = mAuth.getCurrentUser();
 
-                @Override
-                public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                    user = value.toObject(User.class);
-                    role = user.getRole();
-                    Log.w("success ", "LoadedUser");
-                    loadImageAndHospital();
-                }
-            })) {
-            }
-        }catch (Exception ignore){
-            Log.w("Error",ignore.getMessage());
-        }
         //init bar
-            try {
-                setContentView(R.layout.activity_main);
-                BottomNavigationView navView = findViewById(R.id.nav_view);
-
-                // Passing each menu ID as a set of Ids because each
-                // menu should be considered as top level destinations.
-
-                     intent = getIntent();
-                if (role==null ) {
-                    AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                            R.id.navigation_home, R.id.navigation_profile, R.id.navigation_notifications, R.id.navigation_settings1,R.id.navigation_AdminView)
-                            .build();
-                findViewById(R.id.navigation_AdminView).setVisibility(View.GONE);
-                    NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-                    NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-                    NavigationUI.setupWithNavController(navView, navController);
-                }else if (role.equals( new Roles(1))){
-                    AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                            R.id.navigation_home, R.id.navigation_profile, R.id.navigation_notifications, R.id.navigation_settings1,R.id.navigation_AdminView)
-                            .build();
-                    NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-                    NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-                    NavigationUI.setupWithNavController(navView, navController);
-                }
-                else {
-                    AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                            R.id.navigation_home, R.id.navigation_profile, R.id.navigation_notifications, R.id.navigation_settings1,R.id.navigation_AdminView)
-                            .build();
-                    findViewById(R.id.navigation_AdminView).setVisibility(View.GONE);
-                    NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-                    NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-                    NavigationUI.setupWithNavController(navView, navController);
-
-                }
-            }catch (Exception e){
-                System.out.println(e.getMessage());
-            }
+        setContentView(R.layout.activity_main);
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
 
 
-    }
+                appBarConfiguration = new AppBarConfiguration.Builder(
+                        R.id.navigation_home, R.id.navigation_profile, R.id.navigation_notifications, R.id.navigation_settings1)
+                        .build();
 
-    private void loadUser(){
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(navView, navController);
 
     }
 
 
-    private void loadImageAndHospital()  {
-       loadImage();
-       loadHospital();
+    @Override
+    protected void onStart() {
+        super.onStart();
+        fStore.collection("users").document(firebaseUser.getUid())
+                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                        user = value.toObject(User.class);
+                        role = user.getRole();
+                        Log.w("success ", "LoadedUser");
+                        loadImage();
+                    }
+                });
+        SingletonPost singletonPost = SingletonPost.getInstance();
     }
 
 
-    private Task loadImage(){
+
+
+    private Task loadImage() {
         try {
             StorageReference riversRef = storage.getReferenceFromUrl(user.getProfilePic());
             localFile = File.createTempFile("userPic", "jpg");
             riversRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Log.w("success ","ImageLoaded");
+                    Log.w("success ", "ImageLoaded");
                 }
             });
 
-        }catch (Exception e ){
-            Log.w("Error",e.getMessage());
+        } catch (Exception e) {
+            Log.w("Error", e.getMessage());
         }
-        return null ;
+        return null;
     }
 
-    private Task loadHospital(){
-        if(user.getHospital()!=null){
-            fStore.collection("Hospitals").document(user.getHospital()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                @Override
-                public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                    hospital = value.toObject(Hospitals.class);
-                    Log.w("success",hospital.getName());
-                }
-            });
-        }
-     return  null;
-    }
+
 
     public static Hospitals getHospital() {
         return hospital;

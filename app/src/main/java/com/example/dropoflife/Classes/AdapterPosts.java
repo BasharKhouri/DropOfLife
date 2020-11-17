@@ -45,6 +45,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FileDownloadTask;
@@ -66,6 +67,7 @@ import java.util.concurrent.Future;
 
 /**
  * @author Bashar Khouri
+ *
  */
 public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
     Context context;
@@ -76,8 +78,13 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
     ArrayList postIDList;
     DatabaseReference myRef = database.getReference("Posts");
     private FirebaseStorage storage;
+    Hospitals hospitals;
+    String phoneNumber;
+    GeoPoint location;
+
 
     /**
+     *
      * @param context
      * @param postList
      */
@@ -87,6 +94,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
     }
 
     /**
+     *
      * @param parent
      * @param viewType
      * @return return row (post holder )
@@ -107,50 +115,56 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
     public void onBindViewHolder(@NonNull final MyHolder holder, int position) {
         //get data
         final Post post = postList.get(position);
-        final Hospitals hospitals = postList.get(position).getHospital();
+        final String hospitalID = postList.get(position).getHospitalID();
         final String description = postList.get(position).getDescription();
-        final String location = hospitals.getAddress();
         final Date time = postList.get(position).getDateOfPublish();
         final String blood = BloodType.bloodTypes[postList.get(position).getBloodTypeID()];
         final String postTime = (String) android.text.format.DateFormat.format("MMM dd yyyy", time);
-        final String postID = postList.get(position).getID();
-        final String phoneNumber = hospitals.getPhoneNumber();
+        final String postID = postList.get(position).getPostID();
 
+        //get hospital
+        fStore.collection("Hospitals").document(hospitalID).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                hospitals = value.toObject(Hospitals.class);
+                final String address = hospitals.getAddress();
+                holder.location.setText(address);
+                phoneNumber = hospitals.getPhoneNumber();
+                location = hospitals.getLocation();
+                holder.userName.setText(hospitals.getName());
+
+                if (hospitals.getLogo() != null) {
+                    StorageReference riversRef = storage.getReferenceFromUrl(hospitals.getLogo());
+                    try {
+                        final File localFile = File.createTempFile(hospitalID, "jpg");
+                        riversRef.getFile(localFile)
+                                .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                        // Successfully downloaded data to local file
+                                        // ...
+                                        Picasso.get().load(localFile).placeholder(R.drawable.profile).into(holder.uPic);
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                // Handle failed download
+                                // ...
+                            }
+                        });
+
+                    } catch (Exception e) {
+                    }
+                }
+            }
+        });
 
         storage = FirebaseStorage.getInstance();
 
         //if the user has a profile pic
-        if (hospitals.getLogo() != null) {
-            StorageReference riversRef = storage.getReferenceFromUrl(hospitals.getLogo());
-            try {
-                final File localFile = File.createTempFile("images", "jpg");
-                riversRef.getFile(localFile)
-                        .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                // Successfully downloaded data to local file
-                                // ...
-                                Picasso.get().load(localFile).into(holder.uPic);
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle failed download
-                        // ...
-                    }
-                });
 
-            } catch (Exception e) {
-            }
-
-
-        }
-
-
-        holder.userName.setText(hospitals.getName());
         holder.blood.setText(blood);
         holder.description.setText(description);
-        holder.location.setText(location);
         holder.time.setText(postTime);
         //Program each raw buttons function down here
 
@@ -168,45 +182,47 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
             }
         });
 
-        holder.chat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    Uri uri = Uri.parse("smsto:" + phoneNumber);
-                    Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
-                    intent.setPackage("com.whatsapp");
-                    context.startActivity(intent);
-                } catch (Exception e) {
-                    Toast.makeText(context, "you need to have whatsapp ", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+                holder.chat.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                   try {
+                       Uri uri = Uri.parse("smsto:" + phoneNumber);
+                       Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
+                      intent.setPackage("com.whatsapp");
+                       context.startActivity(intent);
+                   }catch (Exception e){
+                       Toast.makeText(context, "you need to have whatsapp ", Toast.LENGTH_SHORT).show();
+                   }
+                    }
+                });
 
-        holder.callMe.setOnClickListener(new View.OnClickListener() {
-            /**
-             * it send the phone number that is associated with the post to the phone dialer
-             * @param v the current view that we are in
-             */
-            @Override
-            public void onClick(View v) {
-                try {
-                    Uri uri = Uri.parse("tel:" + phoneNumber);
-                    Intent intent = new Intent(Intent.ACTION_DIAL, uri);
-                    context.startActivity(intent);
-                } catch (Exception e) {
-                    Toast.makeText(context, "you need to have whatsapp ", Toast.LENGTH_SHORT).show();
-                }
-            }
+                holder.callMe.setOnClickListener(new View.OnClickListener() {
+                    /**
+                     * it send the phone number that is associated with the post to the phone dialer
+                     * @param v the current view that we are in
+                     */
+                    @Override
+                    public void onClick(View v) {
+                        try {
+                            Uri uri = Uri.parse("tel:" + phoneNumber);
+                            Intent intent = new Intent(Intent.ACTION_DIAL, uri);
+                            context.startActivity(intent);
+                        }catch (Exception e){
+                            Toast.makeText(context, "you need to have whatsapp ", Toast.LENGTH_SHORT).show();
+                        }
+                    }
 
         });
                 /*
                 TODO Hassan you said that this one is on you to do so I'll leave it be don't forget to add comments tho
                  */
-        holder.shareButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                holder.shareButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                    }
+                });
             }
-        });
+
     }
 
 
@@ -276,7 +292,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
         ImageButton moreOption;
         ImageView uPic;
         TextView userName, time, description, blood, location;
-        Button callMe, chat, shareButton;
+        Button callMe, locationButton, shareButton;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
@@ -288,7 +304,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
             blood = (TextView) itemView.findViewById(R.id.itemBloodType);
             location = (TextView) itemView.findViewById(R.id.location);
             callMe = (Button) itemView.findViewById(R.id.item_call_me);
-            chat = (Button) itemView.findViewById(R.id.item_chat);
+            location = (TextView) itemView.findViewById(R.id.location);
             shareButton = (Button) itemView.findViewById(R.id.item_share);
             moreOption = (ImageButton) itemView.findViewById(R.id.moreOption);
         }

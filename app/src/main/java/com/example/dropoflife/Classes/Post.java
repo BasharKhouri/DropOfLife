@@ -17,15 +17,15 @@ import java.util.Date;
  */
 public class Post {
 
-    private Hospitals hospital;
+    public String hospitalID;
     private int bloodTypeID;
     private String description;
     private Date dateOfPublish;
-    private String ID;
+    private String postID ;
 
-    public Post(String ID, Hospitals hospital, int bloodTypeID, String description, Date dateOfPublish) {
-        this.ID = ID;
-        this.hospital = hospital;
+    public Post(String postID,String hospitalID, int bloodTypeID, String description, Date dateOfPublish) {
+        this.postID = postID;
+        this.hospitalID = hospitalID;
         this.bloodTypeID = bloodTypeID;
         this.description = description;
         this.dateOfPublish = dateOfPublish;
@@ -36,9 +36,9 @@ public class Post {
         //auto gen
     }
 
-    //setters
-    public void setID(String ID) {
-        this.ID = ID;
+        //setters
+    public void setPostID(String postID) {
+        this.postID = postID;
     }
 
     public void setDescription(String description) {
@@ -49,9 +49,8 @@ public class Post {
         this.bloodTypeID = bloodTypeID;
     }
 
-
-    public void setHospital(Hospitals hospital) {
-        this.hospital = hospital;
+    public void setHospitalID(String hospitalID) {
+        this.hospitalID = hospitalID;
     }
 
     public void setDateOfPublish(Date dateOfPublish) {
@@ -59,12 +58,12 @@ public class Post {
     }
 
     //getters
-    public String getID() {
-        return ID;
+    public String getPostID() {
+        return postID;
     }
 
-    public Hospitals getHospital() {
-        return hospital;
+    public String getHospitalID() {
+        return hospitalID;
     }
 
     public int bloodTypeID() {
