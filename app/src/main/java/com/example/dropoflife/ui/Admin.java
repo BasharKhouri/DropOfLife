@@ -15,6 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.algolia.search.saas.Client;
+import com.algolia.search.saas.Index;
 import com.example.dropoflife.AddHospital;
 import com.example.dropoflife.ChangeRole;
 import com.example.dropoflife.Classes.AdapterUsers;
@@ -84,15 +87,19 @@ public class Admin extends AppCompatActivity implements AdapterUsers.OnNoteListn
         });
        // to add a custom on click for the recycle view
         mOnNoteListner = this;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
 
 
     }
 
-
     private void LoadUsers(String value){
      users.clear();
      usersID.clear();
-      fStore.collection("users").whereGreaterThanOrEqualTo("email",value.toLowerCase()).limit(10).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+      fStore.collection("users").orderBy("email").whereGreaterThanOrEqualTo("email",value.toLowerCase()).limit(10).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (QueryDocumentSnapshot tk: task.getResult()) {
