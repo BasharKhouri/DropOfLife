@@ -164,8 +164,14 @@ public class AddHospital extends AppCompatActivity {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         pd.dismiss();
-                        logoStr=taskSnapshot.getStorage()+"";
-                   //need for later here      fStore.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(user);
+                        taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                hospital.setLogo(uri.toString());
+                            }
+                        });
+
+
 
                     }
                 })

@@ -81,7 +81,7 @@ public class ProfileFragment extends Fragment {
         //if the user has a profile pic
         if(user.getProfilePic()!=null) {
             try {
-                Picasso.get().load(MainActivity.localFile).placeholder(R.drawable.profile).into(userImage);
+                Picasso.get().load(user.getProfilePic()).placeholder(R.drawable.profile).into(userImage);
             } catch (Exception exception) {
                 System.out.println(exception.getMessage());
             }
@@ -171,9 +171,14 @@ public class ProfileFragment extends Fragment {
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                user.setProfilePic(uri.toString());
+                                fStore.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(user);
+                            }
+                        });
                         pd.dismiss();
-                        user.setProfilePic( taskSnapshot.getStorage()+"");
-                        fStore.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(user);
 
                     }
                 })
