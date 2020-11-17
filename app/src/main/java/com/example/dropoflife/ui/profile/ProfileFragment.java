@@ -81,7 +81,7 @@ public class ProfileFragment extends Fragment {
         //if the user has a profile pic
         if(user.getProfilePic()!=null) {
             try {
-                Picasso.get().load(MainActivity.localFile).placeholder(R.drawable.profile).into(userImage);
+                Picasso.get().load(user.getProfilePic()).placeholder(R.drawable.profile).into(userImage);
             } catch (Exception exception) {
                 System.out.println(exception.getMessage());
             }
@@ -104,7 +104,11 @@ public class ProfileFragment extends Fragment {
            }
        }
 
-       bloodTypeDisplay.setText(user.getBloodType().toString());
+        try {
+            bloodTypeDisplay.setText(user.getBloodType().toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         try {
             numberOfDonations.setText(user.getNumberOfDonations()+"");
         }catch (Exception e){
@@ -172,9 +176,14 @@ public class ProfileFragment extends Fragment {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         pd.dismiss();
-                        user.setProfilePic( taskSnapshot.getStorage()+"");
-                        fStore.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(user);
+                        taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                user.setProfilePic(uri.toString());
+                                fStore.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(user);
 
+                            }
+                        });
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

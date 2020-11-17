@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.dropoflife.Classes.Hospitals;
@@ -63,14 +65,11 @@ public class MainActivity extends AppCompatActivity {
         }
         mAuth = FirebaseAuth.getInstance();
         firebaseUser = mAuth.getCurrentUser();
-
         //init bar
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-
-
+        // menu should be considered as top level destinations
                 appBarConfiguration = new AppBarConfiguration.Builder(
                         R.id.navigation_home, R.id.navigation_profile, R.id.navigation_notifications, R.id.navigation_settings1)
                         .build();
@@ -80,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
 
     }
-
 
     @Override
     protected void onStart() {
@@ -92,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
                         user = value.toObject(User.class);
                         role = user.getRole();
                         Log.w("success ", "LoadedUser");
-                        loadImage();
                     }
                 });
         SingletonPost singletonPost = SingletonPost.getInstance();
@@ -100,23 +97,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-    private Task loadImage() {
-        try {
-            StorageReference riversRef = storage.getReferenceFromUrl(user.getProfilePic());
-            localFile = File.createTempFile("userPic", "jpg");
-            riversRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Log.w("success ", "ImageLoaded");
-                }
-            });
-
-        } catch (Exception e) {
-            Log.w("Error", e.getMessage());
-        }
-        return null;
-    }
 
 
 

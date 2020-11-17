@@ -216,7 +216,6 @@ public class Login extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 FirebaseUser user = mAuth.getCurrentUser();
-                assert user != null;
                 String name = user.getDisplayName();
                 String email = user.getEmail();
                 String userId = user.getProviderId();

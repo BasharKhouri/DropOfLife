@@ -104,6 +104,8 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
         return new MyHolder(view);
     }
 
+
+
     /**
      * @param holder   the raw that has been created
      * @param position the Index form the postList
@@ -149,8 +151,9 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
         holder.moreOption.setOnClickListener(new View.OnClickListener() {
             /**
              * it gives a drop down list where it gives the user 2 options.
-             *  option 1 to report the post to the developers in that case the post will be submitted to the review database.
-             *  option 2 if the user is the owner of this post he/she can delete it.
+             * option 1 to report the post to the developers in that case the post will be submitted to the review database.
+             * option 2 if the user is the owner of this post he/she can delete it.
+             *
              * @param v the current view that we are in
              */
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -163,6 +166,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
         holder.callMe.setOnClickListener(new View.OnClickListener() {
             /**
              * it send the phone number that is associated with the post to the phone dialer
+             *
              * @param v the current view that we are in
              */
             @Override
@@ -198,9 +202,10 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
                 context.startActivity(mapIntent);
             }
         });
-
-
     }
+
+
+
 
 
     /**

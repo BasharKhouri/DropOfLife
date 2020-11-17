@@ -141,7 +141,6 @@ public class ChangeRole extends AppCompatActivity implements IFirebaseHospitalLo
                 } else {
                     hospitalLinearLayout.setVisibility(View.INVISIBLE);
                 }
-                Toast.makeText(ChangeRole.this, "" + position, Toast.LENGTH_SHORT).show();
             }
 
             @Override

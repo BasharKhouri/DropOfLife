@@ -118,6 +118,9 @@ public class User implements Parcelable {
     public BloodType getBloodType() {
         return bloodType;
     }
+    public String getBloodTypeString() {
+        return bloodType.toString();
+    }
 
     public Date getDateOfBirth() {
         return dateOfBirth;
