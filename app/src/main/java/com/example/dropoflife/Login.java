@@ -178,7 +178,6 @@ public class Login extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(getApplicationContext(), "يسعد الله", Toast.LENGTH_SHORT).show();
                             FirebaseUser user = mAuth.getCurrentUser();
                             User googleUser = new User();
                             googleUser.setEmail(user.getEmail());
@@ -233,7 +232,6 @@ public class Login extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                Toast.makeText(Login.this, "Faaack youuuuuuuuu", Toast.LENGTH_SHORT).show();
                 db.collection("users").document(mAuth.getUid()).set(facebookUser)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
@@ -246,119 +244,6 @@ public class Login extends AppCompatActivity {
             }
         });
     }
-
-    //
-//    private void facebookLogin() {
-//
-//
-//    /**
-//     * Bashar comment
-//     * <p>
-//     * User faceBooUser =   new User(fullName, blood,birthDate, sex, email,imagePath, new Roles(1));
-//     * <p>
-//     * pic
-//     * final String imagePath = "images/"+MainActivity.firebaseUser.getUid()+".jpeg";
-//     * StorageReference riversRef = mStorageRef.child(imagePath);
-//     * <p>
-//     * riversRef.putFile(imageUri)
-//     * .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//     *
-//     * @Override public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//     * pd.dismiss();
-//     * user.setProfilePic( taskSnapshot.getStorage()+"");
-//     * fStore.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(user);
-//     * <p>
-//     * }
-//     * })
-//     * .addOnFailureListener(new OnFailureListener() {
-//     * @Override public void onFailure(@NonNull Exception exception) {
-//     * pd.dismiss();
-//     * Toast.makeText(getContext(), R.string.upload_not_successful, Toast.LENGTH_SHORT).show();
-//     * // Handle unsuccessful uploads
-//     * // ...
-//     * <p>
-//     * }
-//     * }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-//     * @Override public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-//     * double progressPercent =(100*snapshot.getBytesTransferred()/snapshot.getTotalByteCount());
-//     * ;
-//     * pd.setMessage((int)progressPercent+" ");
-//     * }
-//     * });
-//     * <p>
-//     * db.collection("users").document(mAuth.getUid()).set(user)
-//     * .addOnSuccessListener(new OnSuccessListener<Void>() {
-//     * @Override public void onSuccess(Void aVoid) {
-//     * Toast.makeText(Registration.this, "User Registerd", Toast.LENGTH_SHORT).show();
-//     * Intent intent =new Intent(getApplicationContext(), MainActivity.class);
-//     * startActivity(intent);
-//     * }
-//     * });
-//     */
-//
-//        loginManager = LoginManager.getInstance();
-//        callbackManager = CallbackManager.Factory.create();
-//
-//        loginManager
-//                .registerCallback(
-//                        callbackManager,
-//                        new FacebookCallback<LoginResult>() {
-//
-//                            @Override
-//                            public void onSuccess(LoginResult loginResult) {
-//                                GraphRequest request = GraphRequest.newMeRequest(
-//
-//                                        loginResult.getAccessToken(),
-//
-//                                        new GraphRequest.GraphJSONObjectCallback() {
-//
-//                                            @Override
-//                                            public void onCompleted(JSONObject object,
-//                                                                    GraphResponse response) {
-//
-//                                                if (object != null) {
-//                                                    try {
-//                                                        String name = object.getString("name");
-//
-//                                                        String birth = object.getString("birthday");
-//                                                        Date bod=new SimpleDateFormat("dd/MM/yyyy").parse(birth);
-//                                                        String email = object.getString("email");
-//                                                        String fbUserID = object.getString("id");
-//                                                        User user = new User(name,bod,"Male", email,null);
-//                                                        Intent in = new Intent(getApplicationContext(),MainActivity.class);
-//
-//                                                        bundle.putSerializable("elUser", user);
-//                                                        in.putExtras(bundle);
-//                                                        startActivity(in);
-//                                                        disconnectFromFacebook();
-//                                                        //userName,new BloodType(1),dateOfBirth,sex,email,profilePic
-//                                                          User faceBooUser =   new User(name, new BloodType(1),bod, "Male", email,null, new Roles(1));
-//                                                        // or call your API
-//                                                    } catch (JSONException | NullPointerException | BloodType.IncorrectBloodIDException | ParseException | Roles.IncorrectRoleExciption | ParseException e) {
-//                                                        e.printStackTrace();
-//                                                    }
-//                                                }
-//                                            }
-//                                        });
-//
-//                                Bundle parameters = new Bundle();
-//                                parameters.putString("fields", "id, name, email, gender, birthday");
-//                                request.setParameters(parameters);
-//                                request.executeAsync();
-//
-//                            }
-//
-//                            @Override
-//                            public void onCancel() {
-//
-//                            }
-//
-//                            @Override
-//                            public void onError(FacebookException error) {
-//
-//                            }
-//                        });
-//    }
     private void forgotPassowrd() {
         final EditText restMail = new EditText(this);
         AlertDialog.Builder passwordResetDialog = new AlertDialog.Builder(this);
@@ -490,29 +375,6 @@ public class Login extends AppCompatActivity {
 
         finish();
     }
-
-
-    private void disconnectFromFacebook() {
-
-            if (AccessToken.getCurrentAccessToken() == null) {
-                return; // already logged out
-            }
-
-        new GraphRequest(
-                AccessToken.getCurrentAccessToken(),
-                "/me/permissions/",
-                null,
-                HttpMethod.DELETE,
-                new GraphRequest
-                        .Callback() {
-                    @Override
-                    public void onCompleted(GraphResponse graphResponse) {
-                        LoginManager.getInstance().logOut();
-                    }
-                })
-                .executeAsync();
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
