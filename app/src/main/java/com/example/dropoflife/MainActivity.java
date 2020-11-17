@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                         user = value.toObject(User.class);
                         role = user.getRole();
                         Log.w("success ", "LoadedUser");
-                        //loadImage();
+                        loadImage();
                     }
                 });
         SingletonPost singletonPost = SingletonPost.getInstance();

@@ -134,10 +134,31 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
                 holder.userName.setText(hospitals.getName());
 
                 if (hospitals.getLogo() != null) {
-                    Picasso.get().load(hospitals.getLogo()).placeholder(R.drawable.profile).into(holder.uPic);
+                    StorageReference riversRef = storage.getReferenceFromUrl(hospitals.getLogo());
+                    try {
+                        final File localFile = File.createTempFile(hospitalID, "jpg");
+                        riversRef.getFile(localFile)
+                                .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                        // Successfully downloaded data to local file
+                                        // ...
+                                        Picasso.get().load(localFile).placeholder(R.drawable.profile).into(holder.uPic);
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                // Handle failed download
+                                // ...
+                            }
+                        });
+
+                    } catch (Exception e) {
+                    }
                 }
             }
         });
+
         storage = FirebaseStorage.getInstance();
 
         //if the user has a profile pic
@@ -198,7 +219,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
         holder.shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                
             }
         });
 

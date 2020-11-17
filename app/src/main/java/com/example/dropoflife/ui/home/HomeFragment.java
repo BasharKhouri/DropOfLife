@@ -66,7 +66,7 @@ public class HomeFragment extends Fragment implements IObserver {
         postList = new ArrayList<>();
         //register this with the subject
         subject.register(this);
-      //  LoadPosts();
+        LoadPosts();
         reqBlood = (Button)view.findViewById(R.id.req_bloodHomeButton);
         share = (Button)view.findViewById(R.id.item_share);
         reqBlood.setOnClickListener(new View.OnClickListener() {
