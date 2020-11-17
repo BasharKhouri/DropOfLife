@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,42 +25,42 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterUsers extends  RecyclerView.Adapter<AdapterUsers.UserHolder>  {
+public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.UserHolder> {
 
     Context context;
     List<User> userList;
     List<String> userIDList;
-    private FirebaseStorage storage ;
-    private  OnNoteListner mOnNoteListner;
-    public AdapterUsers(Context context, List<User> userList , List<String> userIDList,OnNoteListner mOnNoteListner) {
+    private FirebaseStorage storage;
+    private OnNoteListner mOnNoteListner;
+
+    public AdapterUsers(Context context, List<User> userList, List<String> userIDList, OnNoteListner mOnNoteListner) {
         this.context = context;
         this.userList = userList;
-        this.userIDList=userIDList;
-        this.mOnNoteListner=mOnNoteListner;
+        this.userIDList = userIDList;
+        this.mOnNoteListner = mOnNoteListner;
     }
-
 
 
     @NonNull
     @Override
     public UserHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(context).inflate(R.layout.users_card,parent,false);
-        return new UserHolder(view,mOnNoteListner);
+        View view = LayoutInflater.from(context).inflate(R.layout.users_card, parent, false);
+        return new UserHolder(view, mOnNoteListner);
 
     }
 
     @Override
     public void onBindViewHolder(@NonNull final UserHolder holder, int position) {
         final User user = userList.get(position);
-        final String userID=userIDList.get(position);
+        final String userID = userIDList.get(position);
         final String profilePicPath = user.getProfilePic();
         storage = FirebaseStorage.getInstance();
-        if(profilePicPath!=null){
+        if (profilePicPath != null) {
             StorageReference riversRef = storage.getReferenceFromUrl(user.getProfilePic());
 
             try {
                 final File localFile = File.createTempFile("images", "jpg");
-                 riversRef.getFile(localFile)
+                riversRef.getFile(localFile)
                         .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                             @Override
                             public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
@@ -94,15 +95,15 @@ public class AdapterUsers extends  RecyclerView.Adapter<AdapterUsers.UserHolder>
         //views from user_card.xml
         ImageView profilePicET;
         TextView userNameET, userEmailET;
-        OnNoteListner onNoteListner ;
+        OnNoteListner onNoteListner;
 
-        public UserHolder(@NonNull View itemView,OnNoteListner onNoteListner) {
+        public UserHolder(@NonNull View itemView, OnNoteListner onNoteListner) {
             super(itemView);
             //init Views
-            profilePicET = (ImageView)itemView.findViewById(R.id.userCardProfilePic);
-            userEmailET=(TextView)itemView.findViewById(R.id.userCardEmail) ;
-            userNameET=(TextView)itemView.findViewById(R.id.userCardUserName);
-            this.onNoteListner=onNoteListner;
+            profilePicET = (ImageView) itemView.findViewById(R.id.userCardProfilePic);
+            userEmailET = (TextView) itemView.findViewById(R.id.userCardEmail);
+            userNameET = (TextView) itemView.findViewById(R.id.userCardUserName);
+            this.onNoteListner = onNoteListner;
             itemView.setOnClickListener(this);
 
         }
@@ -113,8 +114,8 @@ public class AdapterUsers extends  RecyclerView.Adapter<AdapterUsers.UserHolder>
         }
     }
 
-public interface OnNoteListner {
-        void  onNoteClick(int position);
-}
+    public interface OnNoteListner {
+        void onNoteClick(int position);
+    }
 
 }

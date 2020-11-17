@@ -21,9 +21,9 @@ public class Post {
     private int bloodTypeID;
     private String description;
     private Date dateOfPublish;
-    private String ID ;
+    private String ID;
 
-    public Post(String ID,Hospitals hospital, int bloodTypeID, String description, Date dateOfPublish) {
+    public Post(String ID, Hospitals hospital, int bloodTypeID, String description, Date dateOfPublish) {
         this.ID = ID;
         this.hospital = hospital;
         this.bloodTypeID = bloodTypeID;
@@ -36,7 +36,7 @@ public class Post {
         //auto gen
     }
 
-        //setters
+    //setters
     public void setID(String ID) {
         this.ID = ID;
     }

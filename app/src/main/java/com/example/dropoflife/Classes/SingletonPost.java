@@ -1,4 +1,5 @@
 package com.example.dropoflife.Classes;
+
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
@@ -24,67 +25,61 @@ import java.util.LinkedList;
  * wich in result will be faster and more efficient, and will drive the cost down.
  */
 public class SingletonPost {
-   private static SingletonPost singletonPost = null;
-    private   ArrayList<Post>postArrayList ;
+    private static SingletonPost singletonPost = null;
+    private ArrayList<Post> postArrayList;
 
-    DatabaseReference postRef ;
+    DatabaseReference postRef;
 
-    static  boolean   firstThread  = true;
+    static boolean firstThread = true;
+
     //constructor
-    private SingletonPost(){
+    private SingletonPost() {
         postArrayList = new ArrayList<>();
     }
-   public static SingletonPost getInstance(){
+
+    public static SingletonPost getInstance() {
         //in case of concurrent Threads
-       if(singletonPost==null){
-           if(firstThread){
-               Thread.currentThread();
-               try {
-                   firstThread=false;
-                   Thread.sleep(20);
-               } catch (InterruptedException e) {
-                   e.printStackTrace();
-               }
-           }
-           singletonPost =  new SingletonPost();
-       }
-       return singletonPost;
-   }
+        if (singletonPost == null) {
+            if (firstThread) {
+                Thread.currentThread();
+                try {
+                    firstThread = false;
+                    Thread.sleep(20);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            singletonPost = new SingletonPost();
+        }
+        return singletonPost;
+    }
 
 
+    public ArrayList<Post> LoadPosts() {
 
-
-   public  ArrayList<Post> LoadPosts(){
-
-       // Path Of all Posts
-       postRef= FirebaseDatabase.getInstance().getReference("Posts");
+        // Path Of all Posts
+        postRef = FirebaseDatabase.getInstance().getReference("Posts");
         //get first 20 post
-       postRef.limitToFirst(20).addValueEventListener(new ValueEventListener() {
-           @Override
-           public void onDataChange(@NonNull DataSnapshot snapshot) {
-               postArrayList.clear();
-               for (DataSnapshot ds :snapshot.getChildren()) {
-                  Post post = ds.getValue(Post.class);
-                  postArrayList.add(post);
-               }
+        postRef.limitToFirst(20).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                postArrayList.clear();
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    Post post = ds.getValue(Post.class);
+                    postArrayList.add(post);
+                }
 
-           }
+            }
 
-           @Override
-           public void onCancelled(@NonNull DatabaseError error) {
-               Log.w("Error",error.getMessage());
-           }
-       });
-
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w("Error", error.getMessage());
+            }
+        });
 
 
         return postArrayList;
-   }
-
-
-
-
-
+    }
 
 
 }

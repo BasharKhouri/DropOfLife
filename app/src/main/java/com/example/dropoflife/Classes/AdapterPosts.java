@@ -66,9 +66,8 @@ import java.util.concurrent.Future;
 
 /**
  * @author Bashar Khouri
- *
  */
-public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
+public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
     Context context;
     List<Post> postList;
     FirebaseFirestore fStore = FirebaseFirestore.getInstance();
@@ -76,10 +75,9 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
     Uri userPic;
     ArrayList postIDList;
     DatabaseReference myRef = database.getReference("Posts");
-    private FirebaseStorage storage ;
+    private FirebaseStorage storage;
 
     /**
-     *
      * @param context
      * @param postList
      */
@@ -89,7 +87,6 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
     }
 
     /**
-     *
      * @param parent
      * @param viewType
      * @return return row (post holder )
@@ -97,152 +94,146 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
     @NonNull
     @Override
     public MyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-      //inflate layout
-       View view= LayoutInflater.from(context).inflate(R.layout.row,parent,false);
+        //inflate layout
+        View view = LayoutInflater.from(context).inflate(R.layout.row, parent, false);
         return new MyHolder(view);
     }
 
     /**
-     *
-     * @param holder the raw that has been created
+     * @param holder   the raw that has been created
      * @param position the Index form the postList
      */
     @Override
     public void onBindViewHolder(@NonNull final MyHolder holder, int position) {
         //get data
         final Post post = postList.get(position);
-        final Hospitals hospitals =postList.get(position).getHospital();
-        final String description =postList.get(position).getDescription();
-        final String location =hospitals.getAddress();
-        final Date time =postList.get(position).getDateOfPublish();
+        final Hospitals hospitals = postList.get(position).getHospital();
+        final String description = postList.get(position).getDescription();
+        final String location = hospitals.getAddress();
+        final Date time = postList.get(position).getDateOfPublish();
         final String blood = BloodType.bloodTypes[postList.get(position).getBloodTypeID()];
-        final String postTime = (String) android.text.format.DateFormat.format("MMM dd yyyy",time);
+        final String postTime = (String) android.text.format.DateFormat.format("MMM dd yyyy", time);
         final String postID = postList.get(position).getID();
-        final String phoneNumber =hospitals.getPhoneNumber();
+        final String phoneNumber = hospitals.getPhoneNumber();
 
 
+        storage = FirebaseStorage.getInstance();
 
-
-                storage = FirebaseStorage.getInstance();
-
-                //if the user has a profile pic
-                if(hospitals.getLogo()!=null) {
-                    StorageReference riversRef = storage.getReferenceFromUrl(hospitals.getLogo());
-                    try {
-                        final File localFile = File.createTempFile("images", "jpg");
-                        riversRef.getFile(localFile)
-                                .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                                    @Override
-                                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                        // Successfully downloaded data to local file
-                                        // ...
-                                        Picasso.get().load(localFile).into(holder.uPic);
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
+        //if the user has a profile pic
+        if (hospitals.getLogo() != null) {
+            StorageReference riversRef = storage.getReferenceFromUrl(hospitals.getLogo());
+            try {
+                final File localFile = File.createTempFile("images", "jpg");
+                riversRef.getFile(localFile)
+                        .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                             @Override
-                            public void onFailure(@NonNull Exception exception) {
-                                // Handle failed download
+                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                // Successfully downloaded data to local file
                                 // ...
+                                Picasso.get().load(localFile).into(holder.uPic);
                             }
-                        });
-
-                    } catch (Exception e) {
-                    }
-
-
-                }
-
-
-                holder.userName.setText(hospitals.getName());
-                holder.blood.setText(blood);
-                holder.description.setText(description);
-                holder.location.setText(location);
-                holder.time.setText(postTime);
-                //Program each raw buttons function down here
-
-                holder.moreOption.setOnClickListener(new View.OnClickListener() {
-                    /**
-                     * it gives a drop down list where it gives the user 2 options.
-                     *  option 1 to report the post to the developers in that case the post will be submitted to the review database.
-                     *  option 2 if the user is the owner of this post he/she can delete it.
-                     * @param v the current view that we are in
-                     */
-                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                        }).addOnFailureListener(new OnFailureListener() {
                     @Override
-                    public void onClick(View v) {
-                        moreOption(holder.moreOption, FirebaseAuth.getInstance().getCurrentUser().getUid(),hospitals.getName(),postID);
+                    public void onFailure(@NonNull Exception exception) {
+                        // Handle failed download
+                        // ...
                     }
                 });
 
-                holder.chat.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                   try {
-                       Uri uri = Uri.parse("smsto:" + phoneNumber);
-                       Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
-                      intent.setPackage("com.whatsapp");
-                       context.startActivity(intent);
-                   }catch (Exception e){
-                       Toast.makeText(context, "you need to have whatsapp ", Toast.LENGTH_SHORT).show();
-                   }
-                    }
-                });
-
-                holder.callMe.setOnClickListener(new View.OnClickListener() {
-                    /**
-                     * it send the phone number that is associated with the post to the phone dialer
-                     * @param v the current view that we are in
-                     */
-                    @Override
-                    public void onClick(View v) {
-                        try {
-                            Uri uri = Uri.parse("tel:" + phoneNumber);
-                            Intent intent = new Intent(Intent.ACTION_DIAL, uri);
-                            context.startActivity(intent);
-                        }catch (Exception e){
-                            Toast.makeText(context, "you need to have whatsapp ", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                });
-                /*
-                TODO Hassan you said that this one is on you to do so I'll leave it be don't forget to add comments tho
-                 */
-                holder.shareButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                    }
-                });
+            } catch (Exception e) {
             }
 
 
+        }
+
+
+        holder.userName.setText(hospitals.getName());
+        holder.blood.setText(blood);
+        holder.description.setText(description);
+        holder.location.setText(location);
+        holder.time.setText(postTime);
+        //Program each raw buttons function down here
+
+        holder.moreOption.setOnClickListener(new View.OnClickListener() {
+            /**
+             * it gives a drop down list where it gives the user 2 options.
+             *  option 1 to report the post to the developers in that case the post will be submitted to the review database.
+             *  option 2 if the user is the owner of this post he/she can delete it.
+             * @param v the current view that we are in
+             */
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onClick(View v) {
+                moreOption(holder.moreOption, FirebaseAuth.getInstance().getCurrentUser().getUid(), hospitals.getName(), postID);
+            }
+        });
+
+        holder.chat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Uri uri = Uri.parse("smsto:" + phoneNumber);
+                    Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
+                    intent.setPackage("com.whatsapp");
+                    context.startActivity(intent);
+                } catch (Exception e) {
+                    Toast.makeText(context, "you need to have whatsapp ", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        holder.callMe.setOnClickListener(new View.OnClickListener() {
+            /**
+             * it send the phone number that is associated with the post to the phone dialer
+             * @param v the current view that we are in
+             */
+            @Override
+            public void onClick(View v) {
+                try {
+                    Uri uri = Uri.parse("tel:" + phoneNumber);
+                    Intent intent = new Intent(Intent.ACTION_DIAL, uri);
+                    context.startActivity(intent);
+                } catch (Exception e) {
+                    Toast.makeText(context, "you need to have whatsapp ", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        });
+                /*
+                TODO Hassan you said that this one is on you to do so I'll leave it be don't forget to add comments tho
+                 */
+        holder.shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
+    }
+
 
     /**
-     *
      * @param moreOption the Image that has the on Click listener
-     * @param uid the Current user
-     * @param userID the owner of this post
-     * @param postID the Id that the post has
+     * @param uid        the Current user
+     * @param userID     the owner of this post
+     * @param postID     the Id that the post has
      */
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     private void moreOption(ImageView moreOption, final String uid, String userID, final String postID) {
         //first we will create the pop up menu
-        PopupMenu popupMenu = new PopupMenu(context,moreOption, Gravity.END);
+        PopupMenu popupMenu = new PopupMenu(context, moreOption, Gravity.END);
         //add items in menu
-        if(uid.equals(userID)) {
+        if (uid.equals(userID)) {
             popupMenu.getMenu().add(Menu.NONE, 0, 0, "Delete");
-        } else{
-            popupMenu.getMenu().add(Menu.NONE,1,1,"Report");
+        } else {
+            popupMenu.getMenu().add(Menu.NONE, 1, 1, "Report");
         }
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 int id = item.getItemId();
-                if(id==0) {
+                if (id == 0) {
                     delete(postID);
-                }
-                else {
-                    report(postID,uid);
+                } else {
+                    report(postID, uid);
                 }
                 return false;
             }
@@ -252,23 +243,21 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
     }
 
     /**
-     *
      * @param postID it sends the post ID to the database for the developers to check out the post if it is insulting the post will be removed and the account weill be disabled.
      */
-    private void report(String postID,String currnetUser) {
+    private void report(String postID, String currnetUser) {
         DatabaseReference reportRef = database.getReference("Report");
-        HashMap<String,String>PostMap=new HashMap<>();
-        reportRef.child("PostID: "+postID).child("Reporter: "+currnetUser).setValue(new Date());
+        HashMap<String, String> PostMap = new HashMap<>();
+        reportRef.child("PostID: " + postID).child("Reporter: " + currnetUser).setValue(new Date());
 
     }
 
     /**
-     *
      * @param postID the  child ID in posts inside the realtime firebase database
      */
     private void delete(String postID) {
         //Todo if the take a long time am thinking to add a progress bar come bake later
-       myRef.child(postID).removeValue();
+        myRef.child(postID).removeValue();
     }
 
 
@@ -282,26 +271,26 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
      */
 
     //View Holder Class
-    class MyHolder extends RecyclerView.ViewHolder{
+    class MyHolder extends RecyclerView.ViewHolder {
         //views from row.xml
         ImageButton moreOption;
-        ImageView uPic ;
-        TextView userName , time  , description , blood , location;
-        Button callMe , chat , shareButton;
+        ImageView uPic;
+        TextView userName, time, description, blood, location;
+        Button callMe, chat, shareButton;
 
         public MyHolder(@NonNull View itemView) {
             super(itemView);
-          //init Views
+            //init Views
             uPic = (ImageView) itemView.findViewById(R.id.item_profile_image);
-            userName = (TextView)itemView.findViewById(R.id.itemUserName);
-            time = (TextView)itemView.findViewById(R.id.itemDateOfPublish);
-            description= (TextView)itemView.findViewById(R.id.itemDescription);
-            blood= (TextView)itemView.findViewById(R.id.itemBloodType);
-            location= (TextView)itemView.findViewById(R.id.location);
+            userName = (TextView) itemView.findViewById(R.id.itemUserName);
+            time = (TextView) itemView.findViewById(R.id.itemDateOfPublish);
+            description = (TextView) itemView.findViewById(R.id.itemDescription);
+            blood = (TextView) itemView.findViewById(R.id.itemBloodType);
+            location = (TextView) itemView.findViewById(R.id.location);
             callMe = (Button) itemView.findViewById(R.id.item_call_me);
-            chat= (Button) itemView.findViewById(R.id.item_chat);
-            shareButton= (Button) itemView.findViewById(R.id.item_share);
-            moreOption=(ImageButton) itemView.findViewById(R.id.moreOption);
-         }
+            chat = (Button) itemView.findViewById(R.id.item_chat);
+            shareButton = (Button) itemView.findViewById(R.id.item_share);
+            moreOption = (ImageButton) itemView.findViewById(R.id.moreOption);
+        }
     }
 }

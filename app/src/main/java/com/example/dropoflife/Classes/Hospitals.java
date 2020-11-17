@@ -6,24 +6,25 @@ import com.google.firebase.firestore.GeoPoint;
  * @author Bashar
  */
 public class Hospitals {
-    String name ;
+    String name;
     String ID;
     GeoPoint location;
     String phoneNumber;
     String logo;
     String address;
-    Hospitals(){/*Ignore  Constructor For Firebase*/}
+
+    Hospitals() {/*Ignore  Constructor For Firebase*/}
+
     /**
-     *
-     * @param name name of the Hospital
-     * @param location for the geographical location of the hospital
+     * @param name        name of the Hospital
+     * @param location    for the geographical location of the hospital
      * @param phoneNumber for the receptionist
-     * @param logo the Path for the LOGO
-     * @param address the physical location for the Hospital
+     * @param logo        the Path for the LOGO
+     * @param address     the physical location for the Hospital
      */
-    public Hospitals(String ID,String name, GeoPoint location, String phoneNumber, String logo, String address) {
+    public Hospitals(String ID, String name, GeoPoint location, String phoneNumber, String logo, String address) {
         this.name = name;
-        this.location=location;
+        this.location = location;
         this.phoneNumber = phoneNumber;
         this.logo = logo;
         this.address = address;
