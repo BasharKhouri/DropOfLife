@@ -35,6 +35,9 @@ public class HomeFragment extends Fragment implements IObserver {
     private ISubject subject;
     FirebaseUser currentUser;
     Button reqBlood;
+    Button share;
+//    hospital   bloodtype description date
+
     ProgressBar bar;
     //Posts var
     RecyclerView recyclerView ;
@@ -65,6 +68,7 @@ public class HomeFragment extends Fragment implements IObserver {
         subject.register(this);
       //  LoadPosts();
         reqBlood = (Button)view.findViewById(R.id.req_bloodHomeButton);
+        share = (Button)view.findViewById(R.id.item_share);
         reqBlood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,6 +76,7 @@ public class HomeFragment extends Fragment implements IObserver {
                 startActivity(intent);
             }
         });
+       
 
         return view;
     }

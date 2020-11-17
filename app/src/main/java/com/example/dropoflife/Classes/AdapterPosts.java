@@ -67,6 +67,7 @@ import java.util.concurrent.Future;
 
 /**
  * @author Bashar Khouri
+ *
  */
 public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
     Context context;
@@ -83,6 +84,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
 
 
     /**
+     *
      * @param context
      * @param postList
      */
@@ -92,6 +94,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
     }
 
     /**
+     *
      * @param parent
      * @param viewType
      * @return return row (post holder )
@@ -158,21 +161,35 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
             }
         });
 
-        holder.callMe.setOnClickListener(new View.OnClickListener() {
-            /**
-             * it send the phone number that is associated with the post to the phone dialer
-             * @param v the current view that we are in
-             */
-            @Override
-            public void onClick(View v) {
-                try {
-                    Uri uri = Uri.parse("tel:" + phoneNumber);
-                    Intent intent = new Intent(Intent.ACTION_DIAL, uri);
-                    context.startActivity(intent);
-                } catch (Exception e) {
-                    Toast.makeText(context, "you need to have whatsapp ", Toast.LENGTH_SHORT).show();
-                }
-            }
+                holder.chat.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                   try {
+                       Uri uri = Uri.parse("smsto:" + phoneNumber);
+                       Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
+                      intent.setPackage("com.whatsapp");
+                       context.startActivity(intent);
+                   }catch (Exception e){
+                       Toast.makeText(context, "you need to have whatsapp ", Toast.LENGTH_SHORT).show();
+                   }
+                    }
+                });
+
+                holder.callMe.setOnClickListener(new View.OnClickListener() {
+                    /**
+                     * it send the phone number that is associated with the post to the phone dialer
+                     * @param v the current view that we are in
+                     */
+                    @Override
+                    public void onClick(View v) {
+                        try {
+                            Uri uri = Uri.parse("tel:" + phoneNumber);
+                            Intent intent = new Intent(Intent.ACTION_DIAL, uri);
+                            context.startActivity(intent);
+                        }catch (Exception e){
+                            Toast.makeText(context, "you need to have whatsapp ", Toast.LENGTH_SHORT).show();
+                        }
+                    }
 
         });
                 /*
@@ -195,8 +212,6 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
                 mapIntent.setPackage("com.google.android.apps.maps");
                 context.startActivity(mapIntent);
             }
-        });
-
 
     }
 
@@ -279,7 +294,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
             blood = (TextView) itemView.findViewById(R.id.itemBloodType);
             location = (TextView) itemView.findViewById(R.id.location);
             callMe = (Button) itemView.findViewById(R.id.item_call_me);
-            locationButton = (Button) itemView.findViewById(R.id.item_location);
+            location = (TextView) itemView.findViewById(R.id.location);
             shareButton = (Button) itemView.findViewById(R.id.item_share);
             moreOption = (ImageButton) itemView.findViewById(R.id.moreOption);
         }
