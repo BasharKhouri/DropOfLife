@@ -158,9 +158,6 @@ public class HomeFragment extends Fragment implements IObserver {
 
                 }
 
-                        reqBlood.setVisibility(View.INVISIBLE);
-
-
             }
 
             @Override
