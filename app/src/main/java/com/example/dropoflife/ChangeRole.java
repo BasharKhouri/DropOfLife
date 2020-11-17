@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -108,29 +109,8 @@ public class ChangeRole extends AppCompatActivity implements IFirebaseHospitalLo
             userNameET.setText(selectedUser.getUserName());
             //set profile pic
             if (selectedUser.getProfilePic() != null) {
-                StorageReference riversRef = storage.getReferenceFromUrl(selectedUser.getProfilePic());
-                try {
-                    final File localFile = File.createTempFile("images", "jpg");
-                    riversRef.getFile(localFile)
-                            .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                                @Override
-                                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                    // Successfully downloaded data to local file
-                                    // ...
-                                    Picasso.get().load(localFile).placeholder(R.drawable.profile).into(userImageIV);
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception exception) {
-                            // Handle failed download
-                            // ...
-                        }
-                    });
-                } catch (Exception e) {
-                    Log.w("Error", e.getMessage());
-                }
+               Picasso.get().load(selectedUser.getProfilePic()).into(userImageIV);
             }
-
 
 
         roleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
