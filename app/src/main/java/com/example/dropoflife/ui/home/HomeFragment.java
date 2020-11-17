@@ -1,4 +1,5 @@
 package com.example.dropoflife.ui.home;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,6 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.dropoflife.AddRequest;
 import com.example.dropoflife.Classes.AdapterPosts;
 import com.example.dropoflife.Classes.Post;
+import com.example.dropoflife.Classes.SingletonPost;
+import com.example.dropoflife.Interface.IObserver;
+import com.example.dropoflife.Interface.ISubject;
 import com.example.dropoflife.R;
 import com.google.android.gms.tasks.Task;
 
@@ -25,13 +29,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
+import java.util.List;
 
-public class HomeFragment extends Fragment {
-
-    DatabaseReference postRef ;
-
+public class HomeFragment extends Fragment implements IObserver {
+    private ISubject subject;
     FirebaseUser currentUser;
     Button reqBlood;
+    Button share;
+//    hospital   bloodtype description date
+
     ProgressBar bar;
     //Posts var
     RecyclerView recyclerView ;
@@ -49,7 +55,8 @@ public class HomeFragment extends Fragment {
          // Recycler View and it's properties
         recyclerView = view.findViewById(R.id.postsRecyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-
+       //init subject / singleton
+        subject = SingletonPost.getInstance();
         //show the newest post 1st,for this load from last
         linearLayoutManager.setStackFromEnd(true);
         linearLayoutManager.setReverseLayout(true);
@@ -57,9 +64,11 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         //init post List
         postList = new ArrayList<>();
-            LoadPosts();
-
+        //register this with the subject
+        subject.register(this);
+        LoadPosts();
         reqBlood = (Button)view.findViewById(R.id.req_bloodHomeButton);
+        share = (Button)view.findViewById(R.id.item_share);
         reqBlood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,41 +76,21 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+       
 
         return view;
     }
     ArrayList<String> postID = new ArrayList<>();
     private Task  LoadPosts() {
-        // Path Of all Posts
-        postRef= FirebaseDatabase.getInstance().getReference("Posts");
-        //get all data from the postRef
-        postRef.limitToFirst(20).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                postList.clear();
-                postID.clear();
-                for(DataSnapshot ds:snapshot.getChildren()){
-                    Post post = ds.getValue(Post.class);
-                    postList.add(post);
-                    postID.add(ds.getKey());
-                    //adapter
-                    adapterPosts = new AdapterPosts(getActivity(),postList,postID);
-                 //setAdapter to recyclerView
-                    recyclerView.setAdapter(adapterPosts);
-                }
-                bar.setVisibility(View.GONE);
 
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                //in case of error
-                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        adapterPosts = new AdapterPosts(getActivity(),SingletonPost.getPostArrayList());
+        recyclerView.setAdapter(adapterPosts);
+        bar.setVisibility(View.GONE);
         return null;
     }
 
-
-
-
+    @Override
+    public void update() {
+     LoadPosts();
+    }
 }

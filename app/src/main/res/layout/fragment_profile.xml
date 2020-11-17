@@ -99,30 +99,6 @@
                 android:textColor="#ffffff"
                 android:textSize="15dp" />
 
-            <ImageView
-                android:id="@+id/editImage"
-                android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="11dp"
-                android:layout_marginRight="11dp"
-                android:src="@drawable/ic_baseline_edit_24" />
-
-            <ImageView
-                android:id="@+id/doneImage"
-                android:layout_width="36dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="11dp"
-                android:layout_marginRight="11dp"
-                android:src="@drawable/ic_twotone_done_outline_24"
-                android:visibility="invisible" />
         </RelativeLayout>
 
 
@@ -171,38 +147,6 @@
                 android:textSize="40dp"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/profile_page_usesLocation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/donationButton"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_marginStart="61dp"
-                android:layout_marginLeft="61dp"
-                android:layout_marginTop="110dp"
-                android:background="@color/trasnperant"
-                android:enabled="false"
-                android:text="Location"
-                android:textColor="@color/editTextColor"
-                android:textSize="25dp" />
-
-            <EditText
-                android:id="@+id/profile_page_usesPhone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/profile_page_usesLocation"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_marginStart="61dp"
-                android:layout_marginLeft="61dp"
-                android:layout_marginTop="33dp"
-                android:background="@color/trasnperant"
-                android:enabled="false"
-                android:text="@string/phone_number"
-                android:textColor="@color/editTextColor"
-                android:textSize="25dp" />
-
             <TextView
                 android:id="@+id/profile_page_usesBlood"
                 android:layout_width="57dp"
@@ -212,7 +156,6 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginStart="82dp"
                 android:layout_marginLeft="82dp"
-
                 android:layout_marginTop="-1dp"
                 android:layout_marginEnd="132dp"
                 android:layout_marginRight="132dp"
@@ -257,34 +200,6 @@
                 android:textColor="@color/bttnTxt"
                 android:text="@string/i_just_donated" />
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/profile_page_BloodTypeTXT"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_marginStart="18dp"
-                android:layout_marginLeft="18dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="-21dp"
-                android:layout_marginRight="-21dp"
-
-                android:background="@color/trasnperant"
-                android:src="@drawable/ic_baseline_my_location_24" />
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/imageView"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="39dp"
-                android:background="@color/trasnperant"
-                android:src="@drawable/ic_baseline_phone_24" />
         </RelativeLayout>
     </LinearLayout>
 </ScrollView>

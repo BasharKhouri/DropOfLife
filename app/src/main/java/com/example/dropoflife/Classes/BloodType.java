@@ -6,8 +6,9 @@ package com.example.dropoflife.Classes;
 public class BloodType {
 
     private String bloodType;
-    private int bloodID ;
-   final public static String bloodTypes [] ={"A+","A-","B+","B-","O+","O-","AB+","AB-","Unknown"};
+    private int bloodID;
+    final public static String bloodTypes[] = {"A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-", "Unknown"};
+
     /**
      * @param bloodID number must be between 0 and 8 else it will throw Blood type not found @<code> String bloodTypes [] ={"A+","A-","B+","B-","O+","O-","AB+","AB-","Unknown"} </code>
      */

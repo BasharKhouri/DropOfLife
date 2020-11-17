@@ -17,15 +17,15 @@ import java.util.Date;
  */
 public class Post {
 
-    private Hospitals hospital;
+    public String hospitalID;
     private int bloodTypeID;
     private String description;
     private Date dateOfPublish;
+    private String postID ;
 
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-    public Post(Hospitals hospital, int bloodTypeID, String description, Date dateOfPublish) {
-        this.hospital = hospital;
+    public Post(String postID,String hospitalID, int bloodTypeID, String description, Date dateOfPublish) {
+        this.postID = postID;
+        this.hospitalID = hospitalID;
         this.bloodTypeID = bloodTypeID;
         this.description = description;
         this.dateOfPublish = dateOfPublish;
@@ -36,6 +36,10 @@ public class Post {
         //auto gen
     }
 
+        //setters
+    public void setPostID(String postID) {
+        this.postID = postID;
+    }
 
     public void setDescription(String description) {
         this.description = description;
@@ -45,22 +49,22 @@ public class Post {
         this.bloodTypeID = bloodTypeID;
     }
 
-
-    public void setHospital(Hospitals hospital) {
-        this.hospital = hospital;
+    public void setHospitalID(String hospitalID) {
+        this.hospitalID = hospitalID;
     }
 
     public void setDateOfPublish(Date dateOfPublish) {
         this.dateOfPublish = dateOfPublish;
     }
 
-
-
-
-    public Hospitals getHospital() {
-        return hospital;
+    //getters
+    public String getPostID() {
+        return postID;
     }
 
+    public String getHospitalID() {
+        return hospitalID;
+    }
 
     public int bloodTypeID() {
         return bloodTypeID;

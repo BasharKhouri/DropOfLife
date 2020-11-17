@@ -8,7 +8,7 @@
     <string name="title_home">الصفحة الرئيسية</string>
     <string name="title_profile">الملف الشخصي</string>
     <string name="title_notifications">اشعارات</string>
-    <string name="call_me">اتصل بي </string>
+    <string name="call_me">اتصل بنا </string>
     <string name="chat">المحادثة</string>
     <string name="filter">تصفية</string>
     <string name="req_blood">طلب تبرع بالدم</string>
@@ -70,7 +70,7 @@
     <string name="register">التسجيل</string>
     <string name="what_s_your_blood_type">What\'s your blood type?</string>
     <string name="username">UserName</string>
-    <string name="location">Location</string>
+    <string name="location">الموقع</string>
     <string name="date">Date</string>
     <string name="additional_ino">معلومات اضافية</string>
     <string name="ab">AB+</string>

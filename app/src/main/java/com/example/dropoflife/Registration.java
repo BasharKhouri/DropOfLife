@@ -104,7 +104,7 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
                         Toast.makeText(getApplicationContext(), R.string.sign_up_successfully, Toast.LENGTH_SHORT).show();
                         User user = null;
                         try {
-                            user = new User(fullName, blood,birthDate, sex, email,null, new Roles(1));
+                            user = new User(mAuth.getUid(),fullName, blood,birthDate, sex, email.toLowerCase(),null, new Roles(0));
                         } catch (Roles.IncorrectRoleExciption incorrectRoleExciption) {
                             incorrectRoleExciption.printStackTrace();
                         }
@@ -112,7 +112,7 @@ public class Registration extends AppCompatActivity implements DatePickerDialog.
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        Toast.makeText(Registration.this, "User Registerd", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Registration.this, "User Registered", Toast.LENGTH_SHORT).show();
                                         Intent intent =new Intent(getApplicationContext(), MainActivity.class);
                                         startActivity(intent);
                                     }

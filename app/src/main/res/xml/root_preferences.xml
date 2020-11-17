@@ -70,6 +70,8 @@
             app:title="@string/dark_mode"
             app:summaryOff="Dark Mode Off"
             app:summaryOn="Dark Mode On"/>
+            <Preference android:title="@string/Admin"
+                app:key ="admin"/>
 
 
         <Preference

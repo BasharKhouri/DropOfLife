@@ -4,19 +4,21 @@ package com.example.dropoflife.Classes;
  * @author Bashar
  */
 public class Roles {
-    public  static String [] roles = {"user","admin","hospital worker"};
+    public static String[] roles = {"user", "admin", "hospital worker"};
     private String role;
     private int ID;
-    public Roles(){/*ignore this Constructor it is for the database */}
+
+    public Roles() {/*ignore this Constructor it is for the database */}
+
     public Roles(int ID) throws IncorrectRoleExciption {
-            if(ID>=0&&ID<=2)
-        role=roles[ID];
-            else
-                throw new IncorrectRoleExciption("Incorrect Role");
+        if (ID >= 0 && ID <= 2) {
+            role = roles[ID];
+            this.ID = ID;
+        } else
+            throw new IncorrectRoleExciption("Incorrect Role");
     }
 
     /**
-     *
      * @param role it set the role cant be used by the programmer it is to be used by the firebase database only
      */
     public void setRole(String role) {
@@ -24,7 +26,6 @@ public class Roles {
     }
 
     /**
-     *
      * @param ID For the Firebase database Only
      */
     public void setID(int ID) {

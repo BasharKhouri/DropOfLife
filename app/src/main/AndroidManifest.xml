@@ -28,7 +28,7 @@
         <activity android:name=".Registration" />
         <activity android:name=".Login" />
         <activity android:name=".MainActivity" />
-
+        <activity android:name=".ui.Admin"/>
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
