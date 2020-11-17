@@ -25,7 +25,7 @@ import java.util.LinkedList;
  */
 public class SingletonPost {
    private static SingletonPost singletonPost = null;
-    private   ArrayList<Post>postArrayList ;
+    private  static ArrayList<Post>postArrayList ;
 
     DatabaseReference postRef ;
 
@@ -33,6 +33,8 @@ public class SingletonPost {
     //constructor
     private SingletonPost(){
         postArrayList = new ArrayList<>();
+        LoadPosts();
+
     }
    public static SingletonPost getInstance(){
         //in case of concurrent Threads
@@ -64,24 +66,17 @@ public class SingletonPost {
                   Post post = ds.getValue(Post.class);
                   postArrayList.add(post);
                }
-
            }
-
            @Override
            public void onCancelled(@NonNull DatabaseError error) {
                Log.w("Error",error.getMessage());
            }
        });
 
-
-
         return postArrayList;
    }
 
-
-
-
-
-
-
+    public static ArrayList<Post> getPostArrayList() {
+        return postArrayList;
+    }
 }

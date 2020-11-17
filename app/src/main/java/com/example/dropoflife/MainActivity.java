@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.example.dropoflife.Classes.Hospitals;
 import com.example.dropoflife.Classes.Roles;
+import com.example.dropoflife.Classes.SingletonPost;
 import com.example.dropoflife.Classes.User;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -94,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                         loadImage();
                     }
                 });
-
+        SingletonPost singletonPost = SingletonPost.getInstance();
     }
 
 

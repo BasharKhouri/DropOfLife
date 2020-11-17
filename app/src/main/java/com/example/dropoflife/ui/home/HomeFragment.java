@@ -60,6 +60,7 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
         //init post List
         postList = new ArrayList<>();
+            
             LoadPosts();
 
         reqBlood = (Button)view.findViewById(R.id.req_bloodHomeButton);
@@ -76,13 +77,10 @@ public class HomeFragment extends Fragment {
     ArrayList<String> postID = new ArrayList<>();
     private Task  LoadPosts() {
 
-        adapterPosts = new AdapterPosts(getActivity(),singletonPost.LoadPosts());
+        adapterPosts = new AdapterPosts(getActivity(),singletonPost.getPostArrayList());
         recyclerView.setAdapter(adapterPosts);
         bar.setVisibility(View.GONE);
         return null;
     }
-
-
-
 
 }

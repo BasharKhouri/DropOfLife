@@ -41,15 +41,15 @@
         android:layout_toEndOf="@+id/item_profile_image"
         android:layout_toRightOf="@+id/item_profile_image"
         android:text="UserName"
-        android:textSize="15dp"
+
         android:textColor="@color/row_txt_color"
-        />
+        android:textSize="20sp" />
 
 
     <TextView
         android:id="@+id/location"
-        android:layout_width="72dp"
-        android:layout_height="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/itemUserName"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
@@ -66,15 +66,15 @@
     <TextView
         android:id="@+id/itemDateOfPublish"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="19dp"
         android:layout_above="@+id/contact"
         android:layout_below="@+id/itemBloodType"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="17dp"
-        android:layout_marginRight="17dp"
-        android:layout_marginBottom="26dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginRight="21dp"
+        android:layout_marginBottom="27dp"
         android:autoLink="all"
         android:text="@string/date"
         android:textColor="@color/row_txt_color"
@@ -107,11 +107,11 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginStart="53dp"
-        android:layout_marginLeft="53dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="70dp"
-        android:layout_marginRight="70dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginLeft="84dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
         android:layout_toEndOf="@+id/itemUserName"
         android:layout_toRightOf="@+id/itemUserName"
         android:autoLink="all"
@@ -158,7 +158,7 @@
             android:textSize="12sp"
             android:drawableStart="@drawable/ic_baseline_call_24"
             android:drawableLeft="@drawable/ic_baseline_call_24"
-          
+
             android:autoLink="all"
             android:textColor="@color/row_txt_color"
             />
