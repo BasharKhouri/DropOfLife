@@ -33,7 +33,14 @@ public class SingletonPost implements ISubject {
         observers = new ArrayList<>(1);
 
     }
-   public static SingletonPost getInstance(){
+
+    public void setPostArrayList(ArrayList<Post> postArrayList) {
+        SingletonPost.postArrayList = postArrayList;
+        notifyObserver();
+
+    }
+
+    public static SingletonPost getInstance(){
         //in case of concurrent Threads
        if(singletonPost==null){
            if(firstThread){
