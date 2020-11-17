@@ -67,7 +67,6 @@ import java.util.concurrent.Future;
 
 /**
  * @author Bashar Khouri
- *
  */
 public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
     Context context;
@@ -84,7 +83,6 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
 
 
     /**
-     *
      * @param context
      * @param postList
      */
@@ -94,7 +92,6 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
     }
 
     /**
-     *
      * @param parent
      * @param viewType
      * @return return row (post holder )
@@ -134,27 +131,8 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
                 holder.userName.setText(hospitals.getName());
 
                 if (hospitals.getLogo() != null) {
-                    StorageReference riversRef = storage.getReferenceFromUrl(hospitals.getLogo());
-                    try {
-                        final File localFile = File.createTempFile(hospitalID, "jpg");
-                        riversRef.getFile(localFile)
-                                .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                                    @Override
-                                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                        // Successfully downloaded data to local file
-                                        // ...
-                                        Picasso.get().load(localFile).placeholder(R.drawable.profile).into(holder.uPic);
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception exception) {
-                                // Handle failed download
-                                // ...
-                            }
-                        });
+                    Picasso.get().load(hospitals.getLogo()).placeholder(R.drawable.profile).into(holder.uPic);
 
-                    } catch (Exception e) {
-                    }
                 }
             }
         });
@@ -182,35 +160,21 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
             }
         });
 
-                holder.chat.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                   try {
-                       Uri uri = Uri.parse("smsto:" + phoneNumber);
-                       Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
-                      intent.setPackage("com.whatsapp");
-                       context.startActivity(intent);
-                   }catch (Exception e){
-                       Toast.makeText(context, "you need to have whatsapp ", Toast.LENGTH_SHORT).show();
-                   }
-                    }
-                });
-
-                holder.callMe.setOnClickListener(new View.OnClickListener() {
-                    /**
-                     * it send the phone number that is associated with the post to the phone dialer
-                     * @param v the current view that we are in
-                     */
-                    @Override
-                    public void onClick(View v) {
-                        try {
-                            Uri uri = Uri.parse("tel:" + phoneNumber);
-                            Intent intent = new Intent(Intent.ACTION_DIAL, uri);
-                            context.startActivity(intent);
-                        }catch (Exception e){
-                            Toast.makeText(context, "you need to have whatsapp ", Toast.LENGTH_SHORT).show();
-                        }
-                    }
+        holder.callMe.setOnClickListener(new View.OnClickListener() {
+            /**
+             * it send the phone number that is associated with the post to the phone dialer
+             * @param v the current view that we are in
+             */
+            @Override
+            public void onClick(View v) {
+                try {
+                    Uri uri = Uri.parse("tel:" + phoneNumber);
+                    Intent intent = new Intent(Intent.ACTION_DIAL, uri);
+                    context.startActivity(intent);
+                } catch (Exception e) {
+                    Toast.makeText(context, "you need to have whatsapp ", Toast.LENGTH_SHORT).show();
+                }
+            }
 
         });
                 /*
@@ -219,7 +183,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
         holder.shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+
             }
         });
 
@@ -233,6 +197,8 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
                 mapIntent.setPackage("com.google.android.apps.maps");
                 context.startActivity(mapIntent);
             }
+        });
+
 
     }
 
@@ -315,7 +281,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
             blood = (TextView) itemView.findViewById(R.id.itemBloodType);
             location = (TextView) itemView.findViewById(R.id.location);
             callMe = (Button) itemView.findViewById(R.id.item_call_me);
-            location = (TextView) itemView.findViewById(R.id.location);
+            locationButton = (Button) itemView.findViewById(R.id.item_location);
             shareButton = (Button) itemView.findViewById(R.id.item_share);
             moreOption = (ImageButton) itemView.findViewById(R.id.moreOption);
         }
