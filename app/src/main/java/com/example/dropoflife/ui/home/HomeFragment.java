@@ -24,6 +24,7 @@ import com.example.dropoflife.AddRequest;
 import com.example.dropoflife.Classes.AdapterPosts;
 import com.example.dropoflife.Classes.BloodType;
 import com.example.dropoflife.Classes.Post;
+import com.example.dropoflife.Classes.Roles;
 import com.example.dropoflife.Classes.SingletonPost;
 import com.example.dropoflife.Interface.IObserver;
 import com.example.dropoflife.Interface.ISubject;
@@ -156,6 +157,9 @@ public class HomeFragment extends Fragment implements IObserver {
                     default:
 
                 }
+
+                        reqBlood.setVisibility(View.INVISIBLE);
+
 
             }
 
