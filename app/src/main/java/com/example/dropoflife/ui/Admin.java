@@ -112,6 +112,7 @@ public class Admin extends AppCompatActivity implements AdapterUsers.OnNoteListn
     public void onNoteClick(int position) {
         Intent intent = new Intent(this, ChangeRole.class);
         intent.putExtra("user",users.get(position));
+        intent.putExtra("UID",users.get(position).getUserID());
         startActivity(intent);
     }
 

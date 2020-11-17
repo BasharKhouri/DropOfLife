@@ -45,6 +45,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FileDownloadTask;
@@ -77,6 +78,10 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
     ArrayList postIDList;
     DatabaseReference myRef = database.getReference("Posts");
     private FirebaseStorage storage ;
+    Hospitals hospitals;
+    String phoneNumber ;
+    GeoPoint location;
+
 
     /**
      *
@@ -111,52 +116,56 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
     public void onBindViewHolder(@NonNull final MyHolder holder, int position) {
         //get data
         final Post post = postList.get(position);
-        final Hospitals hospitals =postList.get(position).getHospital();
+        final String hospitalID =postList.get(position).getHospitalID();
         final String description =postList.get(position).getDescription();
-        final String location =hospitals.getAddress();
         final Date time =postList.get(position).getDateOfPublish();
         final String blood = BloodType.bloodTypes[postList.get(position).getBloodTypeID()];
         final String postTime = (String) android.text.format.DateFormat.format("MMM dd yyyy",time);
-        final String postID = postList.get(position).getID();
-        final String phoneNumber =hospitals.getPhoneNumber();
+        final String postID = postList.get(position).getPostID();
 
+            //get hospital
+            fStore.collection("Hospitals").document(hospitalID).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                @Override
+                public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                    hospitals=value.toObject(Hospitals.class);
+                    final String address =hospitals.getAddress();
+                    holder.location.setText(address);
+                    phoneNumber=hospitals.getPhoneNumber();
+                    location = hospitals.getLocation();
+                    holder.userName.setText(hospitals.getName());
 
+                    if(hospitals.getLogo()!=null) {
+                        StorageReference riversRef = storage.getReferenceFromUrl(hospitals.getLogo());
+                        try {
+                            final File localFile = File.createTempFile("images", "jpg");
+                            riversRef.getFile(localFile)
+                                    .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                                        @Override
+                                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                            // Successfully downloaded data to local file
+                                            // ...
+                                            Picasso.get().load(localFile).into(holder.uPic);
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception exception) {
+                                    // Handle failed download
+                                    // ...
+                                }
+                            });
 
+                        } catch (Exception e) {
+                        }
+                    }
+                }
+            });
 
                 storage = FirebaseStorage.getInstance();
 
                 //if the user has a profile pic
-                if(hospitals.getLogo()!=null) {
-                    StorageReference riversRef = storage.getReferenceFromUrl(hospitals.getLogo());
-                    try {
-                        final File localFile = File.createTempFile("images", "jpg");
-                        riversRef.getFile(localFile)
-                                .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                                    @Override
-                                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                        // Successfully downloaded data to local file
-                                        // ...
-                                        Picasso.get().load(localFile).into(holder.uPic);
-                                    }
-                                }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception exception) {
-                                // Handle failed download
-                                // ...
-                            }
-                        });
 
-                    } catch (Exception e) {
-                    }
-
-
-                }
-
-
-                holder.userName.setText(hospitals.getName());
                 holder.blood.setText(blood);
                 holder.description.setText(description);
-                holder.location.setText(location);
                 holder.time.setText(postTime);
                 //Program each raw buttons function down here
 
@@ -171,20 +180,6 @@ public class AdapterPosts extends  RecyclerView.Adapter<AdapterPosts.MyHolder>{
                     @Override
                     public void onClick(View v) {
                         moreOption(holder.moreOption, FirebaseAuth.getInstance().getCurrentUser().getUid(),hospitals.getName(),postID);
-                    }
-                });
-
-                holder.chat.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                   try {
-                       Uri uri = Uri.parse("smsto:" + phoneNumber);
-                       Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
-                      intent.setPackage("com.whatsapp");
-                       context.startActivity(intent);
-                   }catch (Exception e){
-                       Toast.makeText(context, "you need to have whatsapp ", Toast.LENGTH_SHORT).show();
-                   }
                     }
                 });
 

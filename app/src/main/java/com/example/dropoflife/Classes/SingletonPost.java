@@ -51,9 +51,6 @@ public class SingletonPost {
        return singletonPost;
    }
 
-
-
-
    public  ArrayList<Post> LoadPosts(){
 
        // Path Of all Posts

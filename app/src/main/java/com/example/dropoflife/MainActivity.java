@@ -68,16 +68,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        fStore.collection("users").document(firebaseUser.getUid())
-                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                        user = value.toObject(User.class);
-                        role = user.getRole();
-                        Log.w("success ", "LoadedUser");
-                        loadImageAndHospital();
-                    }
-                });
+
 
                 appBarConfiguration = new AppBarConfiguration.Builder(
                         R.id.navigation_home, R.id.navigation_profile, R.id.navigation_notifications, R.id.navigation_settings1)
@@ -90,16 +81,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void loadUser() {
-        //  User user [] = new User[1];
+    @Override
+    protected void onStart() {
+        super.onStart();
+        fStore.collection("users").document(firebaseUser.getUid())
+                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                        user = value.toObject(User.class);
+                        role = user.getRole();
+                        Log.w("success ", "LoadedUser");
+                        loadImage();
+                    }
+                });
 
     }
 
 
-    private void loadImageAndHospital() {
-        loadImage();
-        loadHospital();
-    }
 
 
     private Task loadImage() {
@@ -119,18 +117,7 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }
 
-    private Task loadHospital() {
-        if (user.getHospital() != null) {
-            fStore.collection("Hospitals").document(user.getHospital()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                @Override
-                public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                    hospital = value.toObject(Hospitals.class);
-                    Log.w("success", hospital.getName());
-                }
-            });
-        }
-        return null;
-    }
+
 
     public static Hospitals getHospital() {
         return hospital;

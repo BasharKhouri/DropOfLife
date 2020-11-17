@@ -56,7 +56,7 @@ public class ChangeRole extends AppCompatActivity implements IFirebaseHospitalLo
     IFirebaseHospitalLoad iFirebaseHospitalLoad;
     User selectedUser;
     List<Hospitals> hospitalsList;
-
+    String UID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +73,12 @@ public class ChangeRole extends AppCompatActivity implements IFirebaseHospitalLo
         Intent intent = getIntent();
         if (intent.hasExtra("user")) {
             selectedUser = intent.getParcelableExtra("user");
-
+        } else {
+            Log.w("Error", "Error loading the user into change role ");
+        }
+            if(intent.hasExtra("UID"))
+                UID = intent.getStringExtra("UID");
+            selectedUser.setUserID(UID);
             //init adapter for the spinner
             ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, Roles.roles);
             roleSpinner.setAdapter(spinnerArrayAdapter);
@@ -125,9 +130,7 @@ public class ChangeRole extends AppCompatActivity implements IFirebaseHospitalLo
                     Log.w("Error", e.getMessage());
                 }
             }
-        } else {
-            Log.w("Error", "Error loading the user into change role ");
-        }
+
 
 
         roleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -151,14 +154,14 @@ public class ChangeRole extends AppCompatActivity implements IFirebaseHospitalLo
 
     public void SaveChange(View view) {
         try {
-            fStore.collection("users").document(selectedUser.getUserID()).update("role", new Roles(roleSpinner.getSelectedItemPosition()));
+            fStore.collection("users").document(UID).update("role", new Roles(roleSpinner.getSelectedItemPosition()));
         }
         catch (Exception e){
             Log.w("Error",e.getMessage());
         }
         if (roleSpinner.getSelectedItemPosition() == 2) {
 
-            fStore.collection("users").document(selectedUser.getUserID()).update("hospitalID", hospitalsList.get(searchableSpinner.getSelectedItemPosition()).getID());
+            fStore.collection("users").document(UID).update("hospitalID", hospitalsList.get(searchableSpinner.getSelectedItemPosition()).getID());
         }
 
         Intent intent = new Intent(this, MainActivity.class);
