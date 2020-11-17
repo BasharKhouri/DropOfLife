@@ -1,14 +1,19 @@
 package com.example.dropoflife.ui.home;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,6 +23,7 @@ import com.example.dropoflife.Classes.Post;
 import com.example.dropoflife.Classes.SingletonPost;
 import com.example.dropoflife.Interface.IObserver;
 import com.example.dropoflife.Interface.ISubject;
+import com.example.dropoflife.Classes.User;
 import com.example.dropoflife.R;
 import com.google.android.gms.tasks.Task;
 
@@ -30,6 +36,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class HomeFragment extends Fragment implements IObserver {
     private ISubject subject;
@@ -43,6 +52,10 @@ public class HomeFragment extends Fragment implements IObserver {
     RecyclerView recyclerView ;
     private ArrayList<Post> postList;
     AdapterPosts adapterPosts;
+    ArrayAdapter filterAdapter;
+    Spinner filter ;
+    String[] listFilter = new String[]{"Filter"," By Blood type", " By Location"};
+    ArrayList<Post> posts = new ArrayList<Post>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -69,6 +82,10 @@ public class HomeFragment extends Fragment implements IObserver {
         LoadPosts();
         reqBlood = (Button)view.findViewById(R.id.req_bloodHomeButton);
         share = (Button)view.findViewById(R.id.item_share);
+        filter = (Spinner) view.findViewById(R.id.spinnerFilter);
+        filterAdapter= new ArrayAdapter(getActivity(),R.layout.support_simple_spinner_dropdown_item,listFilter);
+        filter.setAdapter(filterAdapter);
+        final String searchFilter;
         reqBlood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

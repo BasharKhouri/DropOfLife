@@ -104,7 +104,11 @@ public class ProfileFragment extends Fragment {
            }
        }
 
-       bloodTypeDisplay.setText(user.getBloodType().toString());
+        try {
+            bloodTypeDisplay.setText(user.getBloodType().toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         try {
             numberOfDonations.setText(user.getNumberOfDonations()+"");
         }catch (Exception e){
