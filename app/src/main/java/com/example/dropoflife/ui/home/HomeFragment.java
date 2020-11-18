@@ -107,38 +107,38 @@ public class HomeFragment extends Fragment implements IObserver {
                         try {
                             if (MainActivity.user.getBloodTypeString().equalsIgnoreCase("A+")) {
                                 filteredPosts = (ArrayList<Post>) posts.stream().filter(p ->
-                                        BloodType.bloodTypes[p.getBloodTypeID()].equals(MainActivity.user.getBloodTypeString()) ||
+                                                BloodType.bloodTypes[p.getBloodTypeID()].equals(MainActivity.user.getBloodTypeString()) ||
                                                 BloodType.bloodTypes[p.getBloodTypeID()].equals("AB+"))
                                         .collect(Collectors.toList());
                             }else   if (MainActivity.user.getBloodTypeString().equalsIgnoreCase("A-")) {
                                 filteredPosts = (ArrayList<Post>) posts.stream().filter(p ->
-                                        BloodType.bloodTypes[p.getBloodTypeID()].equals(MainActivity.user.getBloodTypeString()) ||
+                                                BloodType.bloodTypes[p.getBloodTypeID()].equals(MainActivity.user.getBloodTypeString()) ||
                                                 BloodType.bloodTypes[p.getBloodTypeID()].equals("AB+") ||
                                                 BloodType.bloodTypes[p.getBloodTypeID()].equals("AB-")||
                                                 BloodType.bloodTypes[p.getBloodTypeID()].equals("A+")
                                 ).collect(Collectors.toList());
                             }else  if (MainActivity.user.getBloodTypeString().equalsIgnoreCase("B+")) {
                                 filteredPosts = (ArrayList<Post>) posts.stream().filter(p ->
-                                        BloodType.bloodTypes[p.getBloodTypeID()].equals(MainActivity.user.getBloodTypeString()) ||
+                                                BloodType.bloodTypes[p.getBloodTypeID()].equals(MainActivity.user.getBloodTypeString()) ||
                                                 BloodType.bloodTypes[p.getBloodTypeID()].equals("AB+"))
                                         .collect(Collectors.toList());
                             }else if (MainActivity.user.getBloodTypeString().equalsIgnoreCase("B-")) {
                                 filteredPosts = (ArrayList<Post>) posts.stream().filter(p ->
-                                        BloodType.bloodTypes[p.getBloodTypeID()].equals(MainActivity.user.getBloodTypeString()) ||
+                                                BloodType.bloodTypes[p.getBloodTypeID()].equals(MainActivity.user.getBloodTypeString()) ||
                                                 BloodType.bloodTypes[p.getBloodTypeID()].equals("AB+") ||
                                                 BloodType.bloodTypes[p.getBloodTypeID()].equals("AB-")||
                                                 BloodType.bloodTypes[p.getBloodTypeID()].equals("B+")
                                 ).collect(Collectors.toList());
                             }else if (MainActivity.user.getBloodTypeString().equalsIgnoreCase("O+")) {
                                 filteredPosts = (ArrayList<Post>) posts.stream().filter(p ->
-                                        BloodType.bloodTypes[p.getBloodTypeID()].equals(MainActivity.user.getBloodTypeString()) ||
+                                                BloodType.bloodTypes[p.getBloodTypeID()].equals(MainActivity.user.getBloodTypeString()) ||
                                                 BloodType.bloodTypes[p.getBloodTypeID()].equals("A+") ||
                                                 BloodType.bloodTypes[p.getBloodTypeID()].equals("B+") ||
                                                 BloodType.bloodTypes[p.getBloodTypeID()].equals("AB+")
                                 ).collect(Collectors.toList());
                             }else if (MainActivity.user.getBloodTypeString().equalsIgnoreCase("AB-")) {
                                 filteredPosts = (ArrayList<Post>) posts.stream().filter(p ->
-                                        BloodType.bloodTypes[p.getBloodTypeID()].equals(MainActivity.user.getBloodTypeString()) ||
+                                                BloodType.bloodTypes[p.getBloodTypeID()].equals(MainActivity.user.getBloodTypeString()) ||
                                                 BloodType.bloodTypes[p.getBloodTypeID()].equals("AB+")
                                 ).collect(Collectors.toList());
                             }else if (MainActivity.user.getBloodTypeString().equalsIgnoreCase("AB+")) {

@@ -131,4 +131,6 @@
 
     </string-array>
 
+    <string name="changeRole">تغيير الدور</string>
+    <string name="save">احفظ التغييرات</string>
 </resources>
