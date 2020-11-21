@@ -24,6 +24,7 @@ import com.example.dropoflife.Classes.AdapterUsers;
 import com.example.dropoflife.Classes.User;
 import com.example.dropoflife.MainActivity;
 import com.example.dropoflife.R;
+import com.example.dropoflife.Splashscreen;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -58,7 +59,7 @@ public class Admin extends AppCompatActivity implements AdapterUsers.OnNoteListn
        // View view = inflater.inflate(R.layout.fragment_admin, container, false);
          //init values
         fStore = FirebaseFirestore.getInstance();
-         user = MainActivity.user;
+         user = Splashscreen.user;
          search = findViewById(R.id.searchUser);
          //userRecyclerView and it's property
         userRecyclerView = (RecyclerView)findViewById(R.id.userRecyclerView);

@@ -14,7 +14,8 @@
         android:onClick="goToAddHospitalView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add a new Hospital"
+        android:text="@string/add_hospital"
+        android:textAllCaps="false"
         android:id="@+id/goToAddHospitalButton"
         />
 
@@ -22,7 +23,8 @@
             android:id="@+id/searchUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="search users" />
+            android:hint="@string/search_by_email" />
+
     </LinearLayout>
     <LinearLayout
     android:layout_width="match_parent"

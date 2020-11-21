@@ -114,7 +114,11 @@
 
     <string name="Admin">المشرف</string>
     <string name="select_hosptial">اختر المشفى</string>
-
+    <string name="changeRole">تغير الوظيفة</string>
+    <string name="save">حفظ التغير</string>
+    <string name="add_hospital">اضف مستشفى </string>
+    <string name="search_by_email">البحث عن مستخدم باستخدام البريد الالكتروني</string>
+    
     <string-array name="provinces">
 
         <item>عمان</item>

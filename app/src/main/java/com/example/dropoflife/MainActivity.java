@@ -46,15 +46,10 @@ import bolts.Task;
  * author Bashar Khouri,Hassan wael ,Bashar Nimri
  */
 public class MainActivity extends AppCompatActivity {
-    FirebaseFirestore fStore = FirebaseFirestore.getInstance();
-    private Roles role;
-    public static User user;
+
+    User user  = Splashscreen.user;
     private FirebaseAuth mAuth;
     public static FirebaseUser firebaseUser;
-    public static File localFile;
-    Intent intent;
-    private static Hospitals hospital;
-    FirebaseStorage storage = FirebaseStorage.getInstance();
     AppBarConfiguration appBarConfiguration;
 
     @Override
@@ -78,29 +73,5 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        fStore.collection("users").document(firebaseUser.getUid())
-                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                        user = value.toObject(User.class);
-                        role = user.getRole();
-                        Log.w("success ", "LoadedUser");
-                    }
-                });
-        SingletonPost singletonPost = SingletonPost.getInstance();
-    }
-
-
-
-
-
-
-    public static Hospitals getHospital() {
-        return hospital;
     }
 }

@@ -139,6 +139,8 @@
     <string name="select_hosptial">Select hosptial</string>
     <string name="changeRole">Change role</string>
     <string name="save">Save Changes</string>
+    <string name="add_hospital">Add a new hospital</string>
+    <string name="search_by_email">search users by email</string>
 
 
 </resources>
