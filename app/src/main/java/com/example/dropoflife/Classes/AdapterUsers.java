@@ -56,29 +56,7 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.UserHolder> 
         final String profilePicPath = user.getProfilePic();
         storage = FirebaseStorage.getInstance();
         if(profilePicPath!=null){
-            StorageReference riversRef = storage.getReferenceFromUrl(user.getProfilePic());
-
-            try {
-                final File localFile = File.createTempFile("images", "jpg");
-                 riversRef.getFile(localFile)
-                        .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                                // Successfully downloaded data to local file
-                                // ...
-                                Picasso.get().load(localFile).placeholder(R.drawable.profile).into(holder.profilePicET);
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle failed download
-                        // ...
-                    }
-                });
-
-            } catch (Exception e) {
-
-            }
+           Picasso.get().load(profilePicPath).into(holder.profilePicET);
         }
         holder.userNameET.setText(user.getUserName());
         holder.userEmailET.setText(user.getEmail());

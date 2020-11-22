@@ -163,10 +163,15 @@ public class AddHospital extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        pd.dismiss();
-                        logoStr=taskSnapshot.getStorage()+"";
-                   //need for later here      fStore.collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).set(user);
+                        taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                            //MAKE SURE TO USE THIS WHEN YOU MERGE IT IS ONE LINE I FIXED A LOT
+                                logoStr=uri.toString();
+                            }
+                        });
 
+                        pd.dismiss();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
