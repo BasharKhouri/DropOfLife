@@ -139,6 +139,7 @@
     <string name="select_hosptial">Select hosptial</string>
     <string name="changeRole">Change role</string>
     <string name="save">Save Changes</string>
+    <string name="alertmsg">Sorry we can\'t use this feature until we publish our app on Google play store</string>
 
 
 </resources>

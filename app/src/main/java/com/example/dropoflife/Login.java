@@ -107,6 +107,22 @@ public class Login extends AppCompatActivity {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
+
+        Snackbar.make(findViewById(android.R.id.content), "This is main activity", Snackbar.LENGTH_LONG)
+                .setAction("CLOSE", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                    }
+                })
+                .setActionTextColor(getResources().getColor(android.R.color.holo_red_light ))
+                .show();
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setMessage(R.string.alertmsg);
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -129,6 +145,7 @@ public class Login extends AppCompatActivity {
 //        facebookLogin();
 //        facebook_button2 = findViewById(R.id.facebook_button);
         facebook_button = findViewById(R.id.login_button);
+        facebook_button.setEnabled(false);
         facebook_button.setReadPermissions("email", "public_profile", "user_gender", "user_age_range");
 //        facebook_button2.setOnClickListener(new View.OnClickListener() {
 //            @Override

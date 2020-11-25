@@ -133,4 +133,5 @@
 
     <string name="changeRole">تغيير الدور</string>
     <string name="save">احفظ التغييرات</string>
+    <string name="alertmsg">نعتذر لا يمكنك استخدام هذه الميزة قبل نشر التطبيق على متجر التطبيقات الخاص بجوجل وفقاَ لسياسات فيسبوك الجديدة </string>
 </resources>
