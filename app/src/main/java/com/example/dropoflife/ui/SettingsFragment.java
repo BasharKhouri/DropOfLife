@@ -48,7 +48,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         adminET=findPreference("admin");
         darkMode=findPreference("dark_mode_switch");
         FacebookSdk.sdkInitialize(getApplicationContext());
-     user = MainActivity.user;
+     user = Splashscreen.user;
 
         if (logoutET != null) {
             logoutET.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {

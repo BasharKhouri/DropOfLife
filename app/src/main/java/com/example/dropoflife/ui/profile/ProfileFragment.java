@@ -26,6 +26,7 @@ import com.bumptech.glide.Glide;
 import com.example.dropoflife.Classes.User;
 import com.example.dropoflife.MainActivity;
 import com.example.dropoflife.R;
+import com.example.dropoflife.Splashscreen;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -71,7 +72,7 @@ public class ProfileFragment extends Fragment {
         donationButton=(Button)view.findViewById(R.id.donationButton);
         numberOfDonations =(TextView)view.findViewById(R.id.profile_page_NoOfDonation);
         mStorageRef = FirebaseStorage.getInstance().getReference();
-        user = MainActivity.user;
+        user = Splashscreen.user;
         storage = FirebaseStorage.getInstance();
 
 

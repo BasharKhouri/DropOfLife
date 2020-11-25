@@ -47,7 +47,7 @@ public class AddRequest extends AppCompatActivity {
 
                   Post post;
                     myRef= database.getReference("Posts").push();
-                  post = new Post(myRef.getKey(),MainActivity.user.getHospitalID(),requestedBlood.getBloodID(),description.getText().toString(),
+                  post = new Post(myRef.getKey(),Splashscreen.user.getHospitalID(),requestedBlood.getBloodID(),description.getText().toString(),
                      new Date());
                   myRef.setValue(post);
                   Intent intent =new Intent(getApplicationContext(), MainActivity.class);

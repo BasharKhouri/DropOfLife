@@ -84,17 +84,12 @@ public class Login extends AppCompatActivity {
     public String email, password;
     public EditText emailET, passwordET;
     private FirebaseAuth mAuth;
-    private CallbackManager mCallbackManager;
     public static final String SHARED_NAME = ".shared";
-    private ImageView facebook_button2;
     private CallbackManager callbackManager;
-    private LoginManager loginManager;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseStorage storage;
     private StorageReference mStorageRef;
-    Bundle bundle = new Bundle();
     LoginButton facebook_button;
-
     private  GoogleSignInClient mGoogleSignInClient;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -327,11 +322,6 @@ public class Login extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-
-        // add go to home fragment.
-        if (currentUser != null)
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
     }
 
     /**

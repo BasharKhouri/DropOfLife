@@ -68,7 +68,7 @@
     <string name="our_logo">our_logo</string>
     <string name="gender_with">الجنس:</string>
     <string name="register">التسجيل</string>
-    <string name="what_s_your_blood_type">What\'s your blood type?</string>
+    <string name="what_s_your_blood_type">فصيلة الدم</string>
     <string name="username">UserName</string>
     <string name="location">الموقع</string>
     <string name="date">Date</string>
@@ -114,7 +114,11 @@
 
     <string name="Admin">المشرف</string>
     <string name="select_hosptial">اختر المشفى</string>
-
+    <string name="changeRole">تغير الوظيفة</string>
+    <string name="save">حفظ التغير</string>
+    <string name="add_hospital">اضف مستشفى </string>
+    <string name="search_by_email">البحث عن مستخدم باستخدام البريد الالكتروني</string>
+    
     <string-array name="provinces">
 
         <item>عمان</item>
