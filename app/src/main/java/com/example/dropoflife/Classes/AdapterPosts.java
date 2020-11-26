@@ -196,7 +196,7 @@ public class AdapterPosts extends RecyclerView.Adapter<AdapterPosts.MyHolder> {
             @Override
             public void onClick(View v) {
 
-                Uri hospitalGeoPoint = Uri.parse("geo:" + location.getLatitude() + "," + location.getLongitude());
+                Uri hospitalGeoPoint = Uri.parse("google.navigation:q=" + location.getLatitude() + "," + location.getLongitude());
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, hospitalGeoPoint);
                 mapIntent.setPackage("com.google.android.apps.maps");
                 context.startActivity(mapIntent);
