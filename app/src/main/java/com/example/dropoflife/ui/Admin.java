@@ -100,10 +100,11 @@ public class Admin extends AppCompatActivity implements AdapterUsers.OnNoteListn
     private void LoadUsers(String value){
      users.clear();
      usersID.clear();
-      fStore.collection("users").orderBy("email").whereGreaterThanOrEqualTo("email",value.toLowerCase()).limit(10).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+      fStore.collection("users").whereEqualTo("email",value.toLowerCase()).limit(10).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (QueryDocumentSnapshot tk: task.getResult()) {
+
                     User user =tk.toObject(User.class);
                     String id = tk.getId();
                     users.add(user);

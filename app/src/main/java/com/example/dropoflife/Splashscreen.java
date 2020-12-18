@@ -40,11 +40,11 @@ public class Splashscreen extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        String UI = currentUser.getUid();
+
 
         // add go to home fragment.
         if (currentUser != null) {
-            fStore.collection("users").document(UI)
+            fStore.collection("users").document(currentUser.getUid())
                     .addSnapshotListener(new EventListener<DocumentSnapshot>() {
                         @Override
                         public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {

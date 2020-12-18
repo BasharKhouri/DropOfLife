@@ -60,7 +60,7 @@
             android:inputType="textMultiLine"
             android:maxLength="100"
             android:padding="5dp" />
-        
+
 
         <Button
             android:id="@+id/addRequest"
