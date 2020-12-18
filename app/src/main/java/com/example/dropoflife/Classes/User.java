@@ -23,7 +23,7 @@ public class User implements Parcelable {
     private String profilePic;
     private String phone;
     private Roles role;
-    private String hospitalID;
+    private String hospital;
     private String userID;
 
     /**
@@ -88,9 +88,6 @@ public class User implements Parcelable {
         }
     };
 
-    public String getHospitalID() {
-        return hospitalID;
-    }
 
     public String getUserID() {
         return userID;
@@ -145,8 +142,8 @@ public class User implements Parcelable {
     // The Setters
 
 
-    public void setHospitalID(String hospitalID) {
-        this.hospitalID = hospitalID;
+    public void setHospital(String hospital) {
+        this.hospital = hospital;
     }
 
     public void setUserID(String userID) {
@@ -200,12 +197,9 @@ public class User implements Parcelable {
         this.role = role;
     }
 
-    public void setHospital(String hospitalID) {
-        this.hospitalID = hospitalID;
-    }
 
     public String getHospital() {
-        return hospitalID;
+        return hospital;
     }
 
 
@@ -222,7 +216,7 @@ public class User implements Parcelable {
         dest.writeString(email);
         dest.writeString(profilePic);
         dest.writeString(phone);
-        dest.writeString(hospitalID);
+        dest.writeString(hospital);
         dest.writeString(userID);
     }
 }

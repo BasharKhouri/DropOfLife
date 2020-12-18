@@ -60,15 +60,7 @@
             android:inputType="textMultiLine"
             android:maxLength="100"
             android:padding="5dp" />
-
-        <View
-            android:id="@+id/divider"
-            android:layout_width="250dp"
-            android:layout_height="2dp"
-            android:layout_marginLeft="75dp"
-            android:layout_marginTop="40dp"
-            android:background="#90bb0a1e"
-            android:paddingTop="1000dp" />
+        
 
         <Button
             android:id="@+id/addRequest"
